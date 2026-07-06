@@ -159,8 +159,8 @@ export const CATEGORIES = Object.entries(CATEGORY_MAP).map(([value, label]) => (
 export function resolveAttachmentUrl(url?: string): string | undefined {
   if (!url) return undefined;
   if (url.startsWith('http')) return url;          // already absolute
-  if (url.startsWith('/uploads/') || url.startsWith('/LogoNTT/')) return url; // local uploads/assets
-  return `${BASE_URL}${url}`;                       // e.g. https://lht.gun.hmz.one/storage/uploads/...
+  if (url.startsWith('/storage/')) return `${BASE_URL}${url}`; // NocoBase uploads
+  return url;                                       // local uploads and static assets (/images, /uploads, /herobanner)
 }
 
 // Thời gian revalidate (giây)
