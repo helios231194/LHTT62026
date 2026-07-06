@@ -8,7 +8,7 @@ export function HomeCTA() {
     <section className="py-24 md:py-32 bg-ice-white text-oxford-blue text-center border-t border-gray-200">
       <div className="container mx-auto px-4 md:px-6">
         <FadeIn direction="up">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-8 leading-tight max-w-4xl mx-auto">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-8 leading-tight max-w-4xl mx-auto text-balance">
             Bước tiếp theo rõ ràng hơn khi bạn biết mình đang ở đâu.
           </h2>
           <p className="text-lg md:text-xl text-cyan-azure max-w-3xl mx-auto leading-relaxed mb-12">
