@@ -15,7 +15,7 @@ export function PersonalWorkshopHero() {
       </div>
 
       <div className="container mx-auto px-4 md:px-6 relative z-10">
-        <div className="max-w-4xl mx-auto text-center">
+        <div className="max-w-5xl mx-auto text-center">
           <SlideIn direction="up">
             <div className="flex flex-wrap items-center justify-center gap-4 md:gap-8 mb-8">
               <div className="flex items-center gap-2 bg-white/5 border border-white/10 px-4 py-2 rounded-full text-sm font-medium">
@@ -38,8 +38,8 @@ export function PersonalWorkshopHero() {
           </SlideIn>
 
           <FadeIn direction="up" delay={0.1}>
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-black mb-8 leading-[1.1] tracking-tight text-white drop-shadow-2xl">
-              Workshop Cá nhân <br/>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-8 leading-[1.2] tracking-tight text-white drop-shadow-2xl">
+              Workshop Cá nhân <br className="hidden md:block"/>
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blaze-orange to-[#ff9b50]">Thuật Số Học Ứng Dụng</span> 
               <br className="hidden md:block"/>
               cho cuộc sống, gia đình và tài chính.
@@ -47,11 +47,14 @@ export function PersonalWorkshopHero() {
           </FadeIn>
 
           <FadeIn direction="up" delay={0.2}>
-            <p className="text-xl md:text-2xl text-white/80 font-medium leading-relaxed mb-12 max-w-3xl mx-auto border-l-4 border-cyan-azure pl-6 text-left md:text-center mx-auto">
-              Mỗi buổi một chủ đề gần gũi và thực tế: tài chính cá nhân, hôn nhân, gia đình, dạy con. Hiểu rõ bản thân và những người bên cạnh để sống đúng và sống tốt hơn.
-              <br className="hidden md:block"/><br className="hidden md:block"/>
-              Dẫn dắt trực tiếp bởi Master Hoàng Mai Linh.
-            </p>
+            <div className="text-lg md:text-xl text-white/80 font-medium leading-relaxed mb-12 max-w-3xl mx-auto border-l-4 border-cyan-azure pl-6 text-left space-y-3">
+              <p>
+                Mỗi buổi một chủ đề gần gũi và thực tế: tài chính cá nhân, hôn nhân, gia đình, dạy con. Hiểu rõ bản thân và những người bên cạnh để sống đúng và sống tốt hơn.
+              </p>
+              <p className="text-sm md:text-base text-white/60 font-normal">
+                Dẫn dắt trực tiếp bởi Master Hoàng Mai Linh.
+              </p>
+            </div>
           </FadeIn>
 
           <FadeIn direction="up" delay={0.3}>

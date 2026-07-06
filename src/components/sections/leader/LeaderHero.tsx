@@ -21,8 +21,8 @@ export function LeaderHero() {
             <div className="w-10 h-px bg-blaze-orange" />
           </div>
           
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white mb-8 leading-[1.45] tracking-tight">
-            <span className="whitespace-nowrap">Chiến lược kinh doanh đúng</span> <br className="hidden md:block"/>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white mb-8 leading-[1.3] tracking-tight">
+            Chiến lược kinh doanh đúng <br className="hidden md:block"/>
             bắt đầu từ người đứng đầu <br className="hidden lg:block"/>
             <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-blaze-orange to-[#ff9b50] py-2">hiểu rõ mình.</span>
           </h1>
