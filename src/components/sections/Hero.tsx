@@ -42,13 +42,13 @@ export function Hero() {
           <div className="lg:col-span-7 text-center lg:text-left z-20">
             <StaggerContainer>
               <FadeIn>
-                <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-oxford-blue mb-8 leading-tight drop-shadow-sm [text-wrap:balance]">
-                  Đồng hành cùng cá nhân & tổ chức <br className="hidden lg:block" />  <span className="text-transparent bg-clip-text bg-gradient-to-r from-blaze-orange to-yellow-500 drop-shadow-md">trở thành phiên bản tốt nhất</span>
+                <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-oxford-blue mb-8 leading-tight drop-shadow-sm text-balance">
+                  Đồng hành cùng cá nhân & tổ chức <span className="text-transparent bg-clip-text bg-gradient-to-r from-blaze-orange to-yellow-500 drop-shadow-md">trở thành phiên bản tốt nhất</span>
                 </h1>
               </FadeIn>
               
               <FadeIn>
-                <p className="text-lg md:text-xl text-metallic-blue mb-12 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-medium border-l-4 border-blaze-orange pl-6">
+                <p className="text-lg md:text-xl text-metallic-blue mb-12 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-medium border-l-4 border-blaze-orange pl-6 text-left">
                   Kiến tạo sự thay đổi bền vững từ việc thấu hiểu chính mình thông qua Khai vấn và Trí tuệ cảm xúc.
                 </p>
               </FadeIn>

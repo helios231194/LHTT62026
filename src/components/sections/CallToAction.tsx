@@ -14,9 +14,8 @@ export function CallToAction() {
       <div className="container relative z-10 mx-auto px-4 md:px-6">
         <StaggerContainer className="max-w-4xl mx-auto relative z-10 bg-white/5 backdrop-blur-xl border border-white/10 p-12 md:p-16 rounded-[3rem] shadow-[0_20px_40px_rgba(0,0,0,0.2)]">
           <FadeIn>
-            <h2 className="text-4xl md:text-6xl font-extrabold tracking-tight mb-8 leading-tight drop-shadow-md">
-              Bắt đầu hành trình phát triển <br className="hidden md:block"/> 
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blaze-orange to-yellow-500">từ bên trong ngay hôm nay</span>
+            <h2 className="text-4xl md:text-6xl font-extrabold tracking-tight mb-8 leading-tight drop-shadow-md text-balance">
+              Bắt đầu hành trình phát triển <span className="text-transparent bg-clip-text bg-gradient-to-r from-blaze-orange to-yellow-500">từ bên trong ngay hôm nay</span>
             </h2>
           </FadeIn>
 

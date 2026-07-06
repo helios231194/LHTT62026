@@ -13,10 +13,8 @@ export function Philosophy() {
           
           <StaggerContainer>
             <FadeIn direction="right">
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-ice-white mb-8">
-                Đồng hành để mỗi người <br/> 
-                <span className="text-blaze-orange">đủ rõ mình</span>, 
-                đủ vững vàng để chọn điều mình muốn
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-ice-white mb-8 text-balance">
+                Đồng hành để mỗi người <span className="text-blaze-orange">đủ rõ mình</span>, đủ vững vàng để chọn điều mình muốn
               </h2>
             </FadeIn>
             

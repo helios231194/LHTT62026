@@ -97,7 +97,7 @@ export function WhatIsNumerology() {
               <span className="inline-block py-1.5 px-4 mb-5 text-xs font-bold tracking-widest text-blaze-orange bg-blaze-orange/10 uppercase rounded-full">
                 THUẬT SỐ HỌC ỨNG DỤNG LÀ GÌ
               </span>
-              <h2 className="text-3xl md:text-5xl font-bold text-oxford-blue leading-tight">
+              <h2 className="text-3xl md:text-5xl font-bold text-oxford-blue leading-tight text-balance">
                 Một công cụ.<br />
                 <span className="text-blaze-orange">Ba câu hỏi</span> chiến lược.
               </h2>

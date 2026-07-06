@@ -58,7 +58,7 @@ export function Contact() {
              <div className="absolute top-10 -left-10 w-32 h-32 bg-blaze-orange rounded-full blur-[60px] opacity-30 pointer-events-none" />
              
              <div className="relative z-10">
-                <h3 className="text-3xl font-bold mb-6">Kết nối với <br/> Linh Hoa Tâm<span className="text-blaze-orange">.</span></h3>
+                <h3 className="text-3xl font-bold mb-6 text-balance">Kết nối với <br/> Linh Hoa Tâm<span className="text-blaze-orange">.</span></h3>
                 <p className="text-cyan-azure mb-12 text-lg">
                   Mỗi cuộc gọi đều là một cơ hội để thấu hiểu và mở ra những lựa chọn tốt hơn.
                 </p>
