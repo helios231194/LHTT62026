@@ -1,0 +1,91 @@
+{
+  "id": 1,
+  "name": "Master Hoàng Mai Linh",
+  "bio": "Hơn 3.700 giờ làm việc trực tiếp với CEO, Founder và lãnh đạo cấp cao từ nhiều ngành – F&B, sản xuất, tài chính, bất động sản, công nghệ.\n\nĐiều lặp đi lặp lại qua những buổi làm việc đó: người đứng đầu nào cũng có năng lực. Điều tạo ra sự khác biệt trong kết quả thường nằm ở thời điểm hành động, cách phân vai trong đội ngũ, và mức độ hiểu rõ chính mình khi đưa ra quyết định lớn.\n\nThuật Số Học Ứng Dụng được xây dựng để khai thác đúng ba điểm đó, giúp kinh nghiệm và trực giác của lãnh đạo được dùng đúng chỗ, đúng lúc, và đúng người.",
+  "hero_title": "Một quyết định đúng thời điểm thay đổi cả năm vận hành.",
+  "hero_desc": "Linh Hoa Tâm đồng hành cùng CEO, Founder, Lãnh đạo cấp cao và cá nhân muốn hiểu rõ bản thân thông qua Thuật Số Học Ứng Dụng – công cụ giúp đặt đúng người và rẽ đúng hướng.",
+  "workshop_title": "Workshop Chiến lược Miễn phí\nMỗi tuần một chủ đề thực chiến.",
+  "workshop_desc": "4 sai lầm hệ thống khiến người làm nhiều mà kết quả không tăng. Cùng nhiều chủ đề: Chu kỳ vận hành, Quản trị đội ngũ theo bản đồ năng lực, Ra quyết định nhân sự & đầu tư đúng thời điểm.",
+  "workshop_tags": null,
+  "community_title": "Cộng đồng Lãnh đạo\nLinh Hoa Tâm",
+  "community_desc": "Chia sẻ, học hỏi & mở rộng góc nhìn chiến lược cùng người đứng đầu doanh nghiệp. Cập nhật kiến thức, thông báo workshop và ưu đãi sớm nhất.",
+  "credentials": [
+    "Chuyên gia Số học Ứng dụng",
+    "Diễn giả Forbes Women Vietnam 2023-2024",
+    "Tác giả \"Sức Mạnh Ẩn Sau Con Số\"",
+    "Người sáng lập Linh Hoa Tâm"
+  ],
+  "values": [
+    "Chính xác",
+    "Thực chiến",
+    "Cam kết",
+    "Bền vững"
+  ],
+  "avatar": [
+    {
+      "id": 20,
+      "createdAt": "2026-07-02T21:52:51.730Z",
+      "updatedAt": "2026-07-02T21:52:51.736Z",
+      "title": "hero03",
+      "filename": "hero03-648lwl.png",
+      "extname": ".png",
+      "size": 1564522,
+      "mimetype": "image/png",
+      "path": "",
+      "meta": {},
+      "url": "/uploads/hero03-648lwl.png",
+      "createdById": 1,
+      "updatedById": 1,
+      "storageId": 372110280097792,
+      "preview": "/storage/uploads/hero03-648lwl.png",
+      "t_zgmqjot6uqu": {
+        "createdAt": "2026-07-02T21:52:51.879Z",
+        "updatedAt": "2026-07-02T21:52:51.879Z",
+        "f_29qlc3k6gr0": 1,
+        "f_4f1yxzjdmvv": 20
+      }
+    }
+  ],
+  "community_qr": [
+    {
+      "id": 101,
+      "filename": "placeholder-800x800.svg",
+      "url": "/images/placeholder-800x800.svg"
+    }
+  ],
+  "book_cover": [
+    {
+      "id": 102,
+      "filename": "placeholder-800x800.svg",
+      "url": "/images/placeholder-800x800.svg"
+    }
+  ],
+  "logo": [
+    {
+      "id": 103,
+      "filename": "LOGO-07.png",
+      "url": "/LOGO-07.png"
+    }
+  ],
+  "hero_bg": [
+    {
+      "id": 104,
+      "filename": "herobannerbackground.png",
+      "url": "/herobannerbackground.png"
+    }
+  ],
+  "philosophy_img": [
+    {
+      "id": 105,
+      "filename": "hero02.png",
+      "url": "/herobanner/hero02.png"
+    }
+  ],
+  "community_banner": [
+    {
+      "id": 106,
+      "filename": "hero04.png",
+      "url": "/herobanner/hero04.png"
+    }
+  ]
+}

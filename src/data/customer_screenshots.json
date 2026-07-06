@@ -1,0 +1,28 @@
+[
+  {
+    "id": 1,
+    "caption": "Phản hồi khách hàng cá nhân 1",
+    "sort_order": 1,
+    "visible": true,
+    "image": [
+      {
+        "id": 1,
+        "filename": "screenshot1.jpg",
+        "url": "/uploads/screenshot1.jpg"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "caption": "Phản hồi khách hàng cá nhân 2",
+    "sort_order": 2,
+    "visible": true,
+    "image": [
+      {
+        "id": 2,
+        "filename": "screenshot2.webp",
+        "url": "/uploads/screenshot2.webp"
+      }
+    ]
+  }
+]

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Chống Google index trang này -->
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <title>LHT Homepage Assets Manager Embed</title>
+  <meta name="description" content="Quản lý tài sản hình ảnh chính trên trang chủ website Linh Hoa Tâm">
+  <meta property="og:title" content="LHT Homepage Assets Manager Embed">
+  <meta property="og:description" content="Quản lý tài sản hình ảnh chính trên trang chủ website Linh Hoa Tâm">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts Outfit & Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            title: ['Outfit', 'sans-serif'],
+          },
+          colors: {
+            'oxford-blue': '#002b57',
+            'blaze-orange': '#ff5a00',
+            'cyan-azure': '#0084ff',
+            'ice-white': '#f5f7fa',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="p-6 bg-slate-50">
+  <div class="max-w-5xl mx-auto bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+    <!-- Header -->
+    <div class="bg-gradient-to-r from-oxford-blue to-[#004080] p-6 text-white flex items-center justify-between">
+      <div>
+        <h1 class="text-2xl font-title font-bold tracking-tight">QUẢN LÝ HÌNH ẢNH HỆ THỐNG</h1>
+        <p class="text-xs text-slate-300 mt-1 font-medium">Thay thế các hình ảnh tĩnh trên Website với thông số định dạng chuẩn</p>
+      </div>
+      <div class="flex items-center gap-3">
+        <span id="sync-status" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-300">
+          <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+          Đồng bộ NocoBase
+        </span>
+      </div>
+    </div>
+
+    <!-- Manager Cards Grid -->
+    <div class="p-6 grid grid-cols-1 md:grid-cols-3 gap-6" id="assets-grid">
+      <!-- 1. Master Avatar -->
+      <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 flex flex-col justify-between h-full">
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <span class="px-2 py-0.5 bg-blaze-orange/10 text-blaze-orange text-[10px] font-bold rounded uppercase">Vị trí: Hero / Profile</span>
+            <span class="text-slate-400 text-xs font-bold">1</span>
+          </div>
+          <h2 class="font-title font-bold text-oxford-blue text-base mb-1">Ảnh Chân dung Master</h2>
+          <p class="text-[11px] text-slate-500 mb-4 leading-relaxed">Dùng trên biểu ngữ đầu trang chủ và khối thông tin cá nhân của Master Hoàng Mai Linh.</p>
+          
+          <div class="aspect-square bg-slate-200 border border-slate-300 rounded-xl overflow-hidden mb-4 relative flex items-center justify-center" id="preview-avatar">
+            <span class="text-xs text-slate-400">Đang tải ảnh...</span>
+          </div>
+        </div>
+
+        <div>
+          <div class="bg-white border border-slate-200/60 rounded-xl p-3 mb-4 text-[11px] text-slate-600 leading-normal space-y-1">
+            <div><strong class="text-oxford-blue">Khuyến nghị kích thước:</strong> 800x800 px</div>
+            <div><strong class="text-oxford-blue">Khuyến nghị định dạng:</strong> .PNG tách nền (trong suốt)</div>
+          </div>
+          <input type="file" id="input-avatar" aria-label="Tải lên ảnh chân dung Master" onchange="uploadSystemImage(event, 'avatar')" class="hidden" accept="image/*">
+          <button onclick="document.getElementById('input-avatar').click()" class="w-full bg-oxford-blue hover:bg-oxford-blue/90 text-white font-bold py-2 px-4 rounded-xl text-xs transition-all duration-200 active:scale-[0.98]">
+            Thay đổi hình ảnh
+          </button>
+        </div>
+      </div>
+
+      <!-- 2. Community QR -->
+      <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 flex flex-col justify-between h-full">
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <span class="px-2 py-0.5 bg-blaze-orange/10 text-blaze-orange text-[10px] font-bold rounded uppercase">Vị trí: Cộng đồng / Footer</span>
+            <span class="text-slate-400 text-xs font-bold">2</span>
+          </div>
+          <h2 class="font-title font-bold text-oxford-blue text-base mb-1">Mã QR Code Cộng đồng</h2>
+          <p class="text-[11px] text-slate-500 mb-4 leading-relaxed">Mã QR dẫn link Zalo hoặc Group để khách hàng quét tham gia cộng đồng ở chân trang.</p>
+          
+          <div class="aspect-square bg-slate-200 border border-slate-300 rounded-xl overflow-hidden mb-4 relative flex items-center justify-center p-6" id="preview-qr">
+            <span class="text-xs text-slate-400">Đang tải ảnh...</span>
+          </div>
+        </div>
+
+        <div>
+          <div class="bg-white border border-slate-200/60 rounded-xl p-3 mb-4 text-[11px] text-slate-600 leading-normal space-y-1">
+            <div><strong class="text-oxford-blue">Khuyến nghị kích thước:</strong> 300x300 px (tỷ lệ 1:1)</div>
+            <div><strong class="text-oxford-blue">Khuyến nghị định dạng:</strong> .PNG hoặc .JPG sắc nét</div>
+          </div>
+          <input type="file" id="input-qr" aria-label="Tải lên mã QR" onchange="uploadSystemImage(event, 'community_qr')" class="hidden" accept="image/*">
+          <button onclick="document.getElementById('input-qr').click()" class="w-full bg-oxford-blue hover:bg-oxford-blue/90 text-white font-bold py-2 px-4 rounded-xl text-xs transition-all duration-200 active:scale-[0.98]">
+            Thay đổi hình ảnh
+          </button>
+        </div>
+      </div>
+
+      <!-- 3. Book Cover -->
+      <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 flex flex-col justify-between h-full">
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <span class="px-2 py-0.5 bg-blaze-orange/10 text-blaze-orange text-[10px] font-bold rounded uppercase">Vị trí: Giới thiệu Sách</span>
+            <span class="text-slate-400 text-xs font-bold">3</span>
+          </div>
+          <h2 class="font-title font-bold text-oxford-blue text-base mb-1">Bìa Sách "Sức mạnh..."</h2>
+          <p class="text-[11px] text-slate-500 mb-4 leading-relaxed">Ảnh bìa sách dùng trên trang chi tiết sách và mục giới thiệu sách tự phát triển.</p>
+          
+          <div class="aspect-square bg-slate-200 border border-slate-300 rounded-xl overflow-hidden mb-4 relative flex items-center justify-center p-2" id="preview-book">
+            <span class="text-xs text-slate-400">Đang tải ảnh...</span>
+          </div>
+        </div>
+
+        <div>
+          <div class="bg-white border border-slate-200/60 rounded-xl p-3 mb-4 text-[11px] text-slate-600 leading-normal space-y-1">
+            <div><strong class="text-oxford-blue">Khuyến nghị kích thước:</strong> 600x900 px (tỷ lệ 2:3)</div>
+            <div><strong class="text-oxford-blue">Khuyến nghị định dạng:</strong> .PNG hoặc .JPG mặt trước sách</div>
+          </div>
+          <input type="file" id="input-book" aria-label="Tải lên bìa sách" onchange="uploadSystemImage(event, 'book_cover')" class="hidden" accept="image/*">
+          <button onclick="document.getElementById('input-book').click()" class="w-full bg-oxford-blue hover:bg-oxford-blue/90 text-white font-bold py-2 px-4 rounded-xl text-xs transition-all duration-200 active:scale-[0.98]">
+            Thay đổi hình ảnh
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGVOYW1lIjoicm9vdCIsImlhdCI6MTc4MjU0NDIyOSwiZXhwIjozMzM0MDE0NDIyOX0.l-Aru4p4MXyS6teBgmJQKeS2SfhMCUPV3IGAf2zeYWE";
+    const BASE_URL = "https://lht.gun.hmz.one";
+    
+    let profileData = null;
+
+    const headers = {
+      'Authorization': `Bearer ${TOKEN}`,
+      'Content-Type': 'application/json'
+    };
+
+    window.addEventListener('DOMContentLoaded', () => {
+      fetchProfile();
+    });
+
+    async function fetchProfile() {
+      const statusIndicator = document.getElementById('sync-status');
+      statusIndicator.className = "inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-amber-500/20 text-amber-300";
+      statusIndicator.innerHTML = '<span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span> Đang tải...';
+
+      try {
+        const res = await fetch(`${BASE_URL}/api/profile:list?appends=avatar,community_qr,book_cover`, { headers });
+        if (!res.ok) throw new Error('API failed');
+        const payload = await res.json();
+        profileData = payload.data?.[0] || null;
+        
+        if (profileData) {
+          renderPreviews();
+        }
+
+        statusIndicator.className = "inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-300";
+        statusIndicator.innerHTML = '<span class="w-2 h-2 rounded-full bg-emerald-400"></span> Đã đồng bộ NocoBase';
+      } catch (err) {
+        console.error(err);
+        statusIndicator.className = "inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-rose-500/20 text-rose-300";
+        statusIndicator.innerHTML = '<span class="w-2 h-2 rounded-full bg-rose-400"></span> Lỗi kết nối';
+      }
+    }
+
+    function renderPreviews() {
+      // 1. Avatar
+      const avatarContainer = document.getElementById('preview-avatar');
+      const avatarImg = profileData.avatar?.[0];
+      if (avatarImg) {
+        avatarContainer.innerHTML = `<img src="${BASE_URL}${avatarImg.url}" alt="avatar preview" class="object-contain w-full h-full bg-slate-900/5 p-2">`;
+      } else {
+        avatarContainer.innerHTML = '<span class="text-xs text-slate-400">Chưa có ảnh đại diện</span>';
+      }
+
+      // 2. QR Code
+      const qrContainer = document.getElementById('preview-qr');
+      const qrImg = profileData.community_qr?.[0];
+      if (qrImg) {
+        qrContainer.innerHTML = `<img src="${BASE_URL}${qrImg.url}" alt="QR code preview" class="object-contain w-full h-full bg-white border border-slate-100 shadow-sm">`;
+      } else {
+        qrContainer.innerHTML = '<span class="text-xs text-slate-400">Chưa có ảnh QR Code</span>';
+      }
+
+      // 3. Book Cover
+      const bookContainer = document.getElementById('preview-book');
+      const bookImg = profileData.book_cover?.[0];
+      if (bookImg) {
+        bookContainer.innerHTML = `<img src="${BASE_URL}${bookImg.url}" alt="book cover preview" class="object-contain max-h-full max-w-full shadow-md">`;
+      } else {
+        bookContainer.innerHTML = '<span class="text-xs text-slate-400">Chưa có ảnh bìa sách</span>';
+      }
+    }
+
+    async function uploadSystemImage(event, fieldName) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const statusIndicator = document.getElementById('sync-status');
+      statusIndicator.className = "inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-amber-500/20 text-amber-300";
+      statusIndicator.innerHTML = `<span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span> Đang tải ảnh ${fieldName}...`;
+
+      const formData = new FormData();
+      formData.append('file', file);
+
+      try {
+        // Step 1: Upload image file to attachments
+        const res = await fetch(`${BASE_URL}/api/attachments:create`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${TOKEN}`
+          },
+          body: formData
+        });
+
+        if (!res.ok) throw new Error('Upload image failed');
+        const payload = await res.json();
+        const fileId = payload.data?.id;
+
+        if (!fileId) throw new Error('File ID missing');
+
+        // Step 2: Link image to Profile record ID 1 via relationship
+        const linkRes = await fetch(`${BASE_URL}/api/profile/${profileData.id}/${fieldName}:set`, {
+          method: 'POST',
+          headers,
+          body: JSON.stringify([fileId])
+        });
+
+        if (!linkRes.ok) throw new Error('Linking to profile failed');
+
+        // Refresh preview
+        await fetchProfile();
+      } catch (err) {
+        console.error(err);
+        alert('Tải ảnh hoặc cập nhật NocoBase thất bại.');
+        statusIndicator.className = "inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-rose-500/20 text-rose-300";
+        statusIndicator.innerHTML = '<span class="w-2 h-2 rounded-full bg-rose-400"></span> Lỗi tải ảnh';
+      }
+    }
+  </script>
+</body>
+</html>

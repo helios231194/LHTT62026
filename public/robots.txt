@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /admin-embed/
+Disallow: /_next/
+Disallow: /api/

@@ -1,0 +1,242 @@
+[
+  {
+    "id": 7,
+    "updatedAt": "2026-07-02T22:31:54.343Z",
+    "name": "Mr. Van hoai thuong",
+    "position": "Founder",
+    "company": "FitStrength / Học viện đào tạo PT",
+    "quote": "Sau 4 năm đồng hành, mỗi lần mở thêm chi nhánh tôi đều ra quyết định dựa trên bản đồ chiến lược cá nhân mà Linh Hoa Tâm xây dựng. Đây là hệ quy chiếu cho những quyết định quan trọng của doanh nghiệp.",
+    "rating": 2,
+    "sort_order": 1,
+    "category": null,
+    "image": [
+      {
+        "id": 9,
+        "createdAt": "2026-07-02T21:42:08.071Z",
+        "updatedAt": "2026-07-02T21:42:08.079Z",
+        "title": "Trần Trung Nhân",
+        "filename": "Trần Trung Nhân-b6orwz.jpg",
+        "extname": ".jpg",
+        "size": 64777,
+        "mimetype": "image/jpeg",
+        "path": "",
+        "meta": {},
+        "url": "/uploads/TrầnTrungNhân-b6orwz.jpg",
+        "createdById": 1,
+        "updatedById": 1,
+        "storageId": 372110280097792,
+        "preview": "/storage/uploads/Tr%E1%BA%A7n%20Trung%20Nh%C3%A2n-b6orwz.jpg",
+        "t_wcfi4ikoryo": {
+          "createdAt": "2026-07-02T21:42:41.895Z",
+          "updatedAt": "2026-07-02T21:42:41.895Z",
+          "f_q3ajt4adsf0": 7,
+          "f_ful9q9nib5a": 9
+        }
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "updatedAt": "2026-07-02T22:36:31.857Z",
+    "name": "Ms. Hoàng Lê Dung",
+    "position": "Founder & CEO",
+    "company": "Hệ sinh thái Sức khỏe ProCARE",
+    "quote": "Giá trị lớn nhất tôi nhận được là một khung ra quyết định rõ ràng, giúp tôi nhìn đúng bản chất vấn đề, xác định đâu là ưu tiên chiến lược và tránh những lựa chọn gây hao tổn nguồn lực về sau.",
+    "rating": 4,
+    "sort_order": 2,
+    "category": null,
+    "image": [
+      {
+        "id": 10,
+        "createdAt": "2026-07-02T21:42:08.262Z",
+        "updatedAt": "2026-07-02T21:42:08.266Z",
+        "title": "Hoàng Lê Dung",
+        "filename": "Hoàng Lê Dung-3ts3na.jpg",
+        "extname": ".jpg",
+        "size": 92208,
+        "mimetype": "image/jpeg",
+        "path": "",
+        "meta": {},
+        "url": "/uploads/HoàngLêDung-3ts3na.jpg",
+        "createdById": 1,
+        "updatedById": 1,
+        "storageId": 372110280097792,
+        "preview": "/storage/uploads/Ho%C3%A0ng%20L%C3%AA%20Dung-3ts3na.jpg",
+        "t_wcfi4ikoryo": {
+          "createdAt": "2026-07-02T21:42:41.969Z",
+          "updatedAt": "2026-07-02T21:42:41.969Z",
+          "f_q3ajt4adsf0": 8,
+          "f_ful9q9nib5a": 10
+        }
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "updatedAt": "2026-07-02T22:36:34.292Z",
+    "name": "Ms. Thảo Nguyễn",
+    "position": "Co-founder & Head of Finance",
+    "company": "Aura Capital",
+    "quote": "Làm việc cùng Linh Hoa Tâm giúp tôi đưa ra các quyết định tài chính và vận hành dưới một khung chiến lược rõ ràng, cân đối được tăng trưởng và kiểm soát rủi ro trong giai đoạn mở rộng.",
+    "rating": 5,
+    "sort_order": 3,
+    "category": null,
+    "image": [
+      {
+        "id": 11,
+        "createdAt": "2026-07-02T21:42:08.418Z",
+        "updatedAt": "2026-07-02T21:42:08.422Z",
+        "title": "Thảo Nguyễn",
+        "filename": "Thảo Nguyễn-p1o7hd.jpg",
+        "extname": ".jpg",
+        "size": 43894,
+        "mimetype": "image/jpeg",
+        "path": "",
+        "meta": {},
+        "url": "/uploads/ThảoNguyễn-p1o7hd.jpg",
+        "createdById": 1,
+        "updatedById": 1,
+        "storageId": 372110280097792,
+        "preview": "/storage/uploads/Th%E1%BA%A3o%20Nguy%E1%BB%85n-p1o7hd.jpg",
+        "t_wcfi4ikoryo": {
+          "createdAt": "2026-07-02T21:42:42.042Z",
+          "updatedAt": "2026-07-02T21:42:42.042Z",
+          "f_q3ajt4adsf0": 9,
+          "f_ful9q9nib5a": 11
+        }
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "updatedAt": "2026-07-02T22:36:37.924Z",
+    "name": "Mr. Nguyễn Thành Huy",
+    "position": "Founder",
+    "company": "SUA Architecture & UY Diamond Jewelry",
+    "quote": "Buổi làm việc không tập trung vào lời khuyên ngắn hạn, mà giúp tôi tái định vị cách ra quyết định ở cấp độ chiến lược, đặc biệt trong giai đoạn doanh nghiệp cần mở rộng.",
+    "rating": 6,
+    "sort_order": 4,
+    "category": null,
+    "image": [
+      {
+        "id": 12,
+        "createdAt": "2026-07-02T21:42:08.652Z",
+        "updatedAt": "2026-07-02T21:42:08.658Z",
+        "title": "Nguyễn Thành Huy",
+        "filename": "Nguyễn Thành Huy-in246q.jpg",
+        "extname": ".jpg",
+        "size": 437779,
+        "mimetype": "image/jpeg",
+        "path": "",
+        "meta": {},
+        "url": "/uploads/NguyễnThànhHuy-in246q.jpg",
+        "createdById": 1,
+        "updatedById": 1,
+        "storageId": 372110280097792,
+        "preview": "/storage/uploads/Nguy%E1%BB%85n%20Th%C3%A0nh%20Huy-in246q.jpg",
+        "t_wcfi4ikoryo": {
+          "createdAt": "2026-07-02T21:42:42.108Z",
+          "updatedAt": "2026-07-02T21:42:42.108Z",
+          "f_q3ajt4adsf0": 10,
+          "f_ful9q9nib5a": 12
+        }
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "updatedAt": "2026-07-02T22:36:43.778Z",
+    "name": "Ms. Phạm Huỳnh Thảo Miên",
+    "position": "Founder",
+    "company": "TNHH Yến Sào SG / Á hậu Đại Dương Doanh Nhân Thế Giới 2026",
+    "quote": "Cảm ơn Linh Hoa Tâm đã đồng hành cùng tôi nhìn lại toàn bộ hành trình điều hành doanh nghiệp dưới một góc độ chiến lược hơn và xây dựng thương hiệu theo hướng bền vững.",
+    "rating": 7,
+    "sort_order": 5,
+    "category": null,
+    "image": [
+      {
+        "id": 13,
+        "createdAt": "2026-07-02T21:42:08.812Z",
+        "updatedAt": "2026-07-02T21:42:08.815Z",
+        "title": "Phạm Huỳnh Thảo Miên",
+        "filename": "Phạm Huỳnh Thảo Miên-wuj9uk.jpg",
+        "extname": ".jpg",
+        "size": 57817,
+        "mimetype": "image/jpeg",
+        "path": "",
+        "meta": {},
+        "url": "/uploads/PhạmHuỳnhThảoMiên-wuj9uk.jpg",
+        "createdById": 1,
+        "updatedById": 1,
+        "storageId": 372110280097792,
+        "preview": "/storage/uploads/Ph%E1%BA%A1m%20Hu%E1%BB%B3nh%20Th%E1%BA%A3o%20Mi%C3%AAn-wuj9uk.jpg",
+        "t_wcfi4ikoryo": {
+          "createdAt": "2026-07-02T21:42:42.171Z",
+          "updatedAt": "2026-07-02T21:42:42.171Z",
+          "f_q3ajt4adsf0": 11,
+          "f_ful9q9nib5a": 13
+        }
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "updatedAt": "2026-07-02T22:36:47.928Z",
+    "name": "Mr. Đỗ Duy Thanh",
+    "position": "CEO",
+    "company": "Công ty TNHH Adobus / Founder Hệ thống Dụng cụ cắt kim loại Adobus",
+    "quote": "Master Hoàng Mai Linh giúp tôi xác định rõ thời điểm nên đầu tư, thời điểm cần chậm lại và những quyết định không nên làm, tránh được các bước đi tốn kém nhưng không tạo ra giá trị dài hạn.",
+    "rating": 8,
+    "sort_order": 6,
+    "category": null,
+    "image": [
+      {
+        "id": 14,
+        "createdAt": "2026-07-02T21:42:09.000Z",
+        "updatedAt": "2026-07-02T21:42:09.004Z",
+        "title": "Đỗ Duy Thanh",
+        "filename": "Đỗ Duy Thanh-na3146.jpg",
+        "extname": ".jpg",
+        "size": 168446,
+        "mimetype": "image/jpeg",
+        "path": "",
+        "meta": {},
+        "url": "/uploads/ĐỗDuyThanh-na3146.jpg",
+        "createdById": 1,
+        "updatedById": 1,
+        "storageId": 372110280097792,
+        "preview": "/storage/uploads/%C4%90%E1%BB%97%20Duy%20Thanh-na3146.jpg",
+        "t_wcfi4ikoryo": {
+          "createdAt": "2026-07-02T21:42:42.239Z",
+          "updatedAt": "2026-07-02T21:42:42.239Z",
+          "f_q3ajt4adsf0": 12,
+          "f_ful9q9nib5a": 14
+        }
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "updatedAt": "2026-07-03T22:04:51.115Z",
+    "name": "Ông Nguyễn Văn A",
+    "position": "Trưởng ban tổ chức",
+    "company": "CEO Forum 2025",
+    "quote": "Phần chia sẻ của Master Mai Linh thực sự ấn tượng. Khác với những diễn giả truyền cảm hứng thông thường, chị mang đến một framework rõ ràng dựa trên con số để ban lãnh đạo tự soi chiếu lại cấu trúc tổ chức và ra quyết định chiến lược.",
+    "rating": 5,
+    "sort_order": 1,
+    "category": "speaker",
+    "image": []
+  },
+  {
+    "id": 14,
+    "updatedAt": "2026-07-03T22:04:51.169Z",
+    "name": "Bà Trần Thị B",
+    "position": "Founder & CEO",
+    "company": "TechStartup JSC",
+    "quote": "Rất thực chiến và có tính ứng dụng cao. Sau 2 giờ làm việc nội bộ, đội ngũ 5 Founders của chúng tôi đã nhìn ra ngay tại sao 6 tháng qua công ty liên tục lục đục nội bộ và biết chính xác ai nên lùi về sau, ai nên đứng mũi chịu sào trong năm tới.",
+    "rating": 5,
+    "sort_order": 2,
+    "category": "speaker",
+    "image": []
+  }
+]

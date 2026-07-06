@@ -1,0 +1,1451 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Chống Google index trang này -->
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <title>LHT Website Command Center</title>
+  <meta name="description" content="Trung tâm điều khiển và quản trị nội dung website Linh Hoa Tâm">
+  <meta property="og:title" content="LHT Website Command Center">
+  <meta property="og:description" content="Trung tâm điều khiển và quản trị nội dung website Linh Hoa Tâm">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts Outfit & Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            title: ['Outfit', 'sans-serif'],
+          },
+          colors: {
+            'oxford-blue': '#002b57',
+            'blaze-orange': '#ff5a00',
+            'cyan-azure': '#0084ff',
+            'ice-white': '#f5f7fa',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f8fafc;
+    }
+    .custom-scroll::-webkit-scrollbar {
+      width: 5px;
+    }
+    .custom-scroll::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body class="p-4 bg-slate-50 min-h-screen flex flex-col justify-between">
+  <div class="w-full bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden flex flex-col max-w-[1280px] mx-auto">
+    <!-- Header -->
+    <div class="bg-gradient-to-r from-oxford-blue to-[#004080] p-5 text-white flex items-center justify-between shrink-0">
+      <div>
+        <h1 class="text-xl font-title font-bold tracking-tight">TRANG QUẢN TRỊ TỔNG HỢP (WEBSITE COMMAND CENTER)</h1>
+        <p class="text-[11px] text-slate-300 mt-0.5 font-medium">Bản điều khiển tập trung để quản lý toàn bộ nội dung & hình ảnh website Linh Hoa Tâm</p>
+      </div>
+      <div class="flex items-center gap-3">
+        <span id="sync-status" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-300">
+          <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+          NocoBase Live Connected
+        </span>
+      </div>
+    </div>
+
+    <!-- Dashboard Content Layout -->
+    <div class="flex flex-col lg:flex-row min-h-[640px] max-h-[750px] overflow-hidden">
+      <!-- Sidebar Navigation -->
+      <div class="w-full lg:w-[240px] bg-slate-50/50 border-r border-slate-200 p-4 flex flex-col gap-1.5 shrink-0 overflow-y-auto custom-scroll">
+        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider px-3 mb-1">Cấu hình chung</span>
+        <button onclick="switchTab('homepage')" id="menu-homepage" class="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-bold transition-all duration-150 bg-oxford-blue text-white shadow-sm w-full text-left">
+          🏠 Cấu hình Trang chủ
+        </button>
+        <button onclick="switchTab('images')" id="menu-images" class="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-bold transition-all duration-150 text-slate-600 hover:bg-slate-100 w-full text-left">
+          🖼️ Quản lý hình ảnh chính
+        </button>
+
+        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider px-3 mt-4 mb-1">Sản phẩm & Dịch vụ</span>
+        <button onclick="switchTab('personal_products')" id="menu-personal_products" class="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-bold transition-all duration-150 text-slate-600 hover:bg-slate-100 w-full text-left">
+          👤 Sản phẩm Cá nhân
+        </button>
+        <button onclick="switchTab('business_products')" id="menu-business_products" class="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-bold transition-all duration-150 text-slate-600 hover:bg-slate-100 w-full text-left">
+          🏢 Sản phẩm Doanh nghiệp
+        </button>
+
+        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider px-3 mt-4 mb-1">Khách hàng & MXH</span>
+        <button onclick="switchTab('testimonials')" id="menu-testimonials" class="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-bold transition-all duration-150 text-slate-600 hover:bg-slate-100 w-full text-left">
+          💬 Nhận xét khách hàng
+        </button>
+        <button onclick="switchTab('customer_screenshots')" id="menu-customer_screenshots" class="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-bold transition-all duration-150 text-slate-600 hover:bg-slate-100 w-full text-left">
+          📱 Ảnh chụp tin nhắn KH
+        </button>
+        <button onclick="switchTab('facebook_posts')" id="menu-facebook_posts" class="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-bold transition-all duration-150 text-slate-600 hover:bg-slate-100 w-full text-left">
+          🔗 Bài viết Facebook
+        </button>
+        <button onclick="switchTab('leads')" id="menu-leads" class="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-bold transition-all duration-150 text-slate-600 hover:bg-slate-100 w-full text-left">
+          📥 Đăng ký từ Web (Leads)
+        </button>
+        <button onclick="switchTab('speaker_events')" id="menu-speaker_events" class="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-bold transition-all duration-150 text-slate-600 hover:bg-slate-100 w-full text-left">
+          📸 Ảnh Sự Kiện Speaker
+        </button>
+        <button onclick="switchTab('speaker_assets')" id="menu-speaker_assets" class="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-bold transition-all duration-150 text-slate-600 hover:bg-slate-100 w-full text-left">
+          🔗 Cấu hình Speaker (Files & Links)
+        </button>
+
+        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider px-3 mt-4 mb-1">Thành phần phụ</span>
+        <button onclick="switchTab('stats')" id="menu-stats" class="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-bold transition-all duration-150 text-slate-600 hover:bg-slate-100 w-full text-left">
+          📊 Số liệu thống kê
+        </button>
+        <button onclick="switchTab('partners')" id="menu-partners" class="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-bold transition-all duration-150 text-slate-600 hover:bg-slate-100 w-full text-left">
+          🤝 Logo Đối tác
+        </button>
+      </div>
+
+      <!-- Main Panel Work Area -->
+      <div class="flex-grow p-6 bg-white overflow-y-auto custom-scroll" id="work-area">
+        <!-- Dyn contents loaded here -->
+      </div>
+    </div>
+  </div>
+
+  <div class="text-center text-[10px] text-slate-400 font-medium py-2">
+    Đảm bảo an toàn SEO & Disallowed index bởi Robots.txt
+  </div>
+
+  <!-- Command Center Script Core -->
+  <script>
+    // 🔒 LỚP BẢO MẬT: CHỈ CHO PHÉP CHẠY BÊN TRONG IFRAME CỦA NOCOBASE
+    (function checkSecurityLock() {
+      const isEmbedded = window.self !== window.top;
+      const ref = document.referrer || "";
+      const isAllowedOrigin = ref.includes("lht.gun.hmz.one") || ref.includes("localhost") || ref.includes("127.0.0.1");
+      
+      if (!isEmbedded || !isAllowedOrigin) {
+        document.body.innerHTML = `
+          <div class="min-h-screen bg-slate-100 flex flex-col items-center justify-center p-6 text-center">
+            <div class="bg-white p-8 rounded-2xl shadow-xl max-w-md border border-slate-200">
+              <span class="text-4xl">🔒</span>
+              <div role="heading" aria-level="1" class="text-lg font-title font-bold text-slate-800 mt-4 mb-2">TRUY CẬP BỊ TỪ CHỐI</div>
+              <p class="text-xs text-slate-500 leading-relaxed">Trang quản trị này chứa token hệ thống và chỉ được phép hoạt động khi nhúng (iframe) bên trong NocoBase của Linh Hoa Tâm. Truy cập trực tiếp bị từ chối vì lý do bảo mật.</p>
+            </div>
+          </div>
+        `;
+        throw new Error("Security Lock: Access denied outside allowed NocoBase origin.");
+      }
+    })();
+
+    const TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGVOYW1lIjoicm9vdCIsImlhdCI6MTc4MjU0NDIyOSwiZXhwIjozMzM0MDE0NDIyOX0.l-Aru4p4MXyS6teBgmJQKeS2SfhMCUPV3IGAf2zeYWE";
+    const BASE_URL = "";
+    const NOCOBASE_URL = "https://lht.gun.hmz.one";
+    
+    let activeTab = 'homepage';
+    let profileData = null;
+    let listData = [];
+    let selectedItem = null;
+
+    const headers = {
+      'Authorization': `Bearer ${TOKEN}`,
+      'Content-Type': 'application/json'
+    };
+
+    // Global Fetch Interceptor to route NocoBase API calls to local endpoints (except leads)
+    const originalFetch = window.fetch;
+    window.fetch = async function(resource, init) {
+      let url = typeof resource === 'string' ? resource : resource.url;
+      
+      if (url.startsWith('/api/') || url.includes('/api/')) {
+        const urlPath = url.startsWith('http') ? new URL(url).pathname : url;
+        const pathParts = urlPath.split('/');
+        const endpoint = pathParts[pathParts.length - 1];
+        
+        // 1. LEADS: Redirect to remote NocoBase URL
+        if (endpoint.includes('leads')) {
+          const remoteUrl = `${NOCOBASE_URL}${urlPath}${url.includes('?') ? '?' + url.split('?')[1] : ''}`;
+          return originalFetch(remoteUrl, init);
+        }
+        
+        // 2. FILE UPLOADS: Redirect to local upload API
+        if (endpoint === 'attachments:create') {
+          return originalFetch('/api/admin/upload', init);
+        }
+        
+        // 3. SET IMAGE ASSOCIATION: Mock success since we store attachments inline
+        if (endpoint.includes(':set')) {
+          return new Response(JSON.stringify({ data: { success: true } }), {
+            status: 200,
+            headers: { 'Content-Type': 'application/json' }
+          });
+        }
+        
+        // 4. HOMEPAGE/PROFILE CONFIG
+        if (endpoint.startsWith('profile:list')) {
+          const localRes = await originalFetch('/api/admin/config?tab=homepage', { headers: init?.headers });
+          const localData = await localRes.json();
+          return new Response(JSON.stringify({ data: [localData.data] }), {
+            status: 200,
+            headers: { 'Content-Type': 'application/json' }
+          });
+        }
+        
+        if (endpoint.startsWith('profile:update')) {
+          const bodyData = JSON.parse(init.body);
+          return originalFetch('/api/admin/config?tab=homepage', {
+            method: 'POST',
+            headers: init.headers,
+            body: JSON.stringify(bodyData)
+          });
+        }
+        
+        // 5. OTHER COLLECTIONS (GET, POST, DELETE)
+        // Handle Delete/Destroy
+        if (endpoint.includes(':destroy')) {
+          const tabName = endpoint.split(':')[0];
+          const itemId = endpoint.split('/').pop() || '';
+          return originalFetch(`/api/admin/config?tab=${tabName}&id=${itemId}`, {
+            method: 'DELETE',
+            headers: init?.headers
+          });
+        }
+        
+        // Handle Update or Create
+        if (endpoint.includes(':update') || endpoint.includes(':create')) {
+          const tabName = endpoint.split(':')[0];
+          const bodyData = JSON.parse(init.body);
+          
+          const imageField = tabName === 'facebook_posts' ? 'thumbnail' : 'image';
+          const imgInput = document.getElementById('edit-image-id');
+          if (imgInput && imgInput.value) {
+            const val = imgInput.value;
+            if (val.startsWith('{')) {
+              try {
+                bodyData[imageField] = [JSON.parse(val)];
+              } catch(e) {}
+            } else if (selectedItem) {
+              bodyData[imageField] = selectedItem[imageField] || null;
+            }
+          }
+          
+          return originalFetch(`/api/admin/config?tab=${tabName}`, {
+            method: 'POST',
+            headers: init.headers,
+            body: JSON.stringify(bodyData)
+          });
+        }
+        
+        // Handle Listing
+        if (endpoint.includes(':list')) {
+          const tabName = endpoint.split(':')[0];
+          return originalFetch(`/api/admin/config?tab=${tabName}`, { headers: init?.headers });
+        }
+      }
+      
+      return originalFetch(resource, init);
+    };
+
+    window.addEventListener('DOMContentLoaded', () => {
+      switchTab('homepage');
+    });
+
+    function setSyncStatus(status, text) {
+      const el = document.getElementById('sync-status');
+      if (status === 'syncing') {
+        el.className = "inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-amber-500/20 text-amber-300";
+        el.innerHTML = '<span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span> ' + text;
+      } else if (status === 'success') {
+        el.className = "inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-300";
+        el.innerHTML = '<span class="w-2 h-2 rounded-full bg-emerald-400"></span> ' + text;
+      } else {
+        el.className = "inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-rose-500/20 text-rose-300";
+        el.innerHTML = '<span class="w-2 h-2 rounded-full bg-rose-400"></span> ' + text;
+      }
+    }
+
+    function switchTab(tab) {
+      // Update sidebar styling
+      const menuIds = ['homepage', 'images', 'personal_products', 'business_products', 'testimonials', 'customer_screenshots', 'facebook_posts', 'leads', 'stats', 'partners', 'speaker_events', 'speaker_assets'];
+      menuIds.forEach(id => {
+        const el = document.getElementById('menu-' + id);
+        if (id === tab) {
+          el.className = "flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-bold transition-all duration-150 bg-oxford-blue text-white shadow-sm w-full text-left";
+        } else {
+          el.className = "flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-bold transition-all duration-150 text-slate-600 hover:bg-slate-100 w-full text-left";
+        }
+      });
+
+      activeTab = tab;
+      selectedItem = null;
+      loadTabData();
+    }
+
+    async function loadTabData() {
+      setSyncStatus('syncing', 'Đang tải dữ liệu...');
+      const area = document.getElementById('work-area');
+      
+      if (activeTab === 'homepage') {
+        await loadHomepageConfig(area);
+      } else if (activeTab === 'images') {
+        await loadImagesConfig(area);
+      } else if (activeTab === 'speaker_assets') {
+        await loadSpeakerAssetsConfig(area);
+      } else {
+        await loadCollectionConfig(area);
+      }
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // 1. Homepage Config (Profile Collection)
+    // ─────────────────────────────────────────────────────────────
+    async function loadHomepageConfig(area) {
+      try {
+        const res = await fetch(`${BASE_URL}/api/profile:list`, { headers });
+        const payload = await res.json();
+        profileData = payload.data?.[0] || null;
+        
+        if (!profileData) {
+          area.innerHTML = '<div class="text-center text-slate-400 py-10">Không tìm thấy record cấu hình profile ID 1</div>';
+          return;
+        }
+
+        area.innerHTML = `
+          <div class="max-w-3xl">
+            <h2 class="font-title font-bold text-lg text-oxford-blue mb-2">🏠 CẤU HÌNH NỘI DUNG TRANG CHỦ & WORKSHOP</h2>
+            <p class="text-xs text-slate-400 mb-6">Thay đổi trực tiếp nội dung chính trên trang chủ. Bấm lưu để đồng bộ lên website.</p>
+            
+            <form onsubmit="saveHomepage(event)" class="space-y-5">
+              <div>
+                <label class="block text-xs font-bold text-slate-600 uppercase mb-1.5">Tiêu đề chính (Hero Title) - Nhấn Enter để xuống dòng</label>
+                <textarea id="hp-hero-title" rows="2" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs focus:outline-none focus:ring-1 focus:ring-oxford-blue">${profileData.hero_title || ''}</textarea>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-600 uppercase mb-1.5">Mô tả chính (Hero Description)</label>
+                <textarea id="hp-hero-desc" rows="3" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs focus:outline-none focus:ring-1 focus:ring-oxford-blue">${profileData.hero_desc || ''}</textarea>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4 border-t border-slate-100">
+                <div>
+                  <h3 class="text-xs font-black text-blaze-orange uppercase tracking-wider mb-3">Cấu hình banner Workshop</h3>
+                  <div class="space-y-3">
+                    <div>
+                      <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Tiêu đề Workshop - Nhấn Enter để xuống dòng</label>
+                      <textarea id="hp-workshop-title" rows="2" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs focus:outline-none focus:ring-1 focus:ring-oxford-blue">${profileData.workshop_title || ''}</textarea>
+                    </div>
+                    <div>
+                      <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Mô tả ngắn</label>
+                      <textarea id="hp-workshop-desc" rows="3" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs focus:outline-none focus:ring-1 focus:ring-oxford-blue">${profileData.workshop_desc || ''}</textarea>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <h3 class="text-xs font-black text-blaze-orange uppercase tracking-wider mb-3">Cấu hình banner Cộng đồng</h3>
+                  <div class="space-y-3">
+                    <div>
+                      <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Tiêu đề Cộng đồng - Nhấn Enter để xuống dòng</label>
+                      <textarea id="hp-community-title" rows="2" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs focus:outline-none focus:ring-1 focus:ring-oxford-blue">${profileData.community_title || ''}</textarea>
+                    </div>
+                    <div>
+                      <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Mô tả ngắn</label>
+                      <textarea id="hp-community-desc" rows="3" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs focus:outline-none focus:ring-1 focus:ring-oxford-blue">${profileData.community_desc || ''}</textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="pt-4 border-t border-slate-100 flex justify-end">
+                <button type="submit" class="bg-blaze-orange hover:bg-blaze-orange/95 text-white font-bold text-xs px-6 py-2.5 rounded-xl transition-all duration-200">
+                  Lưu cấu hình nội dung
+                </button>
+              </div>
+            </form>
+          </div>
+        `;
+        setSyncStatus('success', 'Đã tải cấu hình trang chủ');
+      } catch (err) {
+        setSyncStatus('error', 'Lỗi tải profile');
+      }
+    }
+
+    async function saveHomepage(e) {
+      e.preventDefault();
+      setSyncStatus('syncing', 'Đang lưu nội dung...');
+      const data = {
+        hero_title: document.getElementById('hp-hero-title').value.trim(),
+        hero_desc: document.getElementById('hp-hero-desc').value.trim(),
+        workshop_title: document.getElementById('hp-workshop-title').value.trim(),
+        workshop_desc: document.getElementById('hp-workshop-desc').value.trim(),
+        community_title: document.getElementById('hp-community-title').value.trim(),
+        community_desc: document.getElementById('hp-community-desc').value.trim(),
+      };
+
+      try {
+        const res = await fetch(`${BASE_URL}/api/profile:update/${profileData.id}`, {
+          method: 'POST',
+          headers,
+          body: JSON.stringify(data)
+        });
+        if (!res.ok) throw new Error('Save failed');
+        setSyncStatus('success', 'Đã lưu cấu hình thành công!');
+        setTimeout(loadTabData, 1500);
+      } catch (err) {
+        alert('Lưu thất bại');
+        setSyncStatus('error', 'Lỗi lưu cấu hình');
+      }
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // Speaker Config (Speaker Assets)
+    // ─────────────────────────────────────────────────────────────
+    let speakerAssetsData = null;
+
+    async function loadSpeakerAssetsConfig(area) {
+      try {
+        const res = await fetch('/api/admin/config?tab=speaker_assets', { headers });
+        const payload = await res.json();
+        speakerAssetsData = payload.data || {};
+
+        area.innerHTML = `
+          <div class="max-w-3xl">
+            <h2 class="font-title font-bold text-lg text-oxford-blue mb-2">🔗 CẤU HÌNH FILE, LINKS & PROPOSAL DIỄN GIẢ</h2>
+            <p class="text-xs text-slate-400 mb-6">Quản lý trực tiếp các liên kết tài liệu diễn giả, tệp tin và các tùy chọn biểu mẫu mời.</p>
+            
+            <form onsubmit="saveSpeakerAssets(event)" class="space-y-5">
+              <div>
+                <label class="block text-xs font-bold text-slate-600 uppercase mb-1.5">Link Hồ Sơ Năng Lực (Credential PDF) *</label>
+                <input type="text" id="sa-pdf-url" required class="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs focus:outline-none focus:ring-1 focus:ring-oxford-blue" value="${speakerAssetsData.credential_pdf_url || ''}">
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-600 uppercase mb-1.5">Link Proposal Diễn Giả (Slide đề xuất)</label>
+                <input type="text" id="sa-proposal-url" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs focus:outline-none focus:ring-1 focus:ring-oxford-blue" value="${speakerAssetsData.proposal_url || ''}">
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-600 uppercase mb-1.5">Tùy chọn Chuyên đề Form đặt lịch (Mỗi chuyên đề một dòng)</label>
+                <textarea id="sa-topics-options" rows="6" placeholder="Nhập các chủ đề cách nhau bằng dòng mới..." class="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs focus:outline-none focus:ring-1 focus:ring-oxford-blue">${(speakerAssetsData.topics_options || []).join('\n')}</textarea>
+              </div>
+
+              <div class="pt-4 border-t border-slate-100 flex justify-end">
+                <button type="submit" class="bg-blaze-orange hover:bg-blaze-orange/95 text-white font-bold text-xs px-6 py-2.5 rounded-xl transition-all duration-200">
+                  Lưu cấu hình Speaker
+                </button>
+              </div>
+            </form>
+          </div>
+        `;
+        setSyncStatus('success', 'Đã tải cấu hình Speaker');
+      } catch (err) {
+        setSyncStatus('error', 'Lỗi tải cấu hình Speaker');
+      }
+    }
+
+    async function saveSpeakerAssets(e) {
+      e.preventDefault();
+      setSyncStatus('syncing', 'Đang lưu cấu hình...');
+      const topicsText = document.getElementById('sa-topics-options').value.trim();
+      const topics_options = topicsText ? topicsText.split('\n').map(t => t.trim()).filter(Boolean) : [];
+      
+      const data = {
+        credential_pdf_url: document.getElementById('sa-pdf-url').value.trim(),
+        proposal_url: document.getElementById('sa-proposal-url').value.trim(),
+        hero_image: speakerAssetsData.hero_image || '',
+        topics_options: topics_options
+      };
+
+      try {
+        const res = await fetch('/api/admin/config?tab=speaker_assets', {
+          method: 'POST',
+          headers,
+          body: JSON.stringify(data)
+        });
+        if (!res.ok) throw new Error('Save failed');
+        setSyncStatus('success', 'Đã lưu cấu hình Speaker thành công!');
+        setTimeout(loadTabData, 1500);
+      } catch (err) {
+        alert('Lưu thất bại');
+        setSyncStatus('error', 'Lỗi lưu cấu hình');
+      }
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // 2. Main Images Config
+    // ─────────────────────────────────────────────────────────────
+    async function loadImagesConfig(area) {
+      try {
+        const res = await fetch(`${BASE_URL}/api/profile:list?appends=avatar,community_qr,book_cover,logo,hero_bg,philosophy_img,community_banner`, { headers });
+        const payload = await res.json();
+        profileData = payload.data?.[0] || null;
+
+        if (!profileData) {
+          area.innerHTML = '<div class="text-center text-slate-400 py-10">Không tìm thấy record cấu hình profile ID 1</div>';
+          return;
+        }
+
+        const avatarImg = profileData.avatar?.[0];
+        const qrImg = profileData.community_qr?.[0];
+        const bookImg = profileData.book_cover?.[0];
+        const logoImg = profileData.logo?.[0];
+        const heroBgImg = profileData.hero_bg?.[0];
+        const philImg = profileData.philosophy_img?.[0];
+        const commBannerImg = profileData.community_banner?.[0];
+
+        area.innerHTML = `
+          <div>
+            <h2 class="font-title font-bold text-lg text-oxford-blue mb-2">🖼️ QUẢN LÝ HÌNH ẢNH HỆ THỐNG</h2>
+            <p class="text-xs text-slate-400 mb-6">Tải lên để thay thế trực tiếp các hình ảnh tĩnh trên Website.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <!-- Avatar -->
+              <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 flex flex-col justify-between">
+                <div>
+                  <h3 class="text-xs font-bold text-oxford-blue mb-1">1. Ảnh chân dung Master</h3>
+                  <p class="text-[10px] text-slate-400 mb-3">Hiển thị ở Hero Banner & Giới thiệu</p>
+                  <div class="aspect-video bg-slate-200 border rounded-lg overflow-hidden flex items-center justify-center relative mb-4">
+                    ${avatarImg ? `<img src="${BASE_URL}${avatarImg.url}" class="object-contain w-full h-full p-2 bg-slate-900/5" alt="preview">` : '<span class="text-xs text-slate-400">Chưa có ảnh</span>'}
+                  </div>
+                </div>
+                <div>
+                  <div class="bg-white border rounded-lg p-2.5 text-[9px] text-slate-500 mb-3 space-y-0.5">
+                    <div><strong>Kích thước:</strong> 800x800 px</div>
+                    <div><strong>Định dạng:</strong> .PNG trong suốt / JPG</div>
+                  </div>
+                  <input type="file" id="up-avatar" onchange="uploadImageField(event, 'avatar')" class="hidden" accept="image/*">
+                  <button type="button" onclick="document.getElementById('up-avatar').click()" class="w-full bg-oxford-blue hover:bg-oxford-blue/90 text-white font-bold text-xs py-2 rounded-xl transition-all duration-150">
+                    Thay ảnh
+                  </button>
+                </div>
+              </div>
+
+              <!-- Community QR -->
+              <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 flex flex-col justify-between">
+                <div>
+                  <h3 class="text-xs font-bold text-oxford-blue mb-1">2. QR Code Cộng đồng</h3>
+                  <p class="text-[10px] text-slate-400 mb-3">Hiển thị ở banner cộng đồng & Footer</p>
+                  <div class="aspect-video bg-slate-200 border rounded-lg overflow-hidden flex items-center justify-center relative mb-4 p-2">
+                    ${qrImg ? `<img src="${BASE_URL}${qrImg.url}" class="object-contain w-full h-full bg-white border p-2" alt="preview">` : '<span class="text-xs text-slate-400">Chưa có ảnh</span>'}
+                  </div>
+                </div>
+                <div>
+                  <div class="bg-white border rounded-lg p-2.5 text-[9px] text-slate-500 mb-3 space-y-0.5">
+                    <div><strong>Kích thước:</strong> 300x300 px</div>
+                    <div><strong>Định dạng:</strong> PNG/JPG</div>
+                  </div>
+                  <input type="file" id="up-qr" onchange="uploadImageField(event, 'community_qr')" class="hidden" accept="image/*">
+                  <button type="button" onclick="document.getElementById('up-qr').click()" class="w-full bg-oxford-blue hover:bg-oxford-blue/90 text-white font-bold text-xs py-2 rounded-xl transition-all duration-150">
+                    Thay ảnh
+                  </button>
+                </div>
+              </div>
+
+              <!-- Book Cover -->
+              <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 flex flex-col justify-between">
+                <div>
+                  <h3 class="text-xs font-bold text-oxford-blue mb-1">3. Bìa sách "Sức mạnh..."</h3>
+                  <p class="text-[10px] text-slate-400 mb-3">Hiển thị ở mục giới thiệu sách</p>
+                  <div class="aspect-video bg-slate-200 border rounded-lg overflow-hidden flex items-center justify-center relative mb-4 p-2">
+                    ${bookImg ? `<img src="${BASE_URL}${bookImg.url}" class="object-contain max-h-full max-w-full shadow" alt="preview">` : '<span class="text-xs text-slate-400">Chưa có ảnh</span>'}
+                  </div>
+                </div>
+                <div>
+                  <div class="bg-white border rounded-lg p-2.5 text-[9px] text-slate-500 mb-3 space-y-0.5">
+                    <div><strong>Kích thước:</strong> 600x900 px (tỷ lệ 2:3)</div>
+                    <div><strong>Định dạng:</strong> PNG/JPG</div>
+                  </div>
+                  <input type="file" id="up-book" onchange="uploadImageField(event, 'book_cover')" class="hidden" accept="image/*">
+                  <button type="button" onclick="document.getElementById('up-book').click()" class="w-full bg-oxford-blue hover:bg-oxford-blue/90 text-white font-bold text-xs py-2 rounded-xl transition-all duration-150">
+                    Thay ảnh
+                  </button>
+                </div>
+              </div>
+
+              <!-- Logo Website -->
+              <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 flex flex-col justify-between">
+                <div>
+                  <h3 class="text-xs font-bold text-oxford-blue mb-1">4. Logo Website chính</h3>
+                  <p class="text-[10px] text-slate-400 mb-3">Hiển thị ở Header chính của trang web</p>
+                  <div class="aspect-video bg-slate-900 border rounded-lg overflow-hidden flex items-center justify-center relative mb-4 p-4">
+                    ${logoImg ? `<img src="${BASE_URL}${logoImg.url}" class="object-contain w-full h-full" alt="preview">` : '<span class="text-xs text-slate-400">Chưa có ảnh</span>'}
+                  </div>
+                </div>
+                <div>
+                  <div class="bg-white border rounded-lg p-2.5 text-[9px] text-slate-500 mb-3 space-y-0.5">
+                    <div><strong>Kích thước:</strong> Tỷ lệ dài (VD: 320x80 px)</div>
+                    <div><strong>Định dạng:</strong> .PNG nền trong suốt</div>
+                  </div>
+                  <input type="file" id="up-logo" onchange="uploadImageField(event, 'logo')" class="hidden" accept="image/*">
+                  <button type="button" onclick="document.getElementById('up-logo').click()" class="w-full bg-oxford-blue hover:bg-oxford-blue/90 text-white font-bold text-xs py-2 rounded-xl transition-all duration-150">
+                    Thay ảnh
+                  </button>
+                </div>
+              </div>
+
+              <!-- Hero Background -->
+              <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 flex flex-col justify-between">
+                <div>
+                  <h3 class="text-xs font-bold text-oxford-blue mb-1">5. Hình nền Hero Banner</h3>
+                  <p class="text-[10px] text-slate-400 mb-3">Hình nền trang chủ phía sau Master</p>
+                  <div class="aspect-video bg-slate-200 border rounded-lg overflow-hidden flex items-center justify-center relative mb-4">
+                    ${heroBgImg ? `<img src="${BASE_URL}${heroBgImg.url}" class="object-cover w-full h-full" alt="preview">` : '<span class="text-xs text-slate-400">Chưa có ảnh</span>'}
+                  </div>
+                </div>
+                <div>
+                  <div class="bg-white border rounded-lg p-2.5 text-[9px] text-slate-500 mb-3 space-y-0.5">
+                    <div><strong>Kích thước:</strong> 1920x1080 px</div>
+                    <div><strong>Định dạng:</strong> JPG/PNG</div>
+                  </div>
+                  <input type="file" id="up-herobg" onchange="uploadImageField(event, 'hero_bg')" class="hidden" accept="image/*">
+                  <button type="button" onclick="document.getElementById('up-herobg').click()" class="w-full bg-oxford-blue hover:bg-oxford-blue/90 text-white font-bold text-xs py-2 rounded-xl transition-all duration-150">
+                    Thay ảnh
+                  </button>
+                </div>
+              </div>
+
+              <!-- Philosophy Image -->
+              <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 flex flex-col justify-between">
+                <div>
+                  <h3 class="text-xs font-bold text-oxford-blue mb-1">6. Ảnh Triết lý Master</h3>
+                  <p class="text-[10px] text-slate-400 mb-3">Hiển thị ở trang triết lý/triết lý master</p>
+                  <div class="aspect-video bg-slate-200 border rounded-lg overflow-hidden flex items-center justify-center relative mb-4">
+                    ${philImg ? `<img src="${BASE_URL}${philImg.url}" class="object-cover w-full h-full" alt="preview">` : '<span class="text-xs text-slate-400">Chưa có ảnh</span>'}
+                  </div>
+                </div>
+                <div>
+                  <div class="bg-white border rounded-lg p-2.5 text-[9px] text-slate-500 mb-3 space-y-0.5">
+                    <div><strong>Kích thước:</strong> 800x800 px hoặc 800x600 px</div>
+                    <div><strong>Định dạng:</strong> JPG/PNG</div>
+                  </div>
+                  <input type="file" id="up-phil" onchange="uploadImageField(event, 'philosophy_img')" class="hidden" accept="image/*">
+                  <button type="button" onclick="document.getElementById('up-phil').click()" class="w-full bg-oxford-blue hover:bg-oxford-blue/90 text-white font-bold text-xs py-2 rounded-xl transition-all duration-150">
+                    Thay ảnh
+                  </button>
+                </div>
+              </div>
+
+              <!-- Community Banner -->
+              <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 flex flex-col justify-between">
+                <div>
+                  <h3 class="text-xs font-bold text-oxford-blue mb-1">7. Banner Cộng đồng</h3>
+                  <p class="text-[10px] text-slate-400 mb-3">Ảnh banner mục Cộng đồng</p>
+                  <div class="aspect-video bg-slate-200 border rounded-lg overflow-hidden flex items-center justify-center relative mb-4">
+                    ${commBannerImg ? `<img src="${BASE_URL}${commBannerImg.url}" class="object-cover w-full h-full" alt="preview">` : '<span class="text-xs text-slate-400">Chưa có ảnh</span>'}
+                  </div>
+                </div>
+                <div>
+                  <div class="bg-white border rounded-lg p-2.5 text-[9px] text-slate-500 mb-3 space-y-0.5">
+                    <div><strong>Kích thước:</strong> 800x800 px hoặc 1200x800 px</div>
+                    <div><strong>Định dạng:</strong> JPG/PNG</div>
+                  </div>
+                  <input type="file" id="up-commbanner" onchange="uploadImageField(event, 'community_banner')" class="hidden" accept="image/*">
+                  <button type="button" onclick="document.getElementById('up-commbanner').click()" class="w-full bg-oxford-blue hover:bg-oxford-blue/90 text-white font-bold text-xs py-2 rounded-xl transition-all duration-150">
+                    Thay ảnh
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+        setSyncStatus('success', 'Đã tải hình ảnh hệ thống');
+      } catch (err) {
+        setSyncStatus('error', 'Lỗi tải ảnh hệ thống');
+      }
+    }
+
+    async function uploadImageField(event, fieldName) {
+      const file = event.target.files[0];
+      if (!file) return;
+      setSyncStatus('syncing', 'Đang tải ảnh ' + fieldName + '...');
+      
+      const formData = new FormData();
+      formData.append('file', file);
+
+      try {
+        const uploadRes = await fetch(`${BASE_URL}/api/attachments:create`, {
+          method: 'POST',
+          headers: { 'Authorization': `Bearer ${TOKEN}` },
+          body: formData
+        });
+        if (!uploadRes.ok) throw new Error('Upload failed');
+        const payload = await uploadRes.json();
+        const fileId = payload.data?.id;
+
+        const linkRes = await fetch(`${BASE_URL}/api/profile/${profileData.id}/${fieldName}:set`, {
+          method: 'POST',
+          headers,
+          body: JSON.stringify([fileId])
+        });
+        if (!linkRes.ok) throw new Error('Link failed');
+        
+        setSyncStatus('success', 'Đã tải ảnh lên thành công!');
+        setTimeout(loadTabData, 1000);
+      } catch (err) {
+        alert('Tải ảnh thất bại');
+        setSyncStatus('error', 'Lỗi tải ảnh');
+      }
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // 3. Collection configurations (products, testimonials, screenshots, stats, partners, facebook_posts)
+    // ─────────────────────────────────────────────────────────────
+    async function loadCollectionConfig(area) {
+      // 3.1 Fetch list data
+      let appends = '';
+      if (['personal_products', 'business_products', 'testimonials', 'facebook_posts', 'customer_screenshots', 'speaker_events'].includes(activeTab)) {
+        appends = activeTab === 'facebook_posts' ? '&appends=thumbnail' : '&appends=image';
+      } else if (activeTab === 'partners') {
+        appends = '&appends=logo';
+      }
+      
+      const sort = (activeTab === 'facebook_posts' || activeTab === 'leads') ? '-createdAt' : 'sort_order';
+
+      try {
+        const res = await fetch(`${BASE_URL}/api/${activeTab}:list?sort=${sort}${appends}&pageSize=100`, { headers });
+        const payload = await res.json();
+        listData = payload.data || [];
+        
+        // Render 2-columns layout: Left list, Right form
+        area.innerHTML = `
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 h-full items-start">
+            <!-- Left panel: list -->
+            <div class="lg:col-span-5 border border-slate-200 rounded-xl p-4 bg-slate-50/50 flex flex-col h-full max-h-[580px]">
+              <div class="flex items-center justify-between mb-3 shrink-0">
+                <span class="text-xs font-bold text-oxford-blue uppercase">${getTabTitle(activeTab)} (${listData.length})</span>
+                ${activeTab !== 'leads' ? `
+                  <button onclick="initNewItem()" class="text-xs font-bold text-cyan-azure hover:text-cyan-azure/80 flex items-center gap-1">
+                    + Thêm mới
+                  </button>
+                ` : ''}
+              </div>
+
+              <div class="flex-grow overflow-y-auto custom-scroll space-y-2 pr-1" id="item-list-container">
+                ${renderItemListMarkup()}
+              </div>
+            </div>
+
+            <!-- Right panel: form editor -->
+            <div class="lg:col-span-7 border border-slate-200 rounded-xl p-5 bg-white h-full max-h-[580px] overflow-y-auto custom-scroll" id="form-container">
+              <div class="text-center py-20 text-slate-400 text-xs">
+                Chọn một mục bên trái hoặc bấm "Thêm mới" để sửa đổi nội dung
+              </div>
+            </div>
+          </div>
+        `;
+        setSyncStatus('success', 'Đã tải danh sách ' + getTabTitle(activeTab));
+      } catch (err) {
+        setSyncStatus('error', 'Lỗi kết nối NocoBase');
+      }
+    }
+
+    function getTabTitle(tab) {
+      const titles = {
+        'personal_products': 'Sản phẩm Cá nhân',
+        'business_products': 'Sản phẩm Doanh nghiệp',
+        'testimonials': 'Nhận xét khách hàng',
+        'customer_screenshots': 'Ảnh chụp tin nhắn KH',
+        'stats': 'Số liệu thống kê',
+        'partners': 'Logo Đối tác',
+        'facebook_posts': 'Bài viết Facebook',
+        'leads': 'Đăng ký từ Web (Leads)',
+        'speaker_events': 'Sự kiện Speaker'
+      };
+      return titles[tab] || tab;
+    }
+
+    function renderItemListMarkup() {
+      if (listData.length === 0) return '<div class="text-center py-10 text-xs text-slate-400">Danh sách trống</div>';
+      
+      return listData.map((item, idx) => {
+        let title = item.name || item.title || item.label || item.caption || `Mục số ${idx + 1}`;
+        let sub = item.price || item.position || item.value || (item.visible === false ? 'Bị ẩn' : 'Hiển thị');
+        let suffix = `<span class="text-[10px] font-bold text-slate-400">#${item.sort_order || 0}</span>`;
+        
+        if (activeTab === 'partners') {
+          title = item.name || 'Đối tác';
+          sub = `Thứ tự #${item.sort_order || 0}`;
+        } else if (activeTab === 'leads') {
+          title = item.name || 'Khách hàng';
+          sub = item.phone || item.email || 'Không có SĐT';
+          const dateStr = item.createdAt ? new Date(item.createdAt).toLocaleDateString('vi-VN') : '';
+          suffix = `<span class="text-[9px] text-slate-400 font-medium">${dateStr}</span>`;
+        }
+        
+        return `
+          <div onclick="selectItem(${item.id})" class="p-3 border rounded-xl bg-white hover:bg-slate-100 cursor-pointer flex items-center justify-between text-xs transition-colors shadow-sm">
+            <div class="min-w-0 flex-grow pr-2">
+              <div class="font-bold text-slate-800 truncate">${title}</div>
+              <div class="text-[10px] text-slate-400 mt-0.5 truncate">${sub}</div>
+            </div>
+            ${suffix}
+          </div>
+        `;
+      }).join('');
+    }
+
+    function selectItem(id) {
+      const item = listData.find(i => i.id === id);
+      if (!item) return;
+      selectedItem = item;
+      renderFormEditor();
+    }
+
+    function initNewItem() {
+      selectedItem = null;
+      renderFormEditor(true);
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // 4. Form Editor Rendering based on Active Tab
+    // ─────────────────────────────────────────────────────────────
+    function renderFormEditor(isNew = false) {
+      const formEl = document.getElementById('form-container');
+      const title = isNew ? 'Thêm mới' : 'Chỉnh sửa';
+      
+      let fieldsMarkup = '';
+      
+      if (['personal_products', 'business_products'].includes(activeTab)) {
+        // Products Form
+        const p = selectedItem || {};
+        const benefitsArray = p.benefits ? p.benefits.split('|') : [];
+        const img = p.image?.[0];
+        
+        fieldsMarkup = `
+          <div class="space-y-4">
+            <div class="grid grid-cols-2 gap-4">
+              <div class="col-span-2">
+                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Tên sản phẩm *</label>
+                <input type="text" id="edit-name" required value="${p.name || ''}" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs">
+              </div>
+
+              <!-- Product Image -->
+              <div class="col-span-2 bg-slate-50 p-3 rounded-xl border border-slate-200 flex items-center gap-4">
+                <div class="w-16 h-16 bg-slate-200 rounded-lg overflow-hidden border border-slate-300 flex items-center justify-center shrink-0" id="preview-product-img">
+                  ${img ? `<img src="${BASE_URL}${img.url}" class="object-cover w-full h-full" alt="preview">` : '<span class="text-[8px] text-slate-400">Chưa có ảnh</span>'}
+                </div>
+                <div class="flex-grow">
+                  <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Ảnh sản phẩm (800x800px)</label>
+                  <div class="flex items-center gap-2">
+                    <input type="file" id="file-product-img" onchange="uploadItemImage(event, 'image', 'preview-product-img')" class="hidden" accept="image/*">
+                    <button type="button" onclick="document.getElementById('file-product-img').click()" class="px-2.5 py-1 bg-white border border-slate-300 rounded-lg text-[10px] font-bold text-slate-600 hover:bg-slate-50">Upload</button>
+                    <button type="button" onclick="clearItemImage('image', 'preview-product-img')" class="text-[10px] font-bold text-rose-500">Xóa</button>
+                  </div>
+                  <input type="hidden" id="edit-image-id" value="${img ? img.id : ''}">
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Giá hiển thị</label>
+                <input type="text" id="edit-price" placeholder="450.000 VND" value="${p.price || ''}" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs">
+              </div>
+              <div>
+                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Nhãn nổi bật (Badge)</label>
+                <input type="text" id="edit-badge" placeholder="ĐẦY ĐỦ NHẤT" value="${p.badge || ''}" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs">
+              </div>
+              <div>
+                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Tagline (Dòng phụ)</label>
+                <input type="text" id="edit-tagline" placeholder="Coaching 1:1" value="${p.tagline || ''}" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs">
+              </div>
+              <div>
+                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Slug URL</label>
+                <input type="text" id="edit-slug" placeholder="file-luan-giai" value="${p.slug || ''}" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs">
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Mô tả ngắn</label>
+              <textarea id="edit-description" rows="2" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs">${p.description || ''}</textarea>
+            </div>
+
+            <!-- Benefits Manager -->
+            <div>
+              <div class="flex justify-between items-center mb-1">
+                <label class="block text-[10px] font-bold text-slate-500 uppercase">Quyền lợi (Dòng chi tiết)</label>
+                <button type="button" onclick="addEditBenefit('')" class="text-[10px] font-bold text-cyan-azure">+ Thêm dòng</button>
+              </div>
+              <div id="edit-benefits-container" class="space-y-2 max-h-[140px] overflow-y-auto custom-scroll p-1 border rounded-lg bg-slate-50">
+                <!-- dynamic benefits rows -->
+              </div>
+            </div>
+
+            <div class="grid grid-cols-3 gap-2">
+              <div>
+                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Nút CTA</label>
+                <input type="text" id="edit-cta-label" placeholder="Đặt lịch ngay" value="${p.cta_label || ''}" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs">
+              </div>
+              <div>
+                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Giao diện (Theme)</label>
+                <select id="edit-theme" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs bg-white">
+                  <option value="light" ${p.theme === 'light' ? 'selected' : ''}>Sáng</option>
+                  <option value="dark" ${p.theme === 'dark' ? 'selected' : ''}>Tối</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Thứ tự hiển thị</label>
+                <input type="number" id="edit-sort-order" value="${p.sort_order || 0}" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs">
+              </div>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <input type="checkbox" id="edit-featured" ${p.featured ? 'checked' : ''} class="rounded text-oxford-blue">
+              <label class="text-[10px] font-bold text-slate-500 uppercase">Sản phẩm nổi bật</label>
+            </div>
+          </div>
+        `;
+      } 
+      else if (activeTab === 'testimonials') {
+        // Testimonials Form
+        const t = selectedItem || {};
+        const img = t.image?.[0];
+        fieldsMarkup = `
+          <div class="space-y-4">
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Tên khách hàng *</label>
+                <input type="text" id="edit-name" required value="${t.name || ''}" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs">
+              </div>
+              <div>
+                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Chức danh / Công ty</label>
+                <input type="text" id="edit-position" value="${t.position || ''}" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs">
+              </div>
+              <div class="col-span-2">
+                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Tên công ty phụ (tùy chọn)</label>
+                <input type="text" id="edit-company" value="${t.company || ''}" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs">
+              </div>
+              <div class="col-span-2">
+                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Phân loại (Hiển thị ở trang nào) *</label>
+                <select id="edit-category" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs bg-white">
+                  <option value="home" ${t.category !== 'speaker' ? 'selected' : ''}>Trang chủ / Cá nhân</option>
+                  <option value="speaker" ${t.category === 'speaker' ? 'selected' : ''}>Mời Speaker (Đối tác đã hợp tác)</option>
+                </select>
+              </div>
+
+              <!-- Avatar Image -->
+              <div class="col-span-2 bg-slate-50 p-3 rounded-xl border border-slate-200 flex items-center gap-4">
+                <div class="w-14 h-14 bg-slate-200 rounded-full overflow-hidden border border-slate-300 flex items-center justify-center shrink-0" id="preview-testimonial-avatar">
+                  ${img ? `<img src="${BASE_URL}${img.url}" class="object-cover w-full h-full" alt="preview">` : '<span class="text-[8px] text-slate-400">Chưa có ảnh</span>'}
+                </div>
+                <div class="flex-grow">
+                  <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Avatar Khách hàng (200x200px)</label>
+                  <div class="flex items-center gap-2">
+                    <input type="file" id="file-testimonial-avatar" onchange="uploadItemImage(event, 'image', 'preview-testimonial-avatar')" class="hidden" accept="image/*">
+                    <button type="button" onclick="document.getElementById('file-testimonial-avatar').click()" class="px-2.5 py-1 bg-white border border-slate-300 rounded-lg text-[10px] font-bold text-slate-600 hover:bg-slate-50">Upload</button>
+                    <button type="button" onclick="clearItemImage('image', 'preview-testimonial-avatar')" class="text-[10px] font-bold text-rose-500">Xóa</button>
+                  </div>
+                  <input type="hidden" id="edit-image-id" value="${img ? img.id : ''}">
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Nội dung nhận xét *</label>
+              <textarea id="edit-quote" required rows="3" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs">${t.quote || ''}</textarea>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Đánh giá (Số sao)</label>
+                <input type="number" id="edit-rating" min="1" max="5" value="${t.rating || 5}" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs">
+              </div>
+              <div>
+                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Thứ tự hiển thị</label>
+                <input type="number" id="edit-sort-order" value="${t.sort_order || 0}" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs">
+              </div>
+            </div>
+          </div>
+        `;
+      } 
+      else if (activeTab === 'customer_screenshots') {
+        // Screenshots Form
+        const s = selectedItem || {};
+        const img = s.image?.[0];
+        fieldsMarkup = `
+          <div class="space-y-4">
+            <div>
+              <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Chú thích ảnh</label>
+              <input type="text" id="edit-caption" value="${s.caption || ''}" placeholder="Nhập chú thích..." class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs">
+            </div>
+
+            <!-- Screenshot Image Upload -->
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex flex-col gap-4">
+              <div class="aspect-[9/16] max-w-[200px] bg-slate-200 border rounded-lg overflow-hidden flex items-center justify-center mx-auto" id="preview-screenshot-img">
+                ${img ? `<img src="${BASE_URL}${img.url}" class="object-cover w-full h-full" alt="preview">` : '<span class="text-xs text-slate-400">Chưa tải tệp</span>'}
+              </div>
+              <div class="text-center">
+                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-2">Hình ảnh chụp tin nhắn</label>
+                <input type="file" id="file-screenshot-img" onchange="uploadItemImage(event, 'image', 'preview-screenshot-img')" class="hidden" accept="image/*">
+                <button type="button" onclick="document.getElementById('file-screenshot-img').click()" class="px-4 py-1.5 bg-white border border-slate-300 rounded-lg text-xs font-bold text-slate-600 hover:bg-slate-50">Tải ảnh lên</button>
+                <button type="button" onclick="clearItemImage('image', 'preview-screenshot-img')" class="text-xs font-bold text-rose-500 ml-4">Xóa ảnh</button>
+                <input type="hidden" id="edit-image-id" value="${img ? img.id : ''}">
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+              <div class="flex items-center gap-2">
+                <input type="checkbox" id="edit-visible" ${s.visible !== false ? 'checked' : ''} class="rounded text-oxford-blue">
+                <label class="text-[10px] font-bold text-slate-500 uppercase">Hiển thị lên web</label>
+              </div>
+              <div>
+                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Thứ tự hiển thị</label>
+                <input type="number" id="edit-sort-order" value="${s.sort_order || 0}" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs">
+              </div>
+            </div>
+          </div>
+        `;
+      } 
+      else if (activeTab === 'speaker_events') {
+        // Speaker Events Form
+        const e = selectedItem || {};
+        const img = e.image?.[0];
+        fieldsMarkup = `
+          <div class="space-y-4">
+            <div>
+              <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Tên sự kiện / Tiêu đề *</label>
+              <input type="text" id="edit-title" required value="${e.title || ''}" placeholder="Sự kiện Forbes Women Summit" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs">
+            </div>
+            <div>
+              <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Địa điểm & Thời gian</label>
+              <input type="text" id="edit-location" value="${e.location || ''}" placeholder="TP.HCM, 2024" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs">
+            </div>
+
+            <!-- Image Upload -->
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex flex-col gap-4">
+              <div class="aspect-video max-w-[320px] bg-slate-200 border rounded-lg overflow-hidden flex items-center justify-center mx-auto" id="preview-event-img">
+                ${img ? `<img src="${BASE_URL}${img.url}" class="object-cover w-full h-full" alt="preview">` : '<span class="text-xs text-slate-400">Chưa có ảnh</span>'}
+              </div>
+              <div class="text-center">
+                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-2">Hình ảnh sự kiện</label>
+                <input type="file" id="file-event-img" onchange="uploadItemImage(event, 'image', 'preview-event-img')" class="hidden" accept="image/*">
+                <button type="button" onclick="document.getElementById('file-event-img').click()" class="px-4 py-1.5 bg-white border border-slate-300 rounded-lg text-xs font-bold text-slate-600 hover:bg-slate-50">Tải ảnh lên</button>
+                <button type="button" onclick="clearItemImage('image', 'preview-event-img')" class="text-xs font-bold text-rose-500 ml-4">Xóa ảnh</button>
+                <input type="hidden" id="edit-image-id" value="${img ? img.id : ''}">
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Thứ tự hiển thị</label>
+              <input type="number" id="edit-sort-order" value="${e.sort_order || 0}" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs">
+            </div>
+          </div>
+        `;
+      }
+      else if (activeTab === 'facebook_posts') {
+        // Facebook Posts Form
+        const f = selectedItem || {};
+        const img = f.thumbnail?.[0];
+        fieldsMarkup = `
+          <div class="space-y-4">
+            <div>
+              <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Tiêu đề bài viết *</label>
+              <input type="text" id="edit-title" required value="${f.title || ''}" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs">
+            </div>
+
+            <div>
+              <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Đường dẫn Facebook (URL)</label>
+              <input type="text" id="edit-post-url" placeholder="https://facebook.com/..." value="${f.post_url || ''}" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs font-mono">
+            </div>
+
+            <!-- Thumbnail Image -->
+            <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 flex items-center gap-4">
+              <div class="w-20 h-16 bg-slate-200 rounded overflow-hidden border border-slate-300 flex items-center justify-center shrink-0" id="preview-facebook-thumbnail">
+                ${img ? `<img src="${BASE_URL}${img.url}" class="object-cover w-full h-full" alt="preview">` : '<span class="text-[8px] text-slate-400">Chưa có ảnh</span>'}
+              </div>
+              <div class="flex-grow">
+                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Ảnh chụp/Thumbnail bài viết</label>
+                <div class="flex items-center gap-2">
+                  <input type="file" id="file-facebook-thumbnail" onchange="uploadItemImage(event, 'thumbnail', 'preview-facebook-thumbnail')" class="hidden" accept="image/*">
+                  <button type="button" onclick="document.getElementById('file-facebook-thumbnail').click()" class="px-2.5 py-1 bg-white border border-slate-300 rounded text-[10px] font-bold text-slate-600 hover:bg-slate-50">Upload</button>
+                  <button type="button" onclick="clearItemImage('thumbnail', 'preview-facebook-thumbnail')" class="text-[10px] font-bold text-rose-500">Xóa</button>
+                </div>
+                <input type="hidden" id="edit-image-id" value="${img ? img.id : ''}">
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Tóm tắt ngắn (Dự phòng)</label>
+              <textarea id="edit-excerpt" rows="2" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs">${f.excerpt || ''}</textarea>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Trạng thái hiển thị</label>
+                <select id="edit-status" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs bg-white">
+                  <option value="published" ${f.status !== 'draft' ? 'selected' : ''}>Hiển thị (Published)</option>
+                  <option value="draft" ${f.status === 'draft' ? 'selected' : ''}>Ẩn (Draft)</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Thứ tự</label>
+                <input type="number" id="edit-sort-order" value="${f.sort_order || 0}" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs">
+              </div>
+            </div>
+          </div>
+        `;
+      } 
+      else if (activeTab === 'stats') {
+        // Stats Form
+        const s = selectedItem || {};
+        fieldsMarkup = `
+          <div class="space-y-4">
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Số liệu chính *</label>
+                <input type="text" id="edit-value" placeholder="Ví dụ: 3.600+" required value="${s.value || ''}" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs">
+              </div>
+              <div>
+                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Nhãn mô tả chính *</label>
+                <input type="text" id="edit-label" placeholder="Giờ tham vấn" required value="${s.label || ''}" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs">
+              </div>
+              <div class="col-span-2">
+                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Dòng phụ bên dưới</label>
+                <input type="text" id="edit-subLabel" placeholder="CEO & lãnh đạo cấp cao" value="${s.subLabel || ''}" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs">
+              </div>
+              <div>
+                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Thứ tự hiển thị</label>
+                <input type="number" id="edit-sort-order" value="${s.sort_order || 0}" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs">
+              </div>
+            </div>
+          </div>
+        `;
+      } 
+      else if (activeTab === 'partners') {
+        // Partners Form
+        const pa = selectedItem || {};
+        const logoUrlVal = pa.logo_url || '';
+        const fullLogoUrl = logoUrlVal ? (logoUrlVal.startsWith('http') ? logoUrlVal : `${BASE_URL}${logoUrlVal}`) : '';
+        
+        fieldsMarkup = `
+          <div class="space-y-4">
+            <div>
+              <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Tên Đối tác / Logo</label>
+              <input type="text" id="edit-name" required value="${pa.name || ''}" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs">
+            </div>
+
+            <!-- Logo Image -->
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex flex-col gap-4">
+              <div class="w-full max-w-[200px] h-16 bg-white border rounded overflow-hidden flex items-center justify-center mx-auto p-2 shadow-sm" id="preview-partner-logo">
+                ${logoUrlVal ? `<img src="${fullLogoUrl}" class="object-contain max-h-full max-w-full" alt="preview">` : '<span class="text-xs text-slate-400">Chưa có logo</span>'}
+              </div>
+              <div class="text-center">
+                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-2">Logo đối tác (PNG/JPG)</label>
+                <input type="file" id="file-partner-logo" onchange="uploadItemImage(event, 'logo_url', 'preview-partner-logo')" class="hidden" accept="image/*">
+                <button type="button" onclick="document.getElementById('file-partner-logo').click()" class="px-4 py-1.5 bg-white border border-slate-300 rounded-lg text-xs font-bold text-slate-600 hover:bg-slate-50">Upload logo</button>
+                <button type="button" onclick="clearItemImage('logo_url', 'preview-partner-logo')" class="text-xs font-bold text-rose-500 ml-4">Xóa logo</button>
+                <input type="hidden" id="edit-logo-url" value="${logoUrlVal}">
+                <input type="hidden" id="edit-image-id" value="">
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Thứ tự hiển thị</label>
+              <input type="number" id="edit-sort-order" value="${pa.sort_order || 0}" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs">
+            </div>
+          </div>
+        `;
+      }
+      else if (activeTab === 'leads') {
+        const l = selectedItem || {};
+        const dateStr = l.createdAt ? new Date(l.createdAt).toLocaleString('vi-VN') : 'Mới';
+        fieldsMarkup = `
+          <div class="space-y-4">
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Tên khách hàng</label>
+                <input type="text" readonly value="${l.name || ''}" class="w-full px-3 py-1.5 border border-slate-200 bg-slate-50 rounded-lg text-xs font-semibold text-slate-600 focus:outline-none">
+              </div>
+              <div>
+                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Số điện thoại</label>
+                <input type="text" readonly value="${l.phone || ''}" class="w-full px-3 py-1.5 border border-slate-200 bg-slate-50 rounded-lg text-xs font-semibold text-slate-600 focus:outline-none">
+              </div>
+              <div>
+                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Email</label>
+                <input type="text" readonly value="${l.email || ''}" class="w-full px-3 py-1.5 border border-slate-200 bg-slate-50 rounded-lg text-xs font-semibold text-slate-600 focus:outline-none">
+              </div>
+              <div>
+                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Phân loại (Tag)</label>
+                <input type="text" readonly value="${l.tag || l.source || ''}" class="w-full px-3 py-1.5 border border-slate-200 bg-slate-50 rounded-lg text-xs font-semibold text-slate-600 focus:outline-none">
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Ngày đăng ký</label>
+              <input type="text" readonly value="${dateStr}" class="w-full px-3 py-1.5 border border-slate-200 bg-slate-50 rounded-lg text-xs font-semibold text-slate-600 focus:outline-none">
+            </div>
+
+            <div>
+              <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Nội dung chi tiết tổng hợp</label>
+              <textarea readonly rows="8" class="w-full px-3 py-2 border border-slate-200 bg-slate-50 rounded-lg text-xs font-mono text-slate-600 focus:outline-none resize-none leading-relaxed">${l.message || l.content_summary || ''}</textarea>
+            </div>
+          </div>
+        `;
+      }
+
+      // Render the form wrap
+      formEl.innerHTML = `
+        <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
+          <span class="text-sm font-black text-oxford-blue uppercase">${title} ${getTabTitle(activeTab)}</span>
+        </div>
+        <form onsubmit="saveItem(event)" class="space-y-5">
+          ${fieldsMarkup}
+          
+          <div class="flex items-center justify-end gap-3 pt-4 border-t border-slate-100 mt-6">
+            ${!isNew ? `
+              <button type="button" onclick="deleteCurrentItem()" class="mr-auto text-xs font-bold text-rose-500 bg-rose-50 hover:bg-rose-100/70 px-3 py-2 rounded-lg transition-colors flex items-center gap-1">
+                Xóa mục này
+              </button>
+            ` : ''}
+            <button type="button" onclick="cancelEdit()" class="px-4 py-2 border border-slate-300 rounded-lg text-slate-600 hover:bg-slate-50 text-xs font-bold transition-all">
+              Hủy
+            </button>
+            <button type="submit" class="px-5 py-2 bg-blaze-orange hover:bg-blaze-orange/95 text-white text-xs font-bold rounded-lg transition-all shadow-sm">
+              Lưu thay đổi
+            </button>
+          </div>
+        </form>
+      `;
+
+      // Post-render configurations
+      if (['personal_products', 'business_products'].includes(activeTab)) {
+        const benefitsArray = (selectedItem && selectedItem.benefits) ? selectedItem.benefits.split('|') : [];
+        const container = document.getElementById('edit-benefits-container');
+        container.innerHTML = '';
+        if (benefitsArray.length === 0) {
+          addEditBenefit('');
+        } else {
+          benefitsArray.forEach(b => addEditBenefit(b));
+        }
+      }
+    }
+
+    // Dynamic row addition for edit benefits
+    function addEditBenefit(value) {
+      const container = document.getElementById('edit-benefits-container');
+      const row = document.createElement('div');
+      row.className = 'flex items-center gap-2 edit-benefit-row';
+      row.innerHTML = `
+        <input type="text" value="${value.replace(/"/g, '&quot;')}" placeholder="Nhập một dòng..." class="flex-1 px-2.5 py-1 border border-slate-300 rounded-lg text-xs focus:outline-none focus:ring-1 focus:ring-oxford-blue">
+        <button type="button" onclick="this.parentElement.remove()" class="text-rose-500 shrink-0">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+        </button>
+      `;
+      container.appendChild(row);
+      container.scrollTop = container.scrollHeight;
+    }
+
+    // Upload Item Image (Upload to NocoBase and update local preview)
+    async function uploadItemImage(event, fileField, previewContainerId) {
+      const file = event.target.files[0];
+      if (!file) return;
+      setSyncStatus('syncing', 'Đang tải tệp lên...');
+
+      const formData = new FormData();
+      formData.append('file', file);
+
+      try {
+        const res = await fetch(`${BASE_URL}/api/attachments:create`, {
+          method: 'POST',
+          headers: { 'Authorization': `Bearer ${TOKEN}` },
+          body: formData
+        });
+        if (!res.ok) throw new Error('Upload failed');
+        const payload = await res.json();
+        const fileData = payload.data || {};
+
+        if (fileField === 'logo_url') {
+          document.getElementById('edit-logo-url').value = fileData.url;
+        } else {
+          document.getElementById('edit-image-id').value = JSON.stringify(fileData);
+        }
+
+        const previewEl = document.getElementById(previewContainerId);
+        
+        if (previewContainerId.includes('avatar')) {
+          previewEl.innerHTML = `<img src="${BASE_URL}${fileData.url}" class="object-cover w-full h-full" alt="preview">`;
+        } else {
+          previewEl.innerHTML = `<img src="${BASE_URL}${fileData.url}" class="object-contain max-h-full max-w-full" alt="preview">`;
+        }
+        
+        setSyncStatus('success', 'Đã upload tệp thành công');
+      } catch (err) {
+        alert('Tải tệp lên thất bại');
+        setSyncStatus('error', 'Lỗi upload');
+      }
+    }
+
+    function clearItemImage(fileField, previewContainerId) {
+      if (fileField === 'logo_url') {
+        document.getElementById('edit-logo-url').value = '';
+      } else {
+        document.getElementById('edit-image-id').value = '';
+      }
+      const previewEl = document.getElementById(previewContainerId);
+      previewEl.innerHTML = `<span class="text-[8px] text-slate-400">Chưa có ảnh</span>`;
+    }
+
+    function cancelEdit() {
+      selectedItem = null;
+      loadTabData();
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // 5. Save and Delete Actions
+    // ─────────────────────────────────────────────────────────────
+    async function saveItem(e) {
+      e.preventDefault();
+      
+      if (activeTab === 'leads') {
+        alert('Dữ liệu khách hàng đăng ký chỉ được quyền xem và xóa, không thể chỉnh sửa.');
+        return;
+      }
+      
+      setSyncStatus('syncing', 'Đang lưu dữ liệu lên NocoBase...');
+
+      const id = selectedItem ? selectedItem.id : null;
+      let data = {};
+      
+      // Build request body depending on activeTab
+      if (['personal_products', 'business_products'].includes(activeTab)) {
+        const benefitRows = document.querySelectorAll('.edit-benefit-row input');
+        const benefitsArr = [];
+        benefitRows.forEach(input => {
+          const v = input.value.trim();
+          if (v) benefitsArr.push(v);
+        });
+        
+        data = {
+          name: document.getElementById('edit-name').value.trim(),
+          price: document.getElementById('edit-price').value.trim(),
+          badge: document.getElementById('edit-badge').value.trim(),
+          tagline: document.getElementById('edit-tagline').value.trim(),
+          slug: document.getElementById('edit-slug').value.trim(),
+          description: document.getElementById('edit-description').value.trim(),
+          benefits: benefitsArr.join('|'),
+          cta_label: document.getElementById('edit-cta-label').value.trim(),
+          theme: document.getElementById('edit-theme').value,
+          sort_order: parseInt(document.getElementById('edit-sort-order').value) || 0,
+          featured: document.getElementById('edit-featured').checked,
+        };
+      } 
+      else if (activeTab === 'testimonials') {
+        data = {
+          name: document.getElementById('edit-name').value.trim(),
+          position: document.getElementById('edit-position').value.trim(),
+          company: document.getElementById('edit-company').value.trim(),
+          quote: document.getElementById('edit-quote').value.trim(),
+          category: document.getElementById('edit-category').value,
+          rating: parseInt(document.getElementById('edit-rating').value) || 5,
+          sort_order: parseInt(document.getElementById('edit-sort-order').value) || 0,
+        };
+      }
+      else if (activeTab === 'speaker_events') {
+        data = {
+          title: document.getElementById('edit-title').value.trim(),
+          location: document.getElementById('edit-location').value.trim(),
+          sort_order: parseInt(document.getElementById('edit-sort-order').value) || 0,
+        };
+      }
+      else if (activeTab === 'customer_screenshots') {
+        data = {
+          caption: document.getElementById('edit-caption').value.trim(),
+          visible: document.getElementById('edit-visible').checked,
+          sort_order: parseInt(document.getElementById('edit-sort-order').value) || 0,
+        };
+      } 
+      else if (activeTab === 'facebook_posts') {
+        data = {
+          title: document.getElementById('edit-title').value.trim(),
+          post_url: document.getElementById('edit-post-url').value.trim(),
+          excerpt: document.getElementById('edit-excerpt').value.trim(),
+          status: document.getElementById('edit-status').value,
+          sort_order: parseInt(document.getElementById('edit-sort-order').value) || 0,
+        };
+      } 
+      else if (activeTab === 'stats') {
+        data = {
+          value: document.getElementById('edit-value').value.trim(),
+          label: document.getElementById('edit-label').value.trim(),
+          subLabel: document.getElementById('edit-subLabel').value.trim(),
+          sort_order: parseInt(document.getElementById('edit-sort-order').value) || 0,
+        };
+      } 
+      else if (activeTab === 'partners') {
+        data = {
+          name: document.getElementById('edit-name').value.trim(),
+          logo_url: document.getElementById('edit-logo-url').value.trim(),
+          sort_order: parseInt(document.getElementById('edit-sort-order').value) || 0,
+        };
+      }
+
+      // Determine API URL
+      const url = id 
+        ? `${BASE_URL}/api/${activeTab}:update/${id}`
+        : `${BASE_URL}/api/${activeTab}:create`;
+
+      try {
+        const res = await fetch(url, {
+          method: 'POST',
+          headers,
+          body: JSON.stringify(data)
+        });
+        if (!res.ok) throw new Error('Save record failed');
+        
+        const payload = await res.json();
+        const savedRecord = payload.data?.[0] || payload.data || {};
+        const savedRecordId = savedRecord.id || id;
+
+        // Save Image attachment association if field edit-image-id exists
+        const imgInput = document.getElementById('edit-image-id');
+        if (imgInput && activeTab !== 'partners') {
+          const imageId = imgInput.value;
+          const imageField = activeTab === 'facebook_posts' ? 'thumbnail' : 'image';
+          const linkUrl = `${BASE_URL}/api/${activeTab}/${savedRecordId}/${imageField}:set`;
+          
+          await fetch(linkUrl, {
+            method: 'POST',
+            headers,
+            body: JSON.stringify(imageId ? [parseInt(imageId)] : [])
+          });
+        }
+
+        setSyncStatus('success', 'Đã lưu thay đổi thành công!');
+        selectedItem = null;
+        setTimeout(loadTabData, 1000);
+      } catch (err) {
+        alert('Lưu thất bại');
+        setSyncStatus('error', 'Lỗi lưu dữ liệu');
+      }
+    }
+
+    async function deleteCurrentItem() {
+      if (!selectedItem) return;
+      if (!confirm('Bạn có chắc chắn muốn xóa mục này khỏi NocoBase?')) return;
+      setSyncStatus('syncing', 'Đang xóa...');
+
+      try {
+        const res = await fetch(`${BASE_URL}/api/${activeTab}:destroy/${selectedItem.id}`, {
+          method: 'POST',
+          headers
+        });
+        if (!res.ok) throw new Error('Destroy failed');
+        setSyncStatus('success', 'Đã xóa mục thành công!');
+        selectedItem = null;
+        setTimeout(loadTabData, 1000);
+      } catch (err) {
+        alert('Xóa thất bại');
+        setSyncStatus('error', 'Lỗi xóa');
+      }
+    }
+
+
+  </script>
+</body>
+</html>

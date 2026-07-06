@@ -1,0 +1,146 @@
+﻿LINH HOA TAM
+Cau truc website hien tai
+Cap nhat theo repo D:\Weblinhhoatam
+Ngay cap nhat: 19/03/2026
+
+TONG QUAN WEBSITE
+Website hien tai la mot website Next.js gioi thieu dich vu thuat so hoc va chia se noi dung.
+Cau truc thuc te dang co 3 nhom trang:
+1. Trang chu: /
+2. Trang danh sach tin tuc: /tin-tuc
+3. Trang chi tiet bai viet: /tin-tuc/[slug]
+
+DIEU HUONG CHINH
+Header menu hien tai gom:
+- Trang chu -> /
+- Gioi thieu -> /#gioi-thieu
+- Dich vu -> /#dich-vu
+- Tin tuc -> /tin-tuc
+- Lien he -> /#lien-he
+
+CTA tren header:
+- Dat lich tu van -> /#lien-he
+
+TRANG 1: TRANG CHU (/)
+Muc tieu:
+Gioi thieu Linh Hoa Tam nhu mot khong gian thuat so hoc hien dai, chua lanh va de ung dung; dan nguoi dung den dich vu va lien he.
+
+Section 1 - Hero
+- Eyebrow: Thuat So Hoc hien dai
+- Headline: Hieu ro ban than de song thuan nhip, sang huong va ben vung hon.
+- Mo ta: nhan manh trai nghiem tinh te, chua lanh, ket noi nang luong ca nhan, moi quan he va hanh trinh su nghiep.
+- CTA 1: Kham pha ngay -> /#dich-vu
+- CTA 2: Xem y nghia con so cua ban -> /#lien-he
+- 3 diem nhan gia tri:
+  + Tu duy dinh huong
+  + Chua lanh noi tam
+  + Chuyen sau so hoc
+- Khoi visual ben phai gioi thieu Linh Hoa Tam va 3 tu khoa:
+  + Ngay sinh
+  + So chu dao
+  + Dinh huong
+
+Section 2 - Gioi thieu
+ID neo: gioi-thieu
+- Tieu de lon: Linh Hoa Tam la khong gian de ban lang nghe ban than qua chieu sau cua thuat so hoc.
+- Mo ta: tiep can hien dai, tinh te, chua lanh; chuyen hoa so chu dao, ngay sinh va chi so ca nhan thanh goc nhin ro rang va de ap dung.
+- Cot trai nhan manh 2 gia tri:
+  + Ket noi noi tam
+  + Dinh huong thuc te
+- 3 the gia tri bo sung:
+  + Thau hieu
+  + Khai mo
+  + Ben vung
+
+Section 3 - Dich vu
+ID neo: dich-vu
+- Tieu de lon: Nhung trai nghiem duoc thiet ke de ban hieu ro hon ve con so, cam xuc va huong di cua minh.
+- Mo ta: can bang giua chieu sau chuyen mon va cam giac de tiep can.
+- 4 nhom dich vu hien co:
+  1. Xem than so hoc ca nhan
+  2. Phan tich ngay sinh
+  3. Y nghia cac con so
+  4. Tu van dinh huong ban than
+
+Section 4 - Bai viet noi bat
+- Tieu de lon: Nhung bai viet moi ve thuat so hoc, dinh huong ban than va cac ket noi chua lanh.
+- Mo ta: kho noi dung nhe nhang, hien dai, co the ung dung trong doi song.
+- Hien thi 3 bai viet noi bat.
+- CTA: Xem tat ca bai viet -> /tin-tuc
+
+Section 5 - Cam nhan khach hang
+- Tieu de lon: Nhung chia se chan that tu nguoi da dong hanh cung Linh Hoa Tam.
+- Mo ta: nhan manh cam giac duoc lang nghe, soi sang va dong hanh.
+- Dang hien thi 3 testimonial mau:
+  + Ngoc Han - Nguoi di lam
+  + Mai An - Chu kinh doanh nho
+  + Tu Linh - Nguoi dang tim dinh huong
+
+Section 6 - Lien he
+ID neo: lien-he
+- Tieu de lon: Bat dau hanh trinh kham pha con so cua ban bang mot cuoc tro chuyen diu dang va chuyen sau.
+- Mo ta: phu hop cho nguoi muon hieu ro hon ve ban than, cong viec va moi quan he.
+- Khoi noi dung bo tro:
+  + Phan tich nhe nhang, ro rang va de ung dung
+  + Ton trong trai nghiem ca nhan cua tung khach hang
+  + Phu hop cho nguoi moi bat dau tim hieu thuat so hoc
+- Form lien he hien tai gom 4 truong:
+  + Ho ten
+  + Email
+  + So dien thoai
+  + Noi dung
+- CTA form: Gui thong tin
+- Thong bao sau submit: Thong tin cua ban da duoc ghi nhan. Linh Hoa Tam se lien he lai som.
+
+TRANG 2: DANH SACH TIN TUC (/tin-tuc)
+Muc tieu:
+Tong hop toan bo bai viet dang co de nguoi dung chon doc theo chu de.
+
+Cau truc:
+- Hero page voi tieu de: Kien thuc thuat so hoc duoc trinh bay hien dai, am ap va de ung dung.
+- Mo ta: bao gom kien thuc nen tang, goc nhin chua lanh trong cong viec va quan he.
+- Danh sach bai viet dang hien thi theo card.
+- Moi card gom:
+  + Thumbnail label
+  + Category
+  + Date
+  + Title
+  + Description
+  + CTA: Xem chi tiet
+
+TRANG 3: CHI TIET BAI VIET (/tin-tuc/[slug])
+Muc tieu:
+Trinh bay noi dung chi tiet cho tung bai viet va giu nguoi dung trong he thong noi dung cua website.
+
+Cau truc:
+- Breadcrumb: Trang chu / Tin tuc / Ten bai viet
+- Khoi thong tin dau bai:
+  + Category
+  + Title
+  + Description
+  + Date
+- Khoi visual/noi dung mo dau voi thumbnail label va thong diep thuong hieu.
+- Than bai viet duoc render theo nhieu section:
+  + Moi section co heading
+  + Moi heading co danh sach doan van noi dung
+
+FOOTER
+- Mo ta thuong hieu lay tu site description
+- Cum dieu huong lap lai menu chinh
+- Cum lien he hien tai:
+  + Email: hello@linhhoatam.vn
+  + Dien thoai: 0900 000 000
+  + Mo ta ngan: Khong gian ket noi chua lanh qua thuat so hoc.
+
+DU LIEU NOI DUNG HIEN TAI
+File dang quan ly noi dung va cau truc:
+- D:\Weblinhhoatam\data\site-content.ts
+- D:\Weblinhhoatam\app\page.tsx
+- D:\Weblinhhoatam\app\tin-tuc\page.tsx
+- D:\Weblinhhoatam\app\tin-tuc\[slug]\page.tsx
+- D:\Weblinhhoatam\components\*
+
+GHI CHU QUAN TRONG
+- Website hien tai KHONG co cac trang rieng sau trong repo: Master, Ve Linh Hoa Tam, Webinar, Cong dong, Moi Speaker.
+- Cau truc 10 trang trong ban cu khong con phu hop voi codebase hien tai.
+- Neu muon mo rong theo ban cu, can bo sung route, du lieu va component moi.

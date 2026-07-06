@@ -1,0 +1,52 @@
+[
+  {
+    "createdAt": "2026-07-02T21:49:57.013Z",
+    "updatedAt": "2026-07-02T21:49:57.013Z",
+    "id": 1,
+    "name": "Prudential Vietnam",
+    "sort_order": 1,
+    "width": 140,
+    "height": 50,
+    "logo_url": "https://lht.gun.hmz.one/storage/uploads/bao-hiem-prudential-01myz4.jpg"
+  },
+  {
+    "createdAt": "2026-07-02T21:49:57.088Z",
+    "updatedAt": "2026-07-02T21:49:57.088Z",
+    "id": 2,
+    "name": "Shinhan Life",
+    "sort_order": 2,
+    "width": 120,
+    "height": 50,
+    "logo_url": "https://lht.gun.hmz.one/storage/uploads/shinhanlife-ur29lh.png"
+  },
+  {
+    "createdAt": "2026-07-02T21:49:57.178Z",
+    "updatedAt": "2026-07-02T21:49:57.178Z",
+    "id": 3,
+    "name": "Forbes Women Vietnam",
+    "sort_order": 3,
+    "width": 140,
+    "height": 50,
+    "logo_url": "https://lht.gun.hmz.one/storage/uploads/forbes-women-jr043u.webp"
+  },
+  {
+    "createdAt": "2026-07-02T21:49:57.255Z",
+    "updatedAt": "2026-07-02T21:49:57.255Z",
+    "id": 4,
+    "name": "ĐH Kinh tế Quốc dân",
+    "sort_order": 4,
+    "width": 80,
+    "height": 50,
+    "logo_url": "https://lht.gun.hmz.one/storage/uploads/Logo-NEU-axzf14.png"
+  },
+  {
+    "createdAt": "2026-07-02T21:49:57.608Z",
+    "updatedAt": "2026-07-02T21:49:57.608Z",
+    "id": 5,
+    "name": "ĐH Ngân hàng TP.HCM",
+    "sort_order": 5,
+    "width": 110,
+    "height": 50,
+    "logo_url": "https://lht.gun.hmz.one/storage/uploads/new-hub-logo-1696235825593699320426-k4qibp.jpg"
+  }
+]

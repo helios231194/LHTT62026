@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "updatedAt": "2026-07-02T22:32:03.739Z",
+    "label": "Giờ tham vấn",
+    "subLabel": "CEO & lãnh đạo cấp cao",
+    "value": "3.9900+",
+    "icon": "Clock",
+    "sort_order": 1
+  },
+  {
+    "id": 2,
+    "updatedAt": "2026-07-02T21:30:34.383Z",
+    "label": "Khách hàng",
+    "subLabel": "Cá nhân & doanh nghiệp",
+    "value": "2.000+",
+    "icon": "Users",
+    "sort_order": 2
+  },
+  {
+    "id": 3,
+    "updatedAt": "2026-07-02T21:30:34.383Z",
+    "label": "Lượt theo dõi",
+    "subLabel": "Cộng đồng đa nền tảng",
+    "value": "500K+",
+    "icon": "TrendingUp",
+    "sort_order": 3
+  },
+  {
+    "id": 4,
+    "updatedAt": "2026-07-02T21:30:34.383Z",
+    "label": "Cộng đồng",
+    "subLabel": "Thành viên",
+    "value": "20.900+",
+    "icon": "Users",
+    "sort_order": 4
+  },
+  {
+    "id": 5,
+    "updatedAt": "2026-07-02T21:30:34.383Z",
+    "label": "Diễn giả",
+    "subLabel": "Women Vietnam 2023-2024",
+    "value": "Forbes",
+    "icon": "Award",
+    "sort_order": 5
+  }
+]
