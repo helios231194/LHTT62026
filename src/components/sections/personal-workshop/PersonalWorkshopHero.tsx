@@ -38,11 +38,8 @@ export function PersonalWorkshopHero() {
           </SlideIn>
 
           <FadeIn direction="up" delay={0.1}>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-8 leading-[1.2] tracking-tight text-white drop-shadow-2xl">
-              Workshop Cá nhân <br className="hidden md:block"/>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blaze-orange to-[#ff9b50]">Thuật Số Học Ứng Dụng</span> 
-              <br className="hidden md:block"/>
-              cho cuộc sống, gia đình và tài chính.
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-8 leading-[1.2] tracking-tight text-white drop-shadow-2xl text-balance">
+              Workshop Cá nhân <span className="text-transparent bg-clip-text bg-gradient-to-r from-blaze-orange to-[#ff9b50]">Thuật Số Học Ứng Dụng</span> cho cuộc sống, gia đình và tài chính.
             </h1>
           </FadeIn>
 

@@ -30,7 +30,7 @@ export function HomeHero({ initialProfile }: HomeHeroProps) {
   const renderDesktopTitle = () => {
     return (
       <h1
-        className="text-[3.5rem] xl:text-[4rem] font-black leading-[1.35] text-white mb-6 animate-fadeSlideUp whitespace-pre-line"
+        className="text-[3.5rem] xl:text-[4rem] font-black leading-[1.35] text-white mb-6 animate-fadeSlideUp whitespace-pre-line text-balance"
         style={{ animationDelay: '300ms', animationFillMode: 'both' }}
       >
         {heroTitle === 'Một quyết định đúng thời điểm thay đổi cả năm vận hành.' ? (
