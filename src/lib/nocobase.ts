@@ -44,6 +44,7 @@ export interface Attachment {
   filename: string;
   url:      string;
   mimetype: string;
+  preview?: string;  // URL-encoded path served from NocoBase /storage/ (preferred for display)
 }
 
 export interface Service {
@@ -133,6 +134,37 @@ export interface Profile {
   hero_bg?:          Attachment[];
   philosophy_img?:   Attachment[];
   community_banner?: Attachment[];
+  destiny_pdf_cover?: Attachment[];
+  strategy_pdf_cover?: Attachment[];
+  speaker_hero_img?:  Attachment[];
+  consulting_tier1_img?: Attachment[];
+  consulting_tier2_img?: Attachment[];
+  consulting_tier3_img?: Attachment[];
+  book_preview_link?: string;
+}
+
+export interface Workshop {
+  id:         number;
+  title:      string;
+  date:       string;
+  type:       string;
+  category:   'personal' | 'business';
+  sort_order: number;
+  image?:     Attachment[];
+}
+
+export interface BookFeedback {
+  id:         number;
+  caption?:   string;
+  sort_order: number;
+  image?:     Attachment[];
+}
+
+export interface BookVideo {
+  id:         number;
+  title:      string;
+  youtube_url: string;
+  sort_order: number;
 }
 
 // ─────────────────────────────────────────────────────────────
@@ -153,18 +185,50 @@ export const CATEGORIES = Object.entries(CATEGORY_MAP).map(([value, label]) => (
 }));
 
 /**
- * NocoBase trả URL ảnh dạng relative: /storage/uploads/filename.jpg
- * Next/Image cần absolute URL → prepend BASE_URL
+ * Resolve attachment URL to an absolute URL usable by Next/Image.
+ * Can receive either a string URL or a full attachment object.
+ * Priority: preview (pre-encoded, /storage/) > url (may contain Vietnamese chars)
  */
-export function resolveAttachmentUrl(url?: string): string | undefined {
+export function resolveAttachmentUrl(
+  urlOrObject?: string | { url?: string; preview?: string } | null,
+  preview?: string
+): string | undefined {
+  // Support passing an attachment object directly
+  if (urlOrObject && typeof urlOrObject === 'object') {
+    const obj = urlOrObject as { url?: string; preview?: string };
+    return resolveAttachmentUrl(obj.url, obj.preview);
+  }
+
+  const url = urlOrObject as string | undefined;
+  const effectivePreview = preview;
+
+  if (!url && !effectivePreview) return undefined;
+
+  // Prefer preview: already URL-encoded, served from NocoBase /storage/
+  if (effectivePreview) {
+    if (effectivePreview.startsWith('http')) return effectivePreview;
+    if (effectivePreview.startsWith('/storage/')) return `${BASE_URL}${effectivePreview}`;
+    return effectivePreview;
+  }
+
   if (!url) return undefined;
-  if (url.startsWith('http')) return url;          // already absolute
-  if (url.startsWith('/storage/')) return `${BASE_URL}${url}`; // NocoBase uploads
-  return url;                                       // local uploads and static assets (/images, /uploads, /herobanner)
+  if (url.startsWith('http')) return url;
+  if (url.startsWith('/storage/')) return `${BASE_URL}${url}`;
+  // /uploads/ may have Vietnamese chars → encode path components
+  // CRITICAL FIX: Prepend absolute site URL so Next.js Image Optimizer fetches through Nginx (which serves uploads successfully)
+  if (url.startsWith('/uploads/')) {
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://lht.agentic.io.vn';
+    try { 
+      return `${siteUrl}${encodeURI(url)}`; 
+    } catch { 
+      return `${siteUrl}${url}`; 
+    }
+  }
+  return url; // /images/, /herobanner/, /testimonials/ → static local assets
 }
 
 // Thời gian revalidate (giây)
-const REVALIDATE_ARTICLES = 300;    // 5 phút — bài viết cập nhật thường xuyên
+const REVALIDATE_ARTICLES = 10;    // 10 giây — bài viết cập nhật gần như lập tức
 const REVALIDATE_CONFIG   = 10;     // 10 giây — services, stats, testimonials, partners, products
 
 // ─────────────────────────────────────────────────────────────
@@ -270,9 +334,11 @@ export async function createLead(
     content_summary: summary
   };
 
-  const res = await fetch(`${BASE_URL}/api/leads:create`, {
+  const res = await fetch('/api/leads', {
     method:  'POST',
-    headers: defaultHeaders,
+    headers: {
+      'Content-Type': 'application/json'
+    },
     body:    JSON.stringify(payload),
     cache:   'no-store',
   });

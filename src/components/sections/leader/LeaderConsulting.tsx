@@ -4,36 +4,13 @@ import { FadeIn } from '@/components/ui/AnimationWrapper';
 import { Button } from '@/components/ui/Button';
 import { Star, X, Check, Clock, Coins, Sparkles, BookOpen, Users, Briefcase, FileText, CheckCircle2 } from 'lucide-react';
 import Image from 'next/image';
-import { createLead } from '@/lib/nocobase';
+import { createLead, resolveAttachmentUrl, type Profile } from '@/lib/nocobase';
 
 const PLACEHOLDER = '/images/placeholder-800x800.svg';
 
-const pricingTiers = [
-  {
-    id: 'goi-nen-tang',
-    name: 'PHIÊN PHỎNG VẤN CHIẾN LƯỢC & GIẢI MÃ ĐIỂM MÙ ĐỘC BẢN',
-    image: PLACEHOLDER,
-    popular: false,
-    ctaTextPrimary: 'ĐẶT LỊCH PHỎNG VẤN CHUYÊN SÂU',
-    ctaTextSecondary: 'Xem chi tiết →',
-  },
-  {
-    id: 'goi-co-van',
-    name: 'CHƯƠNG TRÌNH COACHING 90 NGÀY',
-    image: PLACEHOLDER,
-    popular: true,
-    ctaTextPrimary: 'ĐẶT LỊCH COACHING 90 NGÀY',
-    ctaTextSecondary: 'Xem chi tiết →',
-  },
-  {
-    id: 'goi-doi-ngu',
-    name: 'BẢN ĐỒ ĐỘI NGŨ LÃNH ĐẠO & QUẢN LÝ CHỦ CHỐT',
-    image: PLACEHOLDER,
-    popular: false,
-    ctaTextPrimary: 'ĐẶT LỊCH WORKSHOP ĐỘI NGŨ',
-    ctaTextSecondary: 'Xem chi tiết →',
-  }
-];
+interface LeaderConsultingProps {
+  initialProfile?: Profile | null;
+}
 
 interface PackageSection {
   title: string;
@@ -442,7 +419,38 @@ const packageDetails: Record<string, PackageDetail> = {
   }
 };
 
-export function LeaderConsulting() {
+export function LeaderConsulting({ initialProfile }: LeaderConsultingProps) {
+  const tier1ImgUrl = resolveAttachmentUrl(initialProfile?.consulting_tier1_img?.[0]?.url) || PLACEHOLDER;
+  const tier2ImgUrl = resolveAttachmentUrl(initialProfile?.consulting_tier2_img?.[0]?.url) || PLACEHOLDER;
+  const tier3ImgUrl = resolveAttachmentUrl(initialProfile?.consulting_tier3_img?.[0]?.url) || PLACEHOLDER;
+
+  const pricingTiers = [
+    {
+      id: 'goi-nen-tang',
+      name: 'PHIÊN PHỎNG VẤN CHIẾN LƯỢC & GIẢI MÃ ĐIỂM MÙ ĐỘC BẢN',
+      image: tier1ImgUrl,
+      popular: false,
+      ctaTextPrimary: 'ĐẶT LỊCH PHỎNG VẤN CHUYÊN SÂU',
+      ctaTextSecondary: 'Xem chi tiết →',
+    },
+    {
+      id: 'goi-co-van',
+      name: 'CHƯƠNG TRÌNH COACHING 90 NGÀY',
+      image: tier2ImgUrl,
+      popular: true,
+      ctaTextPrimary: 'ĐẶT LỊCH COACHING 90 NGÀY',
+      ctaTextSecondary: 'Xem chi tiết →',
+    },
+    {
+      id: 'goi-doi-ngu',
+      name: 'BẢN ĐỒ ĐỘI NGŨ LÃNH ĐẠO & QUẢN LÝ CHỦ CHỐT',
+      image: tier3ImgUrl,
+      popular: false,
+      ctaTextPrimary: 'ĐẶT LỊCH WORKSHOP ĐỘI NGŨ',
+      ctaTextSecondary: 'Xem chi tiết →',
+    }
+  ];
+
   const [activePackageId, setActivePackageId] = useState<string | null>(null);
   const [modalView, setModalView] = useState<'details' | 'register'>('details');
   const [teamSize, setTeamSize] = useState<3 | 5 | 7>(3);

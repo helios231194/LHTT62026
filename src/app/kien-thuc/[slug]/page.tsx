@@ -14,14 +14,14 @@ import { Button } from '@/components/ui/Button';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { getArticles, getArticleBySlug, CATEGORY_MAP, resolveAttachmentUrl } from '@/lib/nocobase';
+import { getProfile } from '@/lib/local-db';
 
 interface PageProps {
   params: { slug: string };
 }
 
 // ── Static Params: pre-render tất cả bài viết published ───────
-// ISR: sau 5 phút, Next.js tự gọi lại NocoBase để cập nhật
-export const revalidate = 300;
+// ISR: sau 5 phút (300 giây), Next.js tự gọi lại NocoBase để cập nhật (Tối ưu Core Web Vitals)
 
 export async function generateStaticParams() {
   const { data } = await getArticles({ pageSize: 500 });
@@ -73,9 +73,10 @@ function safeJsonLd(data: object): string {
 
 // ── Page ────────────────────────────────────────────────────────
 export default async function ArticleDetailPage({ params }: PageProps) {
-  const [article, { data: allArticles }] = await Promise.all([
+  const [article, { data: allArticles }, profile] = await Promise.all([
     getArticleBySlug(params.slug),
     getArticles({ pageSize: 200 }),
+    getProfile(),
   ]);
 
   if (!article) notFound();
@@ -94,6 +95,7 @@ export default async function ArticleDetailPage({ params }: PageProps) {
 
   const categoryLabel = CATEGORY_MAP[article.category] ?? article.category ?? 'Kiến thức';
   const coverUrl = resolveAttachmentUrl(article.image?.[0]?.url);
+  const authorAvatarUrl = resolveAttachmentUrl(article.author_avatar?.[0]?.url) || resolveAttachmentUrl(profile?.avatar?.[0]?.url) || '/herobanner/hero03.png';
   const dateStr = article.published_at
     ? new Date(article.published_at).toLocaleDateString('vi-VN')
     : '';
@@ -185,18 +187,27 @@ export default async function ArticleDetailPage({ params }: PageProps) {
             </h1>
 
             {/* Tags */}
-            {article.tags?.length > 0 && (
-              <div className="flex flex-wrap gap-2 mb-6">
-                {article.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="bg-slate-100 text-slate-600 text-xs font-medium px-3 py-1 rounded-full"
-                  >
-                    #{tag}
-                  </span>
-                ))}
-              </div>
-            )}
+            {(() => {
+              const rawTags = article.tags as any;
+              const tagsArray: string[] = Array.isArray(rawTags)
+                ? rawTags
+                : typeof rawTags === 'string' && rawTags.trim()
+                ? rawTags.split(',').map((t: string) => t.trim())
+                : [];
+              if (tagsArray.length === 0) return null;
+              return (
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {tagsArray.map((tag) => (
+                    <span
+                      key={tag}
+                      className="bg-slate-100 text-slate-600 text-xs font-medium px-3 py-1 rounded-full"
+                    >
+                      #{tag}
+                    </span>
+                  ))}
+                </div>
+              );
+            })()}
 
             <div className="flex flex-wrap items-center gap-6 text-sm font-medium text-slate-500 pb-8">
               <div className="flex items-center gap-2">
@@ -269,6 +280,34 @@ export default async function ArticleDetailPage({ params }: PageProps) {
                   className="bg-slate-100 text-slate-700 font-medium text-sm px-4 py-1.5 rounded-full hover:bg-cyan-azure hover:text-white transition-colors"
                 >
                   {categoryLabel}
+                </Link>
+              </div>
+            </div>
+
+            {/* Author Biography Box for YMYL & E-E-A-T */}
+            <div className="mt-12 p-6 md:p-8 bg-ice-white rounded-3xl border border-slate-100 flex flex-col md:flex-row items-center md:items-start gap-6 shadow-sm">
+              <div className="relative w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden flex-shrink-0 border-2 border-cyan-azure/20 shadow-md">
+                <Image
+                  src={authorAvatarUrl}
+                  alt="Master Hoàng Mai Linh"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="text-center md:text-left">
+                <span className="text-[10px] bg-cyan-azure/10 text-cyan-azure font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">Tác giả</span>
+                <h4 className="text-lg md:text-xl font-black text-oxford-blue mt-2 mb-1">
+                  Master Hoàng Mai Linh
+                </h4>
+                <p className="text-sm text-cyan-azure font-bold mb-3">Chuyên gia Thuật Số Học Ứng Dụng & Nhà tham vấn chiến lược</p>
+                <p className="text-slate-600 text-sm md:text-base leading-relaxed mb-4">
+                  Hơn 3.500 giờ tham vấn CEO, Founder và lãnh đạo cấp cao. Tác giả cuốn sách &ldquo;Sức Mạnh Ẩn Sau Con Số&rdquo;, diễn giả tại các doanh nghiệp lớn và trường đại học hàng đầu Việt Nam.
+                </p>
+                <Link
+                  href="/master-hoang-mai-linh"
+                  className="text-xs font-bold text-blaze-orange hover:text-cyan-azure transition-colors inline-flex items-center gap-1.5"
+                >
+                  Tìm hiểu thêm về Master Hoàng Mai Linh <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </div>
             </div>

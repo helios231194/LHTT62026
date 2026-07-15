@@ -11,7 +11,6 @@ import { PersonalCTA } from '@/components/sections/personal/PersonalCTA';
 import { getPersonalProducts, getProfile } from '@/lib/local-db';
 
 
-export const revalidate = 10;
 
 export const metadata: Metadata = {
   title: 'Phát Triển Bản Thân Bằng Thuật Số Học | Linh Hoa Tâm',
@@ -34,39 +33,57 @@ export const metadata: Metadata = {
   },
 };
 
+// XSS-safe JSON-LD serialization
+function safeJsonLd(data: object): string {
+  return JSON.stringify(data)
+    .replace(/</g, '\\u003c')
+    .replace(/>/g, '\\u003e')
+    .replace(/&/g, '\\u0026');
+}
+
 export default async function PhatTrienBanThanPage() {
   const { data: products } = await getPersonalProducts();
   const profile = await getProfile();
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://linhhoatam.com';
+
+  const serviceSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    '@id': `${siteUrl}/phat-trien-ban-than#service`,
+    name: 'Dịch vụ coaching 1:1 chuyên sâu - Linh Hoa Tâm',
+    provider: {
+      '@type': 'Organization',
+      '@id': 'https://linhhoatam.com/#organization',
+      name: 'Linh Hoa Tâm'
+    },
+    description: 'Coaching 1:1 chuyên sâu cùng Master Hoàng Mai Linh ứng dụng Thuật Số Học. Nhận diện cấu trúc năng lượng, giải quyết các khó khăn trong phát triển bản thân, định hướng sự nghiệp, cải thiện các mối quan hệ.',
+    offers: {
+      '@type': 'Offer',
+      priceCurrency: 'VND',
+      price: '6800000',
+      priceValidUntil: '2027-12-31',
+      availability: 'https://schema.org/InStock',
+      url: `${siteUrl}/phat-trien-ban-than`
+    }
+  };
+
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Trang chủ', item: siteUrl },
+      { '@type': 'ListItem', position: 2, name: 'Phát Triển Bản Thân', item: `${siteUrl}/phat-trien-ban-than` },
+    ],
+  };
+
+  const jsonLd = [serviceSchema, breadcrumbSchema];
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'Service',
-            name: 'Dịch vụ coaching 1:1 chuyên sâu - Linh Hoa Tâm',
-            provider: {
-              '@type': 'LocalBusiness',
-              name: 'Linh Hoa Tâm',
-              image: 'http://localhost:3000/LOGO-07.png',
-              address: {
-                '@type': 'PostalAddress',
-                streetAddress: '78/1 Phan Đình Phùng, Phú Thọ Hòa, Tân Phú',
-                addressLocality: 'TP.HCM',
-                addressCountry: 'VN'
-              }
-            },
-            description: 'Coaching 1:1 chuyên sâu cùng Master Hoàng Mai Linh ứng dụng Thuật Số Học. Nhận diện cấu trúc năng lượng, giải quyết các khó khăn trong phát triển bản thân, định hướng sự nghiệp, cải thiện các mối quan hệ.',
-            offers: {
-              '@type': 'Offer',
-              priceCurrency: 'VND',
-              price: '6800000',
-              priceValidUntil: '2027-12-31',
-              availability: 'https://schema.org/InStock',
-              url: 'http://localhost:3000/phat-trien-ban-than'
-            }
-          }),
+          __html: safeJsonLd(jsonLd),
         }}
       />
       <Header />
@@ -75,7 +92,7 @@ export default async function PhatTrienBanThanPage() {
         <PersonalHero />
         
         {/* SECTION 2 – FILE LUẬN GIẢI CÁ NHÂN */}
-        <PersonalEntryProduct />
+        <PersonalEntryProduct initialProfile={profile} />
         
         {/* SECTION 3 – COACHING 1:1 CÁ NHÂN – 8 DỊCH VỤ */}
         <PersonalCoaching initialProducts={products} />

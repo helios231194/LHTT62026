@@ -12,6 +12,8 @@ import { WorkshopStats } from '@/components/sections/workshop/WorkshopStats';
 import { WorkshopSpeaker } from '@/components/sections/workshop/WorkshopSpeaker';
 import { WorkshopFAQ } from '@/components/sections/workshop/WorkshopFAQ';
 import { WorkshopCTA } from '@/components/sections/workshop/WorkshopCTA';
+import { getProfile, getWorkshops } from '@/lib/local-db';
+
 
 export const metadata: Metadata = {
   title: 'Workshop Chiến Lược Cho Lãnh Đạo | Linh Hoa Tâm',
@@ -32,7 +34,10 @@ function safeJsonLd(data: object): string {
     .replace(/&/g, '\\u0026');
 }
 
-export default function WorkshopChienLuocPage() {
+export default async function WorkshopChienLuocPage() {
+  const profile = await getProfile();
+  const workshops = await getWorkshops('business');
+
   return (
     <>
       <Header />
@@ -87,13 +92,13 @@ export default function WorkshopChienLuocPage() {
         <WorkshopTopics />
         
         {/* SECTION 7 – LỊCH SỬ WORKSHOP ĐÃ TỔ CHỨC */}
-        <WorkshopHistory />
+        <WorkshopHistory initialWorkshops={workshops.data} />
         
         {/* SECTION 8 – CON SỐ THỰC TẾ */}
         <WorkshopStats />
         
         {/* SECTION 9 – ĐĂNG KÝ NHẬN THÔNG BÁO & DIỄN GIẢ */}
-        <WorkshopSpeaker />
+        <WorkshopSpeaker initialProfile={profile} />
         
         {/* SECTION 10 – CÂU HỎI THƯỜNG GẶP */}
         <WorkshopFAQ />

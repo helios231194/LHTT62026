@@ -1,6 +1,6 @@
 import fs from 'fs/promises';
 import path from 'path';
-import type { Partner, Testimonial, SpeakerEvent, Profile, PersonalProduct, BusinessProduct, Stat, FacebookPost, SpeakerAssets } from './nocobase';
+import type { Partner, Testimonial, SpeakerEvent, Profile, PersonalProduct, BusinessProduct, Stat, FacebookPost, SpeakerAssets, Workshop, BookFeedback, BookVideo } from './nocobase';
 
 const DATA_DIR = path.join(process.cwd(), 'src/data');
 
@@ -99,4 +99,28 @@ export async function getSpeakerAssets(): Promise<SpeakerAssets> {
       "Khác"
     ]
   };
+}
+
+export async function getWorkshops(category?: 'personal' | 'business'): Promise<{ data: Workshop[] }> {
+  const list = await readLocalData('workshops.json');
+  if (!Array.isArray(list)) return { data: [] };
+  const sorted = list.sort((a: any, b: any) => (a.sort_order || 0) - (b.sort_order || 0));
+  if (category) {
+    return { data: sorted.filter((w: any) => w.category === category) };
+  }
+  return { data: sorted };
+}
+
+export async function getBookFeedbacks(): Promise<{ data: BookFeedback[] }> {
+  const list = await readLocalData('book_feedbacks.json');
+  if (!Array.isArray(list)) return { data: [] };
+  const sorted = list.sort((a: any, b: any) => (a.sort_order || 0) - (b.sort_order || 0));
+  return { data: sorted };
+}
+
+export async function getBookVideos(): Promise<{ data: BookVideo[] }> {
+  const list = await readLocalData('book_videos.json');
+  if (!Array.isArray(list)) return { data: [] };
+  const sorted = list.sort((a: any, b: any) => (a.sort_order || 0) - (b.sort_order || 0));
+  return { data: sorted };
 }

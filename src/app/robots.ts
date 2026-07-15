@@ -15,6 +15,9 @@ export default function robots(): MetadataRoute.Robots {
       { userAgent: 'Claude-Web', allow: '/' },
       { userAgent: 'PerplexityBot', allow: '/' },
     ],
-    sitemap: `${SITE_URL}/sitemap.xml`,
+    sitemap: [
+      `${SITE_URL}/sitemap.xml`,
+      `${SITE_URL}/feed.xml`,
+    ],
   };
 }

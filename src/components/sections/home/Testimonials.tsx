@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { FadeIn } from '@/components/ui/AnimationWrapper';
 import Image from 'next/image';
 import { Quote } from 'lucide-react';
@@ -57,7 +57,8 @@ export function Testimonials({ initialTestimonials }: TestimonialsProps) {
   const list = useMemo(() => {
     if (!initialTestimonials || initialTestimonials.length === 0) return defaultTestimonials;
     return initialTestimonials.map((item) => {
-      const coverUrl = resolveAttachmentUrl(item.image?.[0]?.url) || '/LogoNTT/Logo-NEU.png'; // default fallback image
+      const img = item.image?.[0];
+      const coverUrl = resolveAttachmentUrl(img?.url, img?.preview) || '/testimonials/Trần Trung Nhân.jpg';
       const titleText = item.company ? `${item.position} – ${item.company}` : item.position;
       return {
         name: item.name,
@@ -68,43 +69,7 @@ export function Testimonials({ initialTestimonials }: TestimonialsProps) {
     });
   }, [initialTestimonials]);
 
-  // Inject AggregateRating + Review schema for rich snippets on SERP
-  useEffect(() => {
-    const reviewList = list.map((item) => ({
-      '@type': 'Review',
-      author: { '@type': 'Person', name: item.name },
-      reviewBody: item.content,
-      reviewRating: {
-        '@type': 'Rating',
-        ratingValue: '5',
-        bestRating: '5',
-      },
-    }));
 
-    const schema = {
-      '@context': 'https://schema.org',
-      '@type': 'LocalBusiness',
-      name: 'Linh Hoa Tâm',
-      description: 'Thuật Số Học Ứng Dụng – Tham vấn chiến lược cho CEO và lãnh đạo',
-      aggregateRating: {
-        '@type': 'AggregateRating',
-        ratingValue: '5.0',
-        reviewCount: String(list.length),
-        bestRating: '5',
-        worstRating: '5',
-      },
-      review: reviewList,
-    };
-
-    const existingScript = document.getElementById('review-schema');
-    if (existingScript) existingScript.remove();
-    const script = document.createElement('script');
-    script.id = 'review-schema';
-    script.type = 'application/ld+json';
-    script.textContent = JSON.stringify(schema);
-    document.head.appendChild(script);
-    return () => { document.getElementById('review-schema')?.remove(); };
-  }, [list]);
 
   return (
     <section className="py-20 md:py-32 bg-white overflow-hidden">

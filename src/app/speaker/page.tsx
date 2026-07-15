@@ -10,9 +10,8 @@ import { SpeakerTestimonials } from '@/components/sections/speaker/SpeakerTestim
 import { SpeakerProcess } from '@/components/sections/speaker/SpeakerProcess';
 import { SpeakerForm } from '@/components/sections/speaker/SpeakerForm';
 import { SpeakerCredential } from '@/components/sections/speaker/SpeakerCredential';
-import { getPartners, getSpeakerEvents, getTestimonials, getSpeakerAssets } from '@/lib/local-db';
+import { getPartners, getSpeakerEvents, getTestimonials, getSpeakerAssets, getProfile } from '@/lib/local-db';
 
-export const revalidate = 10;
 
 export const metadata: Metadata = {
   title: 'Mời Speaker | Linh Hoa Tâm - Thuật Số Học Ứng Dụng',
@@ -37,6 +36,7 @@ export default async function SpeakerPage() {
   const { data: events } = await getSpeakerEvents();
   const { data: testimonials } = await getTestimonials('speaker');
   const speakerAssets = await getSpeakerAssets();
+  const profile = await getProfile();
 
   return (
     <>
@@ -70,7 +70,7 @@ export default async function SpeakerPage() {
       />
       <main className="min-h-screen pt-16 bg-ice-white text-oxford-blue">
         {/* SECTION 1 - HERO */}
-        <SpeakerHero />
+        <SpeakerHero heroImage={profile?.speaker_hero_img?.[0]} />
         
         {/* SECTION 2 - ĐÃ DIỄN GIẢ TẠI */}
         <SpeakerClients initialPartners={partners} initialEvents={events} />

@@ -52,12 +52,12 @@ export function Header() {
   const [logoUrl, setLogoUrl] = useState('/LOGO-07.png');
 
   useEffect(() => {
-    fetch('https://lht.gun.hmz.one/api/profile:list?appends=logo')
+    fetch('/api/admin/config?tab=homepage')
       .then(res => res.json())
       .then(payload => {
-        const dbLogo = payload.data?.[0]?.logo?.[0]?.url;
+        const dbLogo = payload.data?.logo?.[0]?.url;
         if (dbLogo) {
-          setLogoUrl(`https://lht.gun.hmz.one${dbLogo}`);
+          setLogoUrl(dbLogo);
         }
       })
       .catch(() => {});

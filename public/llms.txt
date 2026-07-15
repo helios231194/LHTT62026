@@ -1,0 +1,27 @@
+# Linh Hoa Tâm
+
+> Đơn vị tiên phong tại Việt Nam ứng dụng Thuật Số Học (Numerology) như công cụ tham vấn chiến lược phát triển bản thân, định hướng nhân sự và hoạch định chu kỳ kinh doanh cho CEO, Founder và Nhà lãnh đạo.
+
+## Cốt lõi dịch vụ & Phương pháp
+
+- **Hệ thống 7 Chỉ số Vận mệnh**: Bản đồ giải mã chi tiết năng lực cá nhân, chu kỳ vận hành và các điểm chạm quyết định dành cho lãnh đạo.
+- **Tham vấn chiến lược**: Hỗ trợ ra quyết định kinh doanh, bố trí nhân sự đúng vị trí (đặt đúng người, rẽ đúng hướng, chọn đúng thời điểm).
+
+## Sơ đồ cấu trúc Website (Sitemap for LLMs)
+
+- [Trang chủ](https://linhhoatam.com/) - Giới thiệu tổng quan về Linh Hoa Tâm, các chỉ số thống kê uy tín (hơn 2.000 khách hàng, 3.500 giờ tham vấn) và cảm nhận từ các nhà lãnh đạo.
+- [Về chúng tôi](https://linhhoatam.com/linh-hoa-tam) - Câu chuyện thương hiệu, tầm nhìn, sứ mệnh, giá trị cốt lõi và hệ sinh thái Linh Hoa Tâm.
+- [Phương pháp](https://linhhoatam.com/phuong-phap) - Chi tiết về quy trình phân tích hành vi và cấu trúc vận hành cá nhân dựa trên Thuật Số Học.
+- [Kiến thức chuyên sâu](https://linhhoatam.com/kien-thuc) - Kho lưu trữ bài viết, bài học và phân tích chuyên sâu về quản trị lãnh đạo và chu kỳ phát triển từ tác giả Hoàng Mai Linh.
+- [Sách "Sức Mạnh Ẩn Sau Con Số"](https://linhhoatam.com/sach) - Giới thiệu tác phẩm gối đầu giường của Master Coach Hoàng Mai Linh giúp thấu hiểu bản thân và đọc vị nhân sự.
+- [Trưởng đại diện](https://linhhoatam.com/truong-dai-dien) - Cơ hội đồng hành, trở thành đối tác chuyển giao và đại diện thương hiệu Linh Hoa Tâm tại địa phương.
+- [Cộng đồng](https://linhhoatam.com/cong-dong) - Nơi kết nối hơn 20.900+ học viên và lãnh đạo đang ứng dụng Thuật Số Học Ứng Dụng.
+- [Liên hệ & Đăng ký tham vấn](https://linhhoatam.com/lien-he) - Form đăng ký tư vấn cá nhân hóa và thông tin liên hệ văn phòng đại diện tại Hà Nội & TP. HCM.
+
+## Thông tin Bản quyền & Tác giả
+
+- **Tác giả/Chuyên gia sáng lập**: Master Coach Hoàng Mai Linh (Hoàng Mai Linh) - Chuyên gia phong thủy, thuật số học và Huấn luyện viên Lãnh đạo cấp cao.
+- **Sản phẩm nổi bật**:
+  - Gói tham vấn cá nhân (Workshop cá nhân).
+  - Chương trình chuyển giao doanh nghiệp (Workshop chiến lược).
+  - Bản báo cáo chi tiết: Hồ sơ vận mệnh cá nhân & doanh nghiệp.

@@ -1,9 +1,16 @@
-'use client';
 import { FadeIn } from '@/components/ui/AnimationWrapper';
 import { Button } from '@/components/ui/Button';
 import Link from 'next/link';
 
-export function CommunityHero() {
+import { resolveAttachmentUrl, type Profile } from '@/lib/nocobase';
+
+interface CommunityHeroProps {
+  initialProfile?: Profile | null;
+}
+
+export function CommunityHero({ initialProfile }: CommunityHeroProps) {
+  const qrCodeUrl = resolveAttachmentUrl(initialProfile?.community_qr?.[0]?.url);
+
   return (
     <section className="relative w-full py-20 md:py-32 overflow-hidden bg-oxford-blue text-white">
       <div className="container mx-auto px-4 md:px-6 relative z-10 text-center max-w-5xl">
@@ -28,8 +35,16 @@ export function CommunityHero() {
           
           <div className="mt-12 opacity-80 flex flex-col items-center">
             <p className="text-sm font-bold tracking-widest uppercase mb-4 text-white/50">Hoặc quét mã QR để tham gia trực tiếp trên điện thoại</p>
-            <div className="w-32 h-32 bg-white flex items-center justify-center border-4 border-white/20 p-2">
-              <span className="text-oxford-blue font-bold text-xs uppercase text-center opacity-30">QR CODE PLACEHOLDER</span>
+            <div className="w-32 h-32 bg-white flex items-center justify-center border-4 border-white/20 p-2 overflow-hidden">
+              {qrCodeUrl ? (
+                <img 
+                  src={qrCodeUrl}
+                  alt="QR Code Cộng đồng"
+                  className="w-full h-full object-contain"
+                />
+              ) : (
+                <span className="text-oxford-blue font-bold text-xs uppercase text-center opacity-30">QR CODE PLACEHOLDER</span>
+              )}
             </div>
           </div>
         </FadeIn>

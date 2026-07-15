@@ -5,7 +5,7 @@ import { KnowledgeFeatured } from './KnowledgeFeatured';
 import { KnowledgeGrid } from './KnowledgeGrid';
 import { KnowledgeNewsletter } from './KnowledgeNewsletter';
 import { KnowledgeCTA } from './KnowledgeCTA';
-import type { Article } from '@/lib/nocobase';
+import type { Article, Profile } from '@/lib/nocobase';
 import { CATEGORY_MAP } from '@/lib/nocobase';
 
 // Label map ngược: value slug → display label
@@ -21,9 +21,10 @@ export const KNOWLEDGE_CATEGORIES = [
 
 interface KnowledgeClientProps {
   initialArticles: Article[];
+  initialProfile?: Profile | null;
 }
 
-export function KnowledgeClient({ initialArticles }: KnowledgeClientProps) {
+export function KnowledgeClient({ initialArticles, initialProfile }: KnowledgeClientProps) {
   const [activeCategory, setActiveCategory] = useState('Tất cả');
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -95,7 +96,7 @@ export function KnowledgeClient({ initialArticles }: KnowledgeClientProps) {
         />
       )}
 
-      <KnowledgeNewsletter />
+      <KnowledgeNewsletter initialProfile={initialProfile} />
       <KnowledgeCTA />
     </>
   );

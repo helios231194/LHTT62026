@@ -13,6 +13,10 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Google Fonts Outfit & Inter -->
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
+  <script src="https://unpkg.com/turndown/dist/turndown.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script>
     tailwind.config = {
       theme: {
@@ -48,8 +52,8 @@
     }
   </style>
 </head>
-<body class="p-4 bg-slate-50 min-h-screen flex flex-col justify-between">
-  <div class="w-full bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden flex flex-col max-w-[1280px] mx-auto">
+<body class="bg-slate-50 h-screen overflow-hidden flex flex-col p-0">
+  <div class="w-full h-full bg-white overflow-hidden flex flex-col flex-grow">
     <!-- Header -->
     <div class="bg-gradient-to-r from-oxford-blue to-[#004080] p-5 text-white flex items-center justify-between shrink-0">
       <div>
@@ -61,55 +65,81 @@
           <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
           NocoBase Live Connected
         </span>
+        <button id="deploy-btn" onclick="deployWebsite()" class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-bold bg-gradient-to-r from-cyan-500 to-blue-600 text-white hover:opacity-90 active:scale-95 transition-all duration-150 shadow-lg shadow-blue-500/30">
+          <svg id="deploy-icon" xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          <span id="deploy-text">🚀 Deploy Website</span>
+        </button>
       </div>
     </div>
 
     <!-- Dashboard Content Layout -->
-    <div class="flex flex-col lg:flex-row min-h-[640px] max-h-[750px] overflow-hidden">
+    <div class="flex flex-col lg:flex-row flex-grow overflow-hidden">
       <!-- Sidebar Navigation -->
-      <div class="w-full lg:w-[240px] bg-slate-50/50 border-r border-slate-200 p-4 flex flex-col gap-1.5 shrink-0 overflow-y-auto custom-scroll">
-        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider px-3 mb-1">Cấu hình chung</span>
+      <div id="sidebar" style="width: 240px; min-width: 240px;" class="w-full bg-slate-50/50 border-r border-slate-200 p-4 flex flex-col gap-1.5 shrink-0 overflow-y-auto custom-scroll transition-all duration-300 relative">
+        <div class="flex items-center justify-between mb-2 shrink-0 border-b border-slate-200/60 pb-2">
+          <span class="group-title text-[10px] font-bold text-slate-400 uppercase tracking-wider px-3">HỆ THỐNG MENU</span>
+          <button id="toggle-sidebar" onclick="toggleSidebar()" class="p-1 rounded-lg text-slate-400 hover:bg-slate-200 transition-colors flex items-center justify-center">
+            <svg id="toggle-arrow" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7"/>
+            </svg>
+          </button>
+        </div>
+
+        <span class="group-title text-[10px] font-bold text-slate-400 uppercase tracking-wider px-3 mb-1">Cấu hình chung</span>
         <button onclick="switchTab('homepage')" id="menu-homepage" class="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-bold transition-all duration-150 bg-oxford-blue text-white shadow-sm w-full text-left">
-          🏠 Cấu hình Trang chủ
+          <span>🏠</span> <span class="menu-text">Cấu hình Trang chủ</span>
         </button>
         <button onclick="switchTab('images')" id="menu-images" class="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-bold transition-all duration-150 text-slate-600 hover:bg-slate-100 w-full text-left">
-          🖼️ Quản lý hình ảnh chính
+          <span>🖼️</span> <span class="menu-text">Quản lý hình ảnh chính</span>
         </button>
-
-        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider px-3 mt-4 mb-1">Sản phẩm & Dịch vụ</span>
+ 
+        <span class="group-title text-[10px] font-bold text-slate-400 uppercase tracking-wider px-3 mt-4 mb-1">Sản phẩm & Dịch vụ</span>
         <button onclick="switchTab('personal_products')" id="menu-personal_products" class="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-bold transition-all duration-150 text-slate-600 hover:bg-slate-100 w-full text-left">
-          👤 Sản phẩm Cá nhân
+          <span>👤</span> <span class="menu-text">Sản phẩm Cá nhân</span>
         </button>
         <button onclick="switchTab('business_products')" id="menu-business_products" class="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-bold transition-all duration-150 text-slate-600 hover:bg-slate-100 w-full text-left">
-          🏢 Sản phẩm Doanh nghiệp
+          <span>🏢</span> <span class="menu-text">Sản phẩm Doanh nghiệp</span>
         </button>
-
-        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider px-3 mt-4 mb-1">Khách hàng & MXH</span>
+        <button onclick="switchTab('workshops')" id="menu-workshops" class="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-bold transition-all duration-150 text-slate-600 hover:bg-slate-100 w-full text-left">
+          <span>📅</span> <span class="menu-text">Quản lý Workshop</span>
+        </button>
+ 
+        <span class="group-title text-[10px] font-bold text-slate-400 uppercase tracking-wider px-3 mt-4 mb-1">📚 Sách "Sức mạnh ẩn sau con số"</span>
+        <button onclick="switchTab('book_feedbacks')" id="menu-book_feedbacks" class="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-bold transition-all duration-150 text-slate-600 hover:bg-slate-100 w-full text-left">
+          <span>🖼️</span> <span class="menu-text">Ảnh Feedback độc giả</span>
+        </button>
+        <button onclick="switchTab('book_videos')" id="menu-book_videos" class="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-bold transition-all duration-150 text-slate-600 hover:bg-slate-100 w-full text-left">
+          <span>🎥</span> <span class="menu-text">Video cảm nhận sách</span>
+        </button>
+ 
+        <span class="group-title text-[10px] font-bold text-slate-400 uppercase tracking-wider px-3 mt-4 mb-1">✍️ Blog & Bài viết</span>
+        <button onclick="switchTab('blog_posts')" id="menu-blog_posts" class="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-bold transition-all duration-150 text-slate-600 hover:bg-slate-100 w-full text-left">
+          <span>📰</span> <span class="menu-text">Quản lý Bài viết</span>
+        </button>
+ 
+        <span class="group-title text-[10px] font-bold text-slate-400 uppercase tracking-wider px-3 mt-4 mb-1">Khách hàng & MXH</span>
         <button onclick="switchTab('testimonials')" id="menu-testimonials" class="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-bold transition-all duration-150 text-slate-600 hover:bg-slate-100 w-full text-left">
-          💬 Nhận xét khách hàng
+          <span>💬</span> <span class="menu-text">Nhận xét khách hàng</span>
         </button>
         <button onclick="switchTab('customer_screenshots')" id="menu-customer_screenshots" class="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-bold transition-all duration-150 text-slate-600 hover:bg-slate-100 w-full text-left">
-          📱 Ảnh chụp tin nhắn KH
+          <span>📱</span> <span class="menu-text">Ảnh chụp tin nhắn KH</span>
         </button>
         <button onclick="switchTab('facebook_posts')" id="menu-facebook_posts" class="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-bold transition-all duration-150 text-slate-600 hover:bg-slate-100 w-full text-left">
-          🔗 Bài viết Facebook
-        </button>
-        <button onclick="switchTab('leads')" id="menu-leads" class="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-bold transition-all duration-150 text-slate-600 hover:bg-slate-100 w-full text-left">
-          📥 Đăng ký từ Web (Leads)
+          <span>🔗</span> <span class="menu-text">Bài viết Facebook</span>
         </button>
         <button onclick="switchTab('speaker_events')" id="menu-speaker_events" class="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-bold transition-all duration-150 text-slate-600 hover:bg-slate-100 w-full text-left">
-          📸 Ảnh Sự Kiện Speaker
+          <span>📸</span> <span class="menu-text">Ảnh Sự Kiện Speaker</span>
         </button>
         <button onclick="switchTab('speaker_assets')" id="menu-speaker_assets" class="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-bold transition-all duration-150 text-slate-600 hover:bg-slate-100 w-full text-left">
-          🔗 Cấu hình Speaker (Files & Links)
+          <span>🔗</span> <span class="menu-text">Cấu hình Speaker (Files & Links)</span>
         </button>
-
-        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider px-3 mt-4 mb-1">Thành phần phụ</span>
+ 
+        <span class="group-title text-[10px] font-bold text-slate-400 uppercase tracking-wider px-3 mt-4 mb-1">Thành phần phụ</span>
         <button onclick="switchTab('stats')" id="menu-stats" class="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-bold transition-all duration-150 text-slate-600 hover:bg-slate-100 w-full text-left">
-          📊 Số liệu thống kê
+          <span>📊</span> <span class="menu-text">Số liệu thống kê</span>
         </button>
         <button onclick="switchTab('partners')" id="menu-partners" class="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-bold transition-all duration-150 text-slate-600 hover:bg-slate-100 w-full text-left">
-          🤝 Logo Đối tác
+          <span>🤝</span> <span class="menu-text">Logo Đối tác</span>
         </button>
       </div>
 
@@ -130,9 +160,21 @@
     (function checkSecurityLock() {
       const isEmbedded = window.self !== window.top;
       const ref = document.referrer || "";
-      const isAllowedOrigin = ref.includes("lht.gun.hmz.one") || ref.includes("localhost") || ref.includes("127.0.0.1");
       
-      if (!isEmbedded || !isAllowedOrigin) {
+      // Allowed origins: NocoBase server, local dev, or our own site (when embedded)
+      const allowedOrigins = [
+        "lht.gun.hmz.one",
+        "lht.agentic.io.vn",
+        "localhost",
+        "127.0.0.1"
+      ];
+      const isAllowedOrigin = allowedOrigins.some(origin => ref.includes(origin));
+      
+      // Allow if: (1) properly embedded in iframe from allowed origin,
+      // OR (2) embedded with no referrer (Referrer-Policy: no-referrer/strict-origin blocks it)
+      const isAllowed = isEmbedded && (isAllowedOrigin || ref === "");
+      
+      if (!isAllowed) {
         document.body.innerHTML = `
           <div class="min-h-screen bg-slate-100 flex flex-col items-center justify-center p-6 text-center">
             <div class="bg-white p-8 rounded-2xl shadow-xl max-w-md border border-slate-200">
@@ -154,6 +196,7 @@
     let profileData = null;
     let listData = [];
     let selectedItem = null;
+    let sidebarCollapsed = false;
 
     const headers = {
       'Authorization': `Bearer ${TOKEN}`,
@@ -166,88 +209,148 @@
       let url = typeof resource === 'string' ? resource : resource.url;
       
       if (url.startsWith('/api/') || url.includes('/api/')) {
-        const urlPath = url.startsWith('http') ? new URL(url).pathname : url;
+        const urlPath = url.startsWith('http') ? new URL(url).pathname : url.split('?')[0];
         const pathParts = urlPath.split('/');
-        const endpoint = pathParts[pathParts.length - 1];
         
-        // 1. LEADS: Redirect to remote NocoBase URL
-        if (endpoint.includes('leads')) {
+        // 1. LEADS & BLOG_POSTS: Redirect to remote NocoBase URL
+        if (urlPath.includes('leads') || urlPath.includes('blog_posts')) {
           const remoteUrl = `${NOCOBASE_URL}${urlPath}${url.includes('?') ? '?' + url.split('?')[1] : ''}`;
           return originalFetch(remoteUrl, init);
         }
+
+        // Tìm segment chứa hành động có dấu hai chấm (ví dụ: "testimonials:update", "avatar:set", "attachments:create")
+        const actionSegment = pathParts.find(part => part.includes(':')) || '';
         
-        // 2. FILE UPLOADS: Redirect to local upload API
-        if (endpoint === 'attachments:create') {
-          return originalFetch('/api/admin/upload', init);
-        }
-        
-        // 3. SET IMAGE ASSOCIATION: Mock success since we store attachments inline
-        if (endpoint.includes(':set')) {
-          return new Response(JSON.stringify({ data: { success: true } }), {
-            status: 200,
-            headers: { 'Content-Type': 'application/json' }
-          });
-        }
-        
-        // 4. HOMEPAGE/PROFILE CONFIG
-        if (endpoint.startsWith('profile:list')) {
-          const localRes = await originalFetch('/api/admin/config?tab=homepage', { headers: init?.headers });
-          const localData = await localRes.json();
-          return new Response(JSON.stringify({ data: [localData.data] }), {
-            status: 200,
-            headers: { 'Content-Type': 'application/json' }
-          });
-        }
-        
-        if (endpoint.startsWith('profile:update')) {
-          const bodyData = JSON.parse(init.body);
-          return originalFetch('/api/admin/config?tab=homepage', {
-            method: 'POST',
-            headers: init.headers,
-            body: JSON.stringify(bodyData)
-          });
-        }
-        
-        // 5. OTHER COLLECTIONS (GET, POST, DELETE)
-        // Handle Delete/Destroy
-        if (endpoint.includes(':destroy')) {
-          const tabName = endpoint.split(':')[0];
-          const itemId = endpoint.split('/').pop() || '';
-          return originalFetch(`/api/admin/config?tab=${tabName}&id=${itemId}`, {
-            method: 'DELETE',
-            headers: init?.headers
-          });
-        }
-        
-        // Handle Update or Create
-        if (endpoint.includes(':update') || endpoint.includes(':create')) {
-          const tabName = endpoint.split(':')[0];
-          const bodyData = JSON.parse(init.body);
+        if (actionSegment) {
+          const actionParts = actionSegment.split(':');
+          const model = actionParts[0]; // e.g. "testimonials", "avatar", "profile", "attachments"
+          const action = actionParts[1]; // e.g. "update", "create", "destroy", "list", "set"
           
-          const imageField = tabName === 'facebook_posts' ? 'thumbnail' : 'image';
-          const imgInput = document.getElementById('edit-image-id');
-          if (imgInput && imgInput.value) {
-            const val = imgInput.value;
-            if (val.startsWith('{')) {
+          // 2. FILE UPLOADS: Redirect to local upload API
+          if (actionSegment === 'attachments:create') {
+            const res = await originalFetch('/api/admin/upload', init);
+            if (res.ok) {
+              const cloned = res.clone();
               try {
-                bodyData[imageField] = [JSON.parse(val)];
-              } catch(e) {}
-            } else if (selectedItem) {
-              bodyData[imageField] = selectedItem[imageField] || null;
+                const payload = await cloned.json();
+                const fileData = payload.data || payload;
+                if (fileData && fileData.id) {
+                  window.uploadedFiles = window.uploadedFiles || {};
+                  window.uploadedFiles[fileData.id] = fileData;
+                }
+              } catch (e) {
+                console.error('Error caching uploaded file:', e);
+              }
             }
+            return res;
           }
           
-          return originalFetch(`/api/admin/config?tab=${tabName}`, {
-            method: 'POST',
-            headers: init.headers,
-            body: JSON.stringify(bodyData)
-          });
-        }
-        
-        // Handle Listing
-        if (endpoint.includes(':list')) {
-          const tabName = endpoint.split(':')[0];
-          return originalFetch(`/api/admin/config?tab=${tabName}`, { headers: init?.headers });
+          // 3. SET IMAGE ASSOCIATION: Save image to local JSON config
+          if (action === 'set') {
+            const targetModel = pathParts[2];
+            const targetId = pathParts[3];
+            const field = model; // e.g. "image" hoặc "avatar"
+            
+            let fileIds = [];
+            try {
+              fileIds = JSON.parse(init.body) || [];
+            } catch(e) {}
+            
+            const fileId = fileIds[0];
+            const fileData = fileId && window.uploadedFiles ? window.uploadedFiles[fileId] : null;
+            
+            if (targetModel === 'profile' || targetModel === 'homepage') {
+              if (profileData) {
+                profileData[field] = fileData ? [fileData] : null;
+                await originalFetch('/api/admin/config?tab=homepage', {
+                  method: 'POST',
+                  headers: { ...headers, 'Content-Type': 'application/json' },
+                  body: JSON.stringify(profileData)
+                });
+              }
+            } else {
+              const item = listData.find(i => String(i.id) === String(targetId));
+              if (item) {
+                item[field] = fileData ? [fileData] : null;
+                await originalFetch(`/api/admin/config?tab=${targetModel}`, {
+                  method: 'POST',
+                  headers: { ...headers, 'Content-Type': 'application/json' },
+                  body: JSON.stringify(item)
+                });
+              }
+            }
+
+            return new Response(JSON.stringify({ data: { success: true } }), {
+              status: 200,
+              headers: { 'Content-Type': 'application/json' }
+            });
+          }
+
+          // 4. HOMEPAGE/PROFILE CONFIG
+          if (actionSegment === 'profile:list') {
+            const localRes = await originalFetch('/api/admin/config?tab=homepage', { headers: init?.headers });
+            const localData = await localRes.json();
+            return new Response(JSON.stringify({ data: [localData.data] }), {
+              status: 200,
+              headers: { 'Content-Type': 'application/json' }
+            });
+          }
+          
+          if (actionSegment.startsWith('profile:update')) {
+            const bodyData = JSON.parse(init.body);
+            return originalFetch('/api/admin/config?tab=homepage', {
+              method: 'POST',
+              headers: init.headers,
+              body: JSON.stringify(bodyData)
+            });
+          }
+
+          // 5. OTHER COLLECTIONS (GET, POST, DELETE)
+          // Handle Delete/Destroy (e.g. /api/testimonials:destroy/1)
+          if (action === 'destroy') {
+            const itemId = pathParts[pathParts.length - 1];
+            return originalFetch(`/api/admin/config?tab=${model}&id=${itemId}`, {
+              method: 'DELETE',
+              headers: init?.headers
+            });
+          }
+          
+          // Handle Update or Create
+          if (action === 'update' || action === 'create') {
+            const bodyData = JSON.parse(init.body);
+            if (action === 'update') {
+              const itemId = pathParts[pathParts.length - 1];
+              if (itemId) {
+                bodyData.id = parseInt(itemId, 10);
+              }
+            }
+            
+            const imageField = model === 'facebook_posts' ? 'thumbnail' : 'image';
+            const imgInput = document.getElementById('edit-image-id');
+            if (imgInput && imgInput.value) {
+              // New image uploaded: value is JSON string of file object
+              const val = imgInput.value;
+              if (val.startsWith('{')) {
+                try {
+                  bodyData[imageField] = [JSON.parse(val)];
+                } catch(e) {}
+              }
+            } else if (selectedItem && selectedItem[imageField]) {
+              // No new image: preserve existing image from selectedItem
+              bodyData[imageField] = selectedItem[imageField];
+            }
+            
+            return originalFetch(`/api/admin/config?tab=${model}`, {
+              method: 'POST',
+              headers: init.headers,
+              body: JSON.stringify(bodyData)
+            });
+          }
+          
+          // Handle Listing
+          if (action === 'list') {
+            return originalFetch(`/api/admin/config?tab=${model}`, { headers: init?.headers });
+          }
         }
       }
       
@@ -272,15 +375,62 @@
       }
     }
 
+    async function deployWebsite() {
+      const btn = document.getElementById('deploy-btn');
+      const textEl = document.getElementById('deploy-text');
+      const iconEl = document.getElementById('deploy-icon');
+      
+      // Loading state
+      btn.disabled = true;
+      btn.className = btn.className.replace('from-cyan-500 to-blue-600', 'from-slate-500 to-slate-600');
+      textEl.textContent = 'Đang cập nhật...';
+      iconEl.innerHTML = '<circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none" stroke-dasharray="31.4" stroke-dashoffset="10" style="animation:spin 1s linear infinite;transform-origin:center"/>';
+
+      try {
+        const res = await originalFetch('/api/admin/revalidate', {
+          method: 'POST',
+          headers: { 'Authorization': `Bearer ${TOKEN}`, 'Content-Type': 'application/json' }
+        });
+        
+        if (res.ok) {
+          // Success state
+          btn.className = btn.className.replace('from-slate-500 to-slate-600', 'from-emerald-500 to-green-600');
+          textEl.textContent = '✅ Website đã cập nhật!';
+          setSyncStatus('success', 'Deploy thành công');
+          setTimeout(() => {
+            btn.className = btn.className.replace('from-emerald-500 to-green-600', 'from-cyan-500 to-blue-600');
+            textEl.textContent = '🚀 Deploy Website';
+            btn.disabled = false;
+          }, 3000);
+        } else {
+          throw new Error('API error');
+        }
+      } catch(err) {
+        // Error state
+        btn.className = btn.className.replace('from-slate-500 to-slate-600', 'from-rose-500 to-red-600');
+        textEl.textContent = '❌ Lỗi - thử lại';
+        setSyncStatus('error', 'Deploy thất bại');
+        setTimeout(() => {
+          btn.className = btn.className.replace('from-rose-500 to-red-600', 'from-cyan-500 to-blue-600');
+          textEl.textContent = '🚀 Deploy Website';
+          btn.disabled = false;
+        }, 3000);
+      }
+    }
+
     function switchTab(tab) {
       // Update sidebar styling
-      const menuIds = ['homepage', 'images', 'personal_products', 'business_products', 'testimonials', 'customer_screenshots', 'facebook_posts', 'leads', 'stats', 'partners', 'speaker_events', 'speaker_assets'];
+      const menuIds = ['homepage', 'images', 'personal_products', 'business_products', 'testimonials', 'customer_screenshots', 'facebook_posts', 'stats', 'partners', 'speaker_events', 'speaker_assets', 'workshops', 'book_feedbacks', 'book_videos', 'blog_posts'];
       menuIds.forEach(id => {
         const el = document.getElementById('menu-' + id);
+        if (!el) return;
+        
+        el.classList.remove('bg-oxford-blue', 'text-white', 'shadow-sm', 'text-slate-600', 'hover:bg-slate-100');
+        
         if (id === tab) {
-          el.className = "flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-bold transition-all duration-150 bg-oxford-blue text-white shadow-sm w-full text-left";
+          el.classList.add('bg-oxford-blue', 'text-white', 'shadow-sm');
         } else {
-          el.className = "flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-bold transition-all duration-150 text-slate-600 hover:bg-slate-100 w-full text-left";
+          el.classList.add('text-slate-600', 'hover:bg-slate-100');
         }
       });
 
@@ -309,9 +459,9 @@
     // ─────────────────────────────────────────────────────────────
     async function loadHomepageConfig(area) {
       try {
-        const res = await fetch(`${BASE_URL}/api/profile:list`, { headers });
+        const res = await fetch('/api/admin/config?tab=homepage', { headers });
         const payload = await res.json();
-        profileData = payload.data?.[0] || null;
+        profileData = payload.data || null;
         
         if (!profileData) {
           area.innerHTML = '<div class="text-center text-slate-400 py-10">Không tìm thấy record cấu hình profile ID 1</div>';
@@ -364,6 +514,14 @@
                 </div>
               </div>
 
+              <div class="pt-4 border-t border-slate-100">
+                <h3 class="text-xs font-black text-blaze-orange uppercase tracking-wider mb-3">Cấu hình Trang Sách</h3>
+                <div>
+                  <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Link đọc thử sách (Flipbook heyzine/iframe)</label>
+                  <input type="url" id="hp-book-preview-link" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs focus:outline-none focus:ring-1 focus:ring-oxford-blue" value="${profileData.book_preview_link || ''}" placeholder="https://heyzine.com/api/flipbook.html">
+                </div>
+              </div>
+
               <div class="pt-4 border-t border-slate-100 flex justify-end">
                 <button type="submit" class="bg-blaze-orange hover:bg-blaze-orange/95 text-white font-bold text-xs px-6 py-2.5 rounded-xl transition-all duration-200">
                   Lưu cấu hình nội dung
@@ -381,13 +539,16 @@
     async function saveHomepage(e) {
       e.preventDefault();
       setSyncStatus('syncing', 'Đang lưu nội dung...');
+      // Spread profileData first to preserve all image fields (avatar, logo, hero_bg, etc.)
       const data = {
+        ...profileData,
         hero_title: document.getElementById('hp-hero-title').value.trim(),
         hero_desc: document.getElementById('hp-hero-desc').value.trim(),
         workshop_title: document.getElementById('hp-workshop-title').value.trim(),
         workshop_desc: document.getElementById('hp-workshop-desc').value.trim(),
         community_title: document.getElementById('hp-community-title').value.trim(),
         community_desc: document.getElementById('hp-community-desc').value.trim(),
+        book_preview_link: document.getElementById('hp-book-preview-link').value.trim(),
       };
 
       try {
@@ -484,9 +645,9 @@
     // ─────────────────────────────────────────────────────────────
     async function loadImagesConfig(area) {
       try {
-        const res = await fetch(`${BASE_URL}/api/profile:list?appends=avatar,community_qr,book_cover,logo,hero_bg,philosophy_img,community_banner`, { headers });
+        const res = await fetch('/api/admin/config?tab=homepage', { headers });
         const payload = await res.json();
-        profileData = payload.data?.[0] || null;
+        profileData = payload.data || null;
 
         if (!profileData) {
           area.innerHTML = '<div class="text-center text-slate-400 py-10">Không tìm thấy record cấu hình profile ID 1</div>';
@@ -500,157 +661,337 @@
         const heroBgImg = profileData.hero_bg?.[0];
         const philImg = profileData.philosophy_img?.[0];
         const commBannerImg = profileData.community_banner?.[0];
+        const destinyCoverImg = profileData.destiny_pdf_cover?.[0];
+        const strategyCoverImg = profileData.strategy_pdf_cover?.[0];
+        const speakerHeroImg = profileData.speaker_hero_img?.[0];
+        const tier1Img = profileData.consulting_tier1_img?.[0];
+        const tier2Img = profileData.consulting_tier2_img?.[0];
+        const tier3Img = profileData.consulting_tier3_img?.[0];
 
         area.innerHTML = `
           <div>
             <h2 class="font-title font-bold text-lg text-oxford-blue mb-2">🖼️ QUẢN LÝ HÌNH ẢNH HỆ THỐNG</h2>
-            <p class="text-xs text-slate-400 mb-6">Tải lên để thay thế trực tiếp các hình ảnh tĩnh trên Website.</p>
+            <p class="text-xs text-slate-400 mb-6">Tải lên để thay thế trực tiếp các hình ảnh tĩnh trên Website (được phân loại theo Trang hiển thị).</p>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <!-- Avatar -->
-              <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 flex flex-col justify-between">
-                <div>
-                  <h3 class="text-xs font-bold text-oxford-blue mb-1">1. Ảnh chân dung Master</h3>
-                  <p class="text-[10px] text-slate-400 mb-3">Hiển thị ở Hero Banner & Giới thiệu</p>
-                  <div class="aspect-video bg-slate-200 border rounded-lg overflow-hidden flex items-center justify-center relative mb-4">
-                    ${avatarImg ? `<img src="${BASE_URL}${avatarImg.url}" class="object-contain w-full h-full p-2 bg-slate-900/5" alt="preview">` : '<span class="text-xs text-slate-400">Chưa có ảnh</span>'}
+            <div class="space-y-8">
+              <!-- Nhóm 1: Trang chủ & Thương hiệu -->
+              <div class="bg-slate-50/50 border border-slate-200/80 rounded-2xl p-5">
+                <h3 class="text-[11px] font-black text-blaze-orange uppercase tracking-wider mb-4 flex items-center gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-blaze-orange"></span> Trang chủ & Nhận diện thương hiệu
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <!-- Avatar -->
+                  <div class="bg-white border border-slate-200 rounded-xl p-4 flex flex-col justify-between shadow-sm">
+                    <div>
+                      <h4 class="text-xs font-bold text-oxford-blue mb-1">1. Ảnh chân dung Master</h4>
+                      <p class="text-[10px] text-slate-400 mb-3">Hiển thị ở Hero Banner & Giới thiệu</p>
+                      <div class="aspect-video bg-slate-100 border rounded-lg overflow-hidden flex items-center justify-center relative mb-4">
+                        ${avatarImg ? `<img src="${BASE_URL}${avatarImg.url}" class="object-contain w-full h-full p-2 bg-slate-900/5" alt="preview">` : '<span class="text-xs text-slate-400">Chưa có ảnh</span>'}
+                      </div>
+                    </div>
+                    <div>
+                      <div class="bg-slate-50 border rounded-lg p-2 text-[9px] text-slate-500 mb-3 space-y-0.5">
+                        <div><strong>Kích thước:</strong> 800x800 px</div>
+                        <div><strong>Định dạng:</strong> .PNG trong suốt / JPG</div>
+                      </div>
+                      <input type="file" id="up-avatar" onchange="uploadImageField(event, 'avatar')" class="hidden" accept="image/*">
+                      <button type="button" onclick="document.getElementById('up-avatar').click()" class="w-full bg-oxford-blue hover:bg-oxford-blue/90 text-white font-bold text-xs py-2 rounded-xl transition-all duration-150">
+                        Thay ảnh
+                      </button>
+                    </div>
                   </div>
-                </div>
-                <div>
-                  <div class="bg-white border rounded-lg p-2.5 text-[9px] text-slate-500 mb-3 space-y-0.5">
-                    <div><strong>Kích thước:</strong> 800x800 px</div>
-                    <div><strong>Định dạng:</strong> .PNG trong suốt / JPG</div>
+
+                  <!-- Logo Website -->
+                  <div class="bg-white border border-slate-200 rounded-xl p-4 flex flex-col justify-between shadow-sm">
+                    <div>
+                      <h4 class="text-xs font-bold text-oxford-blue mb-1">4. Logo Website chính</h4>
+                      <p class="text-[10px] text-slate-400 mb-3">Hiển thị ở Header chính của trang web</p>
+                      <div class="aspect-video bg-slate-900 border rounded-lg overflow-hidden flex items-center justify-center relative mb-4 p-4">
+                        ${logoImg ? `<img src="${BASE_URL}${logoImg.url}" class="object-contain w-full h-full" alt="preview">` : '<span class="text-xs text-slate-400">Chưa có ảnh</span>'}
+                      </div>
+                    </div>
+                    <div>
+                      <div class="bg-slate-50 border rounded-lg p-2 text-[9px] text-slate-500 mb-3 space-y-0.5">
+                        <div><strong>Kích thước:</strong> Tỷ lệ dài (VD: 320x80 px)</div>
+                        <div><strong>Định dạng:</strong> .PNG nền trong suốt</div>
+                      </div>
+                      <input type="file" id="up-logo" onchange="uploadImageField(event, 'logo')" class="hidden" accept="image/*">
+                      <button type="button" onclick="document.getElementById('up-logo').click()" class="w-full bg-oxford-blue hover:bg-oxford-blue/90 text-white font-bold text-xs py-2 rounded-xl transition-all duration-150">
+                        Thay ảnh
+                      </button>
+                    </div>
                   </div>
-                  <input type="file" id="up-avatar" onchange="uploadImageField(event, 'avatar')" class="hidden" accept="image/*">
-                  <button type="button" onclick="document.getElementById('up-avatar').click()" class="w-full bg-oxford-blue hover:bg-oxford-blue/90 text-white font-bold text-xs py-2 rounded-xl transition-all duration-150">
-                    Thay ảnh
-                  </button>
+
+                  <!-- Hero Background -->
+                  <div class="bg-white border border-slate-200 rounded-xl p-4 flex flex-col justify-between shadow-sm">
+                    <div>
+                      <h4 class="text-xs font-bold text-oxford-blue mb-1">5. Hình nền Hero Banner</h4>
+                      <p class="text-[10px] text-slate-400 mb-3">Hình nền trang chủ phía sau Master</p>
+                      <div class="aspect-video bg-slate-100 border rounded-lg overflow-hidden flex items-center justify-center relative mb-4">
+                        ${heroBgImg ? `<img src="${BASE_URL}${heroBgImg.url}" class="object-cover w-full h-full" alt="preview">` : '<span class="text-xs text-slate-400">Chưa có ảnh</span>'}
+                      </div>
+                    </div>
+                    <div>
+                      <div class="bg-slate-50 border rounded-lg p-2 text-[9px] text-slate-500 mb-3 space-y-0.5">
+                        <div><strong>Kích thước:</strong> 1920x1080 px</div>
+                        <div><strong>Định dạng:</strong> JPG/PNG</div>
+                      </div>
+                      <input type="file" id="up-herobg" onchange="uploadImageField(event, 'hero_bg')" class="hidden" accept="image/*">
+                      <button type="button" onclick="document.getElementById('up-herobg').click()" class="w-full bg-oxford-blue hover:bg-oxford-blue/90 text-white font-bold text-xs py-2 rounded-xl transition-all duration-150">
+                        Thay ảnh
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              <!-- Community QR -->
-              <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 flex flex-col justify-between">
-                <div>
-                  <h3 class="text-xs font-bold text-oxford-blue mb-1">2. QR Code Cộng đồng</h3>
-                  <p class="text-[10px] text-slate-400 mb-3">Hiển thị ở banner cộng đồng & Footer</p>
-                  <div class="aspect-video bg-slate-200 border rounded-lg overflow-hidden flex items-center justify-center relative mb-4 p-2">
-                    ${qrImg ? `<img src="${BASE_URL}${qrImg.url}" class="object-contain w-full h-full bg-white border p-2" alt="preview">` : '<span class="text-xs text-slate-400">Chưa có ảnh</span>'}
+              <!-- Nhóm 2: Giới thiệu Master & Triết lý -->
+              <div class="bg-slate-50/50 border border-slate-200/80 rounded-2xl p-5">
+                <h3 class="text-[11px] font-black text-blaze-orange uppercase tracking-wider mb-4 flex items-center gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-blaze-orange"></span> Trang giới thiệu Master & Triết lý
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <!-- Philosophy Image -->
+                  <div class="bg-white border border-slate-200 rounded-xl p-4 flex flex-col justify-between shadow-sm">
+                    <div>
+                      <h4 class="text-xs font-bold text-oxford-blue mb-1">6. Ảnh Triết lý Master</h4>
+                      <p class="text-[10px] text-slate-400 mb-3">Hiển thị ở trang triết lý/triết lý master</p>
+                      <div class="aspect-video bg-slate-100 border rounded-lg overflow-hidden flex items-center justify-center relative mb-4">
+                        ${philImg ? `<img src="${BASE_URL}${philImg.url}" class="object-cover w-full h-full" alt="preview">` : '<span class="text-xs text-slate-400">Chưa có ảnh</span>'}
+                      </div>
+                    </div>
+                    <div>
+                      <div class="bg-slate-50 border rounded-lg p-2 text-[9px] text-slate-500 mb-3 space-y-0.5">
+                        <div><strong>Kích thước:</strong> 800x800 px hoặc 800x600 px</div>
+                        <div><strong>Định dạng:</strong> JPG/PNG</div>
+                      </div>
+                      <input type="file" id="up-phil" onchange="uploadImageField(event, 'philosophy_img')" class="hidden" accept="image/*">
+                      <button type="button" onclick="document.getElementById('up-phil').click()" class="w-full bg-oxford-blue hover:bg-oxford-blue/90 text-white font-bold text-xs py-2 rounded-xl transition-all duration-150">
+                        Thay ảnh
+                      </button>
+                    </div>
                   </div>
-                </div>
-                <div>
-                  <div class="bg-white border rounded-lg p-2.5 text-[9px] text-slate-500 mb-3 space-y-0.5">
-                    <div><strong>Kích thước:</strong> 300x300 px</div>
-                    <div><strong>Định dạng:</strong> PNG/JPG</div>
-                  </div>
-                  <input type="file" id="up-qr" onchange="uploadImageField(event, 'community_qr')" class="hidden" accept="image/*">
-                  <button type="button" onclick="document.getElementById('up-qr').click()" class="w-full bg-oxford-blue hover:bg-oxford-blue/90 text-white font-bold text-xs py-2 rounded-xl transition-all duration-150">
-                    Thay ảnh
-                  </button>
                 </div>
               </div>
 
-              <!-- Book Cover -->
-              <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 flex flex-col justify-between">
-                <div>
-                  <h3 class="text-xs font-bold text-oxford-blue mb-1">3. Bìa sách "Sức mạnh..."</h3>
-                  <p class="text-[10px] text-slate-400 mb-3">Hiển thị ở mục giới thiệu sách</p>
-                  <div class="aspect-video bg-slate-200 border rounded-lg overflow-hidden flex items-center justify-center relative mb-4 p-2">
-                    ${bookImg ? `<img src="${BASE_URL}${bookImg.url}" class="object-contain max-h-full max-w-full shadow" alt="preview">` : '<span class="text-xs text-slate-400">Chưa có ảnh</span>'}
+              <!-- Nhóm 3: Trang Cộng đồng -->
+              <div class="bg-slate-50/50 border border-slate-200/80 rounded-2xl p-5">
+                <h3 class="text-[11px] font-black text-blaze-orange uppercase tracking-wider mb-4 flex items-center gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-blaze-orange"></span> Trang Cộng đồng (/cong-dong)
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <!-- Community QR -->
+                  <div class="bg-white border border-slate-200 rounded-xl p-4 flex flex-col justify-between shadow-sm">
+                    <div>
+                      <h4 class="text-xs font-bold text-oxford-blue mb-1">2. QR Code Cộng đồng</h4>
+                      <p class="text-[10px] text-slate-400 mb-3">Hiển thị ở banner cộng đồng & Footer</p>
+                      <div class="aspect-video bg-slate-100 border rounded-lg overflow-hidden flex items-center justify-center relative mb-4 p-2">
+                        ${qrImg ? `<img src="${BASE_URL}${qrImg.url}" class="object-contain w-full h-full bg-white border p-2" alt="preview">` : '<span class="text-xs text-slate-400">Chưa có ảnh</span>'}
+                      </div>
+                    </div>
+                    <div>
+                      <div class="bg-slate-50 border rounded-lg p-2 text-[9px] text-slate-500 mb-3 space-y-0.5">
+                        <div><strong>Kích thước:</strong> 300x300 px</div>
+                        <div><strong>Định dạng:</strong> PNG/JPG</div>
+                      </div>
+                      <input type="file" id="up-qr" onchange="uploadImageField(event, 'community_qr')" class="hidden" accept="image/*">
+                      <button type="button" onclick="document.getElementById('up-qr').click()" class="w-full bg-oxford-blue hover:bg-oxford-blue/90 text-white font-bold text-xs py-2 rounded-xl transition-all duration-150">
+                        Thay ảnh
+                      </button>
+                    </div>
                   </div>
-                </div>
-                <div>
-                  <div class="bg-white border rounded-lg p-2.5 text-[9px] text-slate-500 mb-3 space-y-0.5">
-                    <div><strong>Kích thước:</strong> 600x900 px (tỷ lệ 2:3)</div>
-                    <div><strong>Định dạng:</strong> PNG/JPG</div>
+
+                  <!-- Community Banner -->
+                  <div class="bg-white border border-slate-200 rounded-xl p-4 flex flex-col justify-between shadow-sm">
+                    <div>
+                      <h4 class="text-xs font-bold text-oxford-blue mb-1">7. Banner Cộng đồng</h4>
+                      <p class="text-[10px] text-slate-400 mb-3">Ảnh banner mục Cộng đồng</p>
+                      <div class="aspect-video bg-slate-100 border rounded-lg overflow-hidden flex items-center justify-center relative mb-4">
+                        ${commBannerImg ? `<img src="${BASE_URL}${commBannerImg.url}" class="object-cover w-full h-full" alt="preview">` : '<span class="text-xs text-slate-400">Chưa có ảnh</span>'}
+                      </div>
+                    </div>
+                    <div>
+                      <div class="bg-slate-50 border rounded-lg p-2 text-[9px] text-slate-500 mb-3 space-y-0.5">
+                        <div><strong>Kích thước:</strong> 800x800 px hoặc 1200x800 px</div>
+                        <div><strong>Định dạng:</strong> JPG/PNG</div>
+                      </div>
+                      <input type="file" id="up-commbanner" onchange="uploadImageField(event, 'community_banner')" class="hidden" accept="image/*">
+                      <button type="button" onclick="document.getElementById('up-commbanner').click()" class="w-full bg-oxford-blue hover:bg-oxford-blue/90 text-white font-bold text-xs py-2 rounded-xl transition-all duration-150">
+                        Thay ảnh
+                      </button>
+                    </div>
                   </div>
-                  <input type="file" id="up-book" onchange="uploadImageField(event, 'book_cover')" class="hidden" accept="image/*">
-                  <button type="button" onclick="document.getElementById('up-book').click()" class="w-full bg-oxford-blue hover:bg-oxford-blue/90 text-white font-bold text-xs py-2 rounded-xl transition-all duration-150">
-                    Thay ảnh
-                  </button>
                 </div>
               </div>
 
-              <!-- Logo Website -->
-              <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 flex flex-col justify-between">
-                <div>
-                  <h3 class="text-xs font-bold text-oxford-blue mb-1">4. Logo Website chính</h3>
-                  <p class="text-[10px] text-slate-400 mb-3">Hiển thị ở Header chính của trang web</p>
-                  <div class="aspect-video bg-slate-900 border rounded-lg overflow-hidden flex items-center justify-center relative mb-4 p-4">
-                    ${logoImg ? `<img src="${BASE_URL}${logoImg.url}" class="object-contain w-full h-full" alt="preview">` : '<span class="text-xs text-slate-400">Chưa có ảnh</span>'}
+              <!-- Nhóm 4: Trang Hồ sơ Vận mệnh -->
+              <div class="bg-slate-50/50 border border-slate-200/80 rounded-2xl p-5">
+                <h3 class="text-[11px] font-black text-blaze-orange uppercase tracking-wider mb-4 flex items-center gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-blaze-orange"></span> Trang Hồ sơ Vận mệnh & Phát triển bản thân
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <!-- destiny_pdf_cover -->
+                  <div class="bg-white border border-slate-200 rounded-xl p-4 flex flex-col justify-between shadow-sm">
+                    <div>
+                      <h4 class="text-xs font-bold text-oxford-blue mb-1">8. Bìa PDF Luận giải Vận mệnh</h4>
+                      <p class="text-[10px] text-slate-400 mb-3">Hiển thị ở trang /ho-so-van-menh & trang /phat-trien-ban-than</p>
+                      <div class="aspect-video bg-slate-100 border rounded-lg overflow-hidden flex items-center justify-center relative mb-4 p-2">
+                        ${destinyCoverImg ? `<img src="${BASE_URL}${destinyCoverImg.url}" class="object-contain max-h-full max-w-full shadow" alt="preview">` : '<span class="text-xs text-slate-400">Chưa có ảnh</span>'}
+                      </div>
+                    </div>
+                    <div>
+                      <div class="bg-slate-50 border rounded-lg p-2 text-[9px] text-slate-500 mb-3 space-y-0.5">
+                        <div><strong>Kích thước:</strong> 600x800 px (tỷ lệ 3:4)</div>
+                        <div><strong>Định dạng:</strong> PNG/JPG</div>
+                      </div>
+                      <input type="file" id="up-destiny-cover" onchange="uploadImageField(event, 'destiny_pdf_cover')" class="hidden" accept="image/*">
+                      <button type="button" onclick="document.getElementById('up-destiny-cover').click()" class="w-full bg-oxford-blue hover:bg-oxford-blue/90 text-white font-bold text-xs py-2 rounded-xl transition-all duration-150">
+                        Thay ảnh
+                      </button>
+                    </div>
                   </div>
-                </div>
-                <div>
-                  <div class="bg-white border rounded-lg p-2.5 text-[9px] text-slate-500 mb-3 space-y-0.5">
-                    <div><strong>Kích thước:</strong> Tỷ lệ dài (VD: 320x80 px)</div>
-                    <div><strong>Định dạng:</strong> .PNG nền trong suốt</div>
-                  </div>
-                  <input type="file" id="up-logo" onchange="uploadImageField(event, 'logo')" class="hidden" accept="image/*">
-                  <button type="button" onclick="document.getElementById('up-logo').click()" class="w-full bg-oxford-blue hover:bg-oxford-blue/90 text-white font-bold text-xs py-2 rounded-xl transition-all duration-150">
-                    Thay ảnh
-                  </button>
                 </div>
               </div>
 
-              <!-- Hero Background -->
-              <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 flex flex-col justify-between">
-                <div>
-                  <h3 class="text-xs font-bold text-oxford-blue mb-1">5. Hình nền Hero Banner</h3>
-                  <p class="text-[10px] text-slate-400 mb-3">Hình nền trang chủ phía sau Master</p>
-                  <div class="aspect-video bg-slate-200 border rounded-lg overflow-hidden flex items-center justify-center relative mb-4">
-                    ${heroBgImg ? `<img src="${BASE_URL}${heroBgImg.url}" class="object-cover w-full h-full" alt="preview">` : '<span class="text-xs text-slate-400">Chưa có ảnh</span>'}
+              <!-- Nhóm 5: Trang Giải pháp Lãnh đạo -->
+              <div class="bg-slate-50/50 border border-slate-200/80 rounded-2xl p-5">
+                <h3 class="text-[11px] font-black text-blaze-orange uppercase tracking-wider mb-4 flex items-center gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-blaze-orange"></span> Trang Giải pháp Lãnh đạo (/giai-phap-lanh-dao)
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <!-- strategy_pdf_cover -->
+                  <div class="bg-white border border-slate-200 rounded-xl p-4 flex flex-col justify-between shadow-sm">
+                    <div>
+                      <h4 class="text-xs font-bold text-oxford-blue mb-1">9. Bìa Bản đồ Chiến lược doanh nghiệp</h4>
+                      <p class="text-[10px] text-slate-400 mb-3">Hiển thị ở mục Bản đồ quyết định trang /giai-phap-lanh-dao</p>
+                      <div class="aspect-video bg-slate-100 border rounded-lg overflow-hidden flex items-center justify-center relative mb-4 p-2">
+                        ${strategyCoverImg ? `<img src="${BASE_URL}${strategyCoverImg.url}" class="object-contain max-h-full max-w-full shadow" alt="preview">` : '<span class="text-xs text-slate-400">Chưa có ảnh</span>'}
+                      </div>
+                    </div>
+                    <div>
+                      <div class="bg-slate-50 border rounded-lg p-2 text-[9px] text-slate-500 mb-3 space-y-0.5">
+                        <div><strong>Kích thước:</strong> 600x800 px (tỷ lệ 3:4)</div>
+                        <div><strong>Định dạng:</strong> PNG/JPG</div>
+                      </div>
+                      <input type="file" id="up-strategy-cover" onchange="uploadImageField(event, 'strategy_pdf_cover')" class="hidden" accept="image/*">
+                      <button type="button" onclick="document.getElementById('up-strategy-cover').click()" class="w-full bg-oxford-blue hover:bg-oxford-blue/90 text-white font-bold text-xs py-2 rounded-xl transition-all duration-150">
+                        Thay ảnh
+                      </button>
+                    </div>
                   </div>
-                </div>
-                <div>
-                  <div class="bg-white border rounded-lg p-2.5 text-[9px] text-slate-500 mb-3 space-y-0.5">
-                    <div><strong>Kích thước:</strong> 1920x1080 px</div>
-                    <div><strong>Định dạng:</strong> JPG/PNG</div>
+
+                  <!-- consulting_tier1_img -->
+                  <div class="bg-white border border-slate-200 rounded-xl p-4 flex flex-col justify-between shadow-sm">
+                    <div>
+                      <h4 class="text-xs font-bold text-oxford-blue mb-1">11. Ảnh Phỏng vấn Chuyên sâu</h4>
+                      <p class="text-[10px] text-slate-400 mb-3">Dịch vụ cột 1 tại mục Tham vấn 1:1 trang /giai-phap-lanh-dao</p>
+                      <div class="aspect-video bg-slate-100 border rounded-lg overflow-hidden flex items-center justify-center relative mb-4">
+                        ${tier1Img ? `<img src="${BASE_URL}${tier1Img.url}" class="object-cover w-full h-full" alt="preview">` : '<span class="text-xs text-slate-400">Chưa có ảnh</span>'}
+                      </div>
+                    </div>
+                    <div>
+                      <div class="bg-slate-50 border rounded-lg p-2 text-[9px] text-slate-500 mb-3 space-y-0.5">
+                        <div><strong>Kích thước:</strong> 800x800 px (tỷ lệ 1:1)</div>
+                        <div><strong>Định dạng:</strong> JPG/PNG</div>
+                      </div>
+                      <input type="file" id="up-tier1" onchange="uploadImageField(event, 'consulting_tier1_img')" class="hidden" accept="image/*">
+                      <button type="button" onclick="document.getElementById('up-tier1').click()" class="w-full bg-oxford-blue hover:bg-oxford-blue/90 text-white font-bold text-xs py-2 rounded-xl transition-all duration-150">
+                        Thay ảnh
+                      </button>
+                    </div>
                   </div>
-                  <input type="file" id="up-herobg" onchange="uploadImageField(event, 'hero_bg')" class="hidden" accept="image/*">
-                  <button type="button" onclick="document.getElementById('up-herobg').click()" class="w-full bg-oxford-blue hover:bg-oxford-blue/90 text-white font-bold text-xs py-2 rounded-xl transition-all duration-150">
-                    Thay ảnh
-                  </button>
+
+                  <!-- consulting_tier2_img -->
+                  <div class="bg-white border border-slate-200 rounded-xl p-4 flex flex-col justify-between shadow-sm">
+                    <div>
+                      <h4 class="text-xs font-bold text-oxford-blue mb-1">12. Ảnh Coaching 90 ngày</h4>
+                      <p class="text-[10px] text-slate-400 mb-3">Dịch vụ cột 2 tại mục Tham vấn 1:1 trang /giai-phap-lanh-dao</p>
+                      <div class="aspect-video bg-slate-100 border rounded-lg overflow-hidden flex items-center justify-center relative mb-4">
+                        ${tier2Img ? `<img src="${BASE_URL}${tier2Img.url}" class="object-cover w-full h-full" alt="preview">` : '<span class="text-xs text-slate-400">Chưa có ảnh</span>'}
+                      </div>
+                    </div>
+                    <div>
+                      <div class="bg-slate-50 border rounded-lg p-2 text-[9px] text-slate-500 mb-3 space-y-0.5">
+                        <div><strong>Kích thước:</strong> 800x800 px (tỷ lệ 1:1)</div>
+                        <div><strong>Định dạng:</strong> JPG/PNG</div>
+                      </div>
+                      <input type="file" id="up-tier2" onchange="uploadImageField(event, 'consulting_tier2_img')" class="hidden" accept="image/*">
+                      <button type="button" onclick="document.getElementById('up-tier2').click()" class="w-full bg-oxford-blue hover:bg-oxford-blue/90 text-white font-bold text-xs py-2 rounded-xl transition-all duration-150">
+                        Thay ảnh
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- consulting_tier3_img -->
+                  <div class="bg-white border border-slate-200 rounded-xl p-4 flex flex-col justify-between shadow-sm">
+                    <div>
+                      <h4 class="text-xs font-bold text-oxford-blue mb-1">13. Ảnh Workshop thấu hiểu đội ngũ</h4>
+                      <p class="text-[10px] text-slate-400 mb-3">Dịch vụ cột 3 tại mục Tham vấn 1:1 trang /giai-phap-lanh-dao</p>
+                      <div class="aspect-video bg-slate-100 border rounded-lg overflow-hidden flex items-center justify-center relative mb-4">
+                        ${tier3Img ? `<img src="${BASE_URL}${tier3Img.url}" class="object-cover w-full h-full" alt="preview">` : '<span class="text-xs text-slate-400">Chưa có ảnh</span>'}
+                      </div>
+                    </div>
+                    <div>
+                      <div class="bg-slate-50 border rounded-lg p-2 text-[9px] text-slate-500 mb-3 space-y-0.5">
+                        <div><strong>Kích thước:</strong> 800x800 px (tỷ lệ 1:1)</div>
+                        <div><strong>Định dạng:</strong> JPG/PNG</div>
+                      </div>
+                      <input type="file" id="up-tier3" onchange="uploadImageField(event, 'consulting_tier3_img')" class="hidden" accept="image/*">
+                      <button type="button" onclick="document.getElementById('up-tier3').click()" class="w-full bg-oxford-blue hover:bg-oxford-blue/90 text-white font-bold text-xs py-2 rounded-xl transition-all duration-150">
+                        Thay ảnh
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              <!-- Philosophy Image -->
-              <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 flex flex-col justify-between">
-                <div>
-                  <h3 class="text-xs font-bold text-oxford-blue mb-1">6. Ảnh Triết lý Master</h3>
-                  <p class="text-[10px] text-slate-400 mb-3">Hiển thị ở trang triết lý/triết lý master</p>
-                  <div class="aspect-video bg-slate-200 border rounded-lg overflow-hidden flex items-center justify-center relative mb-4">
-                    ${philImg ? `<img src="${BASE_URL}${philImg.url}" class="object-cover w-full h-full" alt="preview">` : '<span class="text-xs text-slate-400">Chưa có ảnh</span>'}
+              <!-- Nhóm 6: Trang Diễn giả & Sách -->
+              <div class="bg-slate-50/50 border border-slate-200/80 rounded-2xl p-5">
+                <h3 class="text-[11px] font-black text-blaze-orange uppercase tracking-wider mb-4 flex items-center gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-blaze-orange"></span> Trang Diễn giả (/speaker) & Sách (/sach)
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <!-- speaker_hero_img -->
+                  <div class="bg-white border border-slate-200 rounded-xl p-4 flex flex-col justify-between shadow-sm">
+                    <div>
+                      <h4 class="text-xs font-bold text-oxford-blue mb-1">10. Ảnh diễn giả trên sân khấu</h4>
+                      <p class="text-[10px] text-slate-400 mb-3">Hiển thị ở banner chính đầu trang /speaker</p>
+                      <div class="aspect-video bg-slate-100 border rounded-lg overflow-hidden flex items-center justify-center relative mb-4">
+                        ${speakerHeroImg ? `<img src="${BASE_URL}${speakerHeroImg.url}" class="object-cover w-full h-full" alt="preview">` : '<span class="text-xs text-slate-400">Chưa có ảnh</span>'}
+                      </div>
+                    </div>
+                    <div>
+                      <div class="bg-slate-50 border rounded-lg p-2 text-[9px] text-slate-500 mb-3 space-y-0.5">
+                        <div><strong>Kích thước:</strong> 800x1000 px (tỷ lệ 4:5)</div>
+                        <div><strong>Định dạng:</strong> JPG/PNG</div>
+                      </div>
+                      <input type="file" id="up-speaker-hero" onchange="uploadImageField(event, 'speaker_hero_img')" class="hidden" accept="image/*">
+                      <button type="button" onclick="document.getElementById('up-speaker-hero').click()" class="w-full bg-oxford-blue hover:bg-oxford-blue/90 text-white font-bold text-xs py-2 rounded-xl transition-all duration-150">
+                        Thay ảnh
+                      </button>
+                    </div>
                   </div>
-                </div>
-                <div>
-                  <div class="bg-white border rounded-lg p-2.5 text-[9px] text-slate-500 mb-3 space-y-0.5">
-                    <div><strong>Kích thước:</strong> 800x800 px hoặc 800x600 px</div>
-                    <div><strong>Định dạng:</strong> JPG/PNG</div>
-                  </div>
-                  <input type="file" id="up-phil" onchange="uploadImageField(event, 'philosophy_img')" class="hidden" accept="image/*">
-                  <button type="button" onclick="document.getElementById('up-phil').click()" class="w-full bg-oxford-blue hover:bg-oxford-blue/90 text-white font-bold text-xs py-2 rounded-xl transition-all duration-150">
-                    Thay ảnh
-                  </button>
-                </div>
-              </div>
 
-              <!-- Community Banner -->
-              <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 flex flex-col justify-between">
-                <div>
-                  <h3 class="text-xs font-bold text-oxford-blue mb-1">7. Banner Cộng đồng</h3>
-                  <p class="text-[10px] text-slate-400 mb-3">Ảnh banner mục Cộng đồng</p>
-                  <div class="aspect-video bg-slate-200 border rounded-lg overflow-hidden flex items-center justify-center relative mb-4">
-                    ${commBannerImg ? `<img src="${BASE_URL}${commBannerImg.url}" class="object-cover w-full h-full" alt="preview">` : '<span class="text-xs text-slate-400">Chưa có ảnh</span>'}
+                  <!-- Book Cover -->
+                  <div class="bg-white border border-slate-200 rounded-xl p-4 flex flex-col justify-between shadow-sm">
+                    <div>
+                      <h4 class="text-xs font-bold text-oxford-blue mb-1">3. Bìa sách "Sức mạnh..."</h4>
+                      <p class="text-[10px] text-slate-400 mb-3">Hiển thị ở mục giới thiệu sách</p>
+                      <div class="aspect-video bg-slate-100 border rounded-lg overflow-hidden flex items-center justify-center relative mb-4 p-2">
+                        ${bookImg ? `<img src="${BASE_URL}${bookImg.url}" class="object-contain max-h-full max-w-full shadow" alt="preview">` : '<span class="text-xs text-slate-400">Chưa có ảnh</span>'}
+                      </div>
+                    </div>
+                    <div>
+                      <div class="bg-slate-50 border rounded-lg p-2 text-[9px] text-slate-500 mb-3 space-y-0.5">
+                        <div><strong>Kích thước:</strong> 600x900 px (tỷ lệ 2:3)</div>
+                        <div><strong>Định dạng:</strong> PNG/JPG</div>
+                      </div>
+                      <input type="file" id="up-book" onchange="uploadImageField(event, 'book_cover')" class="hidden" accept="image/*">
+                      <button type="button" onclick="document.getElementById('up-book').click()" class="w-full bg-oxford-blue hover:bg-oxford-blue/90 text-white font-bold text-xs py-2 rounded-xl transition-all duration-150">
+                        Thay ảnh
+                      </button>
+                    </div>
                   </div>
-                </div>
-                <div>
-                  <div class="bg-white border rounded-lg p-2.5 text-[9px] text-slate-500 mb-3 space-y-0.5">
-                    <div><strong>Kích thước:</strong> 800x800 px hoặc 1200x800 px</div>
-                    <div><strong>Định dạng:</strong> JPG/PNG</div>
-                  </div>
-                  <input type="file" id="up-commbanner" onchange="uploadImageField(event, 'community_banner')" class="hidden" accept="image/*">
-                  <button type="button" onclick="document.getElementById('up-commbanner').click()" class="w-full bg-oxford-blue hover:bg-oxford-blue/90 text-white font-bold text-xs py-2 rounded-xl transition-all duration-150">
-                    Thay ảnh
-                  </button>
                 </div>
               </div>
             </div>
@@ -695,19 +1036,110 @@
       }
     }
 
+    function generateSlug(val) {
+      if (activeTab !== 'blog_posts') return;
+      const slugInput = document.getElementById('edit-slug');
+      if (!slugInput) return;
+      
+      const slug = val.toLowerCase()
+        .replace(/á|à|ả|ạ|ã|ă|ắ|ằ|ẳ|ẵ|ặ|â|ấ|ầ|ẩ|ẫ|ậ/g, 'a')
+        .replace(/é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ/g, 'e')
+        .replace(/i|í|ì|ỉ|ĩ|ị/g, 'i')
+        .replace(/ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ/g, 'o')
+        .replace(/ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự/g, 'u')
+        .replace(/ý|ỳ|ỷ|ỹ|ỵ/g, 'y')
+        .replace(/đ/g, 'd')
+        .replace(/[^a-z0-9\s-]/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/-+/g, '-')
+        .replace(/^-+|-+$/g, '')
+        .trim();
+        
+      slugInput.value = slug;
+    }
+
+    function filterBlogPosts() {
+      if (activeTab !== 'blog_posts') return;
+      const searchVal = (document.getElementById('blog-search')?.value || '').toLowerCase().trim();
+      const catVal = document.getElementById('blog-filter-category')?.value || 'all';
+      const statusVal = document.getElementById('blog-filter-status')?.value || 'all';
+      
+      const filtered = listData.filter(item => {
+        const matchesSearch = !searchVal || (item.title || '').toLowerCase().includes(searchVal) || (item.slug || '').toLowerCase().includes(searchVal);
+        const matchesCategory = catVal === 'all' || item.category === catVal;
+        const matchesStatus = statusVal === 'all' || item.status === statusVal;
+        return matchesSearch && matchesCategory && matchesStatus;
+      });
+      
+      const listContainer = document.getElementById('item-list-container');
+      if (listContainer) {
+        listContainer.innerHTML = renderItemListMarkup(filtered);
+      }
+      
+      const countSpan = document.getElementById('blog-list-count');
+      if (countSpan) {
+        countSpan.textContent = filtered.length;
+      }
+    }
+
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const arrow = document.getElementById('toggle-arrow');
+      if (!sidebar || !arrow) return;
+      
+      sidebarCollapsed = !sidebarCollapsed;
+      if (sidebarCollapsed) {
+        sidebar.style.width = '64px';
+        sidebar.style.minWidth = '64px';
+        sidebar.classList.add('px-2');
+        sidebar.classList.remove('p-4');
+        arrow.style.transform = 'rotate(180deg)';
+        
+        document.querySelectorAll('#sidebar button').forEach(btn => {
+          if (btn.id === 'toggle-sidebar') return;
+          const textSpan = btn.querySelector('.menu-text');
+          if (textSpan) textSpan.style.display = 'none';
+          btn.classList.add('px-1', 'justify-center');
+          btn.classList.remove('px-3', 'text-left');
+        });
+        
+        document.querySelectorAll('#sidebar span.group-title').forEach(el => {
+          el.style.display = 'none';
+        });
+      } else {
+        sidebar.style.width = '240px';
+        sidebar.style.minWidth = '240px';
+        sidebar.classList.remove('px-2');
+        sidebar.classList.add('p-4');
+        arrow.style.transform = 'rotate(0deg)';
+        
+        document.querySelectorAll('#sidebar button').forEach(btn => {
+          if (btn.id === 'toggle-sidebar') return;
+          const textSpan = btn.querySelector('.menu-text');
+          if (textSpan) textSpan.style.display = 'inline';
+          btn.classList.remove('px-1', 'justify-center');
+          btn.classList.add('px-3', 'text-left');
+        });
+        
+        document.querySelectorAll('#sidebar span.group-title').forEach(el => {
+          el.style.display = 'block';
+        });
+      }
+    }
+
     // ─────────────────────────────────────────────────────────────
     // 3. Collection configurations (products, testimonials, screenshots, stats, partners, facebook_posts)
     // ─────────────────────────────────────────────────────────────
     async function loadCollectionConfig(area) {
       // 3.1 Fetch list data
       let appends = '';
-      if (['personal_products', 'business_products', 'testimonials', 'facebook_posts', 'customer_screenshots', 'speaker_events'].includes(activeTab)) {
-        appends = activeTab === 'facebook_posts' ? '&appends=thumbnail' : '&appends=image';
+      if (['personal_products', 'business_products', 'testimonials', 'facebook_posts', 'customer_screenshots', 'speaker_events', 'workshops', 'book_feedbacks', 'book_videos', 'blog_posts'].includes(activeTab)) {
+        appends = activeTab === 'facebook_posts' ? '&appends=thumbnail' : (activeTab === 'blog_posts' ? '&appends=image,author_avatar' : '&appends=image');
       } else if (activeTab === 'partners') {
         appends = '&appends=logo';
       }
       
-      const sort = (activeTab === 'facebook_posts' || activeTab === 'leads') ? '-createdAt' : 'sort_order';
+      const sort = (activeTab === 'facebook_posts' || activeTab === 'leads') ? '-createdAt' : (activeTab === 'blog_posts' ? '-published_at' : 'sort_order');
 
       try {
         const res = await fetch(`${BASE_URL}/api/${activeTab}:list?sort=${sort}${appends}&pageSize=100`, { headers });
@@ -720,13 +1152,34 @@
             <!-- Left panel: list -->
             <div class="lg:col-span-5 border border-slate-200 rounded-xl p-4 bg-slate-50/50 flex flex-col h-full max-h-[580px]">
               <div class="flex items-center justify-between mb-3 shrink-0">
-                <span class="text-xs font-bold text-oxford-blue uppercase">${getTabTitle(activeTab)} (${listData.length})</span>
+                <span class="text-xs font-bold text-oxford-blue uppercase">${getTabTitle(activeTab)} (<span id="blog-list-count">${listData.length}</span>)</span>
                 ${activeTab !== 'leads' ? `
                   <button onclick="initNewItem()" class="text-xs font-bold text-cyan-azure hover:text-cyan-azure/80 flex items-center gap-1">
                     + Thêm mới
                   </button>
                 ` : ''}
               </div>
+
+              ${activeTab === 'blog_posts' ? `
+                <div class="mb-3 shrink-0 space-y-2 bg-slate-100/50 p-2 rounded-xl border border-slate-200">
+                  <input type="text" id="blog-search" oninput="filterBlogPosts()" placeholder="🔍 Tìm kiếm tiêu đề, slug..." class="w-full px-2.5 py-1.5 border border-slate-300 rounded-lg text-[11px] focus:outline-none focus:ring-1 focus:ring-oxford-blue bg-white">
+                  <div class="grid grid-cols-2 gap-2">
+                    <select id="blog-filter-category" onchange="filterBlogPosts()" class="px-2 py-1 border border-slate-300 rounded-lg text-[10px] focus:outline-none focus:ring-1 focus:ring-oxford-blue bg-white">
+                      <option value="all">Tất cả chuyên mục</option>
+                      <option value="he-dieu-hanh-ca-nhan">Hệ điều hành cá nhân</option>
+                      <option value="ra-quyet-dinh">Ra quyết định</option>
+                      <option value="doi-ngu-nhan-su">Đội ngũ & Nhân sự</option>
+                      <option value="tai-chinh-dau-tu">Tài chính & Đầu tư</option>
+                      <option value="lanh-dao-van-hanh">Lãnh đạo & Vận hành</option>
+                    </select>
+                    <select id="blog-filter-status" onchange="filterBlogPosts()" class="px-2 py-1 border border-slate-300 rounded-lg text-[10px] focus:outline-none focus:ring-1 focus:ring-oxford-blue bg-white">
+                      <option value="all">Tất cả trạng thái</option>
+                      <option value="published">🟢 Xuất bản</option>
+                      <option value="draft">🟡 Bản nháp</option>
+                    </select>
+                  </div>
+                </div>
+              ` : ''}
 
               <div class="flex-grow overflow-y-auto custom-scroll space-y-2 pr-1" id="item-list-container">
                 ${renderItemListMarkup()}
@@ -743,7 +1196,8 @@
         `;
         setSyncStatus('success', 'Đã tải danh sách ' + getTabTitle(activeTab));
       } catch (err) {
-        setSyncStatus('error', 'Lỗi kết nối NocoBase');
+        console.error('loadCollectionConfig error:', err);
+        setSyncStatus('error', 'Lỗi kết nối NocoBase: ' + err.message);
       }
     }
 
@@ -757,15 +1211,20 @@
         'partners': 'Logo Đối tác',
         'facebook_posts': 'Bài viết Facebook',
         'leads': 'Đăng ký từ Web (Leads)',
-        'speaker_events': 'Sự kiện Speaker'
+        'speaker_events': 'Sự kiện Speaker',
+        'workshops': 'Quản lý Workshop',
+        'book_feedbacks': 'Ảnh Feedback độc giả',
+        'book_videos': 'Video cảm nhận sách',
+        'blog_posts': 'Quản lý Bài viết'
       };
       return titles[tab] || tab;
     }
 
-    function renderItemListMarkup() {
-      if (listData.length === 0) return '<div class="text-center py-10 text-xs text-slate-400">Danh sách trống</div>';
+    function renderItemListMarkup(customData) {
+      const dataToRender = customData || listData;
+      if (dataToRender.length === 0) return '<div class="text-center py-10 text-xs text-slate-400">Danh sách trống</div>';
       
-      return listData.map((item, idx) => {
+      return dataToRender.map((item, idx) => {
         let title = item.name || item.title || item.label || item.caption || `Mục số ${idx + 1}`;
         let sub = item.price || item.position || item.value || (item.visible === false ? 'Bị ẩn' : 'Hiển thị');
         let suffix = `<span class="text-[10px] font-bold text-slate-400">#${item.sort_order || 0}</span>`;
@@ -777,6 +1236,18 @@
           title = item.name || 'Khách hàng';
           sub = item.phone || item.email || 'Không có SĐT';
           const dateStr = item.createdAt ? new Date(item.createdAt).toLocaleDateString('vi-VN') : '';
+          suffix = `<span class="text-[9px] text-slate-400 font-medium">${dateStr}</span>`;
+        } else if (activeTab === 'blog_posts') {
+          title = item.title || 'Không có tiêu đề';
+          const catMap = {
+            'he-dieu-hanh-ca-nhan': 'HĐH cá nhân',
+            'ra-quyet-dinh': 'Ra quyết định',
+            'doi-ngu-nhan-su': 'Đội ngũ & Nhân sự',
+            'tai-chinh-dau-tu': 'Tài chính & Đầu tư',
+            'lanh-dao-van-hanh': 'Lãnh đạo & Vận hành'
+          };
+          sub = `${item.status === 'published' ? '🟢 Xuất bản' : '🟡 Bản nháp'} - ${catMap[item.category] || item.category || 'Chưa phân loại'}`;
+          const dateStr = item.published_at ? new Date(item.published_at).toLocaleDateString('vi-VN') : '';
           suffix = `<span class="text-[9px] text-slate-400 font-medium">${dateStr}</span>`;
         }
         
@@ -830,7 +1301,7 @@
               <!-- Product Image -->
               <div class="col-span-2 bg-slate-50 p-3 rounded-xl border border-slate-200 flex items-center gap-4">
                 <div class="w-16 h-16 bg-slate-200 rounded-lg overflow-hidden border border-slate-300 flex items-center justify-center shrink-0" id="preview-product-img">
-                  ${img ? `<img src="${BASE_URL}${img.url}" class="object-cover w-full h-full" alt="preview">` : '<span class="text-[8px] text-slate-400">Chưa có ảnh</span>'}
+                  ${img ? `<img src="${img.preview || img.url}" class="object-cover w-full h-full" alt="preview">` : '<span class="text-[8px] text-slate-400">Chưa có ảnh</span>'}
                 </div>
                 <div class="flex-grow">
                   <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Ảnh sản phẩm (800x800px)</label>
@@ -839,7 +1310,7 @@
                     <button type="button" onclick="document.getElementById('file-product-img').click()" class="px-2.5 py-1 bg-white border border-slate-300 rounded-lg text-[10px] font-bold text-slate-600 hover:bg-slate-50">Upload</button>
                     <button type="button" onclick="clearItemImage('image', 'preview-product-img')" class="text-[10px] font-bold text-rose-500">Xóa</button>
                   </div>
-                  <input type="hidden" id="edit-image-id" value="${img ? img.id : ''}">
+                  <input type="hidden" id="edit-image-id" value="${img ? JSON.stringify(img) : ''}">
                 </div>
               </div>
 
@@ -902,6 +1373,235 @@
           </div>
         `;
       } 
+      else if (activeTab === 'blog_posts') {
+        const post = selectedItem || {};
+        const img = post.image?.[0];
+        const avatar = post.author_avatar?.[0];
+        const htmlContent = post.content ? marked.parse(post.content) : '';
+        
+        fieldsMarkup = `
+          <div class="space-y-4">
+            <div class="grid grid-cols-2 gap-4">
+              <div class="col-span-2">
+                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Tiêu đề bài viết *</label>
+                <input type="text" id="edit-title" required value="${post.title || ''}" oninput="generateSlug(this.value)" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs focus:outline-none focus:ring-1 focus:ring-oxford-blue">
+              </div>
+              
+              <div class="col-span-2">
+                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Đường dẫn Slug (Tự động tạo hoặc nhập tay) *</label>
+                <input type="text" id="edit-slug" required value="${post.slug || ''}" placeholder="tieu-de-bai-viet-viet-lien-khong-dau" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs focus:outline-none focus:ring-1 focus:ring-oxford-blue">
+              </div>
+
+              <div class="col-span-2">
+                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Mô tả ngắn (Excerpt) *</label>
+                <textarea id="edit-excerpt" required rows="2" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs focus:outline-none focus:ring-1 focus:ring-oxford-blue">${post.excerpt || ''}</textarea>
+              </div>
+
+              <div>
+                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Danh mục *</label>
+                <select id="edit-category" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs focus:outline-none focus:ring-1 focus:ring-oxford-blue bg-white">
+                  <option value="he-dieu-hanh-ca-nhan" ${post.category === 'he-dieu-hanh-ca-nhan' ? 'selected' : ''}>Hệ điều hành cá nhân</option>
+                  <option value="ra-quyet-dinh" ${post.category === 'ra-quyet-dinh' ? 'selected' : ''}>Ra quyết định</option>
+                  <option value="doi-ngu-nhan-su" ${post.category === 'doi-ngu-nhan-su' ? 'selected' : ''}>Đội ngũ & Nhân sự</option>
+                  <option value="tai-chinh-dau-tu" ${post.category === 'tai-chinh-dau-tu' ? 'selected' : ''}>Tài chính & Đầu tư</option>
+                  <option value="lanh-dao-van-hanh" ${post.category === 'lanh-dao-van-hanh' ? 'selected' : ''}>Lãnh đạo & Vận hành</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Trạng thái *</label>
+                <select id="edit-status" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs focus:outline-none focus:ring-1 focus:ring-oxford-blue bg-white">
+                  <option value="published" ${post.status === 'published' ? 'selected' : ''}>Published (Xuất bản)</option>
+                  <option value="draft" ${post.status === 'draft' ? 'selected' : ''}>Draft (Nháp)</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Thời gian đọc (phút)</label>
+                <input type="number" id="edit-read-time" value="${post.read_time || 5}" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs focus:outline-none focus:ring-1 focus:ring-oxford-blue">
+              </div>
+
+              <div>
+                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Ngày xuất bản *</label>
+                <input type="datetime-local" id="edit-published-at" value="${post.published_at ? new Date(new Date(post.published_at).getTime() - new Date().getTimezoneOffset()*60*1000).toISOString().slice(0, 16) : new Date(new Date().getTime() - new Date().getTimezoneOffset()*60*1000).toISOString().slice(0, 16)}" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs focus:outline-none focus:ring-1 focus:ring-oxford-blue bg-white">
+              </div>
+
+              <div class="col-span-2 flex items-center gap-2">
+                <input type="checkbox" id="edit-pinned" ${post.pinned ? 'checked' : ''} class="rounded border-slate-300 text-oxford-blue focus:ring-oxford-blue">
+                <label class="text-[10px] font-bold text-slate-500 uppercase">Ghim bài viết lên đầu trang</label>
+              </div>
+
+              <div class="col-span-2">
+                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Thẻ bài viết (Tags - Phân tách bằng dấu phẩy)</label>
+                <input type="text" id="edit-tags" value="${(post.tags || []).join(', ')}" placeholder="Thần số học, Phát triển bản thân" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs focus:outline-none focus:ring-1 focus:ring-oxford-blue">
+              </div>
+
+              <!-- Cover Image -->
+              <div class="col-span-2 bg-slate-50 p-3 rounded-xl border border-slate-200 flex items-center gap-4">
+                <div class="w-16 h-12 bg-slate-200 rounded-lg overflow-hidden border border-slate-300 flex items-center justify-center shrink-0" id="preview-post-img">
+                  ${img ? `<img src="${img.preview || img.url}" class="object-cover w-full h-full" alt="preview">` : '<span class="text-[8px] text-slate-400">Chưa có ảnh</span>'}
+                </div>
+                <div class="flex-grow">
+                  <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Ảnh bìa bài viết *</label>
+                  <div class="flex items-center gap-2 mt-1">
+                    <input type="file" id="file-post-img" onchange="uploadItemImage(event, 'image', 'preview-post-img')" class="hidden" accept="image/*">
+                    <button type="button" onclick="document.getElementById('file-post-img').click()" class="px-2.5 py-1 bg-white border border-slate-300 rounded-lg text-[10px] font-bold text-slate-600 hover:bg-slate-50">Upload</button>
+                    <button type="button" onclick="clearItemImage('image', 'preview-post-img')" class="text-[10px] font-bold text-rose-500 hover:underline ml-2">Xóa</button>
+                  </div>
+                  <input type="hidden" id="edit-image-id" value="${img ? JSON.stringify(img) : ''}">
+                </div>
+              </div>
+
+              <!-- Author Avatar Image -->
+              <div class="col-span-2 bg-slate-50 p-3 rounded-xl border border-slate-200 flex items-center gap-4">
+                <div class="w-12 h-12 bg-slate-200 rounded-full overflow-hidden border border-slate-300 flex items-center justify-center shrink-0" id="preview-post-author-avatar">
+                  ${avatar ? `<img src="${avatar.preview || avatar.url}" class="object-cover w-full h-full" alt="preview">` : '<span class="text-[8px] text-slate-400">Chưa có ảnh</span>'}
+                </div>
+                <div class="flex-grow">
+                  <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Ảnh đại diện Tác giả (Avatar)</label>
+                  <div class="flex items-center gap-2 mt-1">
+                    <input type="file" id="file-post-author-avatar" onchange="uploadItemImage(event, 'author_avatar', 'preview-post-author-avatar')" class="hidden" accept="image/*">
+                    <button type="button" onclick="document.getElementById('file-post-author-avatar').click()" class="px-2.5 py-1 bg-white border border-slate-300 rounded-lg text-[10px] font-bold text-slate-600 hover:bg-slate-50">Upload</button>
+                    <button type="button" onclick="clearItemImage('author_avatar', 'preview-post-author-avatar')" class="text-[10px] font-bold text-rose-500 hover:underline ml-2">Xóa</button>
+                  </div>
+                  <input type="hidden" id="edit-author_avatar-id" value="${avatar ? JSON.stringify(avatar) : ''}">
+                </div>
+              </div>
+
+              <!-- Editor -->
+              <div class="col-span-2">
+                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-2">Nội dung bài viết * (Gõ tiếng Việt Telex/VNI thoải mái)</label>
+                <div class="border border-slate-300 rounded-lg overflow-hidden bg-white">
+                  <div id="quill-editor-container" class="min-h-[320px] max-h-[480px] overflow-y-auto text-sm">${htmlContent}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+        
+        setTimeout(() => {
+          window.quillEditor = new Quill('#quill-editor-container', {
+            theme: 'snow',
+            modules: {
+              toolbar: [
+                [{ 'header': [1, 2, 3, false] }],
+                ['bold', 'italic', 'underline', 'strike'],
+                ['blockquote', 'code-block'],
+                [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                ['link'],
+                ['clean']
+              ]
+            }
+          });
+        }, 100);
+      } 
+      else if (activeTab === 'workshops') {
+        // Workshops Form
+        const w = selectedItem || {};
+        const img = w.image?.[0];
+        fieldsMarkup = `
+          <div class="space-y-4">
+            <div class="grid grid-cols-2 gap-4">
+              <div class="col-span-2">
+                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Tên Workshop *</label>
+                <input type="text" id="edit-title" required value="${w.title || ''}" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs focus:outline-none focus:ring-1 focus:ring-oxford-blue">
+              </div>
+              <div>
+                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Ngày diễn ra</label>
+                <input type="text" id="edit-date" placeholder="14.06.2025" value="${w.date || ''}" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs focus:outline-none focus:ring-1 focus:ring-oxford-blue">
+              </div>
+              <div>
+                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Hình thức / Địa điểm</label>
+                <input type="text" id="edit-type" placeholder="Online Zoom / Offline" value="${w.type || ''}" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs focus:outline-none focus:ring-1 focus:ring-oxford-blue">
+              </div>
+              <div>
+                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Phân loại *</label>
+                <select id="edit-category" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs bg-white focus:outline-none focus:ring-1 focus:ring-oxford-blue">
+                  <option value="personal" ${w.category !== 'business' ? 'selected' : ''}>Cá nhân (Hiển thị ở /workshop-ca-nhan)</option>
+                  <option value="business" ${w.category === 'business' ? 'selected' : ''}>Doanh nghiệp/Lãnh đạo (Hiển thị ở /workshop-chien-luoc)</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Thứ tự hiển thị</label>
+                <input type="number" id="edit-sort-order" value="${w.sort_order || 0}" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs focus:outline-none focus:ring-1 focus:ring-oxford-blue">
+              </div>
+ 
+               <!-- Workshop Image -->
+              <div class="col-span-2 bg-slate-50 p-3 rounded-xl border border-slate-200 flex items-center gap-4">
+                <div class="w-16 h-12 bg-slate-200 rounded-lg overflow-hidden border border-slate-300 flex items-center justify-center shrink-0" id="preview-workshop-img">
+                  ${img ? `<img src="${img.preview || img.url}" class="object-cover w-full h-full" alt="preview">` : '<span class="text-[8px] text-slate-400">Chưa có ảnh</span>'}
+                </div>
+                <div class="flex-grow">
+                  <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Ảnh bìa/Ảnh chụp Workshop (tỷ lệ 4:3)</label>
+                  <div class="flex items-center gap-2 mt-1">
+                    <input type="file" id="file-workshop-img" onchange="uploadItemImage(event, 'image', 'preview-workshop-img')" class="hidden" accept="image/*">
+                    <button type="button" onclick="document.getElementById('file-workshop-img').click()" class="px-2.5 py-1 bg-white border border-slate-300 rounded-lg text-[10px] font-bold text-slate-600 hover:bg-slate-50">Upload</button>
+                    <button type="button" onclick="clearItemImage('image', 'preview-workshop-img')" class="text-[10px] font-bold text-rose-500 hover:underline ml-2">Xóa</button>
+                  </div>
+                  <input type="hidden" id="edit-image-id" value="${img ? JSON.stringify(img) : ''}">
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+      else if (activeTab === 'book_feedbacks') {
+        // Book Feedbacks Form
+        const bf = selectedItem || {};
+        const img = bf.image?.[0];
+        fieldsMarkup = `
+          <div class="space-y-4">
+            <div class="grid grid-cols-2 gap-4">
+              <div class="col-span-2">
+                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Mô tả ảnh / Chú thích (Không hiển thị ở ngoài web)</label>
+                <input type="text" id="edit-caption" value="${bf.caption || ''}" placeholder="Ảnh feedback số 1" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs focus:outline-none focus:ring-1 focus:ring-oxford-blue">
+              </div>
+              <div class="col-span-2">
+                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Thứ tự hiển thị</label>
+                <input type="number" id="edit-sort-order" value="${bf.sort_order || 0}" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs focus:outline-none focus:ring-1 focus:ring-oxford-blue">
+              </div>
+
+              <!-- Feedback Image -->
+              <div class="col-span-2 bg-slate-50 p-3 rounded-xl border border-slate-200 flex items-center gap-4">
+                <div class="w-16 h-20 bg-slate-200 rounded-lg overflow-hidden border border-slate-300 flex items-center justify-center shrink-0" id="preview-feedback-img">
+                  ${img ? `<img src="${img.preview || img.url}" class="object-cover w-full h-full" alt="preview">` : '<span class="text-[8px] text-slate-400">Chưa có ảnh</span>'}
+                </div>
+                <div class="flex-grow">
+                  <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Ảnh Feedback sách * (Tỷ lệ khoảng 9:16 dọc)</label>
+                  <div class="flex items-center gap-2 mt-1">
+                    <input type="file" id="file-feedback-img" onchange="uploadItemImage(event, 'image', 'preview-feedback-img')" class="hidden" accept="image/*">
+                    <button type="button" onclick="document.getElementById('file-feedback-img').click()" class="px-2.5 py-1 bg-white border border-slate-300 rounded-lg text-[10px] font-bold text-slate-600 hover:bg-slate-50">Upload</button>
+                    <button type="button" onclick="clearItemImage('image', 'preview-feedback-img')" class="text-[10px] font-bold text-rose-500 hover:underline ml-2">Xóa</button>
+                  </div>
+                  <input type="hidden" id="edit-image-id" value="${img ? JSON.stringify(img) : ''}">
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+      else if (activeTab === 'book_videos') {
+        // Book Videos Form
+        const bv = selectedItem || {};
+        fieldsMarkup = `
+          <div class="space-y-4">
+            <div class="grid grid-cols-2 gap-4">
+              <div class="col-span-2">
+                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Tiêu đề Video *</label>
+                <input type="text" id="edit-title" required value="${bv.title || ''}" placeholder="Cảm nhận độc giả" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs focus:outline-none focus:ring-1 focus:ring-oxford-blue">
+              </div>
+              <div class="col-span-2">
+                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Đường dẫn YouTube * (Video URL hoặc Embed URL)</label>
+                <input type="url" id="edit-youtube-url" required value="${bv.youtube_url || ''}" placeholder="https://www.youtube.com/watch?v=..." class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs focus:outline-none focus:ring-1 focus:ring-oxford-blue">
+              </div>
+              <div class="col-span-2">
+                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Thứ tự hiển thị</label>
+                <input type="number" id="edit-sort-order" value="${bv.sort_order || 0}" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs focus:outline-none focus:ring-1 focus:ring-oxford-blue">
+              </div>
+            </div>
+          </div>
+        `;
+      }
       else if (activeTab === 'testimonials') {
         // Testimonials Form
         const t = selectedItem || {};
@@ -932,7 +1632,7 @@
               <!-- Avatar Image -->
               <div class="col-span-2 bg-slate-50 p-3 rounded-xl border border-slate-200 flex items-center gap-4">
                 <div class="w-14 h-14 bg-slate-200 rounded-full overflow-hidden border border-slate-300 flex items-center justify-center shrink-0" id="preview-testimonial-avatar">
-                  ${img ? `<img src="${BASE_URL}${img.url}" class="object-cover w-full h-full" alt="preview">` : '<span class="text-[8px] text-slate-400">Chưa có ảnh</span>'}
+                  ${img ? `<img src="${img.preview || img.url}" class="object-cover w-full h-full" alt="preview">` : '<span class="text-[8px] text-slate-400">Chưa có ảnh</span>'}
                 </div>
                 <div class="flex-grow">
                   <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Avatar Khách hàng (200x200px)</label>
@@ -941,7 +1641,7 @@
                     <button type="button" onclick="document.getElementById('file-testimonial-avatar').click()" class="px-2.5 py-1 bg-white border border-slate-300 rounded-lg text-[10px] font-bold text-slate-600 hover:bg-slate-50">Upload</button>
                     <button type="button" onclick="clearItemImage('image', 'preview-testimonial-avatar')" class="text-[10px] font-bold text-rose-500">Xóa</button>
                   </div>
-                  <input type="hidden" id="edit-image-id" value="${img ? img.id : ''}">
+                  <input type="hidden" id="edit-image-id" value="${img ? JSON.stringify(img) : ''}">
                 </div>
               </div>
             </div>
@@ -978,14 +1678,14 @@
             <!-- Screenshot Image Upload -->
             <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex flex-col gap-4">
               <div class="aspect-[9/16] max-w-[200px] bg-slate-200 border rounded-lg overflow-hidden flex items-center justify-center mx-auto" id="preview-screenshot-img">
-                ${img ? `<img src="${BASE_URL}${img.url}" class="object-cover w-full h-full" alt="preview">` : '<span class="text-xs text-slate-400">Chưa tải tệp</span>'}
+                ${img ? `<img src="${img.preview || img.url}" class="object-cover w-full h-full" alt="preview">` : '<span class="text-xs text-slate-400">Chưa có ảnh</span>'}
               </div>
               <div class="text-center">
                 <label class="block text-[10px] font-bold text-slate-500 uppercase mb-2">Hình ảnh chụp tin nhắn</label>
                 <input type="file" id="file-screenshot-img" onchange="uploadItemImage(event, 'image', 'preview-screenshot-img')" class="hidden" accept="image/*">
                 <button type="button" onclick="document.getElementById('file-screenshot-img').click()" class="px-4 py-1.5 bg-white border border-slate-300 rounded-lg text-xs font-bold text-slate-600 hover:bg-slate-50">Tải ảnh lên</button>
                 <button type="button" onclick="clearItemImage('image', 'preview-screenshot-img')" class="text-xs font-bold text-rose-500 ml-4">Xóa ảnh</button>
-                <input type="hidden" id="edit-image-id" value="${img ? img.id : ''}">
+                <input type="hidden" id="edit-image-id" value="${img ? JSON.stringify(img) : ''}">
               </div>
             </div>
 
@@ -1020,14 +1720,14 @@
             <!-- Image Upload -->
             <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex flex-col gap-4">
               <div class="aspect-video max-w-[320px] bg-slate-200 border rounded-lg overflow-hidden flex items-center justify-center mx-auto" id="preview-event-img">
-                ${img ? `<img src="${BASE_URL}${img.url}" class="object-cover w-full h-full" alt="preview">` : '<span class="text-xs text-slate-400">Chưa có ảnh</span>'}
+                ${img ? `<img src="${img.preview || img.url}" class="object-cover w-full h-full" alt="preview">` : '<span class="text-xs text-slate-400">Chưa có ảnh</span>'}
               </div>
               <div class="text-center">
                 <label class="block text-[10px] font-bold text-slate-500 uppercase mb-2">Hình ảnh sự kiện</label>
                 <input type="file" id="file-event-img" onchange="uploadItemImage(event, 'image', 'preview-event-img')" class="hidden" accept="image/*">
                 <button type="button" onclick="document.getElementById('file-event-img').click()" class="px-4 py-1.5 bg-white border border-slate-300 rounded-lg text-xs font-bold text-slate-600 hover:bg-slate-50">Tải ảnh lên</button>
                 <button type="button" onclick="clearItemImage('image', 'preview-event-img')" class="text-xs font-bold text-rose-500 ml-4">Xóa ảnh</button>
-                <input type="hidden" id="edit-image-id" value="${img ? img.id : ''}">
+                <input type="hidden" id="edit-image-id" value="${img ? JSON.stringify(img) : ''}">
               </div>
             </div>
 
@@ -1057,7 +1757,7 @@
             <!-- Thumbnail Image -->
             <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 flex items-center gap-4">
               <div class="w-20 h-16 bg-slate-200 rounded overflow-hidden border border-slate-300 flex items-center justify-center shrink-0" id="preview-facebook-thumbnail">
-                ${img ? `<img src="${BASE_URL}${img.url}" class="object-cover w-full h-full" alt="preview">` : '<span class="text-[8px] text-slate-400">Chưa có ảnh</span>'}
+                ${img ? `<img src="${img.preview || img.url}" class="object-cover w-full h-full" alt="preview">` : '<span class="text-[8px] text-slate-400">Chưa có ảnh</span>'}
               </div>
               <div class="flex-grow">
                 <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Ảnh chụp/Thumbnail bài viết</label>
@@ -1066,7 +1766,7 @@
                   <button type="button" onclick="document.getElementById('file-facebook-thumbnail').click()" class="px-2.5 py-1 bg-white border border-slate-300 rounded text-[10px] font-bold text-slate-600 hover:bg-slate-50">Upload</button>
                   <button type="button" onclick="clearItemImage('thumbnail', 'preview-facebook-thumbnail')" class="text-[10px] font-bold text-rose-500">Xóa</button>
                 </div>
-                <input type="hidden" id="edit-image-id" value="${img ? img.id : ''}">
+                <input type="hidden" id="edit-image-id" value="${img ? JSON.stringify(img) : ''}">
               </div>
             </div>
 
@@ -1268,10 +1968,12 @@
 
         const previewEl = document.getElementById(previewContainerId);
         
+        // Local uploads are relative (/uploads/...) — do NOT prepend BASE_URL (NocoBase domain)
+        const previewSrc = fileData.url || '';
         if (previewContainerId.includes('avatar')) {
-          previewEl.innerHTML = `<img src="${BASE_URL}${fileData.url}" class="object-cover w-full h-full" alt="preview">`;
+          previewEl.innerHTML = `<img src="${previewSrc}" class="object-cover w-full h-full" alt="preview">`;
         } else {
-          previewEl.innerHTML = `<img src="${BASE_URL}${fileData.url}" class="object-contain max-h-full max-w-full" alt="preview">`;
+          previewEl.innerHTML = `<img src="${previewSrc}" class="object-contain max-h-full max-w-full" alt="preview">`;
         }
         
         setSyncStatus('success', 'Đã upload tệp thành công');
@@ -1377,6 +2079,63 @@
           sort_order: parseInt(document.getElementById('edit-sort-order').value) || 0,
         };
       } 
+      else if (activeTab === 'workshops') {
+        data = {
+          title: document.getElementById('edit-title').value.trim(),
+          date: document.getElementById('edit-date').value.trim(),
+          type: document.getElementById('edit-type').value.trim(),
+          category: document.getElementById('edit-category').value,
+          sort_order: parseInt(document.getElementById('edit-sort-order').value) || 0,
+        };
+      }
+      else if (activeTab === 'book_feedbacks') {
+        data = {
+          caption: document.getElementById('edit-caption').value.trim(),
+          sort_order: parseInt(document.getElementById('edit-sort-order').value) || 0,
+        };
+      }
+      else if (activeTab === 'book_videos') {
+        data = {
+          title: document.getElementById('edit-title').value.trim(),
+          youtube_url: document.getElementById('edit-youtube-url').value.trim(),
+          sort_order: parseInt(document.getElementById('edit-sort-order').value) || 0,
+        };
+      }
+      else if (activeTab === 'blog_posts') {
+        const html = window.quillEditor ? window.quillEditor.root.innerHTML : '';
+        const turndownService = new TurndownService({
+          headingStyle: 'atx',
+          codeBlockStyle: 'fenced'
+        });
+        const markdown = turndownService.turndown(html);
+
+        const pubDateVal = document.getElementById('edit-published-at').value;
+
+        data = {
+          title: document.getElementById('edit-title').value.trim(),
+          slug: document.getElementById('edit-slug').value.trim(),
+          excerpt: document.getElementById('edit-excerpt').value.trim(),
+          category: document.getElementById('edit-category').value,
+          status: document.getElementById('edit-status').value,
+          author: 'Hoàng Mai Linh',
+          read_time: parseInt(document.getElementById('edit-read-time').value) || 5,
+          pinned: document.getElementById('edit-pinned').checked,
+          tags: document.getElementById('edit-tags').value.split(',').map(t => t.trim()).filter(Boolean),
+          published_at: pubDateVal ? new Date(pubDateVal).toISOString() : new Date().toISOString(),
+          content: markdown
+        };
+
+        const avatarIdInput = document.getElementById('edit-author_avatar-id');
+        if (avatarIdInput && avatarIdInput.value) {
+          try {
+            data.author_avatar = [JSON.parse(avatarIdInput.value)];
+          } catch(e) {
+            data.author_avatar = [];
+          }
+        } else {
+          data.author_avatar = [];
+        }
+      }
       else if (activeTab === 'partners') {
         data = {
           name: document.getElementById('edit-name').value.trim(),
@@ -1400,21 +2159,8 @@
         
         const payload = await res.json();
         const savedRecord = payload.data?.[0] || payload.data || {};
-        const savedRecordId = savedRecord.id || id;
-
-        // Save Image attachment association if field edit-image-id exists
-        const imgInput = document.getElementById('edit-image-id');
-        if (imgInput && activeTab !== 'partners') {
-          const imageId = imgInput.value;
-          const imageField = activeTab === 'facebook_posts' ? 'thumbnail' : 'image';
-          const linkUrl = `${BASE_URL}/api/${activeTab}/${savedRecordId}/${imageField}:set`;
-          
-          await fetch(linkUrl, {
-            method: 'POST',
-            headers,
-            body: JSON.stringify(imageId ? [parseInt(imageId)] : [])
-          });
-        }
+        // Image is already included in the request body by the fetch interceptor.
+        // No secondary :set call needed — it would clear the image due to parseInt(jsonString) = NaN.
 
         setSyncStatus('success', 'Đã lưu thay đổi thành công!');
         selectedItem = null;

@@ -1,5 +1,4 @@
 'use client';
-import { useEffect } from 'react';
 import { FadeIn } from '@/components/ui/AnimationWrapper';
 import { Clock, Users, Target } from 'lucide-react';
 
@@ -37,54 +36,7 @@ const questions = [
 ];
 
 export function WhatIsNumerology() {
-  useEffect(() => {
-    const schema = {
-      '@context': 'https://schema.org',
-      '@type': 'FAQPage',
-      mainEntity: [
-        {
-          '@type': 'Question',
-          name: 'Thuật Số Học Ứng Dụng là gì?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'Thuật Số Học Ứng Dụng là hệ thống phân tích hành vi và cấu trúc vận hành cá nhân, giúp CEO và lãnh đạo ra quyết định có căn cứ và hành động đúng thời điểm. Kết quả đo được bằng quyết định, bằng người, bằng tiền.',
-          },
-        },
-        {
-          '@type': 'Question',
-          name: 'Quyết định này nên đưa ra vào thời điểm nào trong chu kỳ?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'Dựa trên chu kỳ vận hành cá nhân và tổ chức, Thuật Số Học Xác định thời điểm tối ưu để ra quyết định quan trọng và thời điểm nên giữ lực, tránh các bước đi tốn kém trong giai đoạn chưa thuận lợi.',
-          },
-        },
-        {
-          '@type': 'Question',
-          name: 'Người này phù hợp vai gì nhất trong cấu trúc tổ chức?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'Thuật Số Học phân tích 7 chỉ số cốt lõi để xác định cấu trúc năng lượng, điểm mạnh và điểm mù của từng cá nhân – từ đó xác định vai trò phù hợp nhất trong đội ngũ và tránh giữ sai người trong vị trí quan trọng.',
-          },
-        },
-        {
-          '@type': 'Question',
-          name: 'Giai đoạn này nên mở rộng, giữ lực, hay tái cấu trúc?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'Thay vì quyết định dựa cảm tính, lãnh đạo có thể dựa vào các chỉ số chu kỳ để định hướng đúng: Mở rộng khi vào giai đoạn tăng trưởng, giữ lực khi cần củng cố nội bộ, tái cấu trúc khi đang ở đáy chu kỳ – tránh đước sai lầm chiến lược tốn kém.',
-          },
-        },
-      ],
-    };
-    const existingScript = document.getElementById('faq-schema');
-    if (existingScript) existingScript.remove();
-    const script = document.createElement('script');
-    script.id = 'faq-schema';
-    script.type = 'application/ld+json';
-    script.textContent = JSON.stringify(schema);
-    document.head.appendChild(script);
-    return () => { document.getElementById('faq-schema')?.remove(); };
-  }, []);
+
 
   return (
     <section className="py-20 md:py-32 bg-ice-white overflow-hidden">

@@ -5,7 +5,16 @@ import { Button } from '@/components/ui/Button';
 import { BookOpen, Target, Users, Key, ArrowDown } from 'lucide-react';
 import Link from 'next/link';
 
-export function BookHero() {
+import type { Profile } from '@/lib/nocobase';
+import { resolveAttachmentUrl } from '@/lib/nocobase';
+
+interface BookHeroProps {
+  initialProfile?: Profile | null;
+}
+
+export function BookHero({ initialProfile }: BookHeroProps) {
+  const bookCoverUrl = resolveAttachmentUrl(initialProfile?.book_cover?.[0]?.url);
+
   return (
     <>
       {/* SECTION 1: HERO */}
@@ -59,7 +68,7 @@ export function BookHero() {
                 <div className="absolute inset-x-8 -bottom-8 bg-black/50 blur-2xl h-8 rounded-[100%] transition-all duration-500" />
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img 
-                  src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&q=80&w=800" 
+                  src={bookCoverUrl || "https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&q=80&w=800"} 
                   alt="Sách Sức Mạnh Ẩn Sau Con Số" 
                   className="w-full h-full object-cover transform-gpu hover:scale-105 transition-transform duration-700 ease-out"
                 />

@@ -61,6 +61,13 @@
     "theme": "light",
     "featured": false,
     "sort_order": 4,
-    "image": []
+    "image": [
+      {
+        "id": 1784069618158,
+        "filename": "800x800_3.png",
+        "url": "/uploads/1784069618158-800x800_3.png",
+        "mimetype": "image/png"
+      }
+    ]
   }
 ]

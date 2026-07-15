@@ -2,36 +2,19 @@
   {
     "id": 7,
     "updatedAt": "2026-07-02T22:31:54.343Z",
-    "name": "Mr. Van hoai thuong",
+    "name": "Mr. Trần Trung Nhân",
     "position": "Founder",
     "company": "FitStrength / Học viện đào tạo PT",
     "quote": "Sau 4 năm đồng hành, mỗi lần mở thêm chi nhánh tôi đều ra quyết định dựa trên bản đồ chiến lược cá nhân mà Linh Hoa Tâm xây dựng. Đây là hệ quy chiếu cho những quyết định quan trọng của doanh nghiệp.",
     "rating": 2,
     "sort_order": 1,
-    "category": null,
+    "category": "home",
     "image": [
       {
-        "id": 9,
-        "createdAt": "2026-07-02T21:42:08.071Z",
-        "updatedAt": "2026-07-02T21:42:08.079Z",
-        "title": "Trần Trung Nhân",
-        "filename": "Trần Trung Nhân-b6orwz.jpg",
-        "extname": ".jpg",
-        "size": 64777,
-        "mimetype": "image/jpeg",
-        "path": "",
-        "meta": {},
-        "url": "/uploads/TrầnTrungNhân-b6orwz.jpg",
-        "createdById": 1,
-        "updatedById": 1,
-        "storageId": 372110280097792,
-        "preview": "/storage/uploads/Tr%E1%BA%A7n%20Trung%20Nh%C3%A2n-b6orwz.jpg",
-        "t_wcfi4ikoryo": {
-          "createdAt": "2026-07-02T21:42:41.895Z",
-          "updatedAt": "2026-07-02T21:42:41.895Z",
-          "f_q3ajt4adsf0": 7,
-          "f_ful9q9nib5a": 9
-        }
+        "id": 1784020323788,
+        "filename": "Trần Trung Nhân.jpg",
+        "url": "/uploads/1784020323788-TranTrungNhan.jpg",
+        "mimetype": "image/jpeg"
       }
     ]
   },
@@ -44,7 +27,7 @@
     "quote": "Giá trị lớn nhất tôi nhận được là một khung ra quyết định rõ ràng, giúp tôi nhìn đúng bản chất vấn đề, xác định đâu là ưu tiên chiến lược và tránh những lựa chọn gây hao tổn nguồn lực về sau.",
     "rating": 4,
     "sort_order": 2,
-    "category": null,
+    "category": "home",
     "image": [
       {
         "id": 10,

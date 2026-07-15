@@ -23,7 +23,6 @@ const STATIC_ROUTES: { path: string; priority: number; changeFrequency: 'always'
   { path: '/dieu-khoan-dich-vu', priority: 0.5, changeFrequency: 'monthly' },
 ];
 
-export const revalidate = 3600; // Tái xây dựng sitemap mỗi 1 giờ
 
 export default async function sitemap() {
   const { data: articles } = await getArticles({ pageSize: 500 });

@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "title": "Thấu Hiểu Bản Thân & Thiết Kế Bản Đồ Thành Công",
+    "date": "12.03.2025",
+    "type": "Offline - TP.HCM",
+    "category": "personal",
+    "sort_order": 1,
+    "image": "/placeholders/workshop-kid.jpg"
+  },
+  {
+    "id": 2,
+    "title": "Ứng Dụng Thuật Số Học Trong Định Hướng Nghề Nghiệp",
+    "date": "28.02.2025",
+    "type": "Online Zoom",
+    "category": "personal",
+    "sort_order": 2,
+    "image": "/placeholders/workshop-kid.jpg"
+  },
+  {
+    "id": 3,
+    "title": "Giao Tiếp Thấu Cảm & Kết Nối Gia Đình",
+    "date": "15.02.2025",
+    "type": "Offline - Hà Nội",
+    "category": "personal",
+    "sort_order": 3,
+    "image": "/placeholders/workshop-kid.jpg"
+  },
+  {
+    "id": 4,
+    "title": "Chu Kỳ Năng Lượng & Làm Làm Chủ Vận Mệnh 2025",
+    "date": "10.01.2025",
+    "type": "Online Zoom",
+    "category": "personal",
+    "sort_order": 4,
+    "image": "/placeholders/workshop-kid.jpg"
+  },
+  {
+    "id": 5,
+    "title": "Thuật Số Học Ứng Dụng Trong Tuyển Dụng & Phát Triển Nhân Sự",
+    "date": "15.03.2025",
+    "type": "Offline - TP.HCM",
+    "category": "business",
+    "sort_order": 1,
+    "image": "/placeholders/workshop-ceo.jpg"
+  },
+  {
+    "id": 6,
+    "title": "Định Hướng Chiến Lược Doanh Nghiệp Theo Chu Kỳ Năng Lượng",
+    "date": "02.03.2025",
+    "type": "Online Zoom",
+    "category": "business",
+    "sort_order": 2,
+    "image": "/placeholders/workshop-ceo.jpg"
+  },
+  {
+    "id": 7,
+    "title": "Xây Dựng Đội Ngũ Tinh Nhuệ Từ Góc Nhìn Thuật Số",
+    "date": "22.02.2025",
+    "type": "Offline - Hà Nội",
+    "category": "business",
+    "sort_order": 3,
+    "image": "/placeholders/workshop-ceo.jpg"
+  },
+  {
+    "id": 8,
+    "title": "Tư Duy Lãnh Đạo & Quản Trị Năng Lượng Doanh Nghiệp",
+    "date": "18.01.2025",
+    "type": "Online Zoom",
+    "category": "business",
+    "sort_order": 4,
+    "image": "/placeholders/workshop-ceo.jpg"
+  }
+]

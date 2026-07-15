@@ -9,6 +9,7 @@ import { WebinarMaster } from '@/components/sections/webinar/WebinarMaster';
 import { WebinarFAQ } from '@/components/sections/webinar/WebinarFAQ';
 import { WebinarCTA } from '@/components/sections/webinar/WebinarCTA';
 
+
 export const metadata: Metadata = {
   title: 'Webinar Tham vấn Chiến lược Miễn phí | Linh Hoa Tâm',
   description: '4 sai lầm hệ thống khiến người làm nhiều mà kết quả không tăng. Tham gia webinar chiến lược miễn phí cùng Master Hoàng Mai Linh – chuyên gia Thuật Số Học hàng đầu Việt Nam. Đăng ký ngay hôm nay.',

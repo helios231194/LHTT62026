@@ -1,0 +1,40 @@
+# Danh Sách Nhiệm Vụ (Task List)
+
+- [x] Sửa lỗi tải ảnh lên Dashboard
+  - [x] Sửa định dạng trả về của API upload (`src/app/api/admin/upload/route.ts`)
+  - [x] Cập nhật fetch interceptor lưu vết ảnh và persist cập nhật `:set` (`public/admin-embed/dashboard.html`)
+- [x] Chuẩn hóa và tối ưu hóa HTML Schema
+  - [x] Loại bỏ client-side schema injection trong `src/components/sections/home/Testimonials.tsx`
+  - [x] Loại bỏ client-side schema injection trong `src/components/sections/home/WhatIsNumerology.tsx`
+  - [x] Cập nhật `src/app/page.tsx` (Trang chủ) với `WebPage` + `Speakable` + `FAQPage` + `AggregateRating`
+  - [x] Cập nhật `src/app/master-hoang-mai-linh/page.tsx` with `Person` + `BreadcrumbList`
+  - [x] Cập nhật `src/app/phat-trien-ban-than/page.tsx` với sửa URL localhost, `Service` + `BreadcrumbList`
+  - [x] Cập nhật `src/app/giai-phap-lanh-dao/page.tsx` với `Service` + `BreadcrumbList`
+  - [x] Cập nhật `src/app/sach/page.tsx` với `Book` + `BreadcrumbList`
+  - [x] Cập nhật `src/app/workshop-ca-nhan/page.tsx` với `Course` + `BreadcrumbList`
+  - [x] Cập nhật `src/app/linh-hoa-tam/page.tsx` với `WebPage` + `Speakable` + `BreadcrumbList`
+  - [x] Cập nhật `src/app/kien-thuc/page.tsx` với `CollectionPage` + `BreadcrumbList`
+  - [x] Cập nhật `src/app/lien-he/page.tsx` với `ContactPage` + `BreadcrumbList`
+- [x] Đồng bộ ảnh chân dung Master và link đọc thử sách động
+  - [x] Thêm thuộc tính `book_preview_link` vào Profile type (`src/lib/nocobase.ts`)
+  - [x] Sửa component `BookDetails.tsx` hiển thị ảnh Master động và link Flipbook từ Profile
+  - [x] Sửa page trang sách `/sach` truyền `profile` xuống component con
+  - [x] Sửa component `PersonalWorkshopSpeaker.tsx` & `WorkshopSpeaker.tsx` lấy ảnh Master động
+  - [x] Thêm ô nhập link đọc thử sách (Flipbook) vào tab Cấu hình Trang chủ trên Dashboard
+- [x] Quản lý danh sách các Workshop (có ảnh) trên Dashboard
+  - [x] Tạo file dữ liệu JSON mẫu ban đầu (`src/data/workshops.json`)
+  - [x] Đăng ký API router cho tab `workshops` (`src/app/api/admin/config/route.ts`)
+  - [x] Định nghĩa kiểu `Workshop` và hàm `getWorkshops` (`src/lib/nocobase.ts`, `src/lib/local-db.ts`)
+  - [x] Sửa trang workshop cá nhân & doanh nghiệp nạp danh sách workshop truyền xuống prop
+  - [x] Cập nhật component `PersonalWorkshopHistory.tsx` & `WorkshopHistory.tsx` hiển thị danh sách & ảnh động
+  - [x] Bổ sung menu Sidebar, form chỉnh sửa & upload ảnh cho Workshop trên Dashboard
+- [x] Tích hợp quản lý Ảnh & Video Feedback cho Sách "Sức mạnh ẩn sau con số"
+  - [x] Khởi tạo các file dữ liệu `book_feedbacks.json` và `book_videos.json`
+  - [x] Đăng ký API router cho 2 tab mới (`src/app/api/admin/config/route.ts`)
+  - [x] Thêm interface và hàm db helper (`src/lib/nocobase.ts`, `src/lib/local-db.ts`)
+  - [x] Cập nhật trang `/sach` nạp dữ liệu động và truyền xuống component con
+  - [x] Cập nhật component `BookFeedback.tsx` hiển thị ảnh feedback thực tế (marquee) và render iframe YouTube động
+  - [x] Thiết kế nhóm menu Sidebar, form nhập và logic lưu trữ Video/Ảnh Feedback trên Dashboard
+- [x] Biên dịch thử và triển khai
+  - [x] Biên dịch build Next.js cục bộ kiểm tra lỗi
+  - [x] Triển khai deploy.py đồng bộ lên VPS thành công

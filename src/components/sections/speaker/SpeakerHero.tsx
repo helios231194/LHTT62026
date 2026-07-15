@@ -1,67 +1,86 @@
 'use client';
-import { FadeIn, SlideIn } from '@/components/ui/AnimationWrapper';
+import { FadeIn } from '@/components/ui/AnimationWrapper';
 import { Button } from '@/components/ui/Button';
-import { Download, Mic, ArrowRight } from 'lucide-react';
-import Link from 'next/link';
+import { User } from 'lucide-react';
+import { resolveAttachmentUrl, type Attachment } from '@/lib/nocobase';
 
-export function SpeakerHero() {
+interface SpeakerHeroProps {
+  heroImage?: Attachment | null;
+}
+
+export function SpeakerHero({ heroImage }: SpeakerHeroProps) {
+  const heroImgUrl = resolveAttachmentUrl(heroImage?.url);
+
   return (
-    <section className="bg-oxford-blue text-white pt-24 pb-24 md:pt-32 md:pb-32 relative overflow-hidden">
-      {/* Abstract Elements */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-cyan-azure/10 rounded-full blur-[150px] pointer-events-none mix-blend-screen" />
-      <div className="absolute -bottom-32 -left-32 w-[500px] h-[500px] bg-blaze-orange/10 rounded-full blur-[120px] pointer-events-none mix-blend-screen" />
-      <div className="absolute inset-0 bg-[url('/noise.png')] opacity-10 mix-blend-overlay pointer-events-none" />
+    <section className="relative pt-32 pb-24 md:pt-40 md:pb-32 bg-oxford-blue text-white overflow-hidden">
+      {/* Background Gradient Orbs */}
+      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-blaze-orange/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-cyan-azure/10 rounded-full blur-[150px] pointer-events-none" />
 
       <div className="container mx-auto px-4 md:px-6 relative z-10">
-        <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
+        <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
           
-          {/* Top/Left Content */}
-          <div className="w-full lg:w-3/5">
-            <SlideIn direction="right">
-              <div className="inline-block px-4 py-2 bg-blaze-orange/20 text-blaze-orange rounded-full text-xs font-bold tracking-[0.2em] uppercase mb-8 border border-blaze-orange/30">
-                Keynote Speaker
-              </div>
-              
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-8 leading-[1.15] text-white">
-                Master Hoàng Mai Linh
-                <span className="block text-2xl md:text-3xl lg:text-4xl mt-4 font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-azure to-white/90">
-                  Diễn giả chiến lược về Thuật Số Học Ứng Dụng trong lãnh đạo và vận hành doanh nghiệp.
-                </span>
-              </h1>
-              
-              <p className="text-white/70 text-lg md:text-xl font-medium leading-relaxed max-w-2xl mb-12 border-l-4 border-cyan-azure pl-6">
-                Phong cách diễn giải thẳng vào vấn đề và ngôn ngữ vận hành thực tế. Mỗi buổi chia sẻ kết thúc bằng framework thực tiễn mà nhà lãnh đạo có thể áp dụng được ngay.
-              </p>
+          {/* Left Text Content */}
+          <div className="lg:w-1/2 space-y-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-blaze-orange/10 border border-blaze-orange/30 rounded-full">
+              <span className="w-2 h-2 rounded-full bg-blaze-orange animate-pulse" />
+              <span className="text-xs font-bold tracking-wider text-blaze-orange uppercase">Diễn Giả Truyền Cảm Hứng</span>
+            </div>
 
-              <div className="flex flex-col sm:flex-row items-center gap-5">
-                <Link href="#booking-form" className="w-full sm:w-auto block">
-                  <Button variant="primary" size="lg" className="w-full h-16 px-8 text-lg font-bold rounded-xl shadow-[0_0_30px_rgba(255,107,0,0.3)] hover:-translate-y-1 hover:shadow-[0_0_40px_rgba(255,107,0,0.5)] transition-all duration-300">
-                    <Mic className="w-5 h-5 mr-3" />
-                    GỬI YÊU CẦU MỜI SPEAKER
-                  </Button>
-                </Link>
-                
-                <Link href="#credential" className="w-full sm:w-auto block group">
-                  <div className="h-16 px-8 rounded-xl border-2 border-white/20 flex items-center justify-center gap-3 text-white font-bold hover:bg-white hover:text-oxford-blue transition-all duration-300">
-                    <Download className="w-5 h-5 group-hover:-translate-y-1 transition-transform" />
-                    Tải Credential PDF
-                  </div>
-                </Link>
-              </div>
-            </SlideIn>
+            <h1 className="text-4xl md:text-6xl font-black tracking-tight leading-[1.1] text-balance">
+              Master <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blaze-orange via-white to-white">
+                Hoàng Mai Linh
+              </span>
+            </h1>
+
+            <p className="text-lg text-white/80 leading-relaxed font-medium">
+              Chuyên gia ứng dụng Số học & Thần số học vào quản trị nhân sự, định hướng sự nghiệp và xây dựng bản đồ chiến lược cá nhân/doanh nghiệp. Người truyền cảm hứng cho hàng ngàn học viên khám phá sức mạnh bản thân.
+            </p>
+
+            <div className="flex flex-wrap gap-4 pt-2">
+              <Button 
+                onClick={() => {
+                  const el = document.getElementById('events');
+                  el?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                variant="primary" 
+                size="lg" 
+                className="h-14 px-8 font-bold"
+              >
+                LỊCH SỰ KIỆN GẦN NHẤT
+              </Button>
+              <Button 
+                onClick={() => {
+                  window.dispatchEvent(new CustomEvent('open-register-modal', { detail: { packageId: 'lien-he-speaker' } }));
+                }}
+                variant="outline" 
+                size="lg" 
+                className="h-14 px-8 border-white/20 text-white hover:bg-white/10"
+              >
+                MỜI DIỄN GIẢ / CỐ VẤN
+              </Button>
+            </div>
           </div>
 
-          {/* Right Hero Image */}
-          <div className="w-full lg:w-2/5">
+          {/* Stage Photo Frame */}
+          <div className="lg:w-1/2 w-full flex justify-center">
             <FadeIn direction="left" delay={0.2}>
-              <div className="relative aspect-[3/4] md:aspect-[4/5] w-full max-w-[450px] mx-auto">
-                <div className="absolute inset-0 bg-gradient-to-t from-oxford-blue via-transparent to-transparent z-10 rounded-[3rem]" />
-                <div className="absolute inset-0 border-2 border-white/10 rounded-[3rem] overflow-hidden">
-                  <div className="w-full h-full bg-slate-800 flex flex-col items-center justify-center text-white/30">
-                    <span className="tracking-widest font-bold uppercase mb-2">Ảnh Master Linh</span>
-                    <span>Tại hội trường/sân khấu</span>
+              <div className="relative w-full max-w-md aspect-[4/5] bg-slate-800 border-4 border-slate-700 rounded-3xl shadow-2xl overflow-hidden group flex items-center justify-center">
+                <div className="absolute inset-0 bg-gradient-to-t from-oxford-blue/80 via-transparent to-transparent z-10" />
+                {heroImgUrl ? (
+                  <img 
+                    src={heroImgUrl}
+                    alt="Master Hoàng Mai Linh"
+                    className="w-full h-full object-cover transform-gpu hover:scale-105 transition-transform duration-700 ease-out"
+                  />
+                ) : (
+                  <div className="text-center p-6 text-slate-500 relative z-20">
+                    <User className="w-20 h-20 mx-auto opacity-30 mb-4" />
+                    <p className="text-sm font-bold tracking-widest uppercase">Ảnh Master Linh</p>
+                    <p className="text-xs mt-1">Tại hội trường / sân khấu</p>
                   </div>
-                </div>
+                )}
                 {/* Floating Meta Badge */}
                 <div className="absolute bottom-10 -left-8 md:-left-12 z-20 bg-white shadow-2xl rounded-2xl p-5 border border-slate-100 flex items-center gap-4 animate-bounce-slow">
                   <div className="w-12 h-12 rounded-full bg-cyan-azure/10 flex items-center justify-center">

@@ -1,18 +1,28 @@
 'use client';
 import { FadeIn, SlideIn } from '@/components/ui/AnimationWrapper';
 import { Button } from '@/components/ui/Button';
-import { Check, Mail } from 'lucide-react';
+import { Check, Mail, CheckCircle2 } from 'lucide-react';
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { createLead } from '@/lib/nocobase';
 
-export function WorkshopSpeaker() {
+import { resolveAttachmentUrl } from '@/lib/nocobase';
+import type { Profile } from '@/lib/nocobase';
+
+interface WorkshopSpeakerProps {
+  initialProfile?: Profile | null;
+}
+
+export function WorkshopSpeaker({ initialProfile }: WorkshopSpeakerProps) {
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
     email: '',
     interests: [] as string[]
   });
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleInterestChange = (interest: string) => {
     setFormData(prev => {
@@ -22,6 +32,42 @@ export function WorkshopSpeaker() {
       if (prev.interests.length >= 2) return prev; // Max 2
       return { ...prev, interests: [...prev.interests, interest] };
     });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formData.name || !formData.phone || !formData.email) {
+      alert('Vui lòng điền đầy đủ các thông tin bắt buộc.');
+      return;
+    }
+
+    setIsSubmitting(true);
+    const leadData = {
+      name: formData.name,
+      phone: formData.phone,
+      email: formData.email,
+      source: 'workshop_chien_luoc_notify',
+    };
+
+    const extraDetails = {
+      'Chủ đề quan tâm': formData.interests.join(', ') || 'Không chọn',
+      'Đăng ký từ': 'Form Đừng để lỡ buổi phù hợp (Strategic Workshop Section)'
+    };
+
+    const success = await createLead(leadData, extraDetails);
+    setIsSubmitting(false);
+
+    if (success) {
+      setIsSubmitted(true);
+      setFormData({
+        name: '',
+        phone: '',
+        email: '',
+        interests: []
+      });
+    } else {
+      alert('Gửi đăng ký thất bại. Vui lòng thử lại sau.');
+    }
   };
 
   return (
@@ -49,51 +95,96 @@ export function WorkshopSpeaker() {
                 </p>
               </div>
 
-              <form className="space-y-6 bg-white/5 border border-white/10 rounded-[2rem] p-8 md:p-10 backdrop-blur-md" onSubmit={(e) => e.preventDefault()}>
-                <div className="space-y-4">
-                  <input type="text" className="w-full bg-white/5 border border-white/10 focus:border-blaze-orange focus:ring-4 focus:ring-blaze-orange/20 rounded-xl px-5 h-14 transition-all outline-none text-white placeholder-white/40" placeholder="Họ tên (bắt buộc)" required />
-                  <input type="tel" className="w-full bg-white/5 border border-white/10 focus:border-blaze-orange focus:ring-4 focus:ring-blaze-orange/20 rounded-xl px-5 h-14 transition-all outline-none text-white placeholder-white/40" placeholder="Số điện thoại (bắt buộc)" required />
-                  <input type="email" className="w-full bg-white/5 border border-white/10 focus:border-blaze-orange focus:ring-4 focus:ring-blaze-orange/20 rounded-xl px-5 h-14 transition-all outline-none text-white placeholder-white/40" placeholder="Email (bắt buộc)" required />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-bold text-white mb-3">Chủ đề quan tâm <span className="text-cyan-azure font-medium">(chọn tối đa 2)</span></label>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    {[
-                      'Ra quyết định chiến lược',
-                      'Đội ngũ & phân vai',
-                      'Chu kỳ vận hành doanh nghiệp',
-                      'Quy Luật Năng Lượng',
-                      'Chuyên đề theo yêu cầu'
-                    ].map((interest, idx) => {
-                      const isSelected = formData.interests.includes(interest);
-                      const isDisabled = !isSelected && formData.interests.length >= 2;
-                      return (
-                        <div 
-                          key={idx}
-                          onClick={() => !isDisabled && handleInterestChange(interest)}
-                          className={`
-                            relative flex items-center p-3 rounded-xl border cursor-pointer transition-all duration-200
-                            ${isSelected ? 'border-blaze-orange bg-blaze-orange/20' : 'border-white/10 bg-white/5 hover:border-white/30'}
-                            ${isDisabled ? 'opacity-50 cursor-not-allowed' : ''}
-                          `}
-                        >
-                          <div className={`w-4 h-4 rounded-[4px] border flex items-center justify-center shrink-0 mr-3 transition-colors ${isSelected ? 'border-blaze-orange bg-blaze-orange' : 'border-white/20'}`}>
-                            {isSelected && <Check className="w-3 h-3 text-white" />}
-                          </div>
-                          <span className={`text-[13px] font-bold leading-tight ${isSelected ? 'text-white' : 'text-white/60'}`}>
-                            {interest}
-                          </span>
-                        </div>
-                      )
-                    })}
+              {isSubmitted ? (
+                <div className="bg-white/5 border border-white/10 rounded-[2rem] p-8 md:p-10 backdrop-blur-md text-center flex flex-col items-center gap-5 relative z-10">
+                  <div className="w-16 h-16 rounded-full bg-green-500/10 text-green-400 flex items-center justify-center shadow-lg">
+                    <CheckCircle2 className="w-10 h-10" />
                   </div>
+                  <div>
+                    <h3 className="text-xl font-black text-white mb-2">Đăng ký nhận thông báo thành công!</h3>
+                    <p className="text-white/60 max-w-sm mx-auto text-sm leading-relaxed">
+                      Thông tin của bạn đã được ghi nhận. Chúng tôi sẽ gửi lịch học workshop mới nhất qua Email và Số điện thoại ngay khi mở lịch đăng ký.
+                    </p>
+                  </div>
+                  <Button variant="secondary" className="px-8 mt-2" onClick={() => setIsSubmitted(false)}>
+                    Đăng ký email khác
+                  </Button>
                 </div>
+              ) : (
+                <form className="space-y-6 bg-white/5 border border-white/10 rounded-[2rem] p-8 md:p-10 backdrop-blur-md" onSubmit={handleSubmit}>
+                  <div className="space-y-4">
+                    <input 
+                      type="text" 
+                      className="w-full bg-white/5 border border-white/10 focus:border-blaze-orange focus:ring-4 focus:ring-blaze-orange/20 rounded-xl px-5 h-14 transition-all outline-none text-white placeholder-white/40 font-medium" 
+                      placeholder="Họ tên (bắt buộc)" 
+                      required 
+                      value={formData.name}
+                      onChange={e => setFormData({ ...formData, name: e.target.value })}
+                    />
+                    <input 
+                      type="tel" 
+                      className="w-full bg-white/5 border border-white/10 focus:border-blaze-orange focus:ring-4 focus:ring-blaze-orange/20 rounded-xl px-5 h-14 transition-all outline-none text-white placeholder-white/40 font-medium" 
+                      placeholder="Số điện thoại (bắt buộc)" 
+                      required 
+                      value={formData.phone}
+                      onChange={e => setFormData({ ...formData, phone: e.target.value })}
+                    />
+                    <input 
+                      type="email" 
+                      className="w-full bg-white/5 border border-white/10 focus:border-blaze-orange focus:ring-4 focus:ring-blaze-orange/20 rounded-xl px-5 h-14 transition-all outline-none text-white placeholder-white/40 font-medium" 
+                      placeholder="Email (bắt buộc)" 
+                      required 
+                      value={formData.email}
+                      onChange={e => setFormData({ ...formData, email: e.target.value })}
+                    />
+                  </div>
 
-                <Button type="submit" variant="primary" size="lg" className="w-full h-16 text-lg font-bold rounded-xl shadow-xl shadow-blaze-orange/20 hover:-translate-y-1 hover:shadow-blaze-orange/40 transition-all duration-300 mt-8">
-                  ĐĂNG KÝ NHẬN THÔNG BÁO
-                </Button>
-              </form>
+                  <div>
+                    <label className="block text-sm font-bold text-white mb-1">Chủ đề quan tâm</label>
+                    <p className="text-xs text-white/50 mb-3 font-medium">(chọn tối đa 2)</p>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      {[
+                        'Ra quyết định chiến lược',
+                        'Đội ngũ & phân vai',
+                        'Chu kỳ vận hành doanh nghiệp',
+                        'Quy Luật Năng Lượng',
+                        'Chuyên đề theo yêu cầu'
+                      ].map((interest, idx) => {
+                        const isSelected = formData.interests.includes(interest);
+                        const isDisabled = !isSelected && formData.interests.length >= 2;
+                        return (
+                          <div 
+                            key={idx}
+                            onClick={() => !isDisabled && handleInterestChange(interest)}
+                            className={`
+                              relative flex items-center p-3 rounded-xl border cursor-pointer transition-all duration-200
+                              ${isSelected ? 'border-blaze-orange bg-blaze-orange/20' : 'border-white/10 bg-white/5 hover:border-white/30'}
+                              ${isDisabled ? 'opacity-50 cursor-not-allowed' : ''}
+                            `}
+                          >
+                            <div className={`w-4 h-4 rounded-[4px] border flex items-center justify-center shrink-0 mr-3 transition-colors ${isSelected ? 'border-blaze-orange bg-blaze-orange' : 'border-white/20 bg-transparent'}`}>
+                              {isSelected && <Check className="w-3 h-3 text-white" />}
+                            </div>
+                            <span className={`text-[13px] font-bold leading-tight ${isSelected ? 'text-white' : 'text-white/60'}`}>
+                              {interest}
+                            </span>
+                          </div>
+                        )
+                      })}
+                    </div>
+                  </div>
+
+                  <Button 
+                    type="submit" 
+                    variant="primary" 
+                    size="lg" 
+                    disabled={isSubmitting}
+                    className="w-full h-16 text-lg font-bold rounded-xl shadow-xl shadow-blaze-orange/20 hover:-translate-y-1 hover:shadow-blaze-orange/40 transition-all duration-300 mt-8"
+                  >
+                    {isSubmitting ? 'ĐANG GỬI...' : 'ĐĂNG KÝ NHẬN THÔNG BÁO'}
+                  </Button>
+                </form>
+              )}
             </SlideIn>
           </div>
 
@@ -102,7 +193,7 @@ export function WorkshopSpeaker() {
             <FadeIn direction="up" delay={0.2}>
               <div className="relative aspect-square md:aspect-[4/5] w-full max-w-md mx-auto rounded-[3rem] overflow-hidden border-4 border-white/10 mb-10 shadow-2xl">
                 <Image
-                  src="/herobanner/hero01.png"
+                  src={resolveAttachmentUrl(initialProfile?.avatar?.[0]) || "/herobanner/hero01.png"}
                   alt="Master Hoàng Mai Linh"
                   fill
                   className="object-cover object-top"

@@ -87,5 +87,29 @@
       "filename": "hero04.png",
       "url": "/herobanner/hero04.png"
     }
+  ],
+  "destiny_pdf_cover": [
+    {
+      "id": 1784068267673,
+      "filename": "Bản đồ LĐ.png",
+      "url": "/uploads/1784068267673-BanoL.png",
+      "mimetype": "image/png"
+    }
+  ],
+  "consulting_tier2_img": [
+    {
+      "id": 1784101834981,
+      "filename": "800x800_10.png",
+      "url": "/uploads/1784101834981-800x800_10.png",
+      "mimetype": "image/png"
+    }
+  ],
+  "speaker_hero_img": [
+    {
+      "id": 1784102315390,
+      "filename": "17.10 SG MS LINH 14H PFCC HP2094.jpg",
+      "url": "/uploads/1784102315390-17.10SGMSLINH14HPFCCHP2094.jpg",
+      "mimetype": "image/jpeg"
+    }
   ]
 }

@@ -1,6 +1,12 @@
 'use client';
 import { FadeIn, SlideIn } from '@/components/ui/AnimationWrapper';
 import Image from 'next/image';
+import { resolveAttachmentUrl } from '@/lib/nocobase';
+import type { Workshop } from '@/lib/nocobase';
+
+interface PersonalWorkshopHistoryProps {
+  initialWorkshops?: Workshop[];
+}
 
 const pastWorkshops = [
   {
@@ -29,7 +35,9 @@ const pastWorkshops = [
   }
 ];
 
-export function PersonalWorkshopHistory() {
+export function PersonalWorkshopHistory({ initialWorkshops }: PersonalWorkshopHistoryProps) {
+  const workshopsList = initialWorkshops && initialWorkshops.length > 0 ? initialWorkshops : pastWorkshops;
+
   return (
     <section className="py-24 md:py-32 bg-oxford-blue relative overflow-hidden" id="history">
       <div className="absolute top-0 left-0 w-1/3 h-full bg-cyan-azure/10 blur-[150px] pointer-events-none" />
@@ -50,32 +58,47 @@ export function PersonalWorkshopHistory() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
-          {pastWorkshops.map((ws, idx) => (
-            <FadeIn key={idx} direction="up" delay={idx * 0.1}>
-              <div className="group cursor-pointer">
-                {/* Image Placeholder intended to be replaced with real banners */}
-                <div className="relative aspect-[4/3] w-full rounded-3xl overflow-hidden bg-white/5 border border-white/10 mb-6 group-hover:border-cyan-azure/50 transition-colors duration-500">
-                  <div className="absolute inset-0 flex items-center justify-center p-6 text-center text-white/20 font-bold border-2 border-dashed border-white/10 m-4 rounded-xl">
-                    <span>Banner<br/>{ws.title.substring(0, 15)}...</span>
+          {workshopsList.map((ws, idx) => {
+            const imageUrl = typeof ws.image === 'string' 
+              ? ws.image 
+              : (ws.image?.[0] ? resolveAttachmentUrl(ws.image[0]) : '');
+
+            return (
+              <FadeIn key={idx} direction="up" delay={idx * 0.1}>
+                <div className="group cursor-pointer">
+                  {/* Image / Placeholder */}
+                  <div className="relative aspect-[4/3] w-full rounded-3xl overflow-hidden bg-white/5 border border-white/10 mb-6 group-hover:border-cyan-azure/50 transition-colors duration-500">
+                    {imageUrl ? (
+                      <Image
+                        src={imageUrl}
+                        alt={ws.title}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                    ) : (
+                      <div className="absolute inset-0 flex items-center justify-center p-6 text-center text-white/20 font-bold border-2 border-dashed border-white/10 m-4 rounded-xl">
+                        <span>Banner<br/>{ws.title.substring(0, 15)}...</span>
+                      </div>
+                    )}
+                    {/* Overlay hover effect */}
+                    <div className="absolute inset-0 bg-cyan-azure/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none mix-blend-screen" />
                   </div>
-                  {/* Overlay hover effect */}
-                  <div className="absolute inset-0 bg-cyan-azure/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none mix-blend-screen" />
-                </div>
-                
-                {/* Content */}
-                <div className="px-2">
-                  <div className="flex items-center gap-3 text-xs font-bold tracking-wider uppercase mb-3 text-blaze-orange">
-                    <span>{ws.date}</span>
-                    <span className="w-1 h-1 rounded-full bg-slate-500" />
-                    <span>{ws.type}</span>
+                  
+                  {/* Content */}
+                  <div className="px-2">
+                    <div className="flex items-center gap-3 text-xs font-bold tracking-wider uppercase mb-3 text-blaze-orange">
+                      <span>{ws.date}</span>
+                      <span className="w-1 h-1 rounded-full bg-slate-500" />
+                      <span>{ws.type}</span>
+                    </div>
+                    <h3 className="text-xl font-bold text-white leading-snug group-hover:text-cyan-azure transition-colors text-balance">
+                      {ws.title}
+                    </h3>
                   </div>
-                  <h3 className="text-xl font-bold text-white leading-snug group-hover:text-cyan-azure transition-colors text-balance">
-                    {ws.title}
-                  </h3>
                 </div>
-              </div>
-            </FadeIn>
-          ))}
+              </FadeIn>
+            );
+          })}
         </div>
       </div>
     </section>

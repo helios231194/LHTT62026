@@ -8,9 +8,26 @@ import { RepresentList } from '@/components/sections/represent/RepresentList';
 import { RepresentWhyUs } from '@/components/sections/represent/RepresentWhyUs';
 import { RepresentCTA } from '@/components/sections/represent/RepresentCTA';
 
+
 export const metadata: Metadata = {
   title: 'Trưởng Đại Diện | Linh Hoa Tâm - Thuật Số Học Ứng Dụng',
   description: 'Trở thành Master Thuật Số Học Ứng Dụng chính thức tại địa phương của bạn. Khám phá lộ trình chuyên nghiệp và vị thế độc quyền cùng Linh Hoa Tâm.',
+  alternates: {
+    canonical: 'https://linhhoatam.com/truong-dai-dien',
+  },
+  openGraph: {
+    title: 'Trưởng Đại Diện | Linh Hoa Tâm - Thuật Số Học Ứng Dụng',
+    description: 'Trở thành Master Thuật Số Học Ứng Dụng chính thức tại địa phương của bạn.',
+    url: 'https://linhhoatam.com/truong-dai-dien',
+    type: 'website',
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Trở thành trưởng đại diện Linh Hoa Tâm' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Trưởng Đại Diện | Linh Hoa Tâm - Thuật Số Học Ứng Dụng',
+    description: 'Trở thành Master Thuật Số Học Ứng Dụng chính thức tại địa phương của bạn.',
+    images: ['/og-image.png'],
+  },
 };
 
 export default function RepresentPage() {

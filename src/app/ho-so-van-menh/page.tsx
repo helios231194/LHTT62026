@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { FadeIn, SlideIn } from '@/components/ui/AnimationWrapper';
@@ -25,7 +25,7 @@ import {
   X
 } from 'lucide-react';
 import Image from 'next/image';
-import { createLead } from '@/lib/nocobase';
+import { createLead, resolveAttachmentUrl } from '@/lib/nocobase';
 
 const videoCourse = [
   {
@@ -51,6 +51,7 @@ const videoCourse = [
 ];
 
 export default function HoSoVanMenhPage() {
+  const [profile, setProfile] = useState<any>(null);
   const [activeCombo, setActiveCombo] = useState<'standard' | 'premium' | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -63,6 +64,19 @@ export default function HoSoVanMenhPage() {
     address: '',
     notes: ''
   });
+
+  useEffect(() => {
+    fetch('/api/profile')
+      .then(res => res.json())
+      .then(data => {
+        if (data?.data) setProfile(data.data);
+      })
+      .catch(err => console.error('Error fetching profile:', err));
+  }, []);
+
+  const destinyCoverUrl = profile?.destiny_pdf_cover?.[0]
+    ? resolveAttachmentUrl(profile.destiny_pdf_cover[0])
+    : null;
 
   const handleOpenRegister = (combo: 'standard' | 'premium') => {
     setActiveCombo(combo);
@@ -169,27 +183,36 @@ export default function HoSoVanMenhPage() {
             <div className="flex flex-col lg:flex-row gap-16 items-center">
               
               {/* Left Mockup View */}
-              <div className="w-full lg:w-5/12 relative aspect-[3/4] bg-ice-white rounded-[2rem] border border-slate-200 overflow-hidden shadow-2xl flex flex-col justify-between p-8 group hover:border-[#4991ba]/30 transition-all duration-300">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-azure/10 rounded-full blur-2xl pointer-events-none" />
-                
-                <div className="flex items-center justify-between border-b border-slate-200 pb-4">
-                  <span className="text-xs font-bold text-slate-400 tracking-wider">LINH HOA TÂM 2026</span>
-                  <Award className="w-5 h-5 text-blaze-orange" />
-                </div>
-                
-                <div className="my-auto space-y-6 text-center">
-                  <span className="inline-block py-1 px-3 bg-[#4991ba]/10 text-xs font-bold text-[#4991ba] uppercase rounded-full">Hồ sơ cá nhân hóa</span>
-                  <h3 className="text-3xl font-black text-oxford-blue">HỒ SƠ VẬN MỆNH</h3>
-                  <div className="w-16 h-1 bg-blaze-orange mx-auto rounded-full" />
-                  <p className="text-left text-slate-500 text-sm max-w-xs mx-auto leading-relaxed">
-                    Được thiết kế để làm cuốn cẩm nang sử dụng nhiều lần qua các giai đoạn cuộc sống, không phải đọc một lần rồi cất đi.
-                  </p>
-                </div>
-                
-                <div className="border-t border-slate-200 pt-4 flex items-center justify-between text-slate-400 text-xs font-semibold">
-                  <span>Quy mô: ~100 trang PDF</span>
-                  <span>Mã số: LHT-DESTINY</span>
-                </div>
+              <div className="w-full lg:w-5/12 relative aspect-[3/4] rounded-[2rem] border border-slate-200 overflow-hidden shadow-2xl flex items-center justify-center bg-white group hover:border-[#4991ba]/30 transition-all duration-300">
+                {destinyCoverUrl ? (
+                  <img 
+                    src={destinyCoverUrl}
+                    alt="Hồ Sơ Vận Mệnh" 
+                    className="w-full h-full object-cover transform-gpu hover:scale-105 transition-transform duration-700 ease-out"
+                  />
+                ) : (
+                  <div className="w-full h-full flex flex-col justify-between p-8 bg-slate-50 relative">
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-azure/10 rounded-full blur-2xl pointer-events-none" />
+                    <div className="flex items-center justify-between border-b border-slate-200 pb-4">
+                      <span className="text-xs font-bold text-slate-400 tracking-wider">LINH HOA TÂM 2026</span>
+                      <Award className="w-5 h-5 text-blaze-orange" />
+                    </div>
+                    
+                    <div className="my-auto space-y-6 text-center">
+                      <span className="inline-block py-1 px-3 bg-[#4991ba]/10 text-xs font-bold text-[#4991ba] uppercase rounded-full">Hồ sơ cá nhân hóa</span>
+                      <h3 className="text-3xl font-black text-oxford-blue">HỒ SƠ VẬN MỆNH</h3>
+                      <div className="w-16 h-1 bg-blaze-orange mx-auto rounded-full" />
+                      <p className="text-left text-slate-500 text-sm max-w-xs mx-auto leading-relaxed">
+                        Được thiết kế để làm cuốn cẩm nang sử dụng nhiều lần qua các giai đoạn cuộc sống, giúp định hình quyết định và phản chiếu hành động, không phải là tài liệu đọc một lần rồi cất đi.
+                      </p>
+                    </div>
+                    
+                    <div className="border-t border-slate-200 pt-4 flex items-center justify-between text-slate-400 text-xs font-semibold">
+                      <span>Quy mô: ~100 trang PDF</span>
+                      <span>Mã số: LHT-DESTINY</span>
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Right Descriptions */}

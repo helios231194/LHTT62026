@@ -5,8 +5,14 @@ import { Button } from '@/components/ui/Button';
 import { BookOpen, Phone, Mail, Award, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { resolveAttachmentUrl } from '@/lib/nocobase';
+import type { Profile } from '@/lib/nocobase';
 
-export function BookDetails() {
+interface BookDetailsProps {
+  initialProfile?: Profile | null;
+}
+
+export function BookDetails({ initialProfile }: BookDetailsProps) {
   return (
     <>
       {/* SECTION 7: VỀ TÁC GIẢ */}
@@ -19,7 +25,7 @@ export function BookDetails() {
                 <div className="relative aspect-[3/4] w-full max-w-md mx-auto lg:mx-0 rounded-2xl overflow-hidden shadow-2xl">
                   {/* Tác giả Placeholder - Using user specified path or placeholder */}
                   <Image
-                    src="/master/master-profile.jpg"
+                    src={resolveAttachmentUrl(initialProfile?.avatar?.[0]) || "/master/master-profile.jpg"}
                     alt="Master Hoàng Mai Linh"
                     fill
                     className="object-cover"
@@ -100,7 +106,7 @@ export function BookDetails() {
             <div className="max-w-5xl mx-auto bg-gray-50 p-4 md:p-8 rounded-3xl border border-gray-200 shadow-xl overflow-hidden aspect-[16/10] md:aspect-video relative">
               {/* This iframe points to a generic flipbook URL, replace with actual if provided */}
               <iframe 
-                src="https://heyzine.com/api/flipbook.html" 
+                src={initialProfile?.book_preview_link || "https://heyzine.com/api/flipbook.html"} 
                 className="w-full h-full border-0 rounded-xl shadow-inner bg-white"
                 allowFullScreen
                 scrolling="no"
