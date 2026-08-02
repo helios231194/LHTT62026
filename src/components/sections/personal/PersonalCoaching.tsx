@@ -221,8 +221,8 @@ export function PersonalCoaching({ initialProducts }: PersonalCoachingProps) {
                       <div className="text-xl font-black text-blaze-orange mt-2">{selectedProduct.price || 'Liên hệ'}</div>
                     </div>
 
-                    <div className="text-slate-600 leading-relaxed text-sm md:text-base">
-                      {selectedProduct.description}
+                    <div className="text-slate-600 leading-relaxed text-sm md:text-base whitespace-pre-line">
+                      {selectedProduct.long_description || selectedProduct.description}
                     </div>
 
                     {/* Benefits List */}

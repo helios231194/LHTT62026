@@ -156,6 +156,7 @@ export interface ProductBase {
   badge?:       string;
   tagline?:     string;
   description?: string;
+  long_description?: string;
   price?:       string;
   /** Pipe-separated benefit bullets: "benefit1|benefit2|benefit3" */
   benefits?:    string;

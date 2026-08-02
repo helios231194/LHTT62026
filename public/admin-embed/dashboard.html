@@ -1333,8 +1333,13 @@
             </div>
 
             <div>
-              <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Mô tả ngắn</label>
-              <textarea id="edit-description" rows="2" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs">${p.description || ''}</textarea>
+              <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Mô tả ngắn (Hiển thị bên ngoài card)</label>
+              <textarea id="edit-description" rows="2" placeholder="Mô tả ngắn gọn 1-2 câu hiển thị bên ngoài..." class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs">${p.description || ''}</textarea>
+            </div>
+
+            <div>
+              <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Mô tả dài (Chi tiết khi click vào)</label>
+              <textarea id="edit-long-description" rows="4" placeholder="Mô tả chi tiết nội dung gói sản phẩm, lộ trình coaching..." class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs">${p.long_description || ''}</textarea>
             </div>
 
             <!-- Benefits Manager -->
@@ -2030,6 +2035,7 @@
           tagline: document.getElementById('edit-tagline').value.trim(),
           slug: document.getElementById('edit-slug').value.trim(),
           description: document.getElementById('edit-description').value.trim(),
+          long_description: document.getElementById('edit-long-description') ? document.getElementById('edit-long-description').value.trim() : '',
           benefits: benefitsArr.join('|'),
           cta_label: document.getElementById('edit-cta-label').value.trim(),
           theme: document.getElementById('edit-theme').value,
