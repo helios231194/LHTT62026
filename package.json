@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "postbuild": "mkdir -p .next/standalone/src && cp -r src/data .next/standalone/src/ 2>/dev/null || true",
     "start": "next start",
     "lint": "next lint"
   },
