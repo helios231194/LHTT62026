@@ -2,7 +2,6 @@
 import { FadeIn, SlideIn } from '@/components/ui/AnimationWrapper';
 import { Button } from '@/components/ui/Button';
 import { Calendar, Video, Users, ArrowRight, Bell } from 'lucide-react';
-import Image from 'next/link';
 
 export function PersonalWorkshopUpcoming() {
   const hasUpcomingWorkshop = true;

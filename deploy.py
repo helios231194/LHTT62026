@@ -9,7 +9,7 @@ VPS_PASS = "RCw*v4Ub-4KB6?#t"
 VPS_PATH = "/var/www/lht-website"
 BUILD_DIR = ".next"
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
-ASKPASS = "/Users/thuongvanhoai/.gemini/antigravity/brain/9137bfe4-a19d-4f63-8a32-7fa62d230e67/scratch/askpass.sh"
+ASKPASS = "/Users/thuongvanhoai/.gemini/antigravity/brain/eaf6e957-cbd5-4fe4-8636-f28c1383d011/scratch/askpass.sh"
 
 # SSH/SCP env with password
 ssh_env = {

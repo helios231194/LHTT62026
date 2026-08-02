@@ -1,6 +1,6 @@
 import fs from 'fs/promises';
 import path from 'path';
-import type { Partner, Testimonial, SpeakerEvent, Profile, PersonalProduct, BusinessProduct, Stat, FacebookPost, SpeakerAssets, Workshop, BookFeedback, BookVideo } from './nocobase';
+import type { Partner, Testimonial, SpeakerEvent, Profile, PersonalProduct, BusinessProduct, Stat, FacebookPost, SpeakerAssets, Workshop, BookFeedback, BookVideo } from './types';
 
 const DATA_DIR = path.join(process.cwd(), 'src/data');
 

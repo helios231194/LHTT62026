@@ -18,154 +18,42 @@ const defaultHeaders = {
 };
 
 // ─────────────────────────────────────────────────────────────
-// Types
+// Types (Re-exported from ./types for backward compatibility)
 // ─────────────────────────────────────────────────────────────
 
-export interface Article {
-  id:           number;
-  title:        string;
-  slug:         string;
-  excerpt:      string;
-  content:      string;       // Markdown
-  author:       string;
-  tags:         string[];
-  category:     string;       // "ra-quyet-dinh"
-  status:       'published' | 'draft';
-  read_time:    number;
-  published_at: string;       // ISO date
-  image?:       Attachment[];
-  author_avatar?: Attachment[];
-  pinned?:      boolean;
-  updatedAt?:   string;
-}
-
-export interface Attachment {
-  id:       number;
-  filename: string;
-  url:      string;
-  mimetype: string;
-  preview?: string;  // URL-encoded path served from NocoBase /storage/ (preferred for display)
-}
-
-export interface Service {
-  id:         number;
-  title:      string;
-  slug:       string;
-  badge?:     string;
-  desc:       string;
-  price:      string;
-  icon:       string;
-  href:       string;
-  featured:   boolean;
-  sort_order?: number;
-  tagline?:   string;
-  /** Pipe-separated bullet points: "feature1|feature2|feature3" */
-  features?:  string;
-  cta_label?: string;
-  theme?:     'light' | 'dark';
-}
-
-export interface Stat {
-  id:         number;
-  label:      string;
-  subLabel:   string;
-  value:      string;
-  icon:       string;
-  sort_order: number;
-}
-
-export interface Partner {
-  id:         number;
-  name:       string;
-  logo_url:   string;
-  sort_order: number;
-  width:      number;
-  height:     number;
-}
-
-export interface Testimonial {
-  id:         number;
-  name:       string;
-  position:   string;
-  company?:   string;
-  quote:      string;
-  rating:     number;
-  sort_order: number;
-  image?:     Attachment[];
-  category?:  string;
-}
-
-export interface SpeakerEvent {
-  id:         number;
-  title:      string;
-  location?:  string;
-  sort_order: number;
-  image?:     Attachment[];
-}
-
-export interface Lead {
-  name:             string;
-  email:            string;
-  phone?:           string;
-  message?:         string;
-  source?:          string;
-  package?:         string;
-  content_summary?: string;
-  tag?:             string;
-}
-
-export interface Profile {
-  id?:              number;
-  name?:            string;
-  bio?:             string;
-  hero_title?:      string;
-  hero_desc?:       string;
-  workshop_title?:  string;
-  workshop_desc?:   string;
-  workshop_tags?:   string[];
-  community_title?: string;
-  community_desc?:  string;
-  credentials?:     string[];
-  values?:          string[];
-  avatar?:          Attachment[];
-  community_qr?:    Attachment[];
-  book_cover?:      Attachment[];
-  logo?:             Attachment[];
-  hero_bg?:          Attachment[];
-  philosophy_img?:   Attachment[];
-  community_banner?: Attachment[];
-  destiny_pdf_cover?: Attachment[];
-  strategy_pdf_cover?: Attachment[];
-  speaker_hero_img?:  Attachment[];
-  consulting_tier1_img?: Attachment[];
-  consulting_tier2_img?: Attachment[];
-  consulting_tier3_img?: Attachment[];
-  book_preview_link?: string;
-}
-
-export interface Workshop {
-  id:         number;
-  title:      string;
-  date:       string;
-  type:       string;
-  category:   'personal' | 'business';
-  sort_order: number;
-  image?:     Attachment[];
-}
-
-export interface BookFeedback {
-  id:         number;
-  caption?:   string;
-  sort_order: number;
-  image?:     Attachment[];
-}
-
-export interface BookVideo {
-  id:         number;
-  title:      string;
-  youtube_url: string;
-  sort_order: number;
-}
+export type {
+  Attachment,
+  Article,
+  Service,
+  Stat,
+  Partner,
+  Testimonial,
+  SpeakerEvent,
+  Lead,
+  Profile,
+  Workshop,
+  BookFeedback,
+  BookVideo,
+  ProductBase,
+  PersonalProduct,
+  BusinessProduct,
+  FacebookPost,
+  SpeakerAssets,
+} from './types';
+import type {
+  Attachment,
+  Article,
+  Service,
+  Stat,
+  Partner,
+  Testimonial,
+  SpeakerEvent,
+  Lead,
+  Profile,
+  Workshop,
+  BookFeedback,
+  BookVideo,
+} from './types';
 
 // ─────────────────────────────────────────────────────────────
 // Category mapping
@@ -193,37 +81,27 @@ export function resolveAttachmentUrl(
   urlOrObject?: string | { url?: string; preview?: string } | null,
   preview?: string
 ): string | undefined {
+  if (!urlOrObject) return undefined;
+
   // Support passing an attachment object directly
-  if (urlOrObject && typeof urlOrObject === 'object') {
+  if (typeof urlOrObject === 'object') {
     const obj = urlOrObject as { url?: string; preview?: string };
-    return resolveAttachmentUrl(obj.url, obj.preview);
+    return resolveAttachmentUrl(obj.preview || obj.url);
   }
 
-  const url = urlOrObject as string | undefined;
+  const url = urlOrObject as string;
   const effectivePreview = preview;
 
-  if (!url && !effectivePreview) return undefined;
-
-  // Prefer preview: already URL-encoded, served from NocoBase /storage/
   if (effectivePreview) {
     if (effectivePreview.startsWith('http')) return effectivePreview;
     if (effectivePreview.startsWith('/storage/')) return `${BASE_URL}${effectivePreview}`;
+    if (effectivePreview.startsWith('/uploads/')) return `${BASE_URL}/storage${effectivePreview}`;
     return effectivePreview;
   }
 
-  if (!url) return undefined;
   if (url.startsWith('http')) return url;
   if (url.startsWith('/storage/')) return `${BASE_URL}${url}`;
-  // /uploads/ may have Vietnamese chars → encode path components
-  // CRITICAL FIX: Prepend absolute site URL so Next.js Image Optimizer fetches through Nginx (which serves uploads successfully)
-  if (url.startsWith('/uploads/')) {
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://lht.agentic.io.vn';
-    try { 
-      return `${siteUrl}${encodeURI(url)}`; 
-    } catch { 
-      return `${siteUrl}${url}`; 
-    }
-  }
+  if (url.startsWith('/uploads/')) return `${BASE_URL}/storage${url}`;
   return url; // /images/, /herobanner/, /testimonials/ → static local assets
 }
 
@@ -261,7 +139,24 @@ export async function getArticles(options?: {
     console.error(`NocoBase getArticles: ${res.status} ${res.statusText}`);
     return { data: [], meta: { count: 0, totalPage: 0 } };
   }
-  return res.json();
+
+  const json = await res.json();
+  if (Array.isArray(json.data)) {
+    json.data.sort((a: Article, b: Article) => {
+      // 1. Bài ghim lên đầu
+      if (a.pinned && !b.pinned) return -1;
+      if (!a.pinned && b.pinned) return 1;
+
+      // 2. Bài mới nhất lên đầu theo thời gian xuất bản/tạo/cập nhật, fallback theo ID
+      const timeA = new Date(a.published_at || (a as any).createdAt || a.updatedAt || 0).getTime();
+      const timeB = new Date(b.published_at || (b as any).createdAt || b.updatedAt || 0).getTime();
+
+      if (timeA !== timeB) return timeB - timeA;
+      return b.id - a.id;
+    });
+  }
+
+  return json;
 }
 
 export async function getArticleBySlug(slugOrId: string): Promise<Article | null> {
@@ -360,32 +255,8 @@ export interface CustomerScreenshot {
 
 
 // ─────────────────────────────────────────────────────────────
-// Products (Sản phẩm cá nhân & doanh nghiệp)
+// Products (Sản phẩm cá nhân & doanh nghiệp - Types imported from ./types)
 // ─────────────────────────────────────────────────────────────
-// Shared product field shape (dùng cho cả 2 collections)
-// ─────────────────────────────────────────────────────────────
-
-export interface ProductBase {
-  id:           number;
-  name:         string;
-  slug?:        string;
-  badge?:       string;
-  tagline?:     string;
-  description?: string;
-  price?:       string;
-  /** Pipe-separated benefit bullets: "benefit1|benefit2|benefit3" */
-  benefits?:    string;
-  cta_label?:   string;
-  href?:        string;
-  theme?:       'light' | 'dark';
-  featured:     boolean;
-  sort_order:   number;
-  image?:       Attachment[];
-}
-
-// Alias cho từng loại — giữ type-safety rõ ràng
-export type PersonalProduct  = ProductBase;
-export type BusinessProduct  = ProductBase;
 
 // ─────────────────────────────────────────────────────────────
 // Sản phẩm CÁ NHÂN  →  collection: personal_products
@@ -400,30 +271,8 @@ export type BusinessProduct  = ProductBase;
 
 
 // ─────────────────────────────────────────────────────────────
-// Facebook Posts (Xem trước nội dung đang diễn ra)
+// Facebook Posts & Speaker Config (Types imported from ./types)
 // ─────────────────────────────────────────────────────────────
-
-export interface FacebookPost {
-  id:         number;
-  title?:     string;
-  post_url?:  string;
-  status?:    'published' | 'draft';
-  excerpt?:   string;
-  thumbnail?: Attachment[];
-}
-
-
-
-// ─────────────────────────────────────────────────────────────
-// Speaker Config (File links & dropdown options)
-// ─────────────────────────────────────────────────────────────
-
-export interface SpeakerAssets {
-  credential_pdf_url: string;
-  proposal_url: string;
-  hero_image: string;
-  topics_options: string[];
-}
 
 
 

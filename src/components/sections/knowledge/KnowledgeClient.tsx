@@ -28,27 +28,36 @@ export function KnowledgeClient({ initialArticles, initialProfile }: KnowledgeCl
   const [activeCategory, setActiveCategory] = useState('Tất cả');
   const [searchQuery, setSearchQuery] = useState('');
 
-  // 1. Tìm các bài viết được ghim (pinned)
-  const pinnedArticles = useMemo(() => {
-    return initialArticles.filter((a) => a.pinned === true);
+  // 0. Đảm bảo tất cả bài viết được sắp xếp mới nhất lên đầu
+  const sortedInitialArticles = useMemo(() => {
+    return [...initialArticles].sort((a, b) => {
+      if (a.pinned && !b.pinned) return -1;
+      if (!a.pinned && b.pinned) return 1;
+
+      const timeA = new Date(a.published_at || (a as any).createdAt || a.updatedAt || 0).getTime();
+      const timeB = new Date(b.published_at || (b as any).createdAt || b.updatedAt || 0).getTime();
+
+      if (timeA !== timeB) return timeB - timeA;
+      return b.id - a.id;
+    });
   }, [initialArticles]);
 
-  // 2. Chọn bài nổi bật (ghim mới nhất theo updatedAt, hoặc bài mới nhất nếu không ghim)
+  // 1. Tìm các bài viết được ghim (pinned)
+  const pinnedArticles = useMemo(() => {
+    return sortedInitialArticles.filter((a) => a.pinned === true);
+  }, [sortedInitialArticles]);
+
+  // 2. Chọn bài nổi bật (ghim mới nhất, hoặc bài mới nhất nếu không ghim)
   const featuredArticle = useMemo(() => {
     if (pinnedArticles.length > 0) {
-      const sortedPinned = [...pinnedArticles].sort((a, b) => {
-        const timeA = a.updatedAt ? new Date(a.updatedAt).getTime() : 0;
-        const timeB = b.updatedAt ? new Date(b.updatedAt).getTime() : 0;
-        return timeB - timeA; // Mới nhất lên đầu
-      });
-      return sortedPinned[0];
+      return pinnedArticles[0];
     }
-    return initialArticles[0]; // Fallback về bài mới nhất
-  }, [pinnedArticles, initialArticles]);
+    return sortedInitialArticles[0]; // Fallback về bài mới nhất
+  }, [pinnedArticles, sortedInitialArticles]);
 
   // 3. Client-side filter trên dữ liệu đã được pre-fetched (không gọi API)
   const filteredArticles = useMemo(() => {
-    return initialArticles.filter((post) => {
+    return sortedInitialArticles.filter((post) => {
       // Category filter: map label → slug
       const activeCategorySlug =
         CATEGORY_LABELS.find((c) => c.label === activeCategory)?.value ?? null;
@@ -64,7 +73,7 @@ export function KnowledgeClient({ initialArticles, initialProfile }: KnowledgeCl
 
       return matchesCategory && matchesSearch;
     });
-  }, [initialArticles, activeCategory, searchQuery]);
+  }, [sortedInitialArticles, activeCategory, searchQuery]);
 
   // 4. Loại bỏ bài nổi bật ra khỏi lưới để tránh trùng lặp
   const gridArticles = useMemo(() => {

@@ -28,15 +28,22 @@
     "slug": "full-19-chi-so",
     "badge": "ĐẦY ĐỦ NHẤT",
     "tagline": "Phân tích toàn diện",
-    "description": "Phân tích chi tiết toàn bộ 19 chỉ số vận mệnh, bao gồm chu kỳ sự nghiệp, tình duyên và sức khỏe.",
+    "description": "Phân tích chi tiết toàn bộ 19 chỉ số vận mệnh, bao gồm chu kỳ sự nghiệp, tình duyên và sức khỏe và công việc",
     "price": "Liên hệ",
-    "benefits": "19 chỉ số vận mệnh đầy đủ|Chu kỳ 5 năm chi tiết|Phân tích tình duyên & hôn nhân|Sức khỏe & năng lượng|Định hướng sự nghiệp dài hạn",
+    "benefits": "19 chỉ số vận mệnh đầy đủ|Chu kỳ 5 năm chi tiết|Phân tích tình duyên & hôn nhân|Sức khỏe & năng lượng|Định hướng sự nghiệp dài hạn|Test thông tin mới",
     "cta_label": "Đặt lịch tư vấn",
     "href": "/phat-trien-ban-than",
     "theme": "dark",
     "featured": true,
     "sort_order": 2,
-    "image": []
+    "image": [
+      {
+        "id": 1785312314828,
+        "filename": "800x800_7 (1).png",
+        "url": "/uploads/1785312314828-800x800_71.png",
+        "mimetype": "image/png"
+      }
+    ]
   },
   {
     "id": 3,

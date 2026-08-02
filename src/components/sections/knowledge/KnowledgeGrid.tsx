@@ -80,7 +80,7 @@ export function KnowledgeGrid({ articles, headline }: KnowledgeGridProps) {
           <>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {currentPosts.map((post, idx) => {
-                const coverUrl = resolveAttachmentUrl(post.image?.[0]?.url);
+                const coverUrl = resolveAttachmentUrl(post.image?.[0]);
                 const categoryLabel = CATEGORY_MAP[post.category] ?? post.category;
                 const dateStr = post.published_at
                   ? new Date(post.published_at).toLocaleDateString('vi-VN')

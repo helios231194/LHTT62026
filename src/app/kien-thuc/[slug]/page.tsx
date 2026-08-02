@@ -94,8 +94,8 @@ export default async function ArticleDetailPage({ params }: PageProps) {
   }
 
   const categoryLabel = CATEGORY_MAP[article.category] ?? article.category ?? 'Kiến thức';
-  const coverUrl = resolveAttachmentUrl(article.image?.[0]?.url);
-  const authorAvatarUrl = resolveAttachmentUrl(article.author_avatar?.[0]?.url) || resolveAttachmentUrl(profile?.avatar?.[0]?.url) || '/herobanner/hero03.png';
+  const coverUrl = resolveAttachmentUrl(article.image?.[0]);
+  const authorAvatarUrl = resolveAttachmentUrl(article.author_avatar?.[0]) || resolveAttachmentUrl(profile?.avatar?.[0]) || '/herobanner/hero03.png';
   const dateStr = article.published_at
     ? new Date(article.published_at).toLocaleDateString('vi-VN')
     : '';
@@ -346,7 +346,7 @@ export default async function ArticleDetailPage({ params }: PageProps) {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {related.map((post) => {
-                const relCoverUrl = resolveAttachmentUrl(post.image?.[0]?.url);
+                const relCoverUrl = resolveAttachmentUrl(post.image?.[0]);
                 const relCategoryLabel = CATEGORY_MAP[post.category] ?? post.category;
                 return (
                   <article

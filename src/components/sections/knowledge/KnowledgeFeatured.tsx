@@ -16,7 +16,7 @@ export function KnowledgeFeatured({ articles }: KnowledgeFeaturedProps) {
   const featured = articles[0];
   if (!featured) return null;
 
-  const coverUrl = resolveAttachmentUrl(featured.image?.[0]?.url);
+  const coverUrl = resolveAttachmentUrl(featured.image?.[0]);
   const categoryLabel = CATEGORY_MAP[featured.category] ?? featured.category;
   const dateStr = featured.published_at
     ? new Date(featured.published_at).toLocaleDateString('vi-VN')
