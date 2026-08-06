@@ -832,6 +832,7 @@
         const tier1Img = profileData.consulting_tier1_img?.[0];
         const tier2Img = profileData.consulting_tier2_img?.[0];
         const tier3Img = profileData.consulting_tier3_img?.[0];
+        const tier4Img = profileData.consulting_tier4_img?.[0];
 
         area.innerHTML = `
           <div>
@@ -1103,6 +1104,27 @@
                       </div>
                       <input type="file" id="up-tier3" onchange="uploadImageField(event, 'consulting_tier3_img')" class="hidden" accept="image/*">
                       <button type="button" onclick="document.getElementById('up-tier3').click()" class="w-full bg-oxford-blue hover:bg-oxford-blue/90 text-white font-bold text-xs py-2 rounded-xl transition-all duration-150">
+                        Thay ảnh
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- consulting_tier4_img -->
+                  <div class="bg-white border border-slate-200 rounded-xl p-4 flex flex-col justify-between shadow-sm">
+                    <div>
+                      <h4 class="text-xs font-bold text-oxford-blue mb-1">14. Ảnh Cải tổ Doanh nghiệp</h4>
+                      <p class="text-[10px] text-slate-400 mb-3">Dịch vụ cột 4 tại mục Tham vấn 1:1 trang /giai-phap-lanh-dao</p>
+                      <div class="aspect-video bg-slate-100 border rounded-lg overflow-hidden flex items-center justify-center relative mb-4">
+                        ${tier4Img ? `<img src="${BASE_URL}${tier4Img.url}" class="object-cover w-full h-full" alt="preview">` : '<span class="text-xs text-slate-400">Chưa có ảnh</span>'}
+                      </div>
+                    </div>
+                    <div>
+                      <div class="bg-slate-50 border rounded-lg p-2 text-[9px] text-slate-500 mb-3 space-y-0.5">
+                        <div><strong>Kích thước:</strong> 800x800 px (tỷ lệ 1:1)</div>
+                        <div><strong>Định dạng:</strong> JPG/PNG</div>
+                      </div>
+                      <input type="file" id="up-tier4" onchange="uploadImageField(event, 'consulting_tier4_img')" class="hidden" accept="image/*">
+                      <button type="button" onclick="document.getElementById('up-tier4').click()" class="w-full bg-oxford-blue hover:bg-oxford-blue/90 text-white font-bold text-xs py-2 rounded-xl transition-all duration-150">
                         Thay ảnh
                       </button>
                     </div>
