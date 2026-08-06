@@ -14,6 +14,9 @@ interface LeaderStrategyMapProps {
 
 export function LeaderStrategyMap({ initialProfile }: LeaderStrategyMapProps) {
   const strategyCoverUrl = resolveAttachmentUrl(initialProfile?.strategy_pdf_cover?.[0]?.url) || '/uploads/1785312695170-800x800_2.png';
+  const title = (initialProfile as any)?.strategy_map_title || 'Bản đồ Quyết Định Chiến Lược Lãnh Đạo 2026';
+  const desc = (initialProfile as any)?.strategy_map_desc || 'Tài sản chiến lược được cá nhân hóa hoàn toàn. Dùng làm tài liệu tham chiếu cốt lõi trong họp chiến lược, tuyển dụng cấp quản lý, quyết định đầu tư và mở chi nhánh.';
+  const price = (initialProfile as any)?.strategy_map_price || '3.800.000 VNĐ';
 
   return (
     <section className="py-24 md:py-32 bg-oxford-blue text-white relative overflow-hidden">
@@ -33,15 +36,11 @@ export function LeaderStrategyMap({ initialProfile }: LeaderStrategyMapProps) {
               </div>
               
               <h2 className="text-4xl md:text-5xl font-black mb-6 leading-[1.15] tracking-tight text-balance">
-                Bản đồ Quyết Định <br className="hidden md:block"/>
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-white/70">
-                  Chiến Lược Lãnh Đạo 2026
-                </span>
+                {title}
               </h2>
 
               <p className="text-lg text-white/80 mb-8 leading-relaxed text-pretty">
-                Tài sản chiến lược được cá nhân hóa hoàn toàn. Dùng làm tài liệu tham chiếu 
-                cốt lõi trong họp chiến lược, tuyển dụng cấp quản lý, quyết định đầu tư và mở chi nhánh.
+                {desc}
               </p>
 
               <div className="space-y-4 mb-10">
@@ -61,7 +60,7 @@ export function LeaderStrategyMap({ initialProfile }: LeaderStrategyMapProps) {
               <div className="flex items-center gap-6 mb-10">
                 <div className="flex flex-col">
                   <span className="text-sm text-white/60 mb-1 uppercase tracking-widest font-bold">Chi phí đầu tư</span>
-                  <span className="text-4xl font-black text-blaze-orange">3.800.000 VNĐ</span>
+                  <span className="text-4xl font-black text-blaze-orange">{price}</span>
                 </div>
               </div>
 
