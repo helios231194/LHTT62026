@@ -145,13 +145,13 @@ export function MethApplication() {
               <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
                 {/* CTA 1 */}
                 <div className="bg-white/10 p-6 md:p-8 rounded-2xl backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all flex flex-col h-full items-center text-center group">
-                  <h3 className="text-xl font-bold mb-3">Bắt đầu từ file 450k</h3>
+                  <h3 className="text-xl font-bold mb-3">Hồ Sơ Vận Mệnh</h3>
                   <p className="text-white/80 mb-6 text-sm flex-1">
-                    File Hồ Sơ Số Vận Mệnh phân tích 7 chỉ số cơ bản. Điểm khởi đầu tốt nhất nếu bạn muốn tự trải nghiệm trước.
+                    Hồ Sơ Vận Mệnh phân tích 7 chỉ số cốt lõi. Điểm khởi đầu tốt nhất nếu bạn muốn tự trải nghiệm trước.
                   </p>
-                  <Link href="/phat-trien-ban-than" className="w-full">
+                  <Link href="/ho-so-van-menh" className="w-full">
                     <Button variant="outline" size="lg" className="w-full h-12 border-white text-dark-blue bg-white hover:bg-white/90 font-bold whitespace-nowrap">
-                      NHẬN FILE LUẬN GIẢI
+                      XEM HỒ SƠ VẬN MỆNH
                     </Button>
                   </Link>
                 </div>

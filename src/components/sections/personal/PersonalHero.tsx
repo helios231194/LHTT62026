@@ -36,8 +36,8 @@ export function PersonalHero() {
                 XEM CÁC DỊCH VỤ CÁ NHÂN
               </Button>
             </Link>
-            <Link href="#entry" className="text-cyan-azure hover:text-blaze-orange transition-colors font-bold text-lg mt-2 sm:mt-0 underline underline-offset-8 decoration-cyan-azure/30 hover:decoration-blaze-orange/50">
-              Nhận File Luận Giải 450K →
+            <Link href="/ho-so-van-menh" className="text-cyan-azure hover:text-blaze-orange transition-colors font-bold text-lg mt-2 sm:mt-0 underline underline-offset-8 decoration-cyan-azure/30 hover:decoration-blaze-orange/50">
+              Hồ Sơ Vận Mệnh →
             </Link>
           </div>
         </FadeIn>

@@ -18,7 +18,7 @@ export function PersonalCTA() {
             </h2>
             <p className="text-xl text-white/80 font-medium leading-relaxed max-w-3xl mx-auto">
               Chọn sản phẩm phù hợp với giai đoạn bạn đang ở. Nếu chưa biết bắt đầu từ đâu, 
-              <strong> File Hồ Sơ Số 450K</strong> là điểm khởi đầu tốt nhất để bạn có 
+              <strong> Hồ Sơ Vận Mệnh</strong> là điểm khởi đầu tốt nhất để bạn có 
               bức tranh toàn cảnh về mình trước khi đi sâu hơn.
             </p>
           </div>
@@ -29,10 +29,10 @@ export function PersonalCTA() {
           <FadeIn direction="up" delay={0.1}>
             <div className="bg-white/5 backdrop-blur-md rounded-[2.5rem] p-8 md:p-10 border border-white/10 flex flex-col items-center text-center h-full hover:bg-white/10 hover:border-blaze-orange/30 transition-all duration-300">
               <span className="text-sm font-bold text-blaze-orange uppercase tracking-widest mb-6">Bước khởi đầu</span>
-              <h3 className="text-2xl font-bold text-white mb-8">Bắt đầu từ đây</h3>
-              <Link href="#entry" className="mt-auto w-full">
+              <h3 className="text-2xl font-bold text-white mb-8">Hồ Sơ Vận Mệnh</h3>
+              <Link href="/ho-so-van-menh#pricing-section" className="mt-auto w-full">
                 <Button variant="primary" size="lg" className="w-full h-14 font-bold rounded-xl shadow-lg shadow-blaze-orange/20">
-                  NHẬN FILE LUẬN GIẢI 450K
+                  ĐẶT HỒ SƠ VẬN MỆNH
                 </Button>
               </Link>
             </div>

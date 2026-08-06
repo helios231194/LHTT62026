@@ -1,6 +1,6 @@
 import { FadeIn } from '@/components/ui/AnimationWrapper';
 import { Button } from '@/components/ui/Button';
-import { CheckCircle2, UserCheck, FileText } from 'lucide-react';
+import { CheckCircle2, UserCheck, FileText, ArrowRight, Sparkles } from 'lucide-react';
 import Link from 'next/link';
 
 import type { Profile } from '@/lib/nocobase';
@@ -27,14 +27,14 @@ export function PersonalEntryProduct({ initialProfile }: PersonalEntryProductPro
                 {destinyCoverUrl ? (
                   <img 
                     src={destinyCoverUrl}
-                    alt="File Luận giải Vận mệnh Cá nhân" 
+                    alt="Hồ Sơ Vận Mệnh" 
                     className="w-full h-full object-cover transform-gpu hover:scale-105 transition-transform duration-700 ease-out"
                   />
                 ) : (
                   <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center bg-slate-50">
                     <FileText className="w-24 h-24 text-blaze-orange mb-6 group-hover:scale-110 transition-transform duration-700" />
-                    <div className="text-2xl font-black text-oxford-blue tracking-tight mb-2">LUẬN GIẢI VẬN MỆNH</div>
-                    <div className="text-blaze-orange font-bold tracking-widest text-sm uppercase mb-6">PDF 100+ TRANG</div>
+                    <div className="text-2xl font-black text-oxford-blue tracking-tight mb-2">HỒ SƠ VẬN MỆNH</div>
+                    <div className="text-blaze-orange font-bold tracking-widest text-sm uppercase mb-6">CÁ NHÂN HÓA ~100 TRANG PDF</div>
                     <div className="space-y-2 opacity-50 blur-[1px]">
                       <div className="w-48 h-2 bg-slate-300 rounded-full mx-auto" />
                       <div className="w-32 h-2 bg-slate-300 rounded-full mx-auto" />
@@ -49,26 +49,37 @@ export function PersonalEntryProduct({ initialProfile }: PersonalEntryProductPro
           {/* Right Content */}
           <div className="lg:w-7/12 w-full">
             <FadeIn direction="left" delay={0.2}>
-              <div className="inline-block px-4 py-1.5 bg-blaze-orange/10 text-blaze-orange rounded-full text-sm font-bold tracking-wider uppercase mb-6">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-blaze-orange/10 text-blaze-orange rounded-full text-sm font-bold tracking-wider uppercase mb-6">
+                <Sparkles className="w-4 h-4" />
                 Bước khởi đầu hoàn hảo
               </div>
               
-              <h2 className="text-4xl md:text-5xl font-black text-oxford-blue mb-4 leading-tight">
-                File Luận giải Vận mệnh <span className="text-blaze-orange">Cá nhân</span>
+              <h2 className="text-4xl md:text-5xl font-black text-oxford-blue mb-3 leading-tight">
+                Hồ Sơ <span className="text-blaze-orange">Vận Mệnh</span>
               </h2>
 
-              <div className="text-3xl font-black text-blaze-orange mb-8">450.000 VNĐ</div>
+              <p className="text-lg text-cyan-azure font-medium mb-4">
+                Bản đồ đầu tiên hiểu cấu trúc vận hành cá nhân trước khi ra quyết định chiến lược.
+              </p>
+
+              <div className="flex items-baseline gap-3 mb-8">
+                <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">Gói Combo từ:</span>
+                <span className="text-3xl font-black text-blaze-orange">680.000 VNĐ</span>
+                <span className="text-sm font-semibold text-slate-500">(Combo Tiêu Chuẩn & Combo Cao Cấp)</span>
+              </div>
 
               <div className="bg-white rounded-3xl p-8 shadow-sm border border-slate-100 mb-8">
-                <h3 className="text-xl font-bold text-oxford-blue mb-6 border-b border-gray-100 pb-4">Bạn sẽ nhận được trong file:</h3>
+                <h3 className="text-xl font-bold text-oxford-blue mb-6 border-b border-gray-100 pb-4">
+                  Bạn sẽ nhận được trong Hồ Sơ Vận Mệnh:
+                </h3>
                 <ul className="space-y-4 mb-8">
                   {[
-                    'Phân tích đầy đủ 7 chỉ số vận mệnh chính và 12 chỉ số phụ – hiểu rõ bản thân ở tầng sâu nhất',
+                    'Phân tích đầy đủ 7 chỉ số vận mệnh cốt lõi – hiểu rõ bản thân ở tầng sâu nhất',
                     'Biểu đồ Sinh Đồ, Danh Đồ và Công Việc – nhìn thấy bức tranh tổng thể về con người bạn',
-                    'Các mốc Đại vận trong cuộc đời – những thời điểm đỉnh cao và thử thách cần chuẩn bị',
-                    'Định hướng sự nghiệp phù hợp với bộ số vận mệnh của bạn',
-                    'Màu sắc, con số may mắn và lời khuyên cụ thể cho từng chỉ số',
-                    'Vận trình Năm cá nhân – biết năm nay nên tập trung vào điều gì'
+                    'Định vị chu kỳ cuộc đời & phân tích chi tiết giai đoạn hiện tại đang diễn ra',
+                    'Năm cá nhân hiện tại – dự báo thuận lợi, cảnh báo rủi ro và các khuyến nghị hành động',
+                    'Nhìn rõ điểm mạnh bẩm sinh chưa khai thác cùng điểm mù cần đặc biệt lưu ý',
+                    'Thiết kế để làm cẩm nang đồng hành sử dụng nhiều lần qua các giai đoạn cuộc sống'
                   ].map((item, idx) => (
                     <li key={idx} className="flex items-start gap-4">
                       <CheckCircle2 className="w-6 h-6 text-blaze-orange shrink-0 mt-0.5" />
@@ -97,17 +108,18 @@ export function PersonalEntryProduct({ initialProfile }: PersonalEntryProductPro
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4 items-center">
-                <Link href="#buy-450k" className="w-full sm:w-auto">
-                  <Button variant="primary" size="lg" className="h-16 px-10 font-bold w-full text-lg rounded-full shadow-xl shadow-blaze-orange/20 hover:-translate-y-1 transition-transform">
-                    NHẬN FILE LUẬN GIẢI 450K NGAY
+                <Link href="/ho-so-van-menh#pricing-section" className="w-full sm:w-auto">
+                  <Button variant="primary" size="lg" className="h-16 px-10 font-bold w-full text-lg rounded-full shadow-xl shadow-blaze-orange/20 hover:-translate-y-1 transition-transform flex items-center justify-center gap-2">
+                    <span>ĐẶT MUA HỒ SƠ VẬN MỆNH</span>
+                    <ArrowRight className="w-5 h-5" />
                   </Button>
                 </Link>
-                <Link href="#entry" className="hidden sm:block text-cyan-azure hover:text-blaze-orange font-bold transition-colors underline underline-offset-4 ml-4">
-                  Xem chi tiết file luận giải →
+                <Link href="/ho-so-van-menh" className="hidden sm:block text-cyan-azure hover:text-blaze-orange font-bold transition-colors underline underline-offset-4 ml-4">
+                  Xem chi tiết trang Hồ Sơ Vận Mệnh →
                 </Link>
                 {/* Mobile secondary link */}
-                <Link href="#entry" className="sm:hidden text-cyan-azure hover:text-blaze-orange font-bold transition-colors mt-2">
-                  Xem chi tiết file luận giải →
+                <Link href="/ho-so-van-menh" className="sm:hidden text-cyan-azure hover:text-blaze-orange font-bold transition-colors mt-2">
+                  Xem chi tiết trang Hồ Sơ Vận Mệnh →
                 </Link>
               </div>
 
