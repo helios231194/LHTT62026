@@ -14,6 +14,15 @@ interface LeaderDestinyProfileProps {
 
 export function LeaderDestinyProfile({ initialDestinyProfile }: LeaderDestinyProfileProps) {
   const coverUrl = resolveAttachmentUrl(initialDestinyProfile?.cover_image?.[0]?.url) || '/uploads/1784020906703-BanoL.png';
+  const tagline = initialDestinyProfile?.tagline || 'Bước đầu tiên để hiểu mình trước khi ra quyết định.';
+  const description = initialDestinyProfile?.description || 'Trước khi lập Bản đồ Chiến lược 2026 hay tiến hành Tham vấn 1:1, bạn cần hiểu rõ cấu trúc vận hành nội tại của chính mình. Hồ Sơ Vận Mệnh là bản đồ cơ bản đầu tiên giúp bạn thấu suốt điểm mạnh bẩm sinh và chu kỳ đang ở hiện tại.';
+  const priceStandard = initialDestinyProfile?.price_standard || '680.000 VNĐ';
+  const benefitsList = initialDestinyProfile?.benefits?.length > 0 ? initialDestinyProfile.benefits : [
+    'Phân tích sâu 7 chỉ số cốt lõi',
+    'Chu kỳ cuộc đời và giai đoạn hiện tại',
+    'Cảnh báo rủi ro & khuyến nghị Năm cá nhân',
+    'Nhận diện điểm mạnh & điểm mù'
+  ];
 
   return (
     <section className="py-24 bg-white relative overflow-hidden" id="destiny-profile">
@@ -30,7 +39,7 @@ export function LeaderDestinyProfile({ initialDestinyProfile }: LeaderDestinyPro
               <div className="relative aspect-[3/4] max-w-[380px] mx-auto rounded-[2rem] overflow-hidden shadow-2xl bg-white border border-slate-100 group flex items-center justify-center">
                 <img 
                   src={coverUrl}
-                  alt="Hồ Sơ Vận Mệnh" 
+                  alt={initialDestinyProfile?.name || "Hồ Sơ Vận Mệnh"} 
                   className="w-full h-full object-cover transform-gpu hover:scale-105 transition-transform duration-700 ease-out"
                 />
               </div>
@@ -43,13 +52,13 @@ export function LeaderDestinyProfile({ initialDestinyProfile }: LeaderDestinyPro
               <div className="space-y-4">
                 <div className="inline-flex items-center gap-2 px-3 py-1 bg-blaze-orange/10 border border-blaze-orange/20 text-xs font-bold text-blaze-orange uppercase rounded-full">
                   <Sparkles className="w-3.5 h-3.5" />
-                  HỒ SƠ VẬN MỆNH
+                  {initialDestinyProfile?.name || "HỒ SƠ VẬN MỆNH"}
                 </div>
                 <h2 className="text-3xl md:text-5xl font-black tracking-tight text-oxford-blue leading-[1.15]">
-                  Bước đầu tiên để hiểu mình trước khi ra quyết định.
+                  {tagline}
                 </h2>
                 <p className="text-slate-500 font-medium text-base md:text-lg leading-relaxed">
-                  Trước khi lập Bản đồ Chiến lược 2026 hay tiến hành Tham vấn 1:1, bạn cần hiểu rõ cấu trúc vận hành nội tại của chính mình. Hồ Sơ Vận Mệnh là bản đồ cơ bản đầu tiên giúp bạn thấu suốt điểm mạnh bẩm sinh và chu kỳ đang ở hiện tại.
+                  {description}
                 </p>
               </div>
 
@@ -58,22 +67,12 @@ export function LeaderDestinyProfile({ initialDestinyProfile }: LeaderDestinyPro
                   Những giá trị cốt lõi bạn sẽ nhận được:
                 </h4>
                 <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-slate-600 font-medium pl-1">
-                  <li className="flex items-center gap-2.5">
-                    <div className="w-1.5 h-1.5 bg-blaze-orange rounded-full" />
-                    <span>Phân tích sâu 7 chỉ số cốt lõi</span>
-                  </li>
-                  <li className="flex items-center gap-2.5">
-                    <div className="w-1.5 h-1.5 bg-blaze-orange rounded-full" />
-                    <span>Chu kỳ cuộc đời và giai đoạn hiện tại</span>
-                  </li>
-                  <li className="flex items-center gap-2.5">
-                    <div className="w-1.5 h-1.5 bg-blaze-orange rounded-full" />
-                    <span>Cảnh báo rủi ro & khuyến nghị Năm cá nhân</span>
-                  </li>
-                  <li className="flex items-center gap-2.5">
-                    <div className="w-1.5 h-1.5 bg-blaze-orange rounded-full" />
-                    <span>Nhận diện điểm mạnh & điểm mù</span>
-                  </li>
+                  {benefitsList.map((benefit: string, idx: number) => (
+                    <li key={idx} className="flex items-center gap-2.5">
+                      <div className="w-1.5 h-1.5 bg-blaze-orange rounded-full shrink-0" />
+                      <span>{benefit}</span>
+                    </li>
+                  ))}
                 </ul>
               </div>
 
@@ -86,7 +85,7 @@ export function LeaderDestinyProfile({ initialDestinyProfile }: LeaderDestinyPro
                 </Link>
                 <Link href="/ho-so-van-menh#pricing-section" className="w-full sm:w-auto">
                   <Button variant="outline" size="lg" className="w-full h-14 font-bold border-slate-200 hover:bg-slate-50 text-oxford-blue">
-                    ĐẶT MUA COMBO (CHỈ TỪ 680K)
+                    ĐẶT MUA COMBO (CHỈ TỪ {priceStandard})
                   </Button>
                 </Link>
               </div>
