@@ -619,20 +619,19 @@ export function LeaderConsulting({ initialProfile }: LeaderConsultingProps) {
                 </div>
 
                 {/* CTA Buttons */}
-                <div className="p-6 flex flex-col gap-3">
+                <div className="p-5 flex flex-col gap-3">
                   <Button 
                     onClick={() => handleOpenRegister(tier.id)}
                     variant={tier.popular ? 'primary' : 'outline'} 
-                    size="lg" 
-                    className={`w-full h-14 font-bold ${!tier.popular && 'border-gray-200 text-oxford-blue hover:text-white hover:bg-oxford-blue hover:border-oxford-blue'}`}
+                    className={`w-full min-h-[52px] h-auto py-3 px-3 text-xs md:text-xs lg:text-xs xl:text-sm font-bold tracking-tight leading-tight whitespace-normal text-center flex items-center justify-center ${!tier.popular && 'border-gray-200 text-oxford-blue hover:text-white hover:bg-oxford-blue hover:border-oxford-blue'}`}
                   >
                     {tier.ctaTextPrimary}
                   </Button>
                   <button 
                     onClick={() => handleOpenDetails(tier.id)}
-                    className="text-center py-2"
+                    className="text-center py-1.5"
                   >
-                    <span className="text-sm font-bold text-cyan-azure hover:text-blaze-orange transition-colors">
+                    <span className="text-xs sm:text-sm font-bold text-cyan-azure hover:text-blaze-orange transition-colors">
                       {tier.ctaTextSecondary}
                     </span>
                   </button>
