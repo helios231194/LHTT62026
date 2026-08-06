@@ -470,6 +470,14 @@
     // ─────────────────────────────────────────────────────────────
     let destinyProfileData = null;
 
+    function resolveUrl(img) {
+      if (!img) return '';
+      if (typeof img === 'string') return img;
+      if (Array.isArray(img)) img = img[0];
+      if (img && typeof img === 'object') return img.preview || img.url || '';
+      return '';
+    }
+
     async function loadDestinyProfileConfig(area) {
       try {
         const res = await fetch('/api/admin/config?tab=destiny_profile', { headers });
