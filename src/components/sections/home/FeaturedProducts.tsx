@@ -71,8 +71,7 @@ interface FeaturedProductsProps {
 export function FeaturedProducts({ products: initialProducts }: FeaturedProductsProps) {
   const products = useMemo(() => {
     if (!initialProducts || initialProducts.length === 0) return FALLBACK_PRODUCTS;
-    // Lấy tối đa 3 sản phẩm nổi bật
-    return initialProducts.slice(0, 3).map((svc) => ({
+    return initialProducts.map((svc) => ({
       id: svc.slug || String(svc.id),
       badge: svc.badge || null,
       name: svc.name,
@@ -105,7 +104,7 @@ export function FeaturedProducts({ products: initialProducts }: FeaturedProducts
           </div>
         </FadeIn>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto">
+        <div className={`grid grid-cols-1 ${products.length === 4 ? 'md:grid-cols-2 lg:grid-cols-4' : 'md:grid-cols-3'} gap-6 lg:gap-8 max-w-7xl mx-auto`}>
           {products.map((product, idx) => (
             <FadeIn key={product.id} direction="up" delay={idx * 0.12}>
               <div className={`relative flex flex-col h-full rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 group ${
