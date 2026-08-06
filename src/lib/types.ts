@@ -122,6 +122,7 @@ export interface Profile {
   consulting_tier1_img?: Attachment[];
   consulting_tier2_img?: Attachment[];
   consulting_tier3_img?: Attachment[];
+  consulting_tier4_img?: Attachment[];
   book_preview_link?: string;
   tiktok_embed_code?: string;
 }
