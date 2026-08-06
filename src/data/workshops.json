@@ -6,7 +6,7 @@
     "type": "Offline - TP.HCM",
     "category": "personal",
     "sort_order": 1,
-    "image": "/placeholders/workshop-kid.jpg"
+    "image": "/uploads/1784102315390-17.10SGMSLINH14HPFCCHP2094.jpg"
   },
   {
     "id": 2,
@@ -15,7 +15,7 @@
     "type": "Online Zoom",
     "category": "personal",
     "sort_order": 2,
-    "image": "/placeholders/workshop-kid.jpg"
+    "image": "/uploads/1785376997021-17.10SGMSLINH14HPFCCHP2587.jpg"
   },
   {
     "id": 3,
@@ -24,7 +24,7 @@
     "type": "Offline - Hà Nội",
     "category": "personal",
     "sort_order": 3,
-    "image": "/placeholders/workshop-kid.jpg"
+    "image": "/uploads/1784102315390-17.10SGMSLINH14HPFCCHP2094.jpg"
   },
   {
     "id": 4,
@@ -33,7 +33,7 @@
     "type": "Online Zoom",
     "category": "personal",
     "sort_order": 4,
-    "image": "/placeholders/workshop-kid.jpg"
+    "image": "/uploads/1785376997021-17.10SGMSLINH14HPFCCHP2587.jpg"
   },
   {
     "id": 5,
@@ -42,7 +42,7 @@
     "type": "Offline - TP.HCM",
     "category": "business",
     "sort_order": 1,
-    "image": "/placeholders/workshop-ceo.jpg"
+    "image": "/uploads/1785376997021-17.10SGMSLINH14HPFCCHP2587.jpg"
   },
   {
     "id": 6,
@@ -51,7 +51,7 @@
     "type": "Online Zoom",
     "category": "business",
     "sort_order": 2,
-    "image": "/placeholders/workshop-ceo.jpg"
+    "image": "/uploads/1784102315390-17.10SGMSLINH14HPFCCHP2094.jpg"
   },
   {
     "id": 7,
@@ -60,7 +60,7 @@
     "type": "Offline - Hà Nội",
     "category": "business",
     "sort_order": 3,
-    "image": "/placeholders/workshop-ceo.jpg"
+    "image": "/uploads/1785376997021-17.10SGMSLINH14HPFCCHP2587.jpg"
   },
   {
     "id": 8,
@@ -69,6 +69,6 @@
     "type": "Online Zoom",
     "category": "business",
     "sort_order": 4,
-    "image": "/placeholders/workshop-ceo.jpg"
+    "image": "/uploads/1784102315390-17.10SGMSLINH14HPFCCHP2094.jpg"
   }
 ]
