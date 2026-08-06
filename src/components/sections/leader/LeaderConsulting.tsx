@@ -592,46 +592,46 @@ export function LeaderConsulting({ initialProfile }: LeaderConsultingProps) {
           </div>
         </FadeIn>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 max-w-7xl mx-auto items-start">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 xl:gap-8 max-w-[1480px] mx-auto items-start">
           {pricingTiers.map((tier, idx) => (
             <FadeIn key={idx} direction="up" delay={idx * 0.15}>
-              <div className={`relative flex flex-col h-full bg-white rounded-3xl overflow-hidden transition-all duration-300 group ${
+              <div className={`relative flex flex-col h-full bg-white rounded-[2rem] overflow-hidden transition-all duration-300 group hover:shadow-2xl ${
                 tier.popular 
-                  ? 'border-2 border-blaze-orange shadow-2xl shadow-blaze-orange/10 transform lg:-translate-y-4' 
+                  ? 'border-2 border-blaze-orange shadow-2xl shadow-blaze-orange/15 transform lg:-translate-y-4' 
                   : 'border border-gray-200 shadow-xl shadow-cyan-azure/5 mt-4'
               }`}>
                 {tier.popular && (
-                  <div className="absolute top-4 left-1/2 -translate-x-1/2 z-10 bg-blaze-orange text-white px-3 md:px-4 py-1.5 rounded-full text-[10px] sm:text-xs md:text-sm font-bold tracking-wider flex items-center gap-1 shadow-lg whitespace-nowrap">
-                    <Star className="w-3 h-3 md:w-4 md:h-4 fill-white text-white" />
+                  <div className="absolute top-4 left-1/2 -translate-x-1/2 z-10 bg-blaze-orange text-white px-4 py-2 rounded-full text-xs sm:text-sm font-black tracking-wider flex items-center gap-1.5 shadow-lg whitespace-nowrap">
+                    <Star className="w-4 h-4 fill-white text-white" />
                     ĐƯỢC CHỌN NHIỀU NHẤT
                   </div>
                 )}
 
                 {/* Package Image */}
-                <div className="relative w-full aspect-square overflow-hidden">
+                <div className="relative w-full aspect-square overflow-hidden bg-slate-50">
                   <Image
                     src={tier.image}
                     alt={tier.name}
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
                 </div>
 
                 {/* CTA Buttons */}
-                <div className="p-5 sm:p-6 flex flex-col gap-3">
+                <div className="p-6 sm:p-7 flex flex-col gap-3.5">
                   <Button 
                     onClick={() => handleOpenRegister(tier.id)}
                     variant={tier.popular ? 'primary' : 'outline'} 
-                    className={`w-full min-h-[54px] h-auto py-3.5 px-4 text-sm font-extrabold tracking-tight leading-snug whitespace-normal text-center flex items-center justify-center rounded-full transition-all ${!tier.popular && 'border-2 border-slate-200 text-oxford-blue hover:text-white hover:bg-oxford-blue hover:border-oxford-blue'}`}
+                    className={`w-full min-h-[58px] h-auto py-4 px-4 text-sm md:text-base font-black tracking-tight leading-snug whitespace-normal text-center flex items-center justify-center rounded-full shadow-md hover:shadow-xl transition-all ${!tier.popular && 'border-2 border-slate-200 text-oxford-blue hover:text-white hover:bg-oxford-blue hover:border-oxford-blue'}`}
                   >
                     {tier.ctaTextPrimary}
                   </Button>
                   <button 
                     onClick={() => handleOpenDetails(tier.id)}
-                    className="text-center py-1.5"
+                    className="text-center py-2"
                   >
-                    <span className="text-sm font-bold text-cyan-azure hover:text-blaze-orange transition-colors">
+                    <span className="text-sm md:text-base font-bold text-cyan-azure hover:text-blaze-orange transition-colors">
                       {tier.ctaTextSecondary}
                     </span>
                   </button>
