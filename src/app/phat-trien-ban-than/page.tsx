@@ -8,7 +8,7 @@ import { PersonalWhyMaster } from '@/components/sections/personal/PersonalWhyMas
 import { PersonalTestimonials } from '@/components/sections/personal/PersonalTestimonials';
 import { PersonalBook } from '@/components/sections/personal/PersonalBook';
 import { PersonalCTA } from '@/components/sections/personal/PersonalCTA';
-import { getPersonalProducts, getProfile } from '@/lib/local-db';
+import { getPersonalProducts, getProfile, getDestinyProfile } from '@/lib/local-db';
 
 
 
