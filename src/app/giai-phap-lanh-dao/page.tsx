@@ -9,7 +9,7 @@ import { LeaderConsulting } from '@/components/sections/leader/LeaderConsulting'
 import { LeaderTestimonials } from '@/components/sections/leader/LeaderTestimonials';
 import { LeaderTopics } from '@/components/sections/leader/LeaderTopics';
 import { AboutDifference } from '@/components/sections/about/AboutDifference';
-import { getProfile, getDestinyProfile } from '@/lib/local-db';
+import { getProfile, getDestinyProfile, getBusinessProducts } from '@/lib/local-db';
 
 
 export const metadata: Metadata = {
