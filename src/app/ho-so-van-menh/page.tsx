@@ -51,7 +51,7 @@ const videoCourse = [
 ];
 
 export default function HoSoVanMenhPage() {
-  const [profile, setProfile] = useState<any>(null);
+  const [destinyData, setDestinyData] = useState<any>(null);
   const [activeCombo, setActiveCombo] = useState<'standard' | 'premium' | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -66,17 +66,19 @@ export default function HoSoVanMenhPage() {
   });
 
   useEffect(() => {
-    fetch('/api/profile')
+    fetch('/api/admin/config?tab=destiny_profile')
       .then(res => res.json())
       .then(data => {
-        if (data?.data) setProfile(data.data);
+        if (data?.data) setDestinyData(data.data);
       })
-      .catch(err => console.error('Error fetching profile:', err));
+      .catch(err => console.error('Error fetching destiny_profile config:', err));
   }, []);
 
-  const destinyCoverUrl = profile?.destiny_pdf_cover?.[0]
-    ? resolveAttachmentUrl(profile.destiny_pdf_cover[0])
-    : null;
+  const destinyCoverUrl = resolveAttachmentUrl(destinyData?.cover_image?.[0]?.url) || '/uploads/1784020906703-BanoL.png';
+  const tagline = destinyData?.tagline || 'Bước đầu tiên để hiểu mình trước khi ra quyết định chiến lược.';
+  const description = destinyData?.description || 'Hồ Sơ Vận Mệnh là tài liệu phân tích cá nhân hóa được xây dựng riêng theo ngày tháng năm sinh và tên của bạn. Đây là bản đồ đầu tiên để hiểu cấu trúc vận hành nội tại, điểm mạnh bẩm sinh và chu kỳ đang ở hiện tại, trước khi đi sâu vào tham vấn chiến lược.';
+  const priceStandard = destinyData?.price_standard || '680.000 VNĐ';
+  const pricePremium = destinyData?.price_premium || '980.000 VNĐ';
 
   const handleOpenRegister = (combo: 'standard' | 'premium') => {
     setActiveCombo(combo);
@@ -151,12 +153,11 @@ export default function HoSoVanMenhPage() {
               </h1>
               
               <p className="text-lg md:text-2xl text-cyan-azure font-semibold max-w-3xl mx-auto mb-6 leading-relaxed">
-                Bước đầu tiên để hiểu mình trước khi ra quyết định chiến lược.
+                {tagline}
               </p>
               
               <p className="text-left md:text-center text-sm md:text-lg text-white/70 max-w-3xl mx-auto leading-relaxed mb-12">
-                Hồ Sơ Vận Mệnh là tài liệu phân tích cá nhân hóa được xây dựng riêng theo ngày tháng năm sinh và tên của bạn. 
-                Đây là bản đồ đầu tiên để hiểu cấu trúc vận hành nội tại, điểm mạnh bẩm sinh và chu kỳ đang ở hiện tại, trước khi đi sâu vào tham vấn chiến lược.
+                {description}
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -321,7 +322,7 @@ export default function HoSoVanMenhPage() {
                   </div>
                   
                   <div className="flex items-baseline gap-2">
-                    <span className="text-3xl md:text-4xl font-black text-[#4991ba]">680.000 VNĐ</span>
+                    <span className="text-3xl md:text-4xl font-black text-[#4991ba]">{priceStandard}</span>
                   </div>
                   
                   <div className="w-full h-px bg-slate-100" />
@@ -365,7 +366,7 @@ export default function HoSoVanMenhPage() {
                   </div>
                   
                   <div className="flex items-baseline gap-2">
-                    <span className="text-3xl md:text-4xl font-black text-blaze-orange">980.000 VNĐ</span>
+                    <span className="text-3xl md:text-4xl font-black text-blaze-orange">{pricePremium}</span>
                   </div>
                   
                   <div className="w-full h-px bg-slate-100" />
