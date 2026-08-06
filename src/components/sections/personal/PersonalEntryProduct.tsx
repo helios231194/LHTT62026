@@ -11,7 +11,7 @@ interface PersonalEntryProductProps {
 }
 
 export function PersonalEntryProduct({ initialProfile }: PersonalEntryProductProps) {
-  const destinyCoverUrl = resolveAttachmentUrl(initialProfile?.destiny_pdf_cover?.[0]?.url);
+  const destinyCoverUrl = resolveAttachmentUrl(initialProfile?.destiny_pdf_cover?.[0]?.url) || '/uploads/1784020906703-BanoL.png';
 
   return (
     <section className="py-24 md:py-32 bg-ice-white relative overflow-hidden" id="entry">
@@ -24,24 +24,11 @@ export function PersonalEntryProduct({ initialProfile }: PersonalEntryProductPro
           <div className="lg:w-5/12 w-full">
             <FadeIn direction="right">
               <div className="relative w-full aspect-[3/4] rounded-[2rem] overflow-hidden shadow-2xl bg-white border border-slate-100 group flex items-center justify-center">
-                {destinyCoverUrl ? (
-                  <img 
-                    src={destinyCoverUrl}
-                    alt="Hồ Sơ Vận Mệnh" 
-                    className="w-full h-full object-cover transform-gpu hover:scale-105 transition-transform duration-700 ease-out"
-                  />
-                ) : (
-                  <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center bg-slate-50">
-                    <FileText className="w-24 h-24 text-blaze-orange mb-6 group-hover:scale-110 transition-transform duration-700" />
-                    <div className="text-2xl font-black text-oxford-blue tracking-tight mb-2">HỒ SƠ VẬN MỆNH</div>
-                    <div className="text-blaze-orange font-bold tracking-widest text-sm uppercase mb-6">CÁ NHÂN HÓA ~100 TRANG PDF</div>
-                    <div className="space-y-2 opacity-50 blur-[1px]">
-                      <div className="w-48 h-2 bg-slate-300 rounded-full mx-auto" />
-                      <div className="w-32 h-2 bg-slate-300 rounded-full mx-auto" />
-                      <div className="w-56 h-2 bg-slate-300 rounded-full mx-auto" />
-                    </div>
-                  </div>
-                )}
+                <img 
+                  src={destinyCoverUrl}
+                  alt="Hồ Sơ Vận Mệnh" 
+                  className="w-full h-full object-cover transform-gpu hover:scale-105 transition-transform duration-700 ease-out"
+                />
               </div>
             </FadeIn>
           </div>

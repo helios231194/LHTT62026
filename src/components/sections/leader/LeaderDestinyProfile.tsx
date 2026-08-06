@@ -19,31 +19,12 @@ export function LeaderDestinyProfile() {
           {/* Left Block - Graphical Representation */}
           <div className="w-full lg:w-5/12">
             <FadeIn direction="left">
-              <div className="relative aspect-[4/5] max-w-[400px] mx-auto bg-ice-white rounded-[2.5rem] p-8 border border-slate-200 shadow-2xl flex flex-col justify-between overflow-hidden group hover:border-[#4991ba]/30 transition-all duration-300">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-azure/10 rounded-full blur-3xl pointer-events-none" />
-                
-                <div className="flex items-center justify-between border-b border-slate-200 pb-4">
-                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Linh Hoa Tâm • Entry Product</span>
-                  <Award className="w-5 h-5 text-blaze-orange" />
-                </div>
-                
-                <div className="my-auto space-y-5 text-center">
-                  <span className="inline-block py-1 px-3 bg-[#ff6801]/10 text-xs font-bold text-blaze-orange uppercase rounded-full">
-                    SẢN PHẨM KHỞI ĐẦU
-                  </span>
-                  <h3 className="text-3xl font-black text-oxford-blue leading-tight">
-                    HỒ SƠ <br/> VẬN MỆNH
-                  </h3>
-                  <div className="w-16 h-1 bg-cyan-azure mx-auto rounded-full" />
-                  <p className="text-slate-500 text-sm leading-relaxed max-w-xs mx-auto">
-                    Tài liệu cá nhân hóa gần 100 trang PDF phân tích sâu 7 chỉ số cốt lõi và chu kỳ cuộc đời dành riêng cho bạn.
-                  </p>
-                </div>
-                
-                <div className="border-t border-slate-200 pt-4 flex items-center justify-between text-slate-400 text-xs font-bold">
-                  <span>Ship sách in toàn quốc</span>
-                  <span>PDF gửi qua Zalo/Email</span>
-                </div>
+              <div className="relative aspect-[3/4] max-w-[380px] mx-auto rounded-[2rem] overflow-hidden shadow-2xl bg-white border border-slate-100 group">
+                <img 
+                  src="/uploads/1784020906703-BanoL.png"
+                  alt="Hồ Sơ Vận Mệnh" 
+                  className="w-full h-full object-cover transform-gpu hover:scale-105 transition-transform duration-700 ease-out"
+                />
               </div>
             </FadeIn>
           </div>
