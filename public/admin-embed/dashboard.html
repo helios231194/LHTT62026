@@ -475,6 +475,9 @@
         const res = await fetch('/api/admin/config?tab=destiny_profile', { headers });
         const payload = await res.json();
         destinyProfileData = payload.data || {};
+        if (Array.isArray(destinyProfileData)) {
+          destinyProfileData = destinyProfileData[0] || {};
+        }
 
         const coverUrl = resolveUrl(destinyProfileData.cover_image) || '/uploads/1784020906703-BanoL.png';
 

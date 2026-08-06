@@ -62,7 +62,7 @@ async function readJsonFile(filename: string): Promise<any> {
   } catch (error: any) {
     if (error.code === 'ENOENT') {
       // Return empty array for lists, empty object for singular config files
-      if (['homepage.json', 'speaker_assets.json'].includes(filename)) {
+      if (['homepage.json', 'speaker_assets.json', 'destiny_profile.json'].includes(filename)) {
         return {};
       }
       return [];
