@@ -18,6 +18,7 @@ const TAB_FILES: Record<string, string> = {
   workshops: 'workshops.json',
   book_feedbacks: 'book_feedbacks.json',
   book_videos: 'book_videos.json',
+  leads: 'leads.json',
 };
 
 // Verify Admin Token via NocoBase API

@@ -14,6 +14,7 @@ import { HomeCTA } from '@/components/sections/home/HomeCTA';
 import { RepresentativeSection } from '@/components/sections/home/RepresentativeSection';
 import { TikTokEmbed } from '@/components/sections/home/TikTokEmbed';
 import { getProfile, getStats, getTestimonials, getBusinessProducts, getPartners } from '@/lib/local-db';
+import { resolveAttachmentUrl } from '@/lib/nocobase';
 
 // Cập nhật cache mỗi 10 giây - tối ưu SEO Google và cập nhật nhanh
 
@@ -191,7 +192,7 @@ export default async function Home() {
         <RepresentativeSection />
 
         {/* Section 12 - TikTok */}
-        <TikTokEmbed />
+        <TikTokEmbed avatarUrl={resolveAttachmentUrl(profile?.avatar?.[0]?.url)} />
       </main>
       <Footer />
     </>
