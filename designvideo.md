@@ -2,7 +2,8 @@
 
 > **Brand Vision:** Linh Hoa Tâm - Thuật Số Học Ứng Dụng Thực Chiến  
 > **Brand Persona / Speaker:** Master Hoàng Mai Linh  
-> **Official Channel:** [@linhhoatam11 (TikTok)](https://www.tiktok.com/@linhhoatam11)  
+> **Website URL:** https://lhtt62026.apps.agentic.io.vn  
+> **Official Channel:** https://www.tiktok.com/@linhhoatam11  
 > **Target Audience:** Nhà Lãnh Đạo, Doanh Chủ, High Performers & Cá Nhân Phát Triển  
 > **Version:** 2026.1  
 
@@ -46,14 +47,22 @@ Mọi video ngắn (TikTok/Reels/Shorts) và video dài (YouTube/Webinar) của 
 
 ---
 
-## 🖼️ 3. LINK LOGO & ASSETS THƯƠNG HIỆU (LOGO & BRAND ASSETS)
+## 🌐 3. DANH SÁCH ĐƯỜNG DẪN URL TÀI NGUYÊN LOGO & ASSETS (WEB URL LINKS)
 
-Toàn bộ tài nguyên logo và hình ảnh chính thức của Linh Hoa Tâm phục vụ dựng phim:
+Dưới đây là các đường dẫn URL trực tiếp (Public Web URLs) phục vụ tải tài nguyên dựng phim:
 
-### **A. Đường Dẫn Logo & Watermark:**
-- 🔹 **Vector Logo (SVG/PNG):** [logo.svg](file:///Users/thuongvanhoai/Documents/Antigravity/LHT-website-main/public/images/logo.svg) (`/images/logo.svg`)
-- 🔹 **Biểu Tượng Thương Hiệu (Brand Avatar):** [Gemini_Generated_Image_7y38qs7y38qs7y38.png](file:///Users/thuongvanhoai/Documents/Antigravity/LHT-website-main/public/uploads/1785376990481-Gemini_Generated_Image_7y38qs7y38qs7y38.png)
-- 🔹 **Ảnh Master Hoàng Mai Linh (Chất lượng cao):** [17.10SGMSLINH14HPFCCHP2587.jpg](file:///Users/thuongvanhoai/Documents/Antigravity/LHT-website-main/public/uploads/1785376997021-17.10SGMSLINH14HPFCCHP2587.jpg)
+- 🔹 **Vector Logo (SVG):**  
+  `https://lhtt62026.apps.agentic.io.vn/images/logo.svg`
+- 🔹 **Biểu Tượng Thương Hiệu (Brand Avatar PNG):**  
+  `https://lhtt62026.apps.agentic.io.vn/uploads/1785376990481-Gemini_Generated_Image_7y38qs7y38qs7y38.png`
+- 🔹 **Ảnh Master Hoàng Mai Linh HD (Chân Dung Speaker):**  
+  `https://lhtt62026.apps.agentic.io.vn/uploads/1785376997021-17.10SGMSLINH14HPFCCHP2587.jpg`
+- 🔹 **Ảnh Master Hoàng Mai Linh (Diễn Thuyết / Workshop):**  
+  `https://lhtt62026.apps.agentic.io.vn/uploads/1784102315390-17.10SGMSLINH14HPFCCHP2094.jpg`
+- 🔹 **Ảnh Bìa Sản Phẩm Hồ Sơ Vận Mệnh:**  
+  `https://lhtt62026.apps.agentic.io.vn/uploads/1784020906703-BanoL.png`
+- 🔹 **Kênh TikTok Chính Thức:**  
+  `https://www.tiktok.com/@linhhoatam11`
 
 ### **B. Quy Tắc Đặt Logo Watermark Trong Video:**
 - **Vị trí:** Góc trên bên phải (Top-Right) hoặc Góc dưới bên phải (Bottom-Right).

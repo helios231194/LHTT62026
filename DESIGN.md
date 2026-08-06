@@ -1,287 +1,102 @@
-# DESIGN.md — Hệ Thống Thiết Kế · Linh Hoa Tâm
+# 🎨 DESIGN SPECIFICATION - LINH HOA TÂM (LHT)
 
-> Tài liệu này là **nguồn sự thật duy nhất (Single Source of Truth)** về hệ thống thiết kế.  
-> Mọi thay đổi về màu sắc, typography hay component phải đồng bộ vào đây trước khi triển khai.
-
----
-
-## 1. Bảng Màu Thương Hiệu (Color Palette)
-
-### 1.1 Brand Core Colors
-
-| Token | Tailwind Class | Hex | CSS Variable | Vai trò |
-|---|---|---|---|---|
-| Oxford Blue | `oxford-blue` | `#002B57` | `--brand-oxford-blue` | Màu chính – Header, tiêu đề, nền tối |
-| Cyan Azure | `cyan-azure` | `#00AEEF` | `--brand-cyan-azure` | Accent xanh – CTA phụ, link, badge |
-| Metallic Blue | `metallic-blue` | `#205E8C` | `--brand-metallic-blue` | Trung gian – hover, border, divider |
-| Dark Blue | `dark-blue` | `#051926` | `--brand-dark-blue` | Text chính trên nền sáng |
-| Blaze Orange | `blaze-orange` | `#FF6801` | `--brand-blaze-orange` | Accent cam – CTA, highlight, button primary |
-| Ice White | `ice-white` | `#EBEBF1` | `--brand-ice-white` | Nền trang chính (Page Background) |
-
-### 1.2 Background Rules theo Ngữ cảnh
-
-| Ngữ cảnh | Class phải dùng | Ghi chú |
-|---|---|---|
-| `<body>`, `<main>` | `bg-ice-white` | Nền mặc định toàn trang |
-| Header (chưa cuộn) | `#EBEBF1` inline | Đồng với ice-white |
-| Header (đã cuộn) | `#ffffff` inline | Intentional – tạo độ nổi |
-| Footer | `bg-oxford-blue` | Nền tối |
-| Section xen kẽ | `bg-[#F8FAFC]` | Accepted accent rhythm |
-| Card, modal, dropdown | `bg-white`, `bg-white/70` | Component level – OK |
-| **KHÔNG DÙNG** làm section bg | `bg-gray-*`, `bg-slate-*` | ❌ Off-brand |
+> **Brand Vision:** Linh Hoa Tâm - Thuật Số Học Ứng Dụng Thực Chiến Cho Nhà Lãnh Đạo & Doanh Chủ  
+> **Lead Strategist & Expert:** Master Hoàng Mai Linh  
+> **Version:** 2026.1  
 
 ---
 
-## 2. Typography
+🤖 **Applying knowledge of `@[frontend-specialist]`...**
 
-### 2.1 Font Family
+---
 
-| Tên | Loại | Nguồn | Class |
+## 🏛️ 1. DESIGN PHILOSOPHY & BRAND IDENTITY
+
+Linh Hoa Tâm không đại diện cho bói toán hay mê tín dị đoan. Thương hiệu đứng ở giao điểm giữa **Tri thức Cổ xưa (Ancient Wisdom)** và **Quản trị Hiện đại (Modern Management)**.
+
+### **Core Brand Pillars:**
+1. **Thực Chiến & Khoa Học:** Mọi luận giải đều hướng tới tính ứng dụng trong công việc, sự nghiệp, nhân sự và quản trị.
+2. **Sang Trọng & Tinh Tế:** Sử dụng ngôn ngữ thiết kế tối giản, cao cấp, lấy độ tương phản mạnh và typography chuẩn mực làm điểm tựa.
+3. **Chạm Cảm Xúc & Truyền Cảm Hứng:** Sử dụng visual depth, hình ảnh chân thực của Master Hoàng Mai Linh và animation chuyển động mượt mà.
+
+---
+
+## 🎨 2. COLOR SYSTEM & DESIGN TOKENS
+
+### **Primary Color Palette (Purple Ban Strictly Enforced 🚫):**
+- **Oxford Blue (`#0B132B` / `bg-oxford-blue`):** Màu chủ đạo đại diện cho sự sâu sắc, uy tín, tri thức và chiều sâu quản trị.
+- **Blaze Orange (`#FF5722` / `text-blaze-orange`):** Màu điểm nhấn thương hiệu (Brand Accent), đại diện cho năng lượng, sự bứt phá và nhiệt huyết.
+- **Ice White (`#F8FAFC` / `bg-ice-white`):** Nền sáng chuẩn mực giúp nổi bật nội dung và mang lại sự thanh thoát.
+- **Cyan Azure (`#4991BA` / `text-cyan-azure`):** Màu phụ trợ cho các badge, icon và điểm nhấn công nghệ.
+- **Champagne Gold (`#D4AF37` / `text-gold`):** Điểm nhấn sang trọng cho các chứng nhận, huy hiệu VIP và gói dịch vụ cao cấp.
+
+```css
+/* Core Design Tokens */
+:root {
+  --color-oxford-blue: #0B132B;
+  --color-blaze-orange: #FF5722;
+  --color-ice-white: #F8FAFC;
+  --color-cyan-azure: #4991BA;
+  --color-gold: #D4AF37;
+  --font-title: 'Playfair Display', Georgia, serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+}
+```
+
+---
+
+## 🔤 3. TYPOGRAPHY SYSTEM
+
+- **Headings (H1, H2, H3):** Playfair Display (`font-title`) - Đem lại khí chất cổ điển, uy nghiêm và sang trọng.
+- **Body & Subtitles:** Inter (`font-body`) - Đảm bảo độ đọc tối ưu trên mọi màn hình di động & máy tính.
+
+| Level | Size | Weight | Usage |
 |---|---|---|---|
-| **Poppins** | Sans-serif (Primary) | Google Fonts / next/font | `font-poppins` |
-
-### 2.2 Type Scale
-
-| Cấp | Tailwind | Dùng cho |
-|---|---|---|
-| Display | `text-5xl`–`text-7xl font-black` | Hero Headline |
-| H1 | `text-4xl`–`text-5xl font-bold` | Section title |
-| H2 | `text-3xl`–`text-4xl font-bold` | Sub-section |
-| H3 | `text-xl`–`text-2xl font-bold` | Card title |
-| H4 | `text-lg font-semibold` | Label, item |
-| Body | `text-base font-normal` | Paragraph |
-| Caption | `text-sm`, `text-xs` | Meta, badge |
-
-### 2.3 Text Color Rules
-
-| Ngữ cảnh | Class |
-|---|---|
-| Text chính trên nền sáng | `text-oxford-blue` hoặc `text-dark-blue` |
-| Text phụ | `text-slate-600`, `text-metallic-blue` |
-| Text trên nền tối | `text-ice-white`, `text-cyan-azure` |
-| Link | `text-cyan-azure hover:text-blaze-orange` |
-| Highlight | `text-blaze-orange` |
+| **H1 Hero** | 2.75rem - 3.75rem | Bold (700) | Hero Headline |
+| **H2 Section** | 2.0rem - 2.5rem | Bold (700) | Tên mục lớn |
+| **H3 Card Header** | 1.25rem - 1.5rem | SemiBold (600) | Tên sản phẩm, thẻ dịch vụ |
+| **Body Text** | 1.0rem (16px) | Regular (400) | Nội dung chi tiết |
+| **Small Badge** | 0.875rem (14px) | Medium (500) | Thẻ phân loại, Tagline |
 
 ---
 
-## 3. Spacing & Layout
+## 📐 4. LAYOUT & TOPOLOGICAL RULES
 
-### 3.1 Container
-```
-max-width: 1280px
-class: container mx-auto px-4 md:px-6
-```
-
-### 3.2 Section Vertical Rhythm
-
-| Loại section | Padding |
-|---|---|
-| Section bình thường | `py-20` |
-| Section lớn | `py-24 md:py-32` |
-| Section compact | `py-12 md:py-16` |
+### **Layout Principles:**
+1. **Asymmetric Tension (Bất đối xứng):** Tránh bố cục 50/50 nhàm chán. Sử dụng tỷ lệ 60/40 hoặc 70/30 để tạo nhịp điệu thị giác.
+2. **Whitespace (Khoảng thở):** Khoảng cách giữa các section luôn từ 80px - 120px trên Desktop và 48px - 64px trên Mobile.
+3. **Card Radius Strategy:**
+   - Thẻ dịch vụ / sản phẩm: `rounded-2xl` (16px) kết hợp viền mảnh `border border-slate-100`.
+   - Nút bấm (CTA): `rounded-full` hoặc `rounded-xl` tạo cảm giác hiện đại, dễ tương tác.
 
 ---
 
-## 4. Component Catalog
+## ✨ 5. ANIMATIONS & MICRO-INTERACTIONS
 
-### 4.1 Button (`src/components/ui/Button.tsx`)
-
-| Variant | Nền | Text | Hover |
-|---|---|---|---|
-| `primary` | Blaze Orange `#ff6801` | White | `#e05a00` |
-| `secondary` | Oxford Blue `#002b57` | Ice White | Metallic Blue |
-| `outline` | Transparent | Oxford Blue | Oxford Blue fill |
-| `ghost` | Transparent | Oxford Blue | Ice White + Orange |
-
-### 4.2 GlowCard (`src/components/ui/spotlight-card.tsx`)
-
-Hiệu ứng ánh sáng Spotlight bám theo con trỏ chuột.
-- Props: `glowColor` ("blaze-orange" | "cyan-azure"), `customSize` (bool)
-```tsx
-<GlowCard glowColor="blaze-orange" customSize className="bg-white rounded-3xl">
-  ...content...
-</GlowCard>
-```
-
-### 4.3 AnimationWrapper (`src/components/ui/AnimationWrapper.tsx`)
-
-- `<FadeIn direction="up" delay={0.1}>` — fade + slide khi scroll vào
-- `<StaggerContainer>` — stagger effect cho list
-
-### 4.4 Header (`src/components/layout/Header.tsx`)
-
-- Fixed, `z-index: 9999`, height `64px`
-- Nền chuyển `#EBEBF1 → #ffffff` + shadow khi `scrollY > 20`
-- **Scroll Progress Bar**: cam `#ff6801` dày 3px ở đáy header
-- Desktop dropdown: `bg-white rounded-xl shadow-xl`
-- Mobile menu: `bg-ice-white/98 backdrop-blur-lg`
-
-### 4.5 Footer (`src/components/layout/Footer.tsx`)
-
-- `bg-oxford-blue text-ice-white`
-- Link: `text-cyan-azure hover:text-blaze-orange`
-- Icon: `text-blaze-orange`
-- Divider: `border-metallic-blue`
+1. **Scroll Entrance Animations:**
+   - Sử dụng hiệu ứng `fade-in-up` với `stagger-delay` cho các danh sách thẻ bài viết và sản phẩm.
+2. **Hover Feedback:**
+   - Thẻ sản phẩm: `hover:-translate-y-1.5 transition-all duration-300 shadow-xl hover:shadow-2xl`.
+   - Nút bấm CTA: Hiệu ứng `scale-105` và đổ bóng cam `shadow-orange-500/25`.
+3. **TikTok Embed Integration:**
+   - Khung phát TikTok dạng Blockquote chạy script nhúng động, hiển thị card thông tin kênh `@linhhoatam11` với thiết kế màu `bg-ice-white` và badge `blaze-orange`.
 
 ---
 
-## 5. Animation & Motion
+## 📦 6. CORE PRODUCTS & CONTENT MAPPING
 
-### 5.1 CSS Animations (globals.css)
-
-| Animation | Class | Duration |
-|---|---|---|
-| Logo Ticker | `animate-ticker` | 20s linear infinite |
-| Fade Slide Up | `animate-fadeSlideUp` | 0.6s ease-out |
-
-### 5.2 Framer Motion Patterns
-
-- Modal: `AnimatePresence` + scale `0.95→1` + opacity `0→1`
-- Hover card: `hover:-translate-y-2 transition-transform duration-300`
-- Stagger: children delay `0.08s–0.1s`
+### **Phễu Sản Phẩm Chiến Lược: Hồ Sơ Vận Mệnh (`/ho-so-van-menh`)**
+- **Combo Tiêu Chuẩn (680.000 VNĐ):** File luận giải chi tiết 100+ trang + Định hướng sự nghiệp 2026.
+- **Combo Cao Cấp (980.000 VNĐ):** File luận giải + Buổi tham vấn 1:1 cùng Chuyên gia + Kế hoạch hành động 12 tháng.
 
 ---
 
-## 6. Section Pattern Library
+## 🛡️ 7. PERFORMANCE & SEO MANDATE
 
-| Pattern | Class | Dùng cho |
-|---|---|---|
-| Light (default) | `bg-ice-white py-24 md:py-32` | Giới thiệu, tính năng |
-| Light Accent | `bg-[#F8FAFC] py-24 md:py-32` | Coaching, workshop, values |
-| Dark | `bg-oxford-blue py-24 md:py-32 text-ice-white` | CTA, hero tối |
-| Hero gradient | `bg-ice-white + overlay/image` | Hero section |
+- **Core Web Vitals:** LCP < 2.5s, CLS = 0, FID/INP < 100ms.
+- **Image Optimization:** 100% hình ảnh hiển thị qua `resolveAttachmentUrl()` đảm bảo mã HTTP 200 OK.
+- **SEO & GEO Ready:** Đã tích hợp Schema.org, OpenGraph, Canonical URLs và Twitter Cards.
 
 ---
 
-## 7. COLOR AUDIT REPORT
-
-> Quét toàn bộ 15 trang + component. Ngày kiểm toán: **2026-07-03**.
-
-### ✅ Trang nhất quán (PASS)
-
-| Trang | Route | `<main>` BG |
-|---|---|---|
-| Trang chủ | `/` | `bg-ice-white` |
-| Liên hệ | `/lien-he` | `bg-ice-white` |
-| Kiến thức | `/kien-thuc` | `bg-ice-white` |
-| Cộng đồng | `/cong-dong` | `bg-ice-white` |
-| Webinar | `/webinar` | `bg-ice-white` |
-| Speaker | `/speaker` | `bg-ice-white` |
-| Trường đại diện | `/truong-dai-dien` | `bg-ice-white` |
-| Workshop cá nhân | `/workshop-ca-nhan` | `bg-ice-white` |
-| Workshop chiến lược | `/workshop-chien-luoc` | `bg-ice-white` |
-| Giải pháp lãnh đạo | `/giai-phap-lanh-dao` | `bg-ice-white` |
-| Phát triển bản thân | `/phat-trien-ban-than` | `bg-ice-white` |
-
----
-
-### 🔴 CRITICAL — Thiếu nền trang + bg-white sai cấp
-
-#### `/linh-hoa-tam`
-- `<main>` chỉ có `className="pt-16"` — **thiếu `bg-ice-white`**
-- `LHTValues.tsx` section dùng `bg-[#F8FAFC]` (hardcoded, không phải token)
-- **Thiếu `<Footer />`** — trang không có footer!
-- **Fix**: Thêm `bg-ice-white` vào `<main>`, thêm Footer.
-
-#### `/master-hoang-mai-linh`
-- `<main>` chỉ có `className="pt-16"` — **thiếu `bg-ice-white`**
-- `MasterRoles.tsx` dùng `bg-white` ở cấp `<section>` — nên đổi sang `bg-ice-white`
-- **Thiếu `<Footer />`** — trang không có footer!
-- **Fix**: Thêm `bg-ice-white` vào `<main>`, sửa section, thêm Footer.
-
-#### `/phuong-phap`
-- `<main>` chỉ có `className="pt-16"` — **thiếu `bg-ice-white`**
-- `MethIndicators.tsx` section dùng `bg-white`
-- `MethApplication.tsx` section dùng `bg-white`
-- **Fix**: Thêm `bg-ice-white` vào `<main>`, đổi các section bg-white thành `bg-ice-white`.
-
-#### `/sach`
-- `<main>` chỉ có `className="overflow-hidden"` — **thiếu `bg-ice-white` VÀ `pt-16`** (nguy cơ header che nội dung!)
-- `BookContent.tsx` section dùng `bg-white`
-- `BookDetails.tsx` section dùng `bg-white`
-- **Fix**: Đổi main thành `className="min-h-screen pt-16 bg-ice-white overflow-hidden"`, sửa sections.
-
----
-
-### 🟡 MEDIUM — bg-white ở cấp section (trang chủ)
-
-| Component | Vấn đề | Đề xuất |
-|---|---|---|
-| `TrustBar` (trang chủ) | `bg-white border-b border-gray-200` làm section | `bg-[#F8FAFC]` hoặc `bg-ice-white` |
-| `Testimonials` (trang chủ) | `bg-white` làm section | `bg-[#F8FAFC]` |
-| `CoreValues.tsx` | `bg-white` trên `<section>` | `bg-[#F8FAFC]` |
-
----
-
-### 🟡 LOW — Màu ngoài palette nhưng ít ảnh hưởng
-
-| File | Vấn đề | Ghi chú |
-|---|---|---|
-| `Hero.tsx:31` | `bg-[#FAFAF9]` overlay | Đổi → `bg-ice-white` |
-| `MethIndicators.tsx` | `bg-gray-50`, `bg-gray-100` trong bảng | Chấp nhận làm table stripe |
-| `BookDetails.tsx` | `bg-gray-50` trong content preview | Acceptable |
-| `PersonalCoaching.tsx:133` | `bg-gray-200` divider | Đổi → `bg-slate-200` |
-| `PersonalCoaching.tsx:315` | `bg-emerald-50 text-emerald-500` modal success | Đổi → `bg-cyan-azure/10 text-cyan-azure` |
-| `WorkshopHero.tsx` | `bg-green-500` pulse badge | Acceptable làm status indicator |
-| `SpeakerCredential.tsx` | `bg-green-500/20` icon | Acceptable |
-
----
-
-### 🟢 Chấp nhận được (card/component level)
-
-Tất cả `bg-white` ở cấp độ **card**, **modal**, **dropdown**, **form input**, **table row** đều ổn theo spec thiết kế.
-
----
-
-## 8. Ưu tiên Fix — Action Items
-
-| # | File cần sửa | Fix | Priority |
-|---|---|---|---|
-| 1 | `linh-hoa-tam/page.tsx` | Thêm `bg-ice-white` vào `<main>`, import + render `<Footer />` | 🔴 NGAY |
-| 2 | `master-hoang-mai-linh/page.tsx` | Thêm `bg-ice-white`, import + render `<Footer />` | 🔴 NGAY |
-| 3 | `phuong-phap/page.tsx` | Thêm `bg-ice-white` vào `<main>` | 🔴 NGAY |
-| 4 | `sach/page.tsx` | Thêm `bg-ice-white pt-16` vào `<main>` | 🔴 NGAY |
-| 5 | `MasterRoles.tsx` | section `bg-white` → `bg-ice-white` | 🟡 Medium |
-| 6 | `MethIndicators.tsx` + `MethApplication.tsx` | section `bg-white` → `bg-ice-white` | 🟡 Medium |
-| 7 | `BookContent.tsx` + `BookDetails.tsx` | section `bg-white` → `bg-ice-white` | 🟡 Medium |
-| 8 | `CoreValues.tsx` | `bg-white` → `bg-[#F8FAFC]` | 🟡 Medium |
-| 9 | `PersonalCoaching.tsx` (modal success) | `emerald` → `cyan-azure` | 🟢 Low |
-| 10 | `Hero.tsx:31` | `#FAFAF9` → `bg-ice-white` | 🟢 Low |
-
----
-
-## 9. Cấu Trúc File Dự Án
-
-```
-src/
-├── app/
-│   ├── layout.tsx                 # Root layout: font, JSON-LD, body bg
-│   ├── globals.css                # CSS vars + animation keyframes
-│   ├── page.tsx                   # Trang chủ
-│   └── [pages]/page.tsx           # 14 trang con
-├── components/
-│   ├── layout/
-│   │   ├── Header.tsx             # Fixed header + scroll progress bar
-│   │   └── Footer.tsx             # Dark footer
-│   ├── sections/                  # Sections theo trang
-│   │   ├── Hero.tsx
-│   │   ├── CoreValues.tsx         # ⚠️ bg-white ở section level
-│   │   ├── personal/
-│   │   ├── leader/
-│   │   ├── workshop/
-│   │   ├── knowledge/
-│   │   ├── linh-hoa-tam/          # ⚠️ LHTValues bg hardcoded
-│   │   ├── phuong-phap/           # ⚠️ Meth sections bg-white
-│   │   └── sach/                  # ⚠️ Book sections bg-white
-│   └── ui/
-│       ├── Button.tsx
-│       ├── spotlight-card.tsx     # GlowCard
-│       ├── AnimationWrapper.tsx   # FadeIn, Stagger
-│       └── ...
-└── lib/
-    └── utils.ts                   # cn() utility
-```
-
----
-
-*Tài liệu được tạo từ kiểm toán toàn bộ source code. Cập nhật lần cuối: 2026-07-03.*
+*Tài liệu này là tiêu chuẩn thiết kế chính thức được áp dụng trên toàn bộ codebase website Linh Hoa Tâm.*
