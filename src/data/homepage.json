@@ -96,6 +96,14 @@
       "mimetype": "image/png"
     }
   ],
+  "strategy_pdf_cover": [
+    {
+      "id": 1785312695170,
+      "filename": "800x800_2.png",
+      "url": "/uploads/1785312695170-800x800_2.png",
+      "mimetype": "image/png"
+    }
+  ],
   "consulting_tier1_img": [
     {
       "id": 1784069571146,

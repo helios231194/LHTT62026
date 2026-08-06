@@ -13,7 +13,7 @@ interface LeaderStrategyMapProps {
 }
 
 export function LeaderStrategyMap({ initialProfile }: LeaderStrategyMapProps) {
-  const strategyCoverUrl = resolveAttachmentUrl(initialProfile?.strategy_pdf_cover?.[0]?.url);
+  const strategyCoverUrl = resolveAttachmentUrl(initialProfile?.strategy_pdf_cover?.[0]?.url) || '/uploads/1785312695170-800x800_2.png';
 
   return (
     <section className="py-24 md:py-32 bg-oxford-blue text-white relative overflow-hidden">
@@ -85,20 +85,11 @@ export function LeaderStrategyMap({ initialProfile }: LeaderStrategyMapProps) {
             <FadeIn direction="up" delay={0.2}>
               <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl border border-white/10 group flex items-center justify-center bg-oxford-blue">
                 <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-white/0 z-10" />
-                {strategyCoverUrl ? (
-                  <img 
-                    src={strategyCoverUrl}
-                    alt="Bản đồ Chiến lược doanh nghiệp" 
-                    className="w-full h-full object-cover transform-gpu hover:scale-105 transition-transform duration-700 ease-out"
-                  />
-                ) : (
-                  <div className="absolute inset-0 flex items-center justify-center bg-oxford-blue/50 backdrop-blur-md">
-                    <div className="text-center relative z-20">
-                      <Map className="w-24 h-24 mx-auto text-blaze-orange/50 mb-4 group-hover:scale-110 transition-transform duration-700" />
-                      <div className="text-2xl font-bold tracking-widest text-white/50">MOCKUP 100+ TRANG PDF</div>
-                    </div>
-                  </div>
-                )}
+                <img 
+                  src={strategyCoverUrl}
+                  alt="Bản đồ Chiến lược doanh nghiệp" 
+                  className="w-full h-full object-cover transform-gpu hover:scale-105 transition-transform duration-700 ease-out"
+                />
               </div>
             </FadeIn>
           </div>
