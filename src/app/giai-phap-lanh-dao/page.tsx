@@ -53,6 +53,8 @@ export default async function GiaiPhapLanhDaoPage() {
   const destinyProfile = await getDestinyProfile();
   const businessProductsRes = await getBusinessProducts();
   const businessProducts = businessProductsRes.data || [];
+  const testimonialsRes = await getTestimonials('home');
+  const testimonials = testimonialsRes.data || [];
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://linhhoatam.com';
 
   const serviceSchema = {
@@ -111,7 +113,7 @@ export default async function GiaiPhapLanhDaoPage() {
         <LeaderConsulting initialProfile={profile} initialBusinessProducts={businessProducts} />
         
         {/* SECTION 5 – CHIA SẺ TỪ LÃNH ĐẠO */}
-        <LeaderTestimonials />
+        <LeaderTestimonials initialTestimonials={testimonials} />
         
         {/* SECTION 6 – LINH HOA TÂM VS. THỊ TRƯỜNG */}
         <AboutDifference />
