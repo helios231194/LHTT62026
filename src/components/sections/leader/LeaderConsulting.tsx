@@ -416,6 +416,26 @@ const packageDetails: Record<string, PackageDetail> = {
         ]
       }
     ]
+  },
+  'cai-to-doanh-nghiep': {
+    id: 'cai-to-doanh-nghiep',
+    name: 'CẢI TỔ DOANH NGHIỆP & TÁI CẤU TRÚC',
+    subtitle: 'Phân tích tổng thể cấu trúc nhân sự và thời điểm phù hợp để tái cơ cấu tổ chức',
+    price: 'Liên hệ',
+    duration: 'Tư vấn & Đồng hành tái cấu trúc',
+    objective: 'Giúp Doanh nghiệp phân tích cấu trúc tổ chức hiện tại, xác định nhân sự vị trí then chốt, xây dựng lộ trình tái cơ cấu và lựa chọn thời điểm triển khai tối ưu.',
+    sections: [
+      {
+        title: 'Hạng mục tái cấu trúc',
+        items: [
+          'Phân tích cấu trúc tổ chức hiện tại',
+          'Xác định vị trí & nhân sự then chốt',
+          'Xây dựng lộ trình tái cơ cấu doanh nghiệp',
+          'Lựa chọn thời điểm triển khai tối ưu',
+          'Theo dõi & cố vấn sau tái cơ cấu'
+        ]
+      }
+    ]
   }
 };
 
@@ -423,6 +443,7 @@ export function LeaderConsulting({ initialProfile }: LeaderConsultingProps) {
   const tier1ImgUrl = resolveAttachmentUrl(initialProfile?.consulting_tier1_img?.[0]?.url) || PLACEHOLDER;
   const tier2ImgUrl = resolveAttachmentUrl(initialProfile?.consulting_tier2_img?.[0]?.url) || PLACEHOLDER;
   const tier3ImgUrl = resolveAttachmentUrl(initialProfile?.consulting_tier3_img?.[0]?.url) || PLACEHOLDER;
+  const tier4ImgUrl = resolveAttachmentUrl(initialProfile?.consulting_tier4_img?.[0]?.url) || '/uploads/1784069618158-800x800_3.png';
 
   const pricingTiers = [
     {
@@ -447,6 +468,14 @@ export function LeaderConsulting({ initialProfile }: LeaderConsultingProps) {
       image: tier3ImgUrl,
       popular: false,
       ctaTextPrimary: 'ĐẶT LỊCH WORKSHOP ĐỘI NGŨ',
+      ctaTextSecondary: 'Xem chi tiết →',
+    },
+    {
+      id: 'cai-to-doanh-nghiep',
+      name: 'CẢI TỔ DOANH NGHIỆP & TÁI CẤU TRÚC',
+      image: tier4ImgUrl,
+      popular: false,
+      ctaTextPrimary: 'YÊU CẦU TƯ VẤN CẢI TỔ',
       ctaTextSecondary: 'Xem chi tiết →',
     }
   ];
@@ -563,7 +592,7 @@ export function LeaderConsulting({ initialProfile }: LeaderConsultingProps) {
           </div>
         </FadeIn>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto items-start">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 max-w-7xl mx-auto items-start">
           {pricingTiers.map((tier, idx) => (
             <FadeIn key={idx} direction="up" delay={idx * 0.15}>
               <div className={`relative flex flex-col h-full bg-white rounded-3xl overflow-hidden transition-all duration-300 group ${
