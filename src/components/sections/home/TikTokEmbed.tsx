@@ -1,13 +1,35 @@
 'use client';
+import { useEffect, useRef } from 'react';
 import { FadeIn } from '@/components/ui/AnimationWrapper';
 import { ExternalLink, CheckCircle2 } from 'lucide-react';
 import Image from 'next/image';
 
 interface TikTokEmbedProps {
   avatarUrl?: string;
+  embedCode?: string;
 }
 
-export function TikTokEmbed({ avatarUrl }: TikTokEmbedProps) {
+export function TikTokEmbed({ avatarUrl, embedCode }: TikTokEmbedProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (embedCode && containerRef.current) {
+      containerRef.current.innerHTML = embedCode;
+      // Re-execute any inline <script> tags inside the embed code
+      const scripts = containerRef.current.getElementsByTagName('script');
+      for (let i = 0; i < scripts.length; i++) {
+        const newScript = document.createElement('script');
+        if (scripts[i].src) {
+          newScript.src = scripts[i].src;
+          newScript.async = true;
+        } else {
+          newScript.textContent = scripts[i].textContent;
+        }
+        document.body.appendChild(newScript);
+      }
+    }
+  }, [embedCode]);
+
   return (
     <section className="py-20 md:py-28 bg-gradient-to-b from-[#0F172A] to-[#1E293B] text-white relative overflow-hidden" id="tiktok">
       {/* Background Glow */}
@@ -28,68 +50,77 @@ export function TikTokEmbed({ avatarUrl }: TikTokEmbedProps) {
           </div>
         </FadeIn>
 
-        {/* Custom TikTok Card (ECC) */}
-        <FadeIn direction="up" delay={0.1}>
-          <div className="max-w-3xl mx-auto bg-slate-900/90 backdrop-blur-xl border border-slate-700/60 rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden">
-            <div className="flex flex-col md:flex-row items-center gap-6 md:gap-8 text-center md:text-left">
-              {/* Avatar */}
-              <div className="relative w-24 h-24 md:w-28 md:h-28 rounded-full p-1 bg-gradient-to-tr from-[#FE2C55] via-[#25F4EE] to-white shadow-xl shrink-0">
-                <div className="relative w-full h-full rounded-full overflow-hidden bg-slate-800">
-                  <Image
-                    src={avatarUrl || '/uploads/hero03-648lwl.png'}
-                    alt="Master Hoàng Mai Linh TikTok"
-                    fill
-                    className="object-cover"
-                    unoptimized
-                  />
+        {embedCode ? (
+          /* Render ECC Plugin Embed Code */
+          <FadeIn direction="up" delay={0.1}>
+            <div className="max-w-4xl mx-auto flex justify-center min-h-[400px]">
+              <div ref={containerRef} className="w-full flex justify-center overflow-hidden rounded-3xl border border-slate-700/60 shadow-2xl p-4 bg-slate-900/80" />
+            </div>
+          </FadeIn>
+        ) : (
+          /* Render Custom TikTok Profile Card */
+          <FadeIn direction="up" delay={0.1}>
+            <div className="max-w-3xl mx-auto bg-slate-900/90 backdrop-blur-xl border border-slate-700/60 rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden">
+              <div className="flex flex-col md:flex-row items-center gap-6 md:gap-8 text-center md:text-left">
+                {/* Avatar */}
+                <div className="relative w-24 h-24 md:w-28 md:h-28 rounded-full p-1 bg-gradient-to-tr from-[#FE2C55] via-[#25F4EE] to-white shadow-xl shrink-0">
+                  <div className="relative w-full h-full rounded-full overflow-hidden bg-slate-800">
+                    <Image
+                      src={avatarUrl || '/uploads/hero03-648lwl.png'}
+                      alt="Master Hoàng Mai Linh TikTok"
+                      fill
+                      className="object-cover"
+                      unoptimized
+                    />
+                  </div>
+                </div>
+
+                {/* Profile Details */}
+                <div className="flex-grow space-y-2">
+                  <div className="flex items-center justify-center md:justify-start gap-2">
+                    <h3 className="text-2xl md:text-3xl font-black text-white">@linhhoatam11</h3>
+                    <CheckCircle2 className="w-6 h-6 text-[#25F4EE] fill-[#25F4EE]/20 shrink-0" />
+                  </div>
+                  <p className="text-sm font-semibold text-[#FE2C55] tracking-wide uppercase">
+                    Linh Hoa Tâm – Thuật Số Học Ứng Dụng
+                  </p>
+                  <p className="text-xs md:text-sm text-slate-300 leading-relaxed max-w-md">
+                    Chia sẻ góc nhìn lãnh đạo, định vị chu kỳ 9 năm và phương pháp đưa ra quyết định đúng thời điểm cho CEO &amp; Founder.
+                  </p>
+                </div>
+
+                {/* Direct CTA Button */}
+                <div className="shrink-0 w-full md:w-auto">
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href="https://www.tiktok.com/@linhhoatam11"
+                    className="w-full md:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 bg-gradient-to-r from-[#FE2C55] to-[#FF0050] hover:from-[#E0264B] hover:to-[#D00045] text-white font-bold text-base rounded-full shadow-lg shadow-[#FE2C55]/30 hover:shadow-xl hover:scale-105 transition-all duration-300"
+                  >
+                    <span>Theo Dõi Trên TikTok</span>
+                    <ExternalLink className="w-5 h-5" />
+                  </a>
                 </div>
               </div>
 
-              {/* Profile Details */}
-              <div className="flex-grow space-y-2">
-                <div className="flex items-center justify-center md:justify-start gap-2">
-                  <h3 className="text-2xl md:text-3xl font-black text-white">@linhhoatam11</h3>
-                  <CheckCircle2 className="w-6 h-6 text-[#25F4EE] fill-[#25F4EE]/20 shrink-0" />
+              {/* Highlights Bar */}
+              <div className="mt-8 pt-8 border-t border-slate-800/80 grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+                <div className="p-4 rounded-2xl bg-slate-800/40 border border-slate-700/40">
+                  <div className="text-xl md:text-2xl font-black text-[#25F4EE]">Short Content</div>
+                  <div className="text-xs text-slate-400 mt-1">Video 1-3 phút thực chiến</div>
                 </div>
-                <p className="text-sm font-semibold text-[#FE2C55] tracking-wide uppercase">
-                  Linh Hoa Tâm – Thuật Số Học Ứng Dụng
-                </p>
-                <p className="text-xs md:text-sm text-slate-300 leading-relaxed max-w-md">
-                  Chia sẻ góc nhìn lãnh đạo, định vị chu kỳ 9 năm và phương pháp đưa ra quyết định đúng thời điểm cho CEO &amp; Founder.
-                </p>
-              </div>
-
-              {/* Direct CTA Button */}
-              <div className="shrink-0 w-full md:w-auto">
-                <a
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href="https://www.tiktok.com/@linhhoatam11"
-                  className="w-full md:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 bg-gradient-to-r from-[#FE2C55] to-[#FF0050] hover:from-[#E0264B] hover:to-[#D00045] text-white font-bold text-base rounded-full shadow-lg shadow-[#FE2C55]/30 hover:shadow-xl hover:scale-105 transition-all duration-300"
-                >
-                  <span>Theo Dõi Trên TikTok</span>
-                  <ExternalLink className="w-5 h-5" />
-                </a>
+                <div className="p-4 rounded-2xl bg-slate-800/40 border border-slate-700/40">
+                  <div className="text-xl md:text-2xl font-black text-[#FE2C55]">Kiến Thức Mới</div>
+                  <div className="text-xs text-slate-400 mt-1">Cập nhật liên tục mỗi tuần</div>
+                </div>
+                <div className="p-4 rounded-2xl bg-slate-800/40 border border-slate-700/40">
+                  <div className="text-xl md:text-2xl font-black text-white">Hỏi Đáp Trực Tiếp</div>
+                  <div className="text-xs text-slate-400 mt-1">Giải đáp Thuật Số Học</div>
+                </div>
               </div>
             </div>
-
-            {/* Highlights Bar */}
-            <div className="mt-8 pt-8 border-t border-slate-800/80 grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
-              <div className="p-4 rounded-2xl bg-slate-800/40 border border-slate-700/40">
-                <div className="text-xl md:text-2xl font-black text-[#25F4EE]">Short Content</div>
-                <div className="text-xs text-slate-400 mt-1">Video 1-3 phút thực chiến</div>
-              </div>
-              <div className="p-4 rounded-2xl bg-slate-800/40 border border-slate-700/40">
-                <div className="text-xl md:text-2xl font-black text-[#FE2C55]">Kiến Thức Mới</div>
-                <div className="text-xs text-slate-400 mt-1">Cập nhật liên tục mỗi tuần</div>
-              </div>
-              <div className="p-4 rounded-2xl bg-slate-800/40 border border-slate-700/40">
-                <div className="text-xl md:text-2xl font-black text-white">Hỏi Đáp Trực Tiếp</div>
-                <div className="text-xs text-slate-400 mt-1">Giải đáp Thuật Số Học</div>
-              </div>
-            </div>
-          </div>
-        </FadeIn>
+          </FadeIn>
+        )}
       </div>
     </section>
   );
