@@ -78,10 +78,16 @@ export const CATEGORIES = Object.entries(CATEGORY_MAP).map(([value, label]) => (
  * Priority: preview (pre-encoded, /storage/) > url (may contain Vietnamese chars)
  */
 export function resolveAttachmentUrl(
-  urlOrObject?: string | { url?: string; preview?: string } | null,
+  urlOrObject?: any,
   preview?: string
 ): string | undefined {
   if (!urlOrObject) return undefined;
+
+  // Handle array of attachments (take first element)
+  if (Array.isArray(urlOrObject)) {
+    if (urlOrObject.length === 0) return undefined;
+    return resolveAttachmentUrl(urlOrObject[0]);
+  }
 
   // Support passing an attachment object directly
   if (typeof urlOrObject === 'object') {
@@ -89,19 +95,12 @@ export function resolveAttachmentUrl(
     return resolveAttachmentUrl(obj.preview || obj.url);
   }
 
-  const url = urlOrObject as string;
-  const effectivePreview = preview;
+  const url = String(urlOrObject);
+  if (!url || url === 'undefined' || url === 'null') return undefined;
 
-  if (effectivePreview) {
-    if (effectivePreview.startsWith('http')) return effectivePreview;
-    if (effectivePreview.startsWith('/storage/')) return `${BASE_URL}${effectivePreview}`;
-    if (effectivePreview.startsWith('/uploads/')) return `${BASE_URL}/storage${effectivePreview}`;
-    return effectivePreview;
-  }
-
-  if (url.startsWith('http')) return url;
+  if (url.startsWith('http://') || url.startsWith('https://')) return url;
   if (url.startsWith('/storage/')) return `${BASE_URL}${url}`;
-  if (url.startsWith('/uploads/')) return `${BASE_URL}/storage${url}`;
+  if (url.startsWith('/uploads/')) return url; // Local web upload (/public/uploads)
   return url; // /images/, /herobanner/, /testimonials/ → static local assets
 }
 
