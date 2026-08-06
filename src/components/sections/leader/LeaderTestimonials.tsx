@@ -1,3 +1,7 @@
+'use client';
+
+import { FadeIn } from '@/components/ui/AnimationWrapper';
+import { Quote } from 'lucide-react';
 import { resolveAttachmentUrl } from '@/lib/nocobase';
 
 interface LeaderTestimonialsProps {
