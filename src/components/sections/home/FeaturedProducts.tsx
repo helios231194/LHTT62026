@@ -94,13 +94,13 @@ export function FeaturedProducts({ products: initialProducts }: FeaturedProducts
         <FadeIn direction="up">
           <div className="text-center mb-16">
             <span className="inline-block py-1.5 px-4 mb-4 text-xs font-bold tracking-widest text-blaze-orange bg-blaze-orange/10 uppercase rounded-full">
-              DỊCH VỤ
+              SẢN PHẨM DOANH NGHIỆP & LÃNH ĐẠO
             </span>
             <h2 className="text-3xl md:text-5xl font-bold text-oxford-blue mb-4">
-              Ba cấp độ đồng hành – một nền tảng
+              Giải Pháp Cố Vấn Chiến Lược Cho Doanh Nghiệp & CEO
             </h2>
             <p className="text-lg text-cyan-azure max-w-2xl mx-auto">
-              Từ tài liệu cá nhân hóa đến tham vấn chiến lược chuyên sâu – mỗi cấp độ phù hợp với một giai đoạn quyết định khác nhau.
+              Từ Bản đồ chiến lược cá nhân hóa 2026 đến Tham vấn 1:1 & Workshop tái cấu trúc đội ngũ C-Suite cho Doanh chủ.
             </p>
           </div>
         </FadeIn>

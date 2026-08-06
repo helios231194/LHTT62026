@@ -23,7 +23,7 @@ const navLinks = [
     href: '#',
     dropdown: [
       { name: 'Hồ Sơ Vận Mệnh', href: '/ho-so-van-menh', desc: 'Bản đồ đầu tiên hiểu cấu trúc vận hành cá nhân' },
-      { name: 'Giải pháp Lãnh đạo', href: '/giai-phap-lanh-dao', desc: 'CEO, Founder, Lãnh đạo cấp cao' },
+      { name: 'Giải pháp Doanh nghiệp & Lãnh đạo', href: '/giai-phap-lanh-dao', desc: 'Cố vấn chiến lược cho CEO, Founder & Doanh chủ' },
       { name: 'Giải pháp Cá nhân', href: '/phat-trien-ban-than', desc: 'Phát triển bản thân & sự nghiệp' },
     ],
   },
