@@ -10,6 +10,7 @@ const PLACEHOLDER = '/images/placeholder-800x800.svg';
 
 interface LeaderConsultingProps {
   initialProfile?: Profile | null;
+  initialBusinessProducts?: any[];
 }
 
 interface PackageSection {
@@ -439,16 +440,21 @@ const packageDetails: Record<string, PackageDetail> = {
   }
 };
 
-export function LeaderConsulting({ initialProfile }: LeaderConsultingProps) {
-  const tier1ImgUrl = resolveAttachmentUrl(initialProfile?.consulting_tier1_img?.[0]?.url) || PLACEHOLDER;
-  const tier2ImgUrl = resolveAttachmentUrl(initialProfile?.consulting_tier2_img?.[0]?.url) || PLACEHOLDER;
-  const tier3ImgUrl = resolveAttachmentUrl(initialProfile?.consulting_tier3_img?.[0]?.url) || PLACEHOLDER;
-  const tier4ImgUrl = resolveAttachmentUrl(initialProfile?.consulting_tier4_img?.[0]?.url) || '/uploads/1784069618158-800x800_3.png';
+export function LeaderConsulting({ initialProfile, initialBusinessProducts }: LeaderConsultingProps) {
+  const p1 = initialBusinessProducts?.find((p: any) => p.id === 1 || p.sort_order === 1);
+  const p2 = initialBusinessProducts?.find((p: any) => p.id === 2 || p.sort_order === 2);
+  const p3 = initialBusinessProducts?.find((p: any) => p.id === 3 || p.sort_order === 3);
+  const p4 = initialBusinessProducts?.find((p: any) => p.id === 4 || p.sort_order === 4);
+
+  const tier1ImgUrl = resolveAttachmentUrl(p1?.image?.[0]?.url) || resolveAttachmentUrl(initialProfile?.consulting_tier1_img?.[0]?.url) || PLACEHOLDER;
+  const tier2ImgUrl = resolveAttachmentUrl(p2?.image?.[0]?.url) || resolveAttachmentUrl(initialProfile?.consulting_tier2_img?.[0]?.url) || PLACEHOLDER;
+  const tier3ImgUrl = resolveAttachmentUrl(p3?.image?.[0]?.url) || resolveAttachmentUrl(initialProfile?.consulting_tier3_img?.[0]?.url) || PLACEHOLDER;
+  const tier4ImgUrl = resolveAttachmentUrl(p4?.image?.[0]?.url) || resolveAttachmentUrl(initialProfile?.consulting_tier4_img?.[0]?.url) || '/uploads/1784069618158-800x800_3.png';
 
   const pricingTiers = [
     {
       id: 'goi-nen-tang',
-      name: 'PHIÊN PHỎNG VẤN CHIẾN LƯỢC & GIẢI MÃ ĐIỂM MÙ ĐỘC BẢN',
+      name: p1?.name || 'PHIÊN PHỎNG VẤN CHIẾN LƯỢC & GIẢI MÃ ĐIỂM MÙ ĐỘC BẢN',
       image: tier1ImgUrl,
       popular: false,
       ctaTextPrimary: 'ĐẶT LỊCH PHỎNG VẤN CHUYÊN SÂU',
@@ -456,7 +462,7 @@ export function LeaderConsulting({ initialProfile }: LeaderConsultingProps) {
     },
     {
       id: 'goi-co-van',
-      name: 'CHƯƠNG TRÌNH COACHING 90 NGÀY',
+      name: p2?.name || 'CHƯƠNG TRÌNH COACHING 90 NGÀY',
       image: tier2ImgUrl,
       popular: true,
       ctaTextPrimary: 'ĐẶT LỊCH COACHING 90 NGÀY',
@@ -464,7 +470,7 @@ export function LeaderConsulting({ initialProfile }: LeaderConsultingProps) {
     },
     {
       id: 'goi-doi-ngu',
-      name: 'BẢN ĐỒ ĐỘI NGŨ LÃNH ĐẠO & QUẢN LÝ CHỦ CHỐT',
+      name: p3?.name || 'BẢN ĐỒ ĐỘI NGŨ LÃNH ĐẠO & QUẢN LÝ CHỦ CHỐT',
       image: tier3ImgUrl,
       popular: false,
       ctaTextPrimary: 'ĐẶT LỊCH WORKSHOP ĐỘI NGŨ',
@@ -472,7 +478,7 @@ export function LeaderConsulting({ initialProfile }: LeaderConsultingProps) {
     },
     {
       id: 'cai-to-doanh-nghiep',
-      name: 'CẢI TỔ DOANH NGHIỆP & TÁI CẤU TRÚC',
+      name: p4?.name || 'CẢI TỔ DOANH NGHIỆP & TÁI CẤU TRÚC',
       image: tier4ImgUrl,
       popular: false,
       ctaTextPrimary: 'YÊU CẦU TƯ VẤN CẢI TỔ',
