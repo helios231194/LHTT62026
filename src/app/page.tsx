@@ -192,7 +192,10 @@ export default async function Home() {
         <RepresentativeSection />
 
         {/* Section 12 - TikTok */}
-        <TikTokEmbed avatarUrl={resolveAttachmentUrl(profile?.avatar?.[0]?.url)} />
+        <TikTokEmbed
+          avatarUrl={resolveAttachmentUrl(profile?.avatar?.[0]?.url)}
+          embedCode={profile?.tiktok_embed_code}
+        />
       </main>
       <Footer />
     </>

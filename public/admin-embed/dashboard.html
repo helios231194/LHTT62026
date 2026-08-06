@@ -514,11 +514,17 @@
                 </div>
               </div>
 
-              <div class="pt-4 border-t border-slate-100">
-                <h3 class="text-xs font-black text-blaze-orange uppercase tracking-wider mb-3">Cấu hình Trang Sách</h3>
+              <div class="pt-4 border-t border-slate-100 space-y-4">
                 <div>
+                  <h3 class="text-xs font-black text-blaze-orange uppercase tracking-wider mb-2">Cấu hình Trang Sách</h3>
                   <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Link đọc thử sách (Flipbook heyzine/iframe)</label>
                   <input type="url" id="hp-book-preview-link" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs focus:outline-none focus:ring-1 focus:ring-oxford-blue" value="${profileData.book_preview_link || ''}" placeholder="https://heyzine.com/api/flipbook.html">
+                </div>
+
+                <div>
+                  <h3 class="text-xs font-black text-blaze-orange uppercase tracking-wider mb-2">Cấu hình Mã Nhúng TikTok / ECC Plugin</h3>
+                  <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Mã Nhúng TikTok (Paste đoạn mã &lt;blockquote...&gt;&lt;script...&gt; hoặc mã ECC Plugin tại đây)</label>
+                  <textarea id="hp-tiktok-embed-code" rows="3" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs font-mono focus:outline-none focus:ring-1 focus:ring-oxford-blue" placeholder="Dán đoạn mã nhúng TikTok hoặc ECC Plugin vào đây">${profileData.tiktok_embed_code || ''}</textarea>
                 </div>
               </div>
 
@@ -549,6 +555,7 @@
         community_title: document.getElementById('hp-community-title').value.trim(),
         community_desc: document.getElementById('hp-community-desc').value.trim(),
         book_preview_link: document.getElementById('hp-book-preview-link').value.trim(),
+        tiktok_embed_code: document.getElementById('hp-tiktok-embed-code').value.trim(),
       };
 
       try {
