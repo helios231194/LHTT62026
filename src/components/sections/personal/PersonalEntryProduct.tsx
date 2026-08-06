@@ -8,10 +8,11 @@ import { resolveAttachmentUrl } from '@/lib/nocobase';
 
 interface PersonalEntryProductProps {
   initialProfile?: Profile | null;
+  initialDestinyProfile?: any;
 }
 
-export function PersonalEntryProduct({ initialProfile }: PersonalEntryProductProps) {
-  const destinyCoverUrl = resolveAttachmentUrl(initialProfile?.destiny_pdf_cover?.[0]?.url) || '/uploads/1784020906703-BanoL.png';
+export function PersonalEntryProduct({ initialProfile, initialDestinyProfile }: PersonalEntryProductProps) {
+  const destinyCoverUrl = resolveAttachmentUrl(initialDestinyProfile?.cover_image?.[0]?.url || initialProfile?.destiny_pdf_cover?.[0]?.url) || '/uploads/1784020906703-BanoL.png';
 
   return (
     <section className="py-24 md:py-32 bg-ice-white relative overflow-hidden" id="entry">

@@ -6,7 +6,15 @@ import { FileText, Sparkles, BookOpen, ArrowRight, ShieldAlert, Award } from 'lu
 import Link from 'next/link';
 import Image from 'next/image';
 
-export function LeaderDestinyProfile() {
+import { resolveAttachmentUrl } from '@/lib/nocobase';
+
+interface LeaderDestinyProfileProps {
+  initialDestinyProfile?: any;
+}
+
+export function LeaderDestinyProfile({ initialDestinyProfile }: LeaderDestinyProfileProps) {
+  const coverUrl = resolveAttachmentUrl(initialDestinyProfile?.cover_image?.[0]?.url) || '/uploads/1784020906703-BanoL.png';
+
   return (
     <section className="py-24 bg-white relative overflow-hidden" id="destiny-profile">
       {/* Decorative BG elements */}
@@ -19,9 +27,9 @@ export function LeaderDestinyProfile() {
           {/* Left Block - Graphical Representation */}
           <div className="w-full lg:w-5/12">
             <FadeIn direction="left">
-              <div className="relative aspect-[3/4] max-w-[380px] mx-auto rounded-[2rem] overflow-hidden shadow-2xl bg-white border border-slate-100 group">
+              <div className="relative aspect-[3/4] max-w-[380px] mx-auto rounded-[2rem] overflow-hidden shadow-2xl bg-white border border-slate-100 group flex items-center justify-center">
                 <img 
-                  src="/uploads/1784020906703-BanoL.png"
+                  src={coverUrl}
                   alt="Hồ Sơ Vận Mệnh" 
                   className="w-full h-full object-cover transform-gpu hover:scale-105 transition-transform duration-700 ease-out"
                 />

@@ -94,6 +94,9 @@
         </button>
  
         <span class="group-title text-[10px] font-bold text-slate-400 uppercase tracking-wider px-3 mt-4 mb-1">Sản phẩm & Dịch vụ</span>
+        <button onclick="switchTab('destiny_profile')" id="menu-destiny_profile" class="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-bold transition-all duration-150 text-slate-600 hover:bg-slate-100 w-full text-left">
+          <span>📜</span> <span class="menu-text">Hồ sơ Vận mệnh</span>
+        </button>
         <button onclick="switchTab('personal_products')" id="menu-personal_products" class="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-bold transition-all duration-150 text-slate-600 hover:bg-slate-100 w-full text-left">
           <span>👤</span> <span class="menu-text">Sản phẩm Cá nhân</span>
         </button>
@@ -420,7 +423,7 @@
 
     function switchTab(tab) {
       // Update sidebar styling
-      const menuIds = ['homepage', 'images', 'personal_products', 'business_products', 'testimonials', 'customer_screenshots', 'facebook_posts', 'stats', 'partners', 'speaker_events', 'speaker_assets', 'workshops', 'book_feedbacks', 'book_videos', 'blog_posts'];
+      const menuIds = ['homepage', 'destiny_profile', 'images', 'personal_products', 'business_products', 'testimonials', 'customer_screenshots', 'facebook_posts', 'stats', 'partners', 'speaker_events', 'speaker_assets', 'workshops', 'book_feedbacks', 'book_videos', 'blog_posts'];
       menuIds.forEach(id => {
         const el = document.getElementById('menu-' + id);
         if (!el) return;
@@ -445,12 +448,167 @@
       
       if (activeTab === 'homepage') {
         await loadHomepageConfig(area);
+      } else if (activeTab === 'destiny_profile') {
+        await loadDestinyProfileConfig(area);
       } else if (activeTab === 'images') {
         await loadImagesConfig(area);
       } else if (activeTab === 'speaker_assets') {
         await loadSpeakerAssetsConfig(area);
       } else {
         await loadCollectionConfig(area);
+      }
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // Destiny Profile Config (Hồ Sơ Vận Mệnh)
+    // ─────────────────────────────────────────────────────────────
+    let destinyProfileData = null;
+
+    async function loadDestinyProfileConfig(area) {
+      try {
+        const res = await fetch('/api/admin/config?tab=destiny_profile', { headers });
+        const payload = await res.json();
+        destinyProfileData = payload.data || {};
+
+        const coverUrl = resolveUrl(destinyProfileData.cover_image) || '/uploads/1784020906703-BanoL.png';
+
+        area.innerHTML = `
+          <div class="max-w-3xl">
+            <h2 class="font-title font-bold text-lg text-oxford-blue mb-2">📜 QUẢN LÝ HỒ SƠ VẬN MỆNH (BÌA SÁCH & NỘI DUNG)</h2>
+            <p class="text-xs text-slate-400 mb-6">Cấu hình tập trung tệp ảnh bìa, giá niêm yết và nội dung Hồ Sơ Vận Mệnh trên toàn bộ website.</p>
+            
+            <form onsubmit="saveDestinyProfile(event)" class="space-y-5">
+              <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-3">
+                <label class="block text-xs font-bold text-slate-600 uppercase">Ảnh Bìa Sách Hồ Sơ Vận Mệnh (Tỷ lệ chuẩn 3:4)</label>
+                <div class="flex items-center gap-4">
+                  <div class="w-24 h-32 rounded-lg overflow-hidden bg-white border border-slate-200 shadow-sm shrink-0 flex items-center justify-center">
+                    <img id="destiny-cover-preview" src="${coverUrl}" class="w-full h-full object-cover">
+                  </div>
+                  <div class="space-y-2">
+                    <input type="file" id="destiny-cover-input" accept="image/*" class="hidden" onchange="uploadDestinyCover(event)">
+                    <button type="button" onclick="document.getElementById('destiny-cover-input').click()" class="px-4 py-2 bg-oxford-blue text-white rounded-lg text-xs font-bold hover:bg-oxford-blue/90">
+                      Tải ảnh bìa mới
+                    </button>
+                    <p class="text-[11px] text-slate-400">Định dạng JPG/PNG. Ảnh này sẽ đồng bộ trọn vẹn lên tất cả các vị trí hiển thị Hồ Sơ Vận Mệnh trên toàn bộ website.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-bold text-slate-600 uppercase mb-1.5">Tên sản phẩm *</label>
+                  <input type="text" id="dp-name" required class="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs focus:outline-none focus:ring-1 focus:ring-oxford-blue" value="${destinyProfileData.name || 'Hồ Sơ Vận Mệnh'}">
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-slate-600 uppercase mb-1.5">Tagline (Dòng phụ)</label>
+                  <input type="text" id="dp-tagline" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs focus:outline-none focus:ring-1 focus:ring-oxford-blue" value="${destinyProfileData.tagline || ''}">
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-600 uppercase mb-1.5">Mô tả ngắn</label>
+                <textarea id="dp-description" rows="3" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs focus:outline-none focus:ring-1 focus:ring-oxford-blue">${destinyProfileData.description || ''}</textarea>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-bold text-slate-600 uppercase mb-1.5">Giá Combo Tiêu Chuẩn</label>
+                  <input type="text" id="dp-price-standard" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs focus:outline-none focus:ring-1 focus:ring-oxford-blue" value="${destinyProfileData.price_standard || '680.000 VNĐ'}">
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-slate-600 uppercase mb-1.5">Giá Combo Cao Cấp</label>
+                  <input type="text" id="dp-price-premium" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs focus:outline-none focus:ring-1 focus:ring-oxford-blue" value="${destinyProfileData.price_premium || '980.000 VNĐ'}">
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-600 uppercase mb-1.5">Danh sách Quyền lợi (Mỗi quyền lợi 1 dòng)</label>
+                <textarea id="dp-benefits" rows="5" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs focus:outline-none focus:ring-1 focus:ring-oxford-blue">${(destinyProfileData.benefits || []).join('\n')}</textarea>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-600 uppercase mb-1.5">Đối tượng phù hợp (Mỗi đối tượng 1 dòng)</label>
+                <textarea id="dp-target-audience" rows="4" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs focus:outline-none focus:ring-1 focus:ring-oxford-blue">${(destinyProfileData.target_audience || []).join('\n')}</textarea>
+              </div>
+
+              <div class="pt-4 border-t border-slate-100 flex justify-end">
+                <button type="submit" class="bg-blaze-orange hover:bg-blaze-orange/95 text-white font-bold text-xs px-6 py-2.5 rounded-xl transition-all duration-200 shadow-md">
+                  Lưu cấu hình Hồ Sơ Vận Mệnh
+                </button>
+              </div>
+            </form>
+          </div>
+        `;
+        setSyncStatus('success', 'Đã tải cấu hình Hồ Sơ Vận Mệnh');
+      } catch (err) {
+        setSyncStatus('error', 'Lỗi tải Hồ Sơ Vận Mệnh');
+      }
+    }
+
+    async function uploadDestinyCover(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      setSyncStatus('syncing', 'Đang tải lên ảnh bìa mới...');
+      const formData = new FormData();
+      formData.append('file', file);
+
+      try {
+        const res = await fetch('/api/admin/upload', {
+          method: 'POST',
+          headers: { Authorization: headers.Authorization },
+          body: formData
+        });
+        const data = await res.json();
+        if (data.url) {
+          destinyProfileData.cover_image = [{
+            id: Date.now(),
+            filename: file.name,
+            url: data.url,
+            mimetype: file.type
+          }];
+          document.getElementById('destiny-cover-preview').src = data.url;
+          setSyncStatus('success', 'Đã tải lên ảnh bìa thành công!');
+        } else {
+          throw new Error('Upload failed');
+        }
+      } catch (err) {
+        alert('Tải ảnh lên thất bại');
+        setSyncStatus('error', 'Lỗi tải ảnh');
+      }
+    }
+
+    async function saveDestinyProfile(e) {
+      e.preventDefault();
+      setSyncStatus('syncing', 'Đang lưu cấu hình Hồ Sơ Vận Mệnh...');
+      const benefitsText = document.getElementById('dp-benefits').value.trim();
+      const benefits = benefitsText ? benefitsText.split('\n').map(b => b.trim()).filter(Boolean) : [];
+
+      const targetText = document.getElementById('dp-target-audience').value.trim();
+      const target_audience = targetText ? targetText.split('\n').map(t => t.trim()).filter(Boolean) : [];
+
+      const payload = {
+        ...destinyProfileData,
+        name: document.getElementById('dp-name').value.trim(),
+        tagline: document.getElementById('dp-tagline').value.trim(),
+        description: document.getElementById('dp-description').value.trim(),
+        price_standard: document.getElementById('dp-price-standard').value.trim(),
+        price_premium: document.getElementById('dp-price-premium').value.trim(),
+        benefits,
+        target_audience
+      };
+
+      try {
+        const res = await fetch('/api/admin/config?tab=destiny_profile', {
+          method: 'POST',
+          headers,
+          body: JSON.stringify(payload)
+        });
+        if (!res.ok) throw new Error('Save failed');
+        setSyncStatus('success', 'Đã lưu cấu hình Hồ Sơ Vận Mệnh thành công!');
+        setTimeout(loadTabData, 1500);
+      } catch (err) {
+        alert('Lưu thất bại');
+        setSyncStatus('error', 'Lỗi lưu cấu hình');
       }
     }
 

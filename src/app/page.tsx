@@ -16,7 +16,7 @@ import { TikTokEmbed } from '@/components/sections/home/TikTokEmbed';
 import { getProfile, getStats, getTestimonials, getBusinessProducts, getPartners } from '@/lib/local-db';
 import { resolveAttachmentUrl } from '@/lib/nocobase';
 
-// Cập nhật cache mỗi 10 giây - tối ưu SEO Google và cập nhật nhanh
+export const revalidate = 0;
 
 export const metadata: Metadata = {
   title: 'Linh Hoa Tâm | Thuật Số Học Ứng Dụng Cho Người Lãnh Đạo',

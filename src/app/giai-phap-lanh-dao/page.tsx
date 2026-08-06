@@ -50,6 +50,7 @@ function safeJsonLd(data: object): string {
 
 export default async function GiaiPhapLanhDaoPage() {
   const profile = await getProfile();
+  const destinyProfile = await getDestinyProfile();
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://linhhoatam.com';
 
   const serviceSchema = {
@@ -99,7 +100,7 @@ export default async function GiaiPhapLanhDaoPage() {
         <LeaderProblems />
         
         {/* SECTION 3 – HỒ SƠ VẬN MỆNH */}
-        <LeaderDestinyProfile />
+        <LeaderDestinyProfile initialDestinyProfile={destinyProfile} />
         
         {/* SECTION 4 – BẢN ĐỒ CHIẾN LƯỢC 2026 */}
         <LeaderStrategyMap initialProfile={profile} />

@@ -44,6 +44,7 @@ function safeJsonLd(data: object): string {
 export default async function PhatTrienBanThanPage() {
   const { data: products } = await getPersonalProducts();
   const profile = await getProfile();
+  const destinyProfile = await getDestinyProfile();
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://linhhoatam.com';
 
   const serviceSchema = {
@@ -92,7 +93,7 @@ export default async function PhatTrienBanThanPage() {
         <PersonalHero />
         
         {/* SECTION 2 – FILE LUẬN GIẢI CÁ NHÂN */}
-        <PersonalEntryProduct initialProfile={profile} />
+        <PersonalEntryProduct initialProfile={profile} initialDestinyProfile={destinyProfile} />
         
         {/* SECTION 3 – COACHING 1:1 CÁ NHÂN – 8 DỊCH VỤ */}
         <PersonalCoaching initialProducts={products} />

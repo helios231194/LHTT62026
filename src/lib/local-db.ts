@@ -32,6 +32,11 @@ export async function getProfile(): Promise<Profile | null> {
   return data || null;
 }
 
+export async function getDestinyProfile(): Promise<any> {
+  const data = await readLocalData('destiny_profile.json');
+  return data || null;
+}
+
 export async function getPartners(): Promise<{ data: Partner[] }> {
   const data = await readLocalData('partners.json');
   return { data };

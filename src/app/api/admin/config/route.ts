@@ -6,6 +6,7 @@ const DATA_DIR = path.join(process.cwd(), 'src/data');
 
 const TAB_FILES: Record<string, string> = {
   homepage: 'homepage.json',
+  destiny_profile: 'destiny_profile.json',
   partners: 'partners.json',
   testimonials: 'testimonials.json',
   speaker_events: 'speaker_events.json',
@@ -111,7 +112,7 @@ export async function POST(req: NextRequest) {
     const filename = TAB_FILES[tab];
 
     // Singular object overrides
-    if (['homepage', 'speaker_assets'].includes(tab)) {
+    if (['homepage', 'speaker_assets', 'destiny_profile'].includes(tab)) {
       await writeJsonFile(filename, payload);
       return NextResponse.json({ data: payload });
     }

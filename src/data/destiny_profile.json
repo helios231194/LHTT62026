@@ -1,0 +1,29 @@
+{
+  "name": "Hồ Sơ Vận Mệnh",
+  "tagline": "Bản đồ đầu tiên hiểu cấu trúc vận hành cá nhân",
+  "description": "Tài liệu cá nhân hóa gần 100 trang PDF phân tích sâu 7 chỉ số cốt lõi và chu kỳ cuộc đời dành riêng cho bạn.",
+  "cover_image": [
+    {
+      "id": 1784020906703,
+      "filename": "Bản đồ LĐ.png",
+      "url": "/uploads/1784020906703-BanoL.png",
+      "mimetype": "image/png"
+    }
+  ],
+  "price_standard": "680.000 VNĐ",
+  "price_premium": "980.000 VNĐ",
+  "benefits": [
+    "Phân tích đầy đủ 7 chỉ số vận mệnh cốt lõi – hiểu rõ bản thân ở tầng sâu nhất",
+    "Biểu đồ Sinh Đồ, Danh Đồ và Công Việc – nhìn thấy bức tranh tổng thể về con người bạn",
+    "Định vị chu kỳ cuộc đời & phân tích chi tiết giai đoạn hiện tại đang diễn ra",
+    "Năm cá nhân hiện tại – dự báo thuận lợi, cảnh báo rủi ro và các khuyến nghị hành động",
+    "Nhìn rõ điểm mạnh bẩm sinh chưa khai thác cùng điểm mù cần đặc biệt lưu ý",
+    "Thiết kế để làm cẩm nang đồng hành sử dụng nhiều lần qua các giai đoạn cuộc sống"
+  ],
+  "target_audience": [
+    "Muốn hiểu rõ điểm mạnh bẩm sinh và cách phát huy tốt nhất",
+    "Đang đứng trước quyết định về sự nghiệp, hướng đi hoặc môi trường làm việc",
+    "Muốn có nền tảng để bắt đầu hành trình tự phát triển bản thân có hệ thống",
+    "Chưa sẵn sàng cho coaching 1:1 nhưng muốn có cái nhìn toàn diện về mình trước"
+  ]
+}
