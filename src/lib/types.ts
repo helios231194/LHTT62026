@@ -123,6 +123,7 @@ export interface Profile {
   consulting_tier2_img?: Attachment[];
   consulting_tier3_img?: Attachment[];
   book_preview_link?: string;
+  tiktok_embed_code?: string;
 }
 
 export interface Workshop {
