@@ -619,11 +619,11 @@ export function LeaderConsulting({ initialProfile }: LeaderConsultingProps) {
                 </div>
 
                 {/* CTA Buttons */}
-                <div className="p-5 flex flex-col gap-3">
+                <div className="p-5 sm:p-6 flex flex-col gap-3">
                   <Button 
                     onClick={() => handleOpenRegister(tier.id)}
                     variant={tier.popular ? 'primary' : 'outline'} 
-                    className={`w-full min-h-[52px] h-auto py-3 px-3 text-xs md:text-xs lg:text-xs xl:text-sm font-bold tracking-tight leading-tight whitespace-normal text-center flex items-center justify-center ${!tier.popular && 'border-gray-200 text-oxford-blue hover:text-white hover:bg-oxford-blue hover:border-oxford-blue'}`}
+                    className={`w-full min-h-[54px] h-auto py-3.5 px-4 text-sm font-extrabold tracking-tight leading-snug whitespace-normal text-center flex items-center justify-center rounded-full transition-all ${!tier.popular && 'border-2 border-slate-200 text-oxford-blue hover:text-white hover:bg-oxford-blue hover:border-oxford-blue'}`}
                   >
                     {tier.ctaTextPrimary}
                   </Button>
@@ -631,7 +631,7 @@ export function LeaderConsulting({ initialProfile }: LeaderConsultingProps) {
                     onClick={() => handleOpenDetails(tier.id)}
                     className="text-center py-1.5"
                   >
-                    <span className="text-xs sm:text-sm font-bold text-cyan-azure hover:text-blaze-orange transition-colors">
+                    <span className="text-sm font-bold text-cyan-azure hover:text-blaze-orange transition-colors">
                       {tier.ctaTextSecondary}
                     </span>
                   </button>
