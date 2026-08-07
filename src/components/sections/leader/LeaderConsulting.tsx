@@ -649,105 +649,105 @@ export function LeaderConsulting({ initialProfile, initialBusinessProducts }: Le
       </div>
 
       {/* POPUP MODAL */}
-      {activePackageId && currentDetail && (
-        <div className="fixed inset-0 z-[1000] bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4 md:p-6 overflow-hidden">
-          <div className="bg-white rounded-3xl max-w-2xl w-full max-h-[85vh] md:max-h-[80vh] overflow-hidden relative shadow-2xl flex flex-col border border-slate-100 animate-in fade-in duration-200">
-            {/* Modal Header */}
-            <div className="sticky top-0 bg-white border-b border-slate-100 px-6 sm:px-8 py-5 flex items-start justify-between z-10 shrink-0">
-              <div className="pr-4">
-                <span className="inline-block py-0.5 px-2.5 bg-[#ff6801]/10 border border-[#ff6801]/25 text-[10px] sm:text-xs font-bold tracking-widest text-[#ff6801] uppercase rounded-full mb-1.5">
-                  CHƯƠNG TRÌNH THAM VẤN
-                </span>
-                <h3 className="text-lg sm:text-xl font-black tracking-tight leading-tight text-slate-800">
-                  {currentDetail.name}
-                </h3>
-                <p className="text-xs sm:text-sm text-slate-500 mt-1 font-medium leading-normal">
-                  {currentDetail.subtitle}
-                </p>
+      {activePackageId && currentDetail && (() => {
+        const matchedProduct = initialBusinessProducts?.find((p: any) => {
+          if (activePackageId === 'goi-nen-tang') return String(p.id) === '1' || p.sort_order === 1;
+          if (activePackageId === 'goi-co-van') return String(p.id) === '2' || p.sort_order === 2;
+          if (activePackageId === 'goi-doi-ngu') return String(p.id) === '3' || p.sort_order === 3;
+          if (activePackageId === 'cai-to-doanh-nghiep') return String(p.id) === '4' || p.sort_order === 4;
+          return false;
+        });
+
+        const benefitsArray = matchedProduct?.benefits
+          ? matchedProduct.benefits.split('|').map((b: string) => b.trim()).filter(Boolean)
+          : [];
+
+        return (
+          <div className="fixed inset-0 z-[1000] bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4 md:p-6 overflow-hidden">
+            <div className="bg-white rounded-3xl max-w-2xl w-full max-h-[85vh] md:max-h-[80vh] overflow-hidden relative shadow-2xl flex flex-col border border-slate-100 animate-in fade-in duration-200">
+              {/* Modal Header */}
+              <div className="sticky top-0 bg-white border-b border-slate-100 px-6 sm:px-8 py-5 flex items-start justify-between z-10 shrink-0">
+                <div className="pr-4">
+                  <span className="inline-block py-0.5 px-2.5 bg-[#ff6801]/10 border border-[#ff6801]/25 text-[10px] sm:text-xs font-bold tracking-widest text-[#ff6801] uppercase rounded-full mb-1.5">
+                    {matchedProduct?.badge || 'CHƯƠNG TRÌNH THAM VẤN'}
+                  </span>
+                  <h3 className="text-lg sm:text-xl font-black tracking-tight leading-tight text-slate-800">
+                    {matchedProduct?.name || currentDetail.name}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-500 mt-1 font-medium leading-normal">
+                    {matchedProduct?.tagline || currentDetail.subtitle}
+                  </p>
+                </div>
+                <button 
+                  onClick={handleClose} 
+                  className="text-slate-400 hover:text-slate-600 bg-slate-50 hover:bg-slate-100 p-2 rounded-full transition-colors shrink-0"
+                >
+                  <X className="w-5 h-5" />
+                </button>
               </div>
-              <button 
-                onClick={handleClose} 
-                className="text-slate-400 hover:text-slate-600 bg-slate-50 hover:bg-slate-100 p-2 rounded-full transition-colors shrink-0"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
 
-            {/* Modal Body */}
-            <div className="overflow-y-auto p-6 sm:p-8 flex-grow space-y-6">
-              {modalView === 'details' ? (
-                <>
-                  {/* Highlight Cards */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="bg-[#F8FAFC] border border-slate-100 p-4 rounded-2xl flex items-center gap-4">
-                      <div className="w-12 h-12 bg-[#ff6801]/10 rounded-xl flex items-center justify-center text-[#ff6801] shrink-0">
-                        <Coins className="w-6 h-6" />
+              {/* Modal Body */}
+              <div className="overflow-y-auto p-6 sm:p-8 flex-grow space-y-6">
+                {modalView === 'details' ? (
+                  <>
+                    {/* Highlight Cards */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div className="bg-[#F8FAFC] border border-slate-100 p-4 rounded-2xl flex items-center gap-4">
+                        <div className="w-12 h-12 bg-[#ff6801]/10 rounded-xl flex items-center justify-center text-[#ff6801] shrink-0">
+                          <Coins className="w-6 h-6" />
+                        </div>
+                        <div>
+                          <div className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Chi phí đầu tư</div>
+                          <div className="text-lg font-black text-slate-800">{matchedProduct?.price || currentDetail.price}</div>
+                        </div>
                       </div>
-                      <div>
-                        <div className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Chi phí đầu tư</div>
-                        <div className="text-lg font-black text-slate-800">{currentDetail.price}</div>
+                      <div className="bg-[#F8FAFC] border border-slate-100 p-4 rounded-2xl flex items-center gap-4">
+                        <div className="w-12 h-12 bg-[#4991ba]/10 rounded-xl flex items-center justify-center text-[#4991ba] shrink-0">
+                          <Clock className="w-6 h-6" />
+                        </div>
+                        <div>
+                          <div className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Thời lượng làm việc</div>
+                          <div className="text-sm font-bold text-slate-800 leading-tight">{currentDetail.duration}</div>
+                        </div>
                       </div>
                     </div>
-                    <div className="bg-[#F8FAFC] border border-slate-100 p-4 rounded-2xl flex items-center gap-4">
-                      <div className="w-12 h-12 bg-[#4991ba]/10 rounded-xl flex items-center justify-center text-[#4991ba] shrink-0">
-                        <Clock className="w-6 h-6" />
-                      </div>
-                      <div>
-                        <div className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Thời lượng làm việc</div>
-                        <div className="text-sm font-bold text-slate-800 leading-tight">{currentDetail.duration}</div>
-                      </div>
-                    </div>
-                  </div>
 
-                  {/* Team Size Selector (only for goi-doi-ngu) */}
-                  {activePackageId === 'goi-doi-ngu' && (
-                    <div className="p-4 bg-slate-50 rounded-2xl border border-slate-100 space-y-3">
-                      <div className="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
-                        <Users className="w-4 h-4 text-[#4991ba]" />
-                        Chọn quy mô đội ngũ
+                    {/* Team Size Selector (only for goi-doi-ngu) */}
+                    {activePackageId === 'goi-doi-ngu' && (
+                      <div className="p-4 bg-slate-50 rounded-2xl border border-slate-100 space-y-3">
+                        <div className="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
+                          <Users className="w-4 h-4 text-[#4991ba]" />
+                          Chọn quy mô đội ngũ
+                        </div>
+                        <div className="flex gap-2">
+                          {([3, 5, 7] as const).map(size => (
+                            <button
+                              key={size}
+                              onClick={() => setTeamSize(size)}
+                              className={`flex-1 py-2.5 px-3 rounded-xl text-[10px] sm:text-xs font-bold border transition-all ${
+                                teamSize === size
+                                  ? 'bg-[#ff6801] border-[#ff6801] text-white shadow-md shadow-[#ff6801]/20'
+                                  : 'bg-white border-slate-200 text-slate-700 hover:border-slate-300'
+                              }`}
+                            >
+                              {size === 3 && 'Bản Đồ Đội Ngũ (3 người)'}
+                              {size === 5 && 'Bản Đồ Điểm Mù (5 người)'}
+                              {size === 7 && 'Workshop Đội Ngũ (7 người)'}
+                            </button>
+                          ))}
+                        </div>
                       </div>
-                      <div className="flex gap-2">
-                        {([3, 5, 7] as const).map(size => (
-                          <button
-                            key={size}
-                            onClick={() => setTeamSize(size)}
-                            className={`flex-1 py-2.5 px-3 rounded-xl text-[10px] sm:text-xs font-bold border transition-all ${
-                              teamSize === size
-                                ? 'bg-[#ff6801] border-[#ff6801] text-white shadow-md shadow-[#ff6801]/20'
-                                : 'bg-white border-slate-200 text-slate-700 hover:border-slate-300'
-                            }`}
-                          >
-                            {size === 3 && 'Bản Đồ Đội Ngũ (3 người)'}
-                            {size === 5 && 'Bản Đồ Điểm Mù (5 người)'}
-                            {size === 7 && 'Workshop Đội Ngũ (7 người)'}
-                          </button>
-                        ))}
+                    )}
+
+                    {/* Short Description */}
+                    {matchedProduct?.description && (
+                      <div className="p-4 bg-slate-50 rounded-2xl border border-slate-100 text-slate-700 text-sm leading-relaxed">
+                        {matchedProduct.description}
                       </div>
-                    </div>
-                  )}
+                    )}
 
-                  {/* Strategic Goal */}
-                  <div className="space-y-2">
-                    <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-2">
-                      <Sparkles className="w-4 h-4 text-[#ff6801]" />
-                      Mục tiêu chiến lược
-                    </h4>
-                    <p className="text-slate-700 font-semibold bg-[#ff6801]/5 border border-[#ff6801]/10 p-4 rounded-xl leading-relaxed text-sm">
-                      {currentDetail.objective}
-                    </p>
-                  </div>
-
-                  {/* Dynamic Long Description (Rich Text/HTML) */}
-                  {(() => {
-                    const matchedProduct = initialBusinessProducts?.find((p: any) => {
-                      if (activePackageId === 'goi-nen-tang') return p.id === 1 || p.sort_order === 1;
-                      if (activePackageId === 'goi-co-van') return p.id === 2 || p.sort_order === 2;
-                      if (activePackageId === 'goi-doi-ngu') return p.id === 3 || p.sort_order === 3;
-                      if (activePackageId === 'cai-to-doanh-nghiep') return p.id === 4 || p.sort_order === 4;
-                      return false;
-                    });
-                    if (!matchedProduct?.long_description) return null;
-                    return (
+                    {/* Dynamic Long Description (Rich Text/HTML) */}
+                    {matchedProduct?.long_description && matchedProduct.long_description !== '<p><br></p>' && (
                       <div className="space-y-2">
                         <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-2">
                           <BookOpen className="w-4 h-4 text-[#4991ba]" />
@@ -758,29 +758,56 @@ export function LeaderConsulting({ initialProfile, initialBusinessProducts }: Le
                           dangerouslySetInnerHTML={{ __html: matchedProduct.long_description }}
                         />
                       </div>
-                    );
-                  })()}
+                    )}
 
-                  {/* Details Sections */}
-                  <div className="space-y-6 pt-2">
-                    {currentDetail.sections.map((section, idx) => (
-                      <div key={idx} className="space-y-3">
+                    {/* Quyền lợi đi kèm / Benefits (Lấy từ Admin Embed nếu có) */}
+                    {benefitsArray.length > 0 ? (
+                      <div className="space-y-3 pt-2">
                         <h4 className="text-sm font-bold uppercase tracking-wider text-slate-800 border-l-2 border-[#4991ba] pl-2.5">
-                          {section.title}
+                          Quyền lợi đi kèm:
                         </h4>
                         <ul className="grid grid-cols-1 gap-2.5 pl-1">
-                          {section.items.map((item, itemIdx) => (
-                            <li key={itemIdx} className="flex items-start gap-3 text-sm">
+                          {benefitsArray.map((benefit: string, idx: number) => (
+                            <li key={idx} className="flex items-start gap-3 text-sm">
                               <CheckCircle2 className="w-4.5 h-4.5 text-[#ff6801] shrink-0 mt-0.5" />
-                              <span className="text-slate-600 font-medium leading-relaxed">{item}</span>
+                              <span className="text-slate-600 font-medium leading-relaxed">{benefit}</span>
                             </li>
                           ))}
                         </ul>
                       </div>
-                    ))}
-                  </div>
-                </>
-              ) : (
+                    ) : (
+                      /* Details Sections (Fallback) */
+                      <div className="space-y-6 pt-2">
+                        {currentDetail.sections.map((section, idx) => (
+                          <div key={idx} className="space-y-3">
+                            <h4 className="text-sm font-bold uppercase tracking-wider text-slate-800 border-l-2 border-[#4991ba] pl-2.5">
+                              {section.title}
+                            </h4>
+                            <ul className="grid grid-cols-1 gap-2.5 pl-1">
+                              {section.items.map((item, itemIdx) => (
+                                <li key={itemIdx} className="flex items-start gap-3 text-sm">
+                                  <CheckCircle2 className="w-4.5 h-4.5 text-[#ff6801] shrink-0 mt-0.5" />
+                                  <span className="text-slate-600 font-medium leading-relaxed">{item}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
+                    {/* Bottom Registration CTA Button */}
+                    <div className="pt-4 border-t border-slate-100">
+                      <Button
+                        variant="primary"
+                        className="w-full font-bold h-14 text-base shadow-xl shadow-blaze-orange/20"
+                        onClick={() => setModalView('register')}
+                      >
+                        {matchedProduct?.cta_label || 'ĐĂNG KÝ TƯ VẤN NGAY'}
+                      </Button>
+                    </div>
+                  </>
+                ) : (
                 /* Registration Form View */
                 <div className="py-2">
                   {isSubmitted ? (
@@ -927,7 +954,7 @@ export function LeaderConsulting({ initialProfile, initialBusinessProducts }: Le
             )}
           </div>
         </div>
-      )}
+      })()}
     </section>
   );
 }
