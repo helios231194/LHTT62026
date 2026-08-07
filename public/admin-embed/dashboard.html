@@ -352,7 +352,8 @@
               bodyData[imageField] = selectedItem[imageField];
             }
             
-            return originalFetch(`/api/admin/config?tab=${model}`, {
+            const targetTab = model === 'destiny_product_item' ? 'personal_products' : model;
+            return originalFetch(`/api/admin/config?tab=${targetTab}`, {
               method: 'POST',
               headers: init.headers,
               body: JSON.stringify(bodyData)
@@ -683,7 +684,7 @@
 
         selectedItem = destinyItem;
         listData = products;
-        activeTab = 'personal_products'; // Target API collection when saving
+        activeTab = 'destiny_product_item';
 
         area.innerHTML = `
           <div class="max-w-3xl">
