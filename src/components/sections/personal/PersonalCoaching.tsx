@@ -223,7 +223,7 @@ export function PersonalCoaching({ initialProducts }: PersonalCoachingProps) {
 
                     <div 
                       className="text-slate-600 leading-relaxed text-sm md:text-base prose max-w-none [&_strong]:text-oxford-blue [&_strong]:font-black [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 [&_h3]:text-lg [&_h3]:font-bold [&_h3]:text-oxford-blue [&_h3]:mt-3 [&_p]:mb-3"
-                      dangerouslySetInnerHTML={{ __html: selectedProduct.long_description || selectedProduct.description }}
+                      dangerouslySetInnerHTML={{ __html: selectedProduct.long_description || selectedProduct.description || '' }}
                     />
 
                     {/* Benefits List */}
