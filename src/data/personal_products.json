@@ -6,6 +6,7 @@
     "badge": "",
     "tagline": "Dành cho cá nhân phát triển",
     "description": "Bước đầu vào hành trình hiểu chính mình. Phân tích 7 chỉ số vận mệnh theo ngày sinh.",
+    "long_description": "<p><strong>Bản phân tích cá nhân hóa</strong> giúp bạn nhận diện 7 chỉ số cốt lõi và chu kỳ năng lượng cá nhân.</p><p>Hồ sơ bao gồm hướng dẫn tra cứu chi tiết, giải mã điểm mạnh và cảnh báo điểm mù trong 12 tháng tới.</p>",
     "price": "450.000 VND",
     "benefits": "7 chỉ số vận mệnh cá nhân|Điểm mạnh bẩm sinh|Chu kỳ sự nghiệp & sức khỏe|Cách vận hành tự nhiên|Thời điểm thuận lợi 12 tháng",
     "cta_label": "Nhận file ngay",
@@ -29,6 +30,7 @@
     "badge": "ĐẦY ĐỦ NHẤT",
     "tagline": "Phân tích toàn diện",
     "description": "Phân tích chi tiết toàn bộ 19 chỉ số vận mệnh, bao gồm chu kỳ sự nghiệp, tình duyên và sức khỏe và công việc",
+    "long_description": "<p><strong>Phân tích chuyên sâu toàn bộ 19 chỉ số số học</strong> bao gồm chu kỳ cuộc đời 5 năm, tình duyên, hôn nhân, sức khỏe và sự nghiệp dài hạn.</p><p>Giúp bạn định vị bản thân, ra quyết định chính xác và tránh các bẫy tâm lý trong các giai đoạn chuyển giao.</p>",
     "price": "Liên hệ",
     "benefits": "19 chỉ số vận mệnh đầy đủ|Chu kỳ 5 năm chi tiết|Phân tích tình duyên & hôn nhân|Sức khỏe & năng lượng|Định hướng sự nghiệp dài hạn|Test thông tin mới",
     "cta_label": "Đặt lịch tư vấn",
@@ -52,6 +54,7 @@
     "badge": "",
     "tagline": "Định hướng nghề nghiệp",
     "description": "Phân tích phương hướng sự nghiệp phù hợp nhất dựa trên chỉ số số học cá nhân.",
+    "long_description": "<p><strong>Buổi làm việc 1:1 trực tiếp cùng Master Hoàng Mai Linh</strong> giúp bạn giải mã môi trường làm việc lý tưởng và thời điểm thuận lợi để chuyển việc hoặc bứt phá sự nghiệp.</p><p>Đi kèm tài liệu định hướng và biểu mẫu hành động cá nhân.</p>",
     "price": "Liên hệ",
     "benefits": "Phân tích nghề nghiệp phù hợp|Thời điểm thuận để chuyển việc|Môi trường làm việc lý tưởng|Đối tác & cộng sự phù hợp",
     "cta_label": "Đặt lịch",
@@ -75,6 +78,7 @@
     "badge": "",
     "tagline": "Cải thiện quan hệ",
     "description": "Phân tích nguồn gốc mâu thuẫn trong quan hệ cá nhân và hướng giải quyết.",
+    "long_description": "<p><strong>Phân tích nguồn gốc xung đột trong các mối quan hệ cá nhân, gia đình và đối tác.</strong></p><p>Cung cấp chiến lược hòa giải dựa trên cấu trúc năng lượng của từng cá nhân, cải thiện giao tiếp và xây dựng mối quan hệ bền vững.</p>",
     "price": "Liên hệ",
     "benefits": "Phân tích nguyên nhân xung đột|Chiến lược hòa giải|Cải thiện giao tiếp|Xây dựng quan hệ bền vững",
     "cta_label": "Đặt lịch",
@@ -98,6 +102,7 @@
     "badge": "SẢN PHẨM KHỞI ĐẦU",
     "tagline": "Bước đầu tiên để hiểu mình",
     "description": "Bản đồ phân tích cá nhân hóa gần 100 trang PDF kết hợp sách in Sức Mạnh Ẩn Sau Con Số ship tận nhà.",
+    "long_description": "<p><strong>Combo sản phẩm phễu chiến lược</strong> kết hợp cuốn sách in <em>Sức Mạnh Ẩn Sau Con Số</em> ship tận nhà và tệp PDF Hồ Sơ Vận Mệnh gần 100 trang.</p><p>Dành riêng cho khách hàng mua Combo Cao Cấp: Tặng kèm quyền truy cập Bộ 4 Video độc quyền hướng dẫn tự luận giải và thực hành.</p>",
     "price": "Từ 680.000 VND",
     "benefits": "Combo Tiêu Chuẩn: Sách in + PDF Hồ Sơ Vận Mệnh|Combo Cao Cấp: Sách in + PDF Hồ Sơ + Bộ 4 Video độc quyền|Phân tích 7 chỉ số vận mệnh cốt lõi|Định vị chu kỳ cuộc đời & Năm cá nhân hiện tại|Nhận diện điểm mạnh & điểm mù ra quyết định|Thiết kế làm cẩm nang đồng hành trọn đời",
     "cta_label": "Tìm hiểu ngay",
@@ -115,12 +120,14 @@
     ]
   },
   {
+    "id": 6,
     "name": "Xem đối tượng kết hôn",
-    "price": "Liên hệ",
+    "slug": "xem-doi-tuong-ket-hon",
     "badge": "",
     "tagline": "",
-    "slug": "xem-doi-tuong-ket-hon",
     "description": "",
+    "long_description": "<p><strong>Luận giải sự tương thích năng lượng giữa hai người</strong>, giúp bạn thấu hiểu điểm chung, điểm khác biệt và dự báo các giai đoạn hòa hợp trong hôn nhân.</p>",
+    "price": "Liên hệ",
     "benefits": "Kiểm tra đối tượng của mình",
     "cta_label": "Đặt lịch tư vấn",
     "theme": "light",
@@ -133,7 +140,6 @@
         "url": "/uploads/1784103500170-800x800_4.png",
         "mimetype": "image/png"
       }
-    ],
-    "id": 6
+    ]
   }
 ]
