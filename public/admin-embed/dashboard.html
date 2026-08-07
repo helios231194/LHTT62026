@@ -2248,7 +2248,7 @@
           tagline: document.getElementById('edit-tagline').value.trim(),
           slug: document.getElementById('edit-slug').value.trim(),
           description: document.getElementById('edit-description').value.trim(),
-          long_description: document.getElementById('edit-long-description') ? document.getElementById('edit-long-description').value.trim() : '',
+          long_description: window.quillLongDescEditor ? window.quillLongDescEditor.root.innerHTML : (document.getElementById('edit-long-description') ? document.getElementById('edit-long-description').value.trim() : ''),
           benefits: benefitsArr.join('|'),
           cta_label: document.getElementById('edit-cta-label').value.trim(),
           theme: document.getElementById('edit-theme').value,

@@ -737,6 +737,30 @@ export function LeaderConsulting({ initialProfile, initialBusinessProducts }: Le
                     </p>
                   </div>
 
+                  {/* Dynamic Long Description (Rich Text/HTML) */}
+                  {(() => {
+                    const matchedProduct = initialBusinessProducts?.find((p: any) => {
+                      if (activePackageId === 'goi-nen-tang') return p.id === 1 || p.sort_order === 1;
+                      if (activePackageId === 'goi-co-van') return p.id === 2 || p.sort_order === 2;
+                      if (activePackageId === 'goi-doi-ngu') return p.id === 3 || p.sort_order === 3;
+                      if (activePackageId === 'cai-to-doanh-nghiep') return p.id === 4 || p.sort_order === 4;
+                      return false;
+                    });
+                    if (!matchedProduct?.long_description) return null;
+                    return (
+                      <div className="space-y-2">
+                        <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-2">
+                          <BookOpen className="w-4 h-4 text-[#4991ba]" />
+                          Mô tả chi tiết nội dung
+                        </h4>
+                        <div 
+                          className="text-slate-700 bg-slate-50 border border-slate-100 p-5 rounded-2xl leading-relaxed text-sm prose max-w-none [&_strong]:text-oxford-blue [&_strong]:font-black [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 [&_h3]:text-base [&_h3]:font-bold [&_h3]:text-oxford-blue [&_h3]:mt-3 [&_p]:mb-2"
+                          dangerouslySetInnerHTML={{ __html: matchedProduct.long_description }}
+                        />
+                      </div>
+                    );
+                  })()}
+
                   {/* Details Sections */}
                   <div className="space-y-6 pt-2">
                     {currentDetail.sections.map((section, idx) => (
