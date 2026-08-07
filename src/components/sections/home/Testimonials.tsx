@@ -58,7 +58,7 @@ export function Testimonials({ initialTestimonials }: TestimonialsProps) {
     if (!initialTestimonials || initialTestimonials.length === 0) return defaultTestimonials;
     return initialTestimonials.map((item) => {
       const img = item.image?.[0];
-      const coverUrl = resolveAttachmentUrl(img?.url, img?.preview) || '/testimonials/Trần Trung Nhân.jpg';
+      const coverUrl = resolveAttachmentUrl(img) || '/testimonials/Trần Trung Nhân.jpg';
       const titleText = item.company ? `${item.position} – ${item.company}` : item.position;
       return {
         name: item.name,

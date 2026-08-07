@@ -65,7 +65,7 @@ export function SpeakerClients({ initialPartners, initialEvents }: SpeakerClient
             { id: 2, title: 'Talkshow Lãnh đạo Đột phá', location: 'Hà Nội, 2025', image: [], sort_order: 2 },
             { id: 3, title: 'Workshop Kiến tạo Đội ngũ', location: 'Đà Nẵng, 2025', image: [], sort_order: 3 }
           ]).map((event, idx) => {
-            const imgUrl = resolveAttachmentUrl(event.image?.[0]?.url);
+            const imgUrl = resolveAttachmentUrl(event.image);
             return (
               <FadeIn key={event.id} direction="up" delay={idx * 0.15}>
                 <div className="group relative rounded-3xl overflow-hidden aspect-[4/3] bg-slate-100 border border-slate-200">

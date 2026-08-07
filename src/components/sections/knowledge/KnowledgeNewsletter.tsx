@@ -41,7 +41,7 @@ export function KnowledgeNewsletter({ initialProfile }: KnowledgeNewsletterProps
     }
   };
 
-  const strategyCoverUrl = resolveAttachmentUrl(initialProfile?.strategy_pdf_cover?.[0]?.url) || resolveAttachmentUrl(initialProfile?.strategy_pdf_cover?.[0]);
+  const strategyCoverUrl = resolveAttachmentUrl(initialProfile?.strategy_pdf_cover) || resolveAttachmentUrl(initialProfile?.strategy_pdf_cover?.[0]);
 
   return (
     <section className="py-24 bg-oxford-blue relative overflow-hidden text-white border-t border-white/5">

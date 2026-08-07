@@ -28,7 +28,7 @@ export async function PersonalTestimonials() {
         <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6 mb-12">
           {screenshots.length > 0
             ? screenshots.map((shot, idx) => {
-                const imgUrl = resolveAttachmentUrl(shot.image?.[0]?.url);
+                const imgUrl = resolveAttachmentUrl(shot.image);
                 return (
                   <FadeIn key={shot.id} direction="up" delay={idx * 0.1}>
                     <div className="relative aspect-[9/16] w-full rounded-2xl overflow-hidden shadow-2xl border border-white/10 group bg-white/5">

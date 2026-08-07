@@ -46,7 +46,7 @@ export function SpeakerTestimonials({ initialTestimonials }: SpeakerTestimonials
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
           {dataList.map((t, idx) => {
-            const imgUrl = resolveAttachmentUrl(t.image?.[0]?.url);
+            const imgUrl = resolveAttachmentUrl(t.image);
             const displayTitle = t.company ? `${t.position}, ${t.company}` : t.position;
             return (
               <FadeIn key={t.id || idx} direction="up" delay={idx * 0.15}>

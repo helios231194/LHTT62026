@@ -30,7 +30,7 @@ export function MasterPhilosophy({ initialProfile }: MasterPhilosophyProps) {
             <div className="relative">
               <div className="relative rounded-2xl overflow-hidden aspect-[3/4] max-h-[600px] w-full">
                 <Image
-                  src={resolveAttachmentUrl(initialProfile?.philosophy_img?.[0]?.url) || "/herobanner/hero02.png"}
+                  src={resolveAttachmentUrl(initialProfile?.philosophy_img) || "/herobanner/hero02.png"}
                   alt="Master Hoàng Mai Linh – Triết lý"
                   fill
                   className="object-cover object-top"

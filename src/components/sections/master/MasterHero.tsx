@@ -16,7 +16,7 @@ export function MasterHero({ initialProfile }: MasterHeroProps) {
       {/* Background image right panel */}
       <div className="absolute inset-y-0 right-0 w-full lg:w-[52%]">
         <Image
-          src={resolveAttachmentUrl(initialProfile?.avatar?.[0]?.url) || "/herobanner/hero03.png"}
+          src={resolveAttachmentUrl(initialProfile?.avatar) || "/herobanner/hero03.png"}
           alt="Master Hoàng Mai Linh"
           fill
           priority

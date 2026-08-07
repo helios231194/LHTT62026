@@ -55,7 +55,7 @@ export function Header() {
     fetch('/api/admin/config?tab=homepage')
       .then(res => res.json())
       .then(payload => {
-        const dbLogo = payload.data?.logo?.[0]?.url;
+        const dbLogo = payload.data?.logo;
         if (dbLogo) {
           setLogoUrl(dbLogo);
         }

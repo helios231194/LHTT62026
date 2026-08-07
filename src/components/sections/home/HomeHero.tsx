@@ -13,7 +13,7 @@ interface HomeHeroProps {
 export function HomeHero({ initialProfile }: HomeHeroProps) {
   const heroTitle = initialProfile?.hero_title || 'Một quyết định đúng thời điểm thay đổi cả năm vận hành.';
   const heroDesc = initialProfile?.hero_desc || 'Linh Hoa Tâm đồng hành cùng CEO, Founder, Lãnh đạo cấp cao và cá nhân muốn hiểu rõ bản thân thông qua Thuật Số Học Ứng Dụng – công cụ giúp đặt đúng người và rẽ đúng hướng.';
-  const heroImage = resolveAttachmentUrl(initialProfile?.avatar?.[0]?.url) || '/herobanner/hero03.png';
+  const heroImage = resolveAttachmentUrl(initialProfile?.avatar) || '/herobanner/hero03.png';
 
   const renderDesktopTagline = () => (
     <div

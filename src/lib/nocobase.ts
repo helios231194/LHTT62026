@@ -77,6 +77,8 @@ export const CATEGORIES = Object.entries(CATEGORY_MAP).map(([value, label]) => (
  * Can receive either a string URL or a full attachment object.
  * Priority: preview (pre-encoded, /storage/) > url (may contain Vietnamese chars)
  */
+const MINIO_BASE_URL = 'https://minio.agentic.io.vn/linhoatam';
+
 export function resolveAttachmentUrl(
   urlOrObject?: any,
   preview?: string
@@ -98,13 +100,29 @@ export function resolveAttachmentUrl(
   const url = String(urlOrObject).trim();
   if (!url || url === 'undefined' || url === 'null') return undefined;
 
+  // Already a full MinIO URL
+  if (url.startsWith('https://minio.agentic.io.vn/')) {
+    return encodeURI(decodeURI(url));
+  }
+
+  // Full URL from old backend
+  if (url.startsWith('https://lht.gun.hmz.one/storage/uploads/')) {
+    const filename = url.replace('https://lht.gun.hmz.one/storage/uploads/', '');
+    return `${MINIO_BASE_URL}/${encodeURIComponent(decodeURIComponent(filename))}`;
+  }
+
   if (url.startsWith('http://') || url.startsWith('https://')) return url;
-  if (url.startsWith('/storage/')) return `${BASE_URL}${url}`;
-  if (url.startsWith('storage/')) return `${BASE_URL}/${url}`;
-  if (url.startsWith('/uploads/')) return url; // Local web upload (/public/uploads)
-  if (url.startsWith('uploads/')) return `/${url}`;
-  if (url.startsWith('/')) return url;
-  return `/${url}`;
+
+  // Extract clean filename from relative paths (/storage/uploads/..., /uploads/..., uploads/...)
+  const cleanFilename = url
+    .replace(/^\/?(storage\/)?uploads\//, '')
+    .replace(/^\//, '');
+
+  if (cleanFilename) {
+    return `${MINIO_BASE_URL}/${encodeURIComponent(decodeURIComponent(cleanFilename))}`;
+  }
+
+  return undefined;
 }
 
 // Thời gian revalidate (giây)

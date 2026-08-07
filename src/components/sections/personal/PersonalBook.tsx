@@ -13,7 +13,7 @@ interface PersonalBookProps {
 }
 
 export function PersonalBook({ initialProfile }: PersonalBookProps) {
-  const bookCoverUrl = resolveAttachmentUrl(initialProfile?.book_cover?.[0]?.url);
+  const bookCoverUrl = resolveAttachmentUrl(initialProfile?.book_cover);
 
   return (
     <section className="py-24 md:py-32 bg-ice-white relative overflow-hidden">

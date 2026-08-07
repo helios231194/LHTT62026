@@ -43,7 +43,7 @@ export function CommunityBanner({ initialProfile }: CommunityBannerProps) {
       {/* Background image */}
       <div className="absolute inset-0 z-0">
         <Image
-          src={resolveAttachmentUrl(initialProfile?.community_banner?.[0]?.url) || "/herobanner/hero04.png"}
+          src={resolveAttachmentUrl(initialProfile?.community_banner) || "/herobanner/hero04.png"}
           alt="Cộng đồng Lãnh đạo Linh Hoa Tâm"
           fill
           className="object-cover object-center opacity-20"

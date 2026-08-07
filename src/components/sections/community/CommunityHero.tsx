@@ -9,7 +9,7 @@ interface CommunityHeroProps {
 }
 
 export function CommunityHero({ initialProfile }: CommunityHeroProps) {
-  const qrCodeUrl = resolveAttachmentUrl(initialProfile?.community_qr?.[0]?.url);
+  const qrCodeUrl = resolveAttachmentUrl(initialProfile?.community_qr);
 
   return (
     <section className="relative w-full py-20 md:py-32 overflow-hidden bg-oxford-blue text-white">

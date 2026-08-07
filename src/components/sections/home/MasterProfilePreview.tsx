@@ -18,7 +18,7 @@ interface MasterProfilePreviewProps {
 export function MasterProfilePreview({ initialProfile }: MasterProfilePreviewProps) {
   const name = initialProfile?.name || 'Master Hoàng Mai Linh';
   const bioText = initialProfile?.bio || defaultBio;
-  const avatarImage = resolveAttachmentUrl(initialProfile?.avatar?.[0]?.url) || '/herobanner/hero03.png';
+  const avatarImage = resolveAttachmentUrl(initialProfile?.avatar) || '/herobanner/hero03.png';
 
   const bioParagraphs = useMemo(() => {
     return bioText.split('\n').filter(p => p.trim() !== '');

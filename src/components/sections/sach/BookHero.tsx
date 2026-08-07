@@ -13,7 +13,7 @@ interface BookHeroProps {
 }
 
 export function BookHero({ initialProfile }: BookHeroProps) {
-  const bookCoverUrl = resolveAttachmentUrl(initialProfile?.book_cover?.[0]?.url);
+  const bookCoverUrl = resolveAttachmentUrl(initialProfile?.book_cover);
 
   return (
     <>

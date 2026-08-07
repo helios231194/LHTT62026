@@ -38,7 +38,7 @@ export function LeaderTestimonials({ initialTestimonials }: LeaderTestimonialsPr
         name: item.name || item.author,
         position: item.position || item.role || '',
         company: item.company || '',
-        avatar: resolveAttachmentUrl(item.image?.[0]?.url) || resolveAttachmentUrl(item.avatar),
+        avatar: resolveAttachmentUrl(item.image) || resolveAttachmentUrl(item.avatar),
         quote: item.quote,
       }))
     : defaultTestimonials;

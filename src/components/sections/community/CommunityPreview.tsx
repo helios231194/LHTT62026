@@ -19,7 +19,7 @@ export async function CommunityPreview() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
           {posts.length > 0 ? (
             posts.map((post, idx) => {
-              const imgUrl = resolveAttachmentUrl(post.thumbnail?.[0]?.url);
+              const imgUrl = resolveAttachmentUrl(post.thumbnail);
               const cardContent = (
                 <div className="relative w-full h-full flex flex-col items-center justify-center overflow-hidden">
                   {imgUrl ? (
