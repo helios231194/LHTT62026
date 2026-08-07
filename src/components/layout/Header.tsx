@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/Button';
 import { cn } from '@/lib/utils';
 import { Menu, X, ChevronDown } from 'lucide-react';
+import { resolveAttachmentUrl } from '@/lib/nocobase';
 
 const navLinks = [
   {
@@ -56,8 +57,9 @@ export function Header() {
       .then(res => res.json())
       .then(payload => {
         const dbLogo = payload.data?.logo;
-        if (dbLogo) {
-          setLogoUrl(dbLogo);
+        const resolved = resolveAttachmentUrl(dbLogo);
+        if (resolved) {
+          setLogoUrl(resolved);
         }
       })
       .catch(() => {});

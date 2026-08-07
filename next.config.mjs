@@ -4,15 +4,38 @@ const nextConfig = {
     optimizePackageImports: ['lucide-react'],
   },
   images: {
+    unoptimized: true,
     formats: ['image/avif', 'image/webp'],
+    domains: [
+      'minio.agentic.io.vn',
+      'lht.gun.hmz.one',
+      'minio-console.apps.agentic.io.vn',
+      '103.211.206.31',
+    ],
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: '**',
+        hostname: 'minio.agentic.io.vn',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'lht.gun.hmz.one',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'minio-console.apps.agentic.io.vn',
+        port: '',
+        pathname: '/**',
       },
       {
         protocol: 'http',
-        hostname: '**',
+        hostname: '103.211.206.31',
+        port: '9000',
+        pathname: '/**',
       },
     ],
   },

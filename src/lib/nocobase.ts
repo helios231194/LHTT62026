@@ -113,16 +113,19 @@ export function resolveAttachmentUrl(
 
   if (url.startsWith('http://') || url.startsWith('https://')) return url;
 
-  // Extract clean filename from relative paths (/storage/uploads/..., /uploads/..., uploads/...)
-  const cleanFilename = url
-    .replace(/^\/?(storage\/)?uploads\//, '')
-    .replace(/^\//, '');
+  // Extract clean filename from relative upload paths (/storage/uploads/..., /uploads/..., uploads/...)
+  if (url.includes('uploads/')) {
+    const cleanFilename = url
+      .replace(/^\/?(storage\/)?uploads\//, '')
+      .replace(/^\//, '');
 
-  if (cleanFilename) {
-    return `${MINIO_BASE_URL}/${encodeURIComponent(decodeURIComponent(cleanFilename))}`;
+    if (cleanFilename) {
+      return `${MINIO_BASE_URL}/${encodeURIComponent(decodeURIComponent(cleanFilename))}`;
+    }
   }
 
-  return undefined;
+  // Static local asset in public/ directory (e.g. /LOGO-07.png, /images/..., /herobannerbackground.png)
+  return url;
 }
 
 // Thời gian revalidate (giây)
