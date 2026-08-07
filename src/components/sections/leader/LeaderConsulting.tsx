@@ -529,6 +529,18 @@ export function LeaderConsulting({ initialProfile, initialBusinessProducts }: Le
   const activeDetailKey = activePackageId === 'goi-doi-ngu' ? `goi-doi-ngu-${teamSize}` : activePackageId || '';
   const currentDetail = packageDetails[activeDetailKey];
 
+  const matchedProduct = initialBusinessProducts?.find((p: any) => {
+    if (activePackageId === 'goi-nen-tang') return String(p.id) === '1' || p.sort_order === 1;
+    if (activePackageId === 'goi-co-van') return String(p.id) === '2' || p.sort_order === 2;
+    if (activePackageId === 'goi-doi-ngu') return String(p.id) === '3' || p.sort_order === 3;
+    if (activePackageId === 'cai-to-doanh-nghiep') return String(p.id) === '4' || p.sort_order === 4;
+    return false;
+  });
+
+  const benefitsArray = matchedProduct?.benefits
+    ? matchedProduct.benefits.split('|').map((b: string) => b.trim()).filter(Boolean)
+    : [];
+
   const handleOpenDetails = (id: string) => {
     setActivePackageId(id);
     setModalView('details');
@@ -649,21 +661,8 @@ export function LeaderConsulting({ initialProfile, initialBusinessProducts }: Le
       </div>
 
       {/* POPUP MODAL */}
-      {activePackageId && currentDetail && (() => {
-        const matchedProduct = initialBusinessProducts?.find((p: any) => {
-          if (activePackageId === 'goi-nen-tang') return String(p.id) === '1' || p.sort_order === 1;
-          if (activePackageId === 'goi-co-van') return String(p.id) === '2' || p.sort_order === 2;
-          if (activePackageId === 'goi-doi-ngu') return String(p.id) === '3' || p.sort_order === 3;
-          if (activePackageId === 'cai-to-doanh-nghiep') return String(p.id) === '4' || p.sort_order === 4;
-          return false;
-        });
-
-        const benefitsArray = matchedProduct?.benefits
-          ? matchedProduct.benefits.split('|').map((b: string) => b.trim()).filter(Boolean)
-          : [];
-
-        return (
-          <div className="fixed inset-0 z-[1000] bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4 md:p-6 overflow-hidden">
+      {activePackageId && currentDetail && (
+        <div className="fixed inset-0 z-[1000] bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4 md:p-6 overflow-hidden">
             <div className="bg-white rounded-3xl max-w-2xl w-full max-h-[85vh] md:max-h-[80vh] overflow-hidden relative shadow-2xl flex flex-col border border-slate-100 animate-in fade-in duration-200">
               {/* Modal Header */}
               <div className="sticky top-0 bg-white border-b border-slate-100 px-6 sm:px-8 py-5 flex items-start justify-between z-10 shrink-0">
@@ -762,35 +761,41 @@ export function LeaderConsulting({ initialProfile, initialBusinessProducts }: Le
 
                     {/* Quyền lợi đi kèm / Benefits (Lấy từ Admin Embed nếu có) */}
                     {benefitsArray.length > 0 ? (
-                      <div className="space-y-3 pt-2">
-                        <h4 className="text-sm font-bold uppercase tracking-wider text-slate-800 border-l-2 border-[#4991ba] pl-2.5">
-                          Quyền lợi đi kèm:
+                      <div className="bg-[#F8FAFC] rounded-2xl p-6 border border-slate-100 space-y-4">
+                        <h4 className="font-bold text-oxford-blue text-sm uppercase tracking-wider flex items-center gap-2">
+                          <CheckCircle2 className="w-5 h-5 text-[#ff6801]" />
+                          Quyền lợi đi kèm dành cho Lãnh đạo:
                         </h4>
-                        <ul className="grid grid-cols-1 gap-2.5 pl-1">
+                        <div className="grid grid-cols-1 gap-3">
                           {benefitsArray.map((benefit: string, idx: number) => (
-                            <li key={idx} className="flex items-start gap-3 text-sm">
-                              <CheckCircle2 className="w-4.5 h-4.5 text-[#ff6801] shrink-0 mt-0.5" />
-                              <span className="text-slate-600 font-medium leading-relaxed">{benefit}</span>
-                            </li>
+                            <div 
+                              key={idx} 
+                              className="flex items-start gap-3.5 p-4 bg-white rounded-xl border border-slate-200/80 shadow-sm hover:shadow-md hover:border-[#ff6801]/30 transition-all duration-200"
+                            >
+                              <div className="w-6 h-6 rounded-full bg-[#ff6801]/10 text-[#ff6801] flex items-center justify-center shrink-0 mt-0.5 font-black text-xs">
+                                ✓
+                              </div>
+                              <span className="text-slate-700 font-semibold text-sm leading-relaxed">{benefit}</span>
+                            </div>
                           ))}
-                        </ul>
+                        </div>
                       </div>
                     ) : (
                       /* Details Sections (Fallback) */
                       <div className="space-y-6 pt-2">
                         {currentDetail.sections.map((section, idx) => (
-                          <div key={idx} className="space-y-3">
-                            <h4 className="text-sm font-bold uppercase tracking-wider text-slate-800 border-l-2 border-[#4991ba] pl-2.5">
+                          <div key={idx} className="bg-[#F8FAFC] rounded-2xl p-5 border border-slate-100 space-y-3">
+                            <h4 className="text-sm font-bold uppercase tracking-wider text-slate-800 border-l-4 border-[#4991ba] pl-3">
                               {section.title}
                             </h4>
-                            <ul className="grid grid-cols-1 gap-2.5 pl-1">
+                            <div className="grid grid-cols-1 gap-2.5">
                               {section.items.map((item, itemIdx) => (
-                                <li key={itemIdx} className="flex items-start gap-3 text-sm">
+                                <div key={itemIdx} className="flex items-start gap-3 p-3 bg-white rounded-xl border border-slate-200/60 shadow-sm">
                                   <CheckCircle2 className="w-4.5 h-4.5 text-[#ff6801] shrink-0 mt-0.5" />
-                                  <span className="text-slate-600 font-medium leading-relaxed">{item}</span>
-                                </li>
+                                  <span className="text-slate-700 font-medium text-sm leading-relaxed">{item}</span>
+                                </div>
                               ))}
-                            </ul>
+                            </div>
                           </div>
                         ))}
                       </div>
@@ -954,7 +959,7 @@ export function LeaderConsulting({ initialProfile, initialBusinessProducts }: Le
             )}
           </div>
         </div>
-      })()}
+      )}
     </section>
   );
 }
