@@ -1561,7 +1561,7 @@
       
       let fieldsMarkup = '';
       
-      if (['personal_products', 'business_products'].includes(activeTab)) {
+      if (['personal_products', 'business_products', 'destiny_product_item'].includes(activeTab)) {
         // Products Form
         const p = selectedItem || {};
         const benefitsArray = p.benefits ? p.benefits.split('|') : [];
@@ -2198,7 +2198,7 @@
       `;
 
       // Post-render configurations
-      if (['personal_products', 'business_products'].includes(activeTab)) {
+      if (['personal_products', 'business_products', 'destiny_product_item'].includes(activeTab)) {
         const benefitsArray = (selectedItem && selectedItem.benefits) ? selectedItem.benefits.split('|') : [];
         const container = document.getElementById('edit-benefits-container');
         if (container) {
@@ -2320,7 +2320,7 @@
       let data = {};
       
       // Build request body depending on activeTab
-      if (['personal_products', 'business_products'].includes(activeTab)) {
+      if (['personal_products', 'business_products', 'destiny_product_item'].includes(activeTab)) {
         const benefitRows = document.querySelectorAll('.edit-benefit-row input');
         const benefitsArr = [];
         benefitRows.forEach(input => {
@@ -2468,6 +2468,7 @@
         // Image is already included in the request body by the fetch interceptor.
         // No secondary :set call needed — it would clear the image due to parseInt(jsonString) = NaN.
 
+        fetch('/api/admin/revalidate', { method: 'POST' }).catch(() => {});
         setSyncStatus('success', 'Đã lưu thay đổi thành công!');
         selectedItem = null;
         setTimeout(loadTabData, 1000);
