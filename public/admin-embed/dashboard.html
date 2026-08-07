@@ -109,9 +109,12 @@
           <span>🏢</span> <span class="menu-text">Lãnh Đạo - 4 Gói Cố Vấn CEO</span>
         </button>
 
-        <span class="group-title text-[10px] font-bold text-slate-400 uppercase tracking-wider px-3 mt-4 mb-1">📜 Trang Hồ Sơ Vận Mệnh</span>
+        <span class="group-title text-[10px] font-bold text-slate-400 uppercase tracking-wider px-3 mt-4 mb-1">📜 Trang Hồ Sơ Vận Mệnh (/ho-so-van-menh)</span>
         <button onclick="switchTab('destiny_profile')" id="menu-destiny_profile" class="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-bold transition-all duration-150 text-slate-600 hover:bg-slate-100 w-full text-left">
-          <span>📜</span> <span class="menu-text">Hồ Sơ Vận Mệnh - Bìa PDF & Giá</span>
+          <span>📜</span> <span class="menu-text">1. Các Session & Nội dung Trang (/ho-so-van-menh)</span>
+        </button>
+        <button onclick="switchTab('destiny_product_item')" id="menu-destiny_product_item" class="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-bold transition-all duration-150 text-slate-600 hover:bg-slate-100 w-full text-left">
+          <span>📦</span> <span class="menu-text">2. Thẻ Gói Sản phẩm (Dẫn về Hồ Sơ)</span>
         </button>
 
         <span class="group-title text-[10px] font-bold text-slate-400 uppercase tracking-wider px-3 mt-4 mb-1">🎙️ Trang Diễn Giả & Workshop</span>
@@ -429,7 +432,7 @@
 
     function switchTab(tab) {
       // Update sidebar styling
-      const menuIds = ['homepage', 'destiny_profile', 'images', 'personal_products', 'business_products', 'testimonials', 'customer_screenshots', 'facebook_posts', 'stats', 'partners', 'speaker_events', 'speaker_assets', 'workshops', 'book_feedbacks', 'book_videos', 'blog_posts'];
+      const menuIds = ['homepage', 'destiny_profile', 'destiny_product_item', 'images', 'personal_products', 'business_products', 'testimonials', 'customer_screenshots', 'facebook_posts', 'stats', 'partners', 'speaker_events', 'speaker_assets', 'workshops', 'book_feedbacks', 'book_videos', 'blog_posts'];
       menuIds.forEach(id => {
         const el = document.getElementById('menu-' + id);
         if (!el) return;
@@ -456,6 +459,8 @@
         await loadHomepageConfig(area);
       } else if (activeTab === 'destiny_profile') {
         await loadDestinyProfileConfig(area);
+      } else if (activeTab === 'destiny_product_item') {
+        await loadDestinyProductItemConfig(area);
       } else if (activeTab === 'images') {
         await loadImagesConfig(area);
       } else if (activeTab === 'speaker_assets') {
@@ -491,8 +496,8 @@
 
         area.innerHTML = `
           <div class="max-w-3xl">
-            <h2 class="font-title font-bold text-lg text-oxford-blue mb-2">📜 QUẢN LÝ HỒ SƠ VẬN MỆNH (BÌA SÁCH & NỘI DUNG)</h2>
-            <p class="text-xs text-slate-400 mb-6">Cấu hình tập trung tệp ảnh bìa, giá niêm yết và nội dung Hồ Sơ Vận Mệnh trên toàn bộ website.</p>
+            <h2 class="font-title font-bold text-lg text-oxford-blue mb-1">📜 1. CẤU HÌNH CÁC SESSION & NỘI DUNG TRANG /ho-so-van-menh</h2>
+            <p class="text-xs text-slate-400 mb-6">Quản lý Ảnh Bìa Sách PDF, Giá Combo Tiêu Chuẩn 680K, Giá Combo Cao Cấp 980K, và tất cả thông tin các Session trên trang <code>/ho-so-van-menh</code>.</p>
             
             <form onsubmit="saveDestinyProfile(event)" class="space-y-5">
               <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-3">
@@ -648,6 +653,51 @@
         console.error('saveDestinyProfile error:', err);
         alert('Lưu thất bại: ' + (err.message || 'Lỗi không xác định'));
         setSyncStatus('error', 'Lỗi lưu cấu hình');
+      }
+    }
+
+    async function loadDestinyProductItemConfig(area) {
+      try {
+        const res = await fetch('/api/admin/config?tab=personal_products', { headers });
+        const payload = await res.json();
+        const products = payload.data || [];
+        let destinyItem = products.find(p => p.id === 5 || p.slug === 'ho-so-van-menh' || (p.name && p.name.includes('Hồ Sơ Vận Mệnh')));
+
+        if (!destinyItem) {
+          destinyItem = {
+            id: 5,
+            name: 'Combo Hồ Sơ Vận Mệnh',
+            slug: 'ho-so-van-menh',
+            badge: 'SẢN PHẨM KHỞI ĐẦU',
+            tagline: 'Bước đầu tiên để hiểu mình',
+            description: 'Bản đồ phân tích cá nhân hóa gần 100 trang PDF kết hợp sách in Sức Mạnh Ẩn Sau Con Số ship tận nhà.',
+            price: 'Từ 680.000 VND',
+            benefits: 'Combo Tiêu Chuẩn: Sách in + PDF Hồ Sơ Vận Mệnh|Combo Cao Cấp: Sách in + PDF Hồ Sơ + Bộ 4 Video độc quyền',
+            cta_label: 'Tìm hiểu ngay',
+            href: '/ho-so-van-menh',
+            theme: 'light',
+            featured: true,
+            sort_order: 0
+          };
+        }
+
+        selectedItem = destinyItem;
+        listData = products;
+        activeTab = 'personal_products'; // Target API collection when saving
+
+        area.innerHTML = `
+          <div class="max-w-3xl">
+            <h2 class="font-title font-bold text-lg text-oxford-blue mb-1">📦 QUẢN LÝ THẺ GÓI SẢN PHẨM HỒ SƠ VẬN MỆNH</h2>
+            <p class="text-xs text-slate-400 mb-6">Cấu hình thẻ sản phẩm hiển thị trên trang danh mục (Trang Chủ & Trang Cá Nhân) trỏ đường link về trang <code>/ho-so-van-menh</code>.</p>
+            <div id="form-container"></div>
+          </div>
+        `;
+
+        renderFormEditor();
+        setSyncStatus('success', 'Đã tải thẻ sản phẩm Hồ Sơ Vận Mệnh');
+      } catch (err) {
+        console.error('loadDestinyProductItemConfig error:', err);
+        setSyncStatus('error', 'Lỗi tải thẻ sản phẩm');
       }
     }
 
