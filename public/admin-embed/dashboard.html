@@ -612,8 +612,10 @@
       const targetText = document.getElementById('dp-target-audience').value.trim();
       const target_audience = targetText ? targetText.split('\n').map(t => t.trim()).filter(Boolean) : [];
 
+      const baseData = (destinyProfileData && typeof destinyProfileData === 'object' && !Array.isArray(destinyProfileData)) ? destinyProfileData : {};
+
       const payload = {
-        ...destinyProfileData,
+        ...baseData,
         name: document.getElementById('dp-name').value.trim(),
         tagline: document.getElementById('dp-tagline').value.trim(),
         description: document.getElementById('dp-description').value.trim(),
@@ -626,14 +628,25 @@
       try {
         const res = await fetch('/api/admin/config?tab=destiny_profile', {
           method: 'POST',
-          headers,
+          headers: {
+            'Authorization': `Bearer ${TOKEN}`,
+            'Content-Type': 'application/json'
+          },
           body: JSON.stringify(payload)
         });
-        if (!res.ok) throw new Error('Save failed');
+
+        if (!res.ok) {
+          const errTxt = await res.text();
+          throw new Error(`HTTP ${res.status}: ${errTxt}`);
+        }
+
+        fetch('/api/admin/revalidate', { method: 'POST' }).catch(() => {});
+
         setSyncStatus('success', 'Đã lưu cấu hình Hồ Sơ Vận Mệnh thành công!');
-        setTimeout(loadTabData, 1500);
+        destinyProfileData = payload;
       } catch (err) {
-        alert('Lưu thất bại');
+        console.error('saveDestinyProfile error:', err);
+        alert('Lưu thất bại: ' + (err.message || 'Lỗi không xác định'));
         setSyncStatus('error', 'Lỗi lưu cấu hình');
       }
     }
