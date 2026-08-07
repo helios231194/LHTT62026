@@ -95,13 +95,16 @@ export function resolveAttachmentUrl(
     return resolveAttachmentUrl(obj.preview || obj.url);
   }
 
-  const url = String(urlOrObject);
+  const url = String(urlOrObject).trim();
   if (!url || url === 'undefined' || url === 'null') return undefined;
 
   if (url.startsWith('http://') || url.startsWith('https://')) return url;
   if (url.startsWith('/storage/')) return `${BASE_URL}${url}`;
+  if (url.startsWith('storage/')) return `${BASE_URL}/${url}`;
   if (url.startsWith('/uploads/')) return url; // Local web upload (/public/uploads)
-  return url; // /images/, /herobanner/, /testimonials/ → static local assets
+  if (url.startsWith('uploads/')) return `/${url}`;
+  if (url.startsWith('/')) return url;
+  return `/${url}`;
 }
 
 // Thời gian revalidate (giây)

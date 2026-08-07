@@ -441,15 +441,15 @@ const packageDetails: Record<string, PackageDetail> = {
 };
 
 export function LeaderConsulting({ initialProfile, initialBusinessProducts }: LeaderConsultingProps) {
-  const p1 = initialBusinessProducts?.find((p: any) => p.id === 1 || p.sort_order === 1);
-  const p2 = initialBusinessProducts?.find((p: any) => p.id === 2 || p.sort_order === 2);
-  const p3 = initialBusinessProducts?.find((p: any) => p.id === 3 || p.sort_order === 3);
-  const p4 = initialBusinessProducts?.find((p: any) => p.id === 4 || p.sort_order === 4);
+  const p1 = initialBusinessProducts?.find((p: any) => String(p.id) === '1' || p.sort_order === 1);
+  const p2 = initialBusinessProducts?.find((p: any) => String(p.id) === '2' || p.sort_order === 2);
+  const p3 = initialBusinessProducts?.find((p: any) => String(p.id) === '3' || p.sort_order === 3);
+  const p4 = initialBusinessProducts?.find((p: any) => String(p.id) === '4' || p.sort_order === 4);
 
-  const tier1ImgUrl = resolveAttachmentUrl(p1?.image?.[0]?.url) || resolveAttachmentUrl(initialProfile?.consulting_tier1_img?.[0]?.url) || PLACEHOLDER;
-  const tier2ImgUrl = resolveAttachmentUrl(p2?.image?.[0]?.url) || resolveAttachmentUrl(initialProfile?.consulting_tier2_img?.[0]?.url) || PLACEHOLDER;
-  const tier3ImgUrl = resolveAttachmentUrl(p3?.image?.[0]?.url) || resolveAttachmentUrl(initialProfile?.consulting_tier3_img?.[0]?.url) || PLACEHOLDER;
-  const tier4ImgUrl = resolveAttachmentUrl(p4?.image?.[0]?.url) || resolveAttachmentUrl(initialProfile?.consulting_tier4_img?.[0]?.url) || '/uploads/1784069618158-800x800_3.png';
+  const tier1ImgUrl = resolveAttachmentUrl(p1?.image) || resolveAttachmentUrl(initialProfile?.consulting_tier1_img) || PLACEHOLDER;
+  const tier2ImgUrl = resolveAttachmentUrl(p2?.image) || resolveAttachmentUrl(initialProfile?.consulting_tier2_img) || PLACEHOLDER;
+  const tier3ImgUrl = resolveAttachmentUrl(p3?.image) || resolveAttachmentUrl(initialProfile?.consulting_tier3_img) || PLACEHOLDER;
+  const tier4ImgUrl = resolveAttachmentUrl(p4?.image) || resolveAttachmentUrl(initialProfile?.consulting_tier4_img) || '/uploads/1784069618158-800x800_3.png';
 
   const pricingTiers = [
     {

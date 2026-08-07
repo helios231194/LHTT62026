@@ -13,7 +13,7 @@ interface LeaderDestinyProfileProps {
 }
 
 export function LeaderDestinyProfile({ initialDestinyProfile }: LeaderDestinyProfileProps) {
-  const coverUrl = resolveAttachmentUrl(initialDestinyProfile?.cover_image?.[0]?.url) || '/uploads/1784020906703-BanoL.png';
+  const coverUrl = resolveAttachmentUrl(initialDestinyProfile?.cover_image) || '/uploads/1784020906703-BanoL.png';
   const tagline = initialDestinyProfile?.tagline || 'Bước đầu tiên để hiểu mình trước khi ra quyết định.';
   const description = initialDestinyProfile?.description || 'Trước khi lập Bản đồ Chiến lược 2026 hay tiến hành Tham vấn 1:1, bạn cần hiểu rõ cấu trúc vận hành nội tại của chính mình. Hồ Sơ Vận Mệnh là bản đồ cơ bản đầu tiên giúp bạn thấu suốt điểm mạnh bẩm sinh và chu kỳ đang ở hiện tại.';
   const priceStandard = initialDestinyProfile?.price_standard || '680.000 VNĐ';

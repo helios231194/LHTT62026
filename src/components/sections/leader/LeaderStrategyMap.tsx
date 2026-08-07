@@ -13,7 +13,7 @@ interface LeaderStrategyMapProps {
 }
 
 export function LeaderStrategyMap({ initialProfile }: LeaderStrategyMapProps) {
-  const strategyCoverUrl = resolveAttachmentUrl(initialProfile?.strategy_pdf_cover?.[0]?.url) || '/uploads/1785312695170-800x800_2.png';
+  const strategyCoverUrl = resolveAttachmentUrl(initialProfile?.strategy_pdf_cover) || '/uploads/1785312695170-800x800_2.png';
   const title = (initialProfile as any)?.strategy_map_title || 'Bản đồ Quyết Định Chiến Lược Lãnh Đạo 2026';
   const desc = (initialProfile as any)?.strategy_map_desc || 'Tài sản chiến lược được cá nhân hóa hoàn toàn. Dùng làm tài liệu tham chiếu cốt lõi trong họp chiến lược, tuyển dụng cấp quản lý, quyết định đầu tư và mở chi nhánh.';
   const price = (initialProfile as any)?.strategy_map_price || '3.800.000 VNĐ';

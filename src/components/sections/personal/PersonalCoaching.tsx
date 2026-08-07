@@ -106,7 +106,7 @@ export function PersonalCoaching({ initialProducts }: PersonalCoachingProps) {
                     {/* Square Placeholder Image */}
                     <div className="relative w-full aspect-[4/3] overflow-hidden bg-slate-100 flex items-center justify-center">
                       <Image
-                        src={resolveAttachmentUrl(svc.image?.[0]?.url) || PLACEHOLDER}
+                        src={resolveAttachmentUrl(svc.image) || PLACEHOLDER}
                         alt={svc.name}
                         fill
                         className="object-cover opacity-80"
