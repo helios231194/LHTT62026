@@ -221,10 +221,23 @@ export function PersonalCoaching({ initialProducts }: PersonalCoachingProps) {
                       <div className="text-xl font-black text-blaze-orange mt-2">{selectedProduct.price || 'Liên hệ'}</div>
                     </div>
 
-                    <div 
-                      className="text-slate-600 leading-relaxed text-sm md:text-base prose max-w-none [&_strong]:text-oxford-blue [&_strong]:font-black [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 [&_h3]:text-lg [&_h3]:font-bold [&_h3]:text-oxford-blue [&_h3]:mt-3 [&_p]:mb-3"
-                      dangerouslySetInnerHTML={{ __html: selectedProduct.long_description || selectedProduct.description || '' }}
-                    />
+                    {selectedProduct.description && (
+                      <p className="text-slate-600 leading-relaxed text-sm md:text-base">
+                        {selectedProduct.description}
+                      </p>
+                    )}
+
+                    {selectedProduct.long_description && selectedProduct.long_description !== '<p><br></p>' && (
+                      <div className="space-y-2 pt-2 border-t border-slate-100">
+                        <h4 className="font-bold text-oxford-blue text-sm uppercase tracking-wider">
+                          Mô tả chi tiết:
+                        </h4>
+                        <div 
+                          className="text-slate-600 leading-relaxed text-sm md:text-base prose max-w-none [&_strong]:text-oxford-blue [&_strong]:font-black [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 [&_h3]:text-lg [&_h3]:font-bold [&_h3]:text-oxford-blue [&_h3]:mt-3 [&_p]:mb-3"
+                          dangerouslySetInnerHTML={{ __html: selectedProduct.long_description }}
+                        />
+                      </div>
+                    )}
 
                     {/* Benefits List */}
                     {getBenefitsArray(selectedProduct.benefits).length > 0 && (
