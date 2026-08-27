@@ -146,7 +146,7 @@ export async function POST(req: NextRequest) {
         ? `${nocobaseUrl}/api/${tab}:update?filterByTk=${payload.id}`
         : `${nocobaseUrl}/api/${tab}:create`;
 
-      await fetch(endpoint, {
+      const nocoRes = await fetch(endpoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -154,6 +154,14 @@ export async function POST(req: NextRequest) {
         },
         body: JSON.stringify(payload),
       });
+
+      if (nocoRes.ok) {
+        const nocoJson = await nocoRes.json();
+        const createdId = nocoJson?.data?.id || (Array.isArray(nocoJson?.data) && nocoJson.data[0]?.id);
+        if (createdId && !payload.id) {
+          payload.id = createdId;
+        }
+      }
     } catch (err) {
       console.warn('Could not sync to NocoBase:', err);
     }
