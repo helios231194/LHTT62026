@@ -9,10 +9,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 export function Hero() {
   const heroImages = [
-    '/herobanner/487810895_632714732968418_1323220081853138133_n.jpg',
-    '/herobanner/489916213_638224145750810_7430750482301268316_n.jpg',
-    '/herobanner/500658755_673862725520285_446945340546018026_n.jpg',
-    '/herobanner/501385981_671344565772101_7822343603965720762_n.jpg',
+    '/herobanner/hero01.png',
+    '/herobanner/hero02.png',
+    '/herobanner/hero03.png',
+    '/herobanner/hero04.png',
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -124,7 +124,7 @@ export function Hero() {
         <FadeIn delay={0.6}>
           <div className="relative h-24 w-80 lg:h-[120px] lg:w-[400px] grayscale hover:grayscale-0 transition-all duration-300">
             <Image 
-              src="/forbes-women.webp" 
+              src="/LogoNTT/forbes-women.webp" 
               alt="Forbes Women" 
               fill 
               className="object-contain object-right mix-blend-multiply drop-shadow-sm" 

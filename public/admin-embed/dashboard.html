@@ -150,6 +150,9 @@
         </button>
 
         <span class="group-title text-[10px] font-bold text-slate-400 uppercase tracking-wider px-3 mt-4 mb-1">📥 Quản Lý Đăng Ký (Leads)</span>
+        <button onclick="switchTab('leads')" id="menu-leads" class="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-bold transition-all duration-150 text-slate-600 hover:bg-slate-100 w-full text-left">
+          <span>👥</span> <span class="menu-text">Khách Hàng (CRM Leads)</span>
+        </button>
         <button onclick="switchTab('facebook_posts')" id="menu-facebook_posts" class="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-bold transition-all duration-150 text-slate-600 hover:bg-slate-100 w-full text-left">
           <span>🔗</span> <span class="menu-text">Bài viết Facebook</span>
         </button>
@@ -167,14 +170,18 @@
   </div>
 
   <!-- Command Center Script Core -->
-  <script>
-    // 🔒 LỚP BẢO MẬT: CHỈ CHO PHÉP CHẠY BÊN TRONG IFRAME CỦA NOCOBASE
+    // 🔒 LỚP BẢO MẬT: HỖ TRỢ CHẠY CẢ LOCALHOST VÀ IFRAME NOCOBASE
     (function checkSecurityLock() {
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      if (isLocalhost) return; // Luôn cho phép truy cập khi phát triển trên máy local
+
       const isEmbedded = window.self !== window.top;
       const ref = document.referrer || "";
       
       // Allowed origins: NocoBase server, local dev, or our own site (when embedded)
       const allowedOrigins = [
+        "linhhoatam.apps.agentic.io.vn",
+        "lhtt62026.apps.agentic.io.vn",
         "lht.gun.hmz.one",
         "lht.agentic.io.vn",
         "localhost",
@@ -192,7 +199,7 @@
             <div class="bg-white p-8 rounded-2xl shadow-xl max-w-md border border-slate-200">
               <span class="text-4xl">🔒</span>
               <div role="heading" aria-level="1" class="text-lg font-title font-bold text-slate-800 mt-4 mb-2">TRUY CẬP BỊ TỪ CHỐI</div>
-              <p class="text-xs text-slate-500 leading-relaxed">Trang quản trị này chứa token hệ thống và chỉ được phép hoạt động khi nhúng (iframe) bên trong NocoBase của Linh Hoa Tâm. Truy cập trực tiếp bị từ chối vì lý do bảo mật.</p>
+              <p class="text-xs text-slate-500 leading-relaxed">Trang quản trị này chứa token hệ thống và chỉ được phép hoạt động khi nhúng (iframe) bên trong NocoBase của Linh Hoa Tâm hoặc trên môi trường Local.</p>
             </div>
           </div>
         `;
@@ -200,9 +207,9 @@
       }
     })();
 
-    const TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGVOYW1lIjoicm9vdCIsImlhdCI6MTc4MjU0NDIyOSwiZXhwIjozMzM0MDE0NDIyOX0.l-Aru4p4MXyS6teBgmJQKeS2SfhMCUPV3IGAf2zeYWE";
+    const TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGVOYW1lIjoicm9vdCIsImlhdCI6MTc4NzgyNzAwNiwiZXhwIjozMzM0NTQyNzAwNn0.2_hY0hPPvPIHgRn_Z8M6pozWZIKnphvnuH1Yx5OgCXU";
     const BASE_URL = "";
-    const NOCOBASE_URL = "https://lht.gun.hmz.one";
+    const NOCOBASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' ? "http://localhost:13000" : "https://linhhoatam.apps.agentic.io.vn";
     
     let activeTab = 'homepage';
     let profileData = null;
@@ -227,7 +234,13 @@
         // 1. LEADS & BLOG_POSTS: Redirect to remote NocoBase URL
         if (urlPath.includes('leads') || urlPath.includes('blog_posts')) {
           const remoteUrl = `${NOCOBASE_URL}${urlPath}${url.includes('?') ? '?' + url.split('?')[1] : ''}`;
-          return originalFetch(remoteUrl, init);
+          const customInit = { ...init };
+          customInit.headers = {
+            ...(init?.headers || {}),
+            'Authorization': `Bearer ${TOKEN}`,
+            'Content-Type': 'application/json',
+          };
+          return originalFetch(remoteUrl, customInit);
         }
 
         // Tìm segment chứa hành động có dấu hai chấm (ví dụ: "testimonials:update", "avatar:set", "attachments:create")
@@ -2139,35 +2152,85 @@
       else if (activeTab === 'leads') {
         const l = selectedItem || {};
         const dateStr = l.createdAt ? new Date(l.createdAt).toLocaleString('vi-VN') : 'Mới';
+        const cleanPhone = (l.phone || '').replace(/[^0-9]/g, '');
         fieldsMarkup = `
           <div class="space-y-4">
-            <div class="grid grid-cols-2 gap-4">
-              <div>
-                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Tên khách hàng</label>
-                <input type="text" readonly value="${l.name || ''}" class="w-full px-3 py-1.5 border border-slate-200 bg-slate-50 rounded-lg text-xs font-semibold text-slate-600 focus:outline-none">
+            <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200/80 space-y-3">
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Tên khách hàng</label>
+                  <input type="text" id="edit-lead-name" value="${l.name || ''}" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs font-semibold text-slate-800">
+                </div>
+                <div>
+                  <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Gói quan tâm</label>
+                  <input type="text" id="edit-lead-package" value="${l.package || ''}" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs font-semibold text-slate-800">
+                </div>
+                <div>
+                  <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Số điện thoại</label>
+                  <div class="flex items-center gap-2">
+                    <input type="text" id="edit-lead-phone" value="${l.phone || ''}" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs font-semibold text-slate-800">
+                    ${cleanPhone ? `
+                      <a href="tel:${cleanPhone}" class="px-2.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold whitespace-nowrap">
+                        Gọi
+                      </a>
+                      <a href="https://zalo.me/${cleanPhone}" target="_blank" class="px-2.5 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-bold whitespace-nowrap">
+                        Zalo
+                      </a>
+                    ` : ''}
+                  </div>
+                </div>
+                <div>
+                  <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Email</label>
+                  <input type="text" id="edit-lead-email" value="${l.email || ''}" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs font-semibold text-slate-800">
+                </div>
+              </div>
+
+              <div class="grid grid-cols-2 gap-3 pt-1 border-t border-slate-200">
+                <div>
+                  <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Nguồn đăng ký</label>
+                  <input type="text" readonly value="${l.source || 'Website Form'}" class="w-full px-3 py-1.5 border border-slate-200 bg-slate-100 rounded-lg text-xs text-slate-600 focus:outline-none">
+                </div>
+                <div>
+                  <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Ngày đăng ký</label>
+                  <input type="text" readonly value="${dateStr}" class="w-full px-3 py-1.5 border border-slate-200 bg-slate-100 rounded-lg text-xs text-slate-600 focus:outline-none">
+                </div>
+              </div>
+            </div>
+
+            <!-- CRM Management Fields -->
+            <div class="p-3.5 bg-blue-50/50 rounded-xl border border-blue-200/80 space-y-3">
+              <div class="text-xs font-bold text-blue-900 flex items-center gap-1.5">
+                <span>⚡</span> Tiến Độ Tư Vấn & Ghi Chú CRM
+              </div>
+              <div class="grid grid-cols-3 gap-3">
+                <div>
+                  <label class="block text-[10px] font-bold text-slate-600 uppercase mb-1">Trạng thái xử lý</label>
+                  <select id="edit-lead-status" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs font-bold text-slate-800 bg-white">
+                    <option value="new" ${(!l.status || l.status === 'new') ? 'selected' : ''}>🔵 Mới tiếp nhận</option>
+                    <option value="contacted" ${l.status === 'contacted' ? 'selected' : ''}>🟡 Đã liên hệ</option>
+                    <option value="consulting" ${l.status === 'consulting' ? 'selected' : ''}>🟣 Đang tư vấn</option>
+                    <option value="won" ${l.status === 'won' ? 'selected' : ''}>🟢 Đã chốt hợp đồng</option>
+                    <option value="lost" ${l.status === 'lost' ? 'selected' : ''}>⚪ Không tiềm năng</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-[10px] font-bold text-slate-600 uppercase mb-1">Chuyên gia phụ trách</label>
+                  <input type="text" id="edit-lead-assigned" value="${l.assigned_to || 'Master Hoàng Mai Linh'}" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs font-medium text-slate-800 bg-white">
+                </div>
+                <div>
+                  <label class="block text-[10px] font-bold text-slate-600 uppercase mb-1">Giá trị hợp đồng (VNĐ)</label>
+                  <input type="number" id="edit-lead-value" value="${l.value || ''}" placeholder="5000000" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs font-bold text-emerald-700 bg-white">
+                </div>
               </div>
               <div>
-                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Số điện thoại</label>
-                <input type="text" readonly value="${l.phone || ''}" class="w-full px-3 py-1.5 border border-slate-200 bg-slate-50 rounded-lg text-xs font-semibold text-slate-600 focus:outline-none">
-              </div>
-              <div>
-                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Email</label>
-                <input type="text" readonly value="${l.email || ''}" class="w-full px-3 py-1.5 border border-slate-200 bg-slate-50 rounded-lg text-xs font-semibold text-slate-600 focus:outline-none">
-              </div>
-              <div>
-                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Phân loại (Tag)</label>
-                <input type="text" readonly value="${l.tag || l.source || ''}" class="w-full px-3 py-1.5 border border-slate-200 bg-slate-50 rounded-lg text-xs font-semibold text-slate-600 focus:outline-none">
+                <label class="block text-[10px] font-bold text-slate-600 uppercase mb-1">Ghi chú tư vấn / Lịch sử trao đổi</label>
+                <textarea id="edit-lead-notes" rows="2" placeholder="Ghi chú về lịch hẹn, yêu cầu riêng của khách hàng..." class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs text-slate-800 bg-white resize-none">${l.notes || ''}</textarea>
               </div>
             </div>
 
             <div>
-              <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Ngày đăng ký</label>
-              <input type="text" readonly value="${dateStr}" class="w-full px-3 py-1.5 border border-slate-200 bg-slate-50 rounded-lg text-xs font-semibold text-slate-600 focus:outline-none">
-            </div>
-
-            <div>
-              <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Nội dung chi tiết tổng hợp</label>
-              <textarea readonly rows="8" class="w-full px-3 py-2 border border-slate-200 bg-slate-50 rounded-lg text-xs font-mono text-slate-600 focus:outline-none resize-none leading-relaxed">${l.message || l.content_summary || ''}</textarea>
+              <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Nội dung tin nhắn từ Website</label>
+              <textarea readonly rows="4" class="w-full px-3 py-2 border border-slate-200 bg-slate-50 rounded-lg text-xs font-mono text-slate-600 focus:outline-none resize-none leading-relaxed">${l.message || l.content_summary || ''}</textarea>
             </div>
           </div>
         `;
@@ -2310,7 +2373,33 @@
       e.preventDefault();
       
       if (activeTab === 'leads') {
-        alert('Dữ liệu khách hàng đăng ký chỉ được quyền xem và xóa, không thể chỉnh sửa.');
+        const id = selectedItem ? selectedItem.id : null;
+        if (!id) return;
+        setSyncStatus('syncing', 'Đang cập nhật khách hàng lên NocoBase...');
+        try {
+          const payload = {
+            name: document.getElementById('edit-lead-name').value.trim(),
+            package: document.getElementById('edit-lead-package').value.trim(),
+            phone: document.getElementById('edit-lead-phone').value.trim(),
+            email: document.getElementById('edit-lead-email').value.trim(),
+            status: document.getElementById('edit-lead-status').value,
+            assigned_to: document.getElementById('edit-lead-assigned').value.trim(),
+            value: document.getElementById('edit-lead-value').value ? parseInt(document.getElementById('edit-lead-value').value, 10) : null,
+            notes: document.getElementById('edit-lead-notes').value.trim(),
+          };
+          const res = await fetch(`/api/leads:update?filterByTk=${id}`, {
+            method: 'POST',
+            body: JSON.stringify(payload)
+          });
+          if (!res.ok) throw new Error('Cập nhật thất bại');
+          setSyncStatus('synced', 'Đã lưu thông tin khách hàng thành công');
+          selectedItem = null;
+          loadTabData();
+        } catch (err) {
+          console.error(err);
+          setSyncStatus('error', 'Lỗi lưu thông tin khách hàng');
+          alert('Không thể lưu thông tin khách hàng: ' + err.message);
+        }
         return;
       }
       

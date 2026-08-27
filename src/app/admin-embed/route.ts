@@ -13,7 +13,7 @@ export async function GET(req: NextRequest) {
     return new NextResponse(htmlContent, {
       headers: {
         'Content-Type': 'text/html; charset=utf-8',
-        'Content-Security-Policy': "frame-ancestors 'self' https://lht.gun.hmz.one",
+        'Content-Security-Policy': "frame-ancestors 'self' https://linhhoatam.apps.agentic.io.vn https://lht.gun.hmz.one http://localhost:*",
         'X-Content-Type-Options': 'nosniff',
         'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0',
       },

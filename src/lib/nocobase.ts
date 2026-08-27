@@ -9,12 +9,12 @@
 
 
 
-const BASE_URL = process.env.NOCOBASE_BASE_URL ?? 'https://lht.gun.hmz.one';
+const BASE_URL = process.env.NOCOBASE_BASE_URL ?? 'https://linhhoatam.apps.agentic.io.vn';
 const TOKEN    = process.env.NOCOBASE_TOKEN ?? '';
 
-const defaultHeaders = {
-  'Authorization': `Bearer ${TOKEN}`,
-  'Content-Type':  'application/json',
+const defaultHeaders: Record<string, string> = {
+  'Content-Type': 'application/json',
+  ...(TOKEN ? { 'Authorization': `Bearer ${TOKEN}` } : {}),
 };
 
 // ─────────────────────────────────────────────────────────────
@@ -94,7 +94,7 @@ export function resolveAttachmentUrl(
   // Support passing an attachment object directly
   if (typeof urlOrObject === 'object') {
     const obj = urlOrObject as { url?: string; preview?: string };
-    return resolveAttachmentUrl(obj.preview || obj.url);
+    return resolveAttachmentUrl(obj.url || obj.preview);
   }
 
   const url = String(urlOrObject).trim();
@@ -153,33 +153,33 @@ export async function getArticles(options?: {
     params.set('filter[category]', options.category);
   }
 
-  const res = await fetch(`${BASE_URL}/api/blog_posts:list?${params}`, {
-    headers: defaultHeaders,
-    next:    { revalidate: REVALIDATE_ARTICLES },
-  });
+  try {
+    const res = await fetch(`${BASE_URL}/api/blog_posts:list?${params}`, {
+      headers: defaultHeaders,
+      next:    { revalidate: REVALIDATE_ARTICLES },
+    });
 
-  if (!res.ok) {
-    console.error(`NocoBase getArticles: ${res.status} ${res.statusText}`);
+    if (!res.ok) {
+      console.error(`NocoBase getArticles: ${res.status} ${res.statusText}`);
+      return { data: [], meta: { count: 0, totalPage: 0 } };
+    }
+
+    const json = await res.json();
+    if (Array.isArray(json.data)) {
+      json.data.sort((a: Article, b: Article) => {
+        if (a.pinned && !b.pinned) return -1;
+        if (!a.pinned && b.pinned) return 1;
+        const timeA = new Date(a.published_at || (a as any).createdAt || a.updatedAt || 0).getTime();
+        const timeB = new Date(b.published_at || (b as any).createdAt || b.updatedAt || 0).getTime();
+        if (timeA !== timeB) return timeB - timeA;
+        return b.id - a.id;
+      });
+    }
+    return json;
+  } catch (error) {
+    console.warn('NocoBase getArticles network fallback:', error);
     return { data: [], meta: { count: 0, totalPage: 0 } };
   }
-
-  const json = await res.json();
-  if (Array.isArray(json.data)) {
-    json.data.sort((a: Article, b: Article) => {
-      // 1. Bài ghim lên đầu
-      if (a.pinned && !b.pinned) return -1;
-      if (!a.pinned && b.pinned) return 1;
-
-      // 2. Bài mới nhất lên đầu theo thời gian xuất bản/tạo/cập nhật, fallback theo ID
-      const timeA = new Date(a.published_at || (a as any).createdAt || a.updatedAt || 0).getTime();
-      const timeB = new Date(b.published_at || (b as any).createdAt || b.updatedAt || 0).getTime();
-
-      if (timeA !== timeB) return timeB - timeA;
-      return b.id - a.id;
-    });
-  }
-
-  return json;
 }
 
 export async function getArticleBySlug(slugOrId: string): Promise<Article | null> {
@@ -205,14 +205,19 @@ export async function getArticleBySlug(slugOrId: string): Promise<Article | null
     appends:  'image,author_avatar',
   });
 
-  const res = await fetch(`${BASE_URL}/api/blog_posts:list?${params}`, {
-    headers: defaultHeaders,
-    next:    { revalidate: REVALIDATE_ARTICLES },
-  });
+  try {
+    const res = await fetch(`${BASE_URL}/api/blog_posts:list?${params}`, {
+      headers: defaultHeaders,
+      next:    { revalidate: REVALIDATE_ARTICLES },
+    });
 
-  if (!res.ok) return null;
-  const { data } = await res.json();
-  return data[0] ?? null;
+    if (!res.ok) return null;
+    const { data } = await res.json();
+    return data[0] ?? null;
+  } catch (error) {
+    console.warn('NocoBase getArticleBySlug network fallback:', error);
+    return null;
+  }
 }
 
 

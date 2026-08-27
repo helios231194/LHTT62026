@@ -1,10 +1,16 @@
 'use client';
 import { FadeIn, SlideIn } from '@/components/ui/AnimationWrapper';
 import { Button } from '@/components/ui/Button';
-import { Calendar, Video, Users, ArrowRight, Bell } from 'lucide-react';
+import { Calendar, Video, Users, Bell } from 'lucide-react';
+import { resolveAttachmentUrl, type Workshop } from '@/lib/nocobase';
 
-export function PersonalWorkshopUpcoming() {
+interface PersonalWorkshopUpcomingProps {
+  workshop?: Workshop | null;
+}
+
+export function PersonalWorkshopUpcoming({ workshop }: PersonalWorkshopUpcomingProps) {
   const hasUpcomingWorkshop = true;
+  const posterImgUrl = workshop?.image ? resolveAttachmentUrl(workshop.image) : null;
 
   return (
     <section className="py-24 md:py-32 bg-ice-white relative -mt-6 z-20 rounded-t-[3rem] shadow-[0_-10px_40px_-15px_rgba(0,0,0,0.1)]">
@@ -29,7 +35,7 @@ export function PersonalWorkshopUpcoming() {
                     Sắp diễn ra
                   </div>
                   <h3 className="text-3xl md:text-4xl font-black text-oxford-blue mb-8 leading-tight">
-                    Mật Mã Thịnh Vượng
+                    {workshop?.title || 'Mật Mã Thịnh Vượng'}
                   </h3>
 
                   <div className="space-y-5 mb-10">
@@ -38,7 +44,9 @@ export function PersonalWorkshopUpcoming() {
                         <Calendar className="w-5 h-5 text-cyan-azure" />
                       </div>
                       <div>
-                        <p className="font-bold text-lg text-oxford-blue">Thứ Tám, 15/05/2026</p>
+                        <p className="font-bold text-lg text-oxford-blue">
+                          {workshop?.date ? `Thứ Tám, ${workshop.date}` : 'Thứ Tám, 15/05/2026'}
+                        </p>
                         <p className="text-slate-500">9:00 SA – 11:00 SA</p>
                       </div>
                     </div>
@@ -48,7 +56,9 @@ export function PersonalWorkshopUpcoming() {
                         <Video className="w-5 h-5 text-blaze-orange" />
                       </div>
                       <div>
-                        <p className="font-bold text-lg text-oxford-blue">Online qua Zoom</p>
+                        <p className="font-bold text-lg text-oxford-blue">
+                          {workshop?.type || 'Online qua Zoom'}
+                        </p>
                         <p className="text-slate-500">Tham gia dễ dàng tại nhà</p>
                       </div>
                     </div>
@@ -78,18 +88,28 @@ export function PersonalWorkshopUpcoming() {
               <div className="w-full lg:w-1/2">
                 <FadeIn direction="left">
                   <div className="relative aspect-[16/9] lg:aspect-[4/3] w-full rounded-2xl overflow-hidden bg-cyan-azure border border-slate-100 shadow-inner group flex items-center justify-center text-center">
-                    <div className="absolute inset-0 bg-gradient-to-br from-cyan-azure to-oxford-blue z-10 opacity-90" />
-                    <div className="absolute inset-0 bg-[url('/noise.png')] opacity-10 mix-blend-overlay z-10" />
-                    <div className="absolute inset-0 flex flex-col items-center justify-center p-8 mix-blend-screen z-20">
-                      <div className="w-16 h-16 border-4 border-white rounded-lg p-2 flex flex-col items-center justify-center mb-4 transform rotate-3">
-                        <span className="text-xs font-bold text-white uppercase tracking-wider">MAY</span>
-                        <span className="text-2xl font-black text-white leading-none">15</span>
-                      </div>
-                      <h3 className="text-3xl lg:text-4xl font-black text-white px-4 leading-tight drop-shadow-md">
-                        MẬT MÃ THỊNH VƯỢNG
-                      </h3>
-                      <p className="text-white/80 mt-4 font-medium italic">Khai mở tần số giàu có cá nhân</p>
-                    </div>
+                    {posterImgUrl ? (
+                      <img 
+                        src={posterImgUrl} 
+                        alt={workshop?.title || 'Poster Workshop'}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      />
+                    ) : (
+                      <>
+                        <div className="absolute inset-0 bg-gradient-to-br from-cyan-azure to-oxford-blue z-10 opacity-90" />
+                        <div className="absolute inset-0 bg-[url('/noise.png')] opacity-10 mix-blend-overlay z-10" />
+                        <div className="absolute inset-0 flex flex-col items-center justify-center p-8 mix-blend-screen z-20">
+                          <div className="w-16 h-16 border-4 border-white rounded-lg p-2 flex flex-col items-center justify-center mb-4 transform rotate-3">
+                            <span className="text-xs font-bold text-white uppercase tracking-wider">MAY</span>
+                            <span className="text-2xl font-black text-white leading-none">15</span>
+                          </div>
+                          <h3 className="text-3xl lg:text-4xl font-black text-white px-4 leading-tight drop-shadow-md">
+                            {workshop?.title || 'MẬT MÃ THỊNH VƯỢNG'}
+                          </h3>
+                          <p className="text-white/80 mt-4 font-medium italic">Khai mở tần số giàu có cá nhân</p>
+                        </div>
+                      </>
+                    )}
                   </div>
                 </FadeIn>
               </div>

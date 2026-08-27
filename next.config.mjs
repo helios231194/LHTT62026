@@ -7,12 +7,19 @@ const nextConfig = {
     unoptimized: true,
     formats: ['image/avif', 'image/webp'],
     domains: [
+      'linhhoatam.apps.agentic.io.vn',
       'minio.agentic.io.vn',
       'lht.gun.hmz.one',
       'minio-console.apps.agentic.io.vn',
       '103.211.206.31',
     ],
     remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'linhhoatam.apps.agentic.io.vn',
+        port: '',
+        pathname: '/**',
+      },
       {
         protocol: 'https',
         hostname: 'minio.agentic.io.vn',
@@ -43,15 +50,11 @@ const nextConfig = {
     return [
       {
         // Allow NocoBase to embed the dashboard in an iframe
-        source: '/admin-embed/:path*',
+        source: '/admin-embed:path*',
         headers: [
           {
-            key: 'X-Frame-Options',
-            value: 'ALLOW-FROM https://lht.gun.hmz.one'
-          },
-          {
             key: 'Content-Security-Policy',
-            value: "frame-ancestors 'self' https://lht.gun.hmz.one"
+            value: "frame-ancestors 'self' https://linhhoatam.apps.agentic.io.vn https://*.agentic.io.vn https://lht.gun.hmz.one http://localhost:*"
           },
           {
             key: 'X-Content-Type-Options',

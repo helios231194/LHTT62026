@@ -3,6 +3,8 @@ import { getArticles } from '@/lib/nocobase';
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://linhhoatam.com';
 
+export const dynamic = 'force-dynamic';
+
 
 export async function GET() {
   try {

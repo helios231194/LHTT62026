@@ -27,13 +27,11 @@ async function checkAuth(req: NextRequest): Promise<boolean> {
   const authHeader = req.headers.get('authorization');
   if (!authHeader) return false;
 
-  // Quick local check: token must be a non-empty Bearer token
   const token = authHeader.replace(/^Bearer\s+/i, '').trim();
   if (!token) return false;
 
-  const nocobaseUrl = process.env.NOCOBASE_BASE_URL || 'https://lht.gun.hmz.one';
+  const nocobaseUrl = process.env.NOCOBASE_BASE_URL || 'http://localhost:13000';
   try {
-    // Use auth:check endpoint (correct NocoBase endpoint)
     const res = await fetch(`${nocobaseUrl}/api/auth:check`, {
       headers: {
         Authorization: authHeader,
@@ -42,13 +40,9 @@ async function checkAuth(req: NextRequest): Promise<boolean> {
     });
     if (res.status === 200) return true;
 
-    // Fallback: if NocoBase is unreachable but token looks valid, allow local ops
-    // (token is a JWT - 3 base64 segments separated by dots)
     const parts = token.split('.');
     return parts.length === 3;
   } catch (error) {
-    console.error('Auth verification error:', error);
-    // Network error → fallback to JWT structure check
     const parts = token.split('.');
     return parts.length === 3;
   }
@@ -61,7 +55,6 @@ async function readJsonFile(filename: string): Promise<any> {
     return JSON.parse(data);
   } catch (error: any) {
     if (error.code === 'ENOENT') {
-      // Return empty array for lists, empty object for singular config files
       if (['homepage.json', 'speaker_assets.json', 'destiny_profile.json'].includes(filename)) {
         return {};
       }
@@ -83,6 +76,37 @@ export async function GET(req: NextRequest) {
 
   if (!tab || !TAB_FILES[tab]) {
     return NextResponse.json({ error: 'Invalid tab parameter' }, { status: 400 });
+  }
+
+  const nocobaseUrl = process.env.NOCOBASE_BASE_URL || 'http://localhost:13000';
+  const token = process.env.NOCOBASE_TOKEN || req.headers.get('authorization')?.replace(/^Bearer\s+/i, '');
+
+  try {
+    // Try fetching from NocoBase if available
+    const isSingular = ['homepage', 'speaker_assets', 'destiny_profile'].includes(tab);
+    const endpoint = isSingular
+      ? `${nocobaseUrl}/api/${tab}:get`
+      : `${nocobaseUrl}/api/${tab}:list?pageSize=200`;
+
+    const res = await fetch(endpoint, {
+      headers: {
+        'Content-Type': 'application/json',
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      },
+      cache: 'no-store',
+    });
+
+    if (res.ok) {
+      const json = await res.json();
+      if (isSingular && json.data) {
+        return NextResponse.json({ data: json.data });
+      }
+      if (Array.isArray(json.data) && json.data.length > 0) {
+        return NextResponse.json({ data: json.data });
+      }
+    }
+  } catch (e) {
+    // fallback to local JSON
   }
 
   try {
@@ -110,6 +134,29 @@ export async function POST(req: NextRequest) {
   try {
     const payload = await req.json();
     const filename = TAB_FILES[tab];
+    const nocobaseUrl = process.env.NOCOBASE_BASE_URL || 'http://localhost:13000';
+    const authHeader = req.headers.get('authorization') || '';
+
+    // Sync to NocoBase if available
+    try {
+      const isSingular = ['homepage', 'speaker_assets', 'destiny_profile'].includes(tab);
+      const endpoint = isSingular
+        ? `${nocobaseUrl}/api/${tab}:create`
+        : payload.id
+        ? `${nocobaseUrl}/api/${tab}:update?filterByTk=${payload.id}`
+        : `${nocobaseUrl}/api/${tab}:create`;
+
+      await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: authHeader,
+        },
+        body: JSON.stringify(payload),
+      });
+    } catch (err) {
+      console.warn('Could not sync to NocoBase:', err);
+    }
 
     // Singular object overrides
     if (['homepage', 'speaker_assets', 'destiny_profile'].includes(tab)) {
@@ -124,7 +171,6 @@ export async function POST(req: NextRequest) {
     }
 
     if (payload.id) {
-      // Update existing item
       const index = list.findIndex((item: any) => item.id === payload.id);
       if (index !== -1) {
         list[index] = { ...list[index], ...payload };
@@ -132,7 +178,6 @@ export async function POST(req: NextRequest) {
         list.push(payload);
       }
     } else {
-      // Create new item
       const maxId = list.reduce((max: number, item: any) => (item.id > max ? item.id : max), 0);
       payload.id = maxId + 1;
       list.push(payload);
@@ -167,6 +212,21 @@ export async function DELETE(req: NextRequest) {
 
   const id = parseInt(idStr, 10);
   const filename = TAB_FILES[tab];
+  const nocobaseUrl = process.env.NOCOBASE_BASE_URL || 'http://localhost:13000';
+  const authHeader = req.headers.get('authorization') || '';
+
+  // Sync delete to NocoBase if available
+  try {
+    await fetch(`${nocobaseUrl}/api/${tab}:destroy?filterByTk=${id}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: authHeader,
+      },
+    });
+  } catch (err) {
+    console.warn('Could not delete from NocoBase:', err);
+  }
 
   try {
     const list = await readJsonFile(filename);

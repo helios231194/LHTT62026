@@ -38,11 +38,17 @@ async function saveLeadLocally(payload: any) {
 export async function POST(req: NextRequest) {
   try {
     const payload = await req.json();
-    const nocobaseUrl = process.env.NOCOBASE_BASE_URL || 'https://lht.gun.hmz.one';
+    const nocobaseUrl = process.env.NOCOBASE_BASE_URL || 'https://linhhoatam.apps.agentic.io.vn';
     const token = process.env.NOCOBASE_TOKEN || '';
 
+    const leadPayload = {
+      ...payload,
+      status: payload.status || 'new',
+      source: payload.source || 'Website Form',
+    };
+
     // 1. Always save a copy locally so data is never lost
-    await saveLeadLocally(payload);
+    await saveLeadLocally(leadPayload);
 
     // 2. Forward the lead submission to NocoBase
     try {
@@ -52,7 +58,7 @@ export async function POST(req: NextRequest) {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(payload),
+        body: JSON.stringify(leadPayload),
         cache: 'no-store',
       });
 

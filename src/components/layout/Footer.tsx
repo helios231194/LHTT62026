@@ -8,10 +8,10 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           
           <div className="col-span-1 lg:col-span-1">
-            <h3 className="text-2xl font-bold mb-6 text-ice-white">
-              LINH HOA TÂM<span className="text-blaze-orange">.</span>
+            <h3 className="text-2xl font-bold mb-6 text-ice-white tracking-wide">
+              LINH HOA TÂM
             </h3>
-            <p className="text-cyan-azure leading-relaxed mb-6">
+            <p className="text-cyan-azure leading-relaxed mb-6 text-sm">
               Thuật Số Học Ứng Dụng Cho Người Lãnh Đạo. Đồng hành cùng CEO, Founder và cá nhân trên hành trình ra quyết định đúng thời điểm.
             </p>
           </div>

@@ -36,7 +36,8 @@ function safeJsonLd(data: object): string {
 
 export default async function WorkshopCaNhanPage() {
   const profile = await getProfile();
-  const workshops = await getWorkshops('personal');
+  const workshopsRes = await getWorkshops('personal');
+  const upcomingWorkshop = workshopsRes?.data?.[0];
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://linhhoatam.com';
 
   const courseSchema = {
@@ -93,7 +94,7 @@ export default async function WorkshopCaNhanPage() {
         <PersonalWorkshopHero />
         
         {/* SECTION 2 – WORKSHOP SẮP TỚI */}
-        <PersonalWorkshopUpcoming />
+        <PersonalWorkshopUpcoming workshop={upcomingWorkshop} />
         
         {/* SECTION 3 – FORM Đăng Ký */}
         <PersonalWorkshopForm />
@@ -105,7 +106,7 @@ export default async function WorkshopCaNhanPage() {
         <PersonalWorkshopTopics />
         
         {/* SECTION 6 – LỊCH SỬ WORKSHOP ĐÃ TỔ CHỨC */}
-        <PersonalWorkshopHistory initialWorkshops={workshops.data} />
+        <PersonalWorkshopHistory initialWorkshops={workshopsRes.data} />
         
         {/* SECTION 7 – CON SỐ THỰC TẾ */}
         <PersonalWorkshopStats />

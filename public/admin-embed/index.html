@@ -209,7 +209,7 @@
   <script>
     const TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGVOYW1lIjoicm9vdCIsImlhdCI6MTc4MjU0NDIyOSwiZXhwIjozMzM0MDE0NDIyOX0.l-Aru4p4MXyS6teBgmJQKeS2SfhMCUPV3IGAf2zeYWE";
     const BASE_URL = "";
-    const NOCOBASE_URL = "https://lht.gun.hmz.one";
+    const NOCOBASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' ? "http://localhost:13000" : "https://lht.gun.hmz.one";
     
     let currentTab = 'personal'; // 'personal' or 'business'
     let productsList = [];

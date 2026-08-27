@@ -9,7 +9,7 @@ interface SpeakerHeroProps {
 }
 
 export function SpeakerHero({ heroImage }: SpeakerHeroProps) {
-  const heroImgUrl = resolveAttachmentUrl(heroImage?.url);
+  const heroImgUrl = resolveAttachmentUrl(heroImage);
 
   return (
     <section className="relative pt-32 pb-24 md:pt-40 md:pb-32 bg-oxford-blue text-white overflow-hidden">
@@ -66,31 +66,35 @@ export function SpeakerHero({ heroImage }: SpeakerHeroProps) {
           {/* Stage Photo Frame */}
           <div className="lg:w-1/2 w-full flex justify-center">
             <FadeIn direction="left" delay={0.2}>
-              <div className="relative w-full max-w-md aspect-[4/5] bg-slate-800 border-4 border-slate-700 rounded-3xl shadow-2xl overflow-hidden group flex items-center justify-center">
-                <div className="absolute inset-0 bg-gradient-to-t from-oxford-blue/80 via-transparent to-transparent z-10" />
-                {heroImgUrl ? (
-                  <img 
-                    src={heroImgUrl}
-                    alt="Master Hoàng Mai Linh"
-                    className="w-full h-full object-cover transform-gpu hover:scale-105 transition-transform duration-700 ease-out"
-                  />
-                ) : (
-                  <div className="text-center p-6 text-slate-500 relative z-20">
-                    <User className="w-20 h-20 mx-auto opacity-30 mb-4" />
-                    <p className="text-sm font-bold tracking-widest uppercase">Ảnh Master Linh</p>
-                    <p className="text-xs mt-1">Tại hội trường / sân khấu</p>
-                  </div>
-                )}
-                {/* Floating Meta Badge */}
-                <div className="absolute bottom-10 -left-8 md:-left-12 z-20 bg-white shadow-2xl rounded-2xl p-5 border border-slate-100 flex items-center gap-4 animate-bounce-slow">
-                  <div className="w-12 h-12 rounded-full bg-cyan-azure/10 flex items-center justify-center">
-                    <span className="text-cyan-azure font-black text-xl">5+</span>
+              <div className="relative w-full max-w-md px-4 sm:px-0">
+                {/* Main Image Container */}
+                <div className="relative aspect-[4/5] bg-slate-800 border-4 border-slate-700 rounded-3xl shadow-2xl overflow-hidden group flex items-center justify-center">
+                  <div className="absolute inset-0 bg-gradient-to-t from-oxford-blue/80 via-transparent to-transparent z-10 pointer-events-none" />
+                  {heroImgUrl ? (
+                    <img 
+                      src={heroImgUrl}
+                      alt="Master Hoàng Mai Linh"
+                      className="w-full h-full object-cover object-top transform-gpu hover:scale-105 transition-transform duration-700 ease-out"
+                    />
+                  ) : (
+                    <div className="text-center p-6 text-slate-500 relative z-20">
+                      <User className="w-20 h-20 mx-auto opacity-30 mb-4" />
+                      <p className="text-sm font-bold tracking-widest uppercase">Ảnh Master Linh</p>
+                      <p className="text-xs mt-1">Tại hội trường / sân khấu</p>
+                    </div>
+                  )}
+                </div>
+
+                {/* Floating Meta Badge (placed outside overflow-hidden) */}
+                <div className="absolute bottom-6 -left-2 sm:-left-6 z-20 bg-white shadow-2xl rounded-2xl p-4 border border-slate-100 flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blaze-orange to-amber-500 flex items-center justify-center text-white shadow-md shadow-blaze-orange/30 shrink-0">
+                    <span className="font-black text-xl text-white">5+</span>
                   </div>
                   <div>
-                    <p className="text-oxford-blue font-black text-[15px] leading-tight mb-1">
+                    <p className="text-oxford-blue font-black text-[15px] leading-tight mb-0.5">
                       Năm kinh nghiệm
                     </p>
-                    <p className="text-slate-500 text-xs font-medium uppercase">
+                    <p className="text-slate-500 text-xs font-semibold uppercase tracking-wider">
                       Diễn giả chuyên nghiệp
                     </p>
                   </div>

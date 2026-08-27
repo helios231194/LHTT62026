@@ -24,8 +24,13 @@ interface PageProps {
 // ISR: sau 5 phút (300 giây), Next.js tự gọi lại NocoBase để cập nhật (Tối ưu Core Web Vitals)
 
 export async function generateStaticParams() {
-  const { data } = await getArticles({ pageSize: 500 });
-  return data.map((a) => ({ slug: a.slug || String(a.id) }));
+  try {
+    const { data } = await getArticles({ pageSize: 500 });
+    return data.map((a) => ({ slug: a.slug || String(a.id) }));
+  } catch (error) {
+    console.warn('generateStaticParams fallback:', error);
+    return [];
+  }
 }
 
 // ── Metadata động từ NocoBase ──────────────────────────────────

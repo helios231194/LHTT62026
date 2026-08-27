@@ -25,7 +25,13 @@ const STATIC_ROUTES: { path: string; priority: number; changeFrequency: 'always'
 
 
 export default async function sitemap() {
-  const { data: articles } = await getArticles({ pageSize: 500 });
+  let articles: any[] = [];
+  try {
+    const res = await getArticles({ pageSize: 500 });
+    articles = res.data || [];
+  } catch (err) {
+    console.warn('Sitemap getArticles fallback:', err);
+  }
 
   const staticUrls = STATIC_ROUTES.map(({ path, priority, changeFrequency }) => ({
     url: `${SITE_URL}${path}`,
