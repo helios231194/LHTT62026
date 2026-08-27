@@ -39,12 +39,26 @@ export async function POST(req: NextRequest) {
   try {
     const payload = await req.json();
     const nocobaseUrl = process.env.NOCOBASE_BASE_URL || 'https://linhhoatam.apps.agentic.io.vn';
-    const token = process.env.NOCOBASE_TOKEN || '';
+    const token = process.env.NOCOBASE_TOKEN || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGVOYW1lIjoicm9vdCIsImlhdCI6MTc4NzgyNzAwNiwiZXhwIjozMzM0NTQyNzAwNn0.2_hY0hPPvPIHgRn_Z8M6pozWZIKnphvnuH1Yx5OgCXU';
+
+    const contentSummary = payload.content_summary || payload.message || '';
+    const formOption = payload.package || payload.form_name || payload.source || 'Tư vấn chung';
 
     const leadPayload = {
-      ...payload,
-      status: payload.status || 'new',
+      name: payload.name || '',
+      phone: payload.phone || '',
+      email: payload.email || '',
+      package: formOption,
+      form_name: formOption,
       source: payload.source || 'Website Form',
+      message: contentSummary,
+      content_summary: contentSummary,
+      status: payload.status || 'new',
+      priority: payload.priority || 'normal',
+      tag: payload.tag || payload.source || formOption,
+      notes: payload.notes || null,
+      assigned_to: payload.assigned_to || 'Master Hoàng Mai Linh',
+      value: payload.value || null,
     };
 
     // 1. Always save a copy locally so data is never lost

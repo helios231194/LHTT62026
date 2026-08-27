@@ -230,31 +230,40 @@ export async function createLead(
   data: Lead,
   extraDetails?: Record<string, any>
 ): Promise<boolean> {
-  let summary = data.content_summary || '';
+  const formOption = data.package || data.source || 'Tư vấn chung';
   
+  let detailsText = '';
   if (extraDetails) {
     const list = Object.entries(extraDetails)
       .filter(([_, val]) => val !== undefined && val !== null && val !== '')
-      .map(([key, val]) => `- ${key}: ${val}`)
+      .map(([key, val]) => `• ${key}: ${val}`)
       .join('\n');
     if (list) {
-      summary = summary ? `${summary}\n\n${list}` : list;
+      detailsText = list;
     }
   }
 
-  // Fallback to message if summary is empty
-  if (!summary && data.message) {
-    summary = data.message;
+  let fullSummary = '';
+  if (detailsText) {
+    fullSummary = `[Thông tin điền form]\n${detailsText}`;
+    if (data.message && data.message.trim() && !detailsText.includes(data.message.trim())) {
+      fullSummary += `\n\n[Lời nhắn / Nhu cầu]\n${data.message.trim()}`;
+    }
+  } else {
+    fullSummary = data.content_summary || data.message || 'Khách hàng để lại thông tin tư vấn từ website';
   }
 
-  // Map fields to match NocoBase database actual schema and display layout
-  // 'message' matches 'Nội dung chi tiết'
-  // 'tag' matches 'Tag phân loại'
   const payload = {
-    ...data,
-    message: summary,
-    tag: data.tag || data.source || '',
-    content_summary: summary
+    name: data.name || '',
+    phone: data.phone || '',
+    email: data.email || '',
+    package: formOption,
+    form_name: formOption,
+    source: data.source || 'Website Form',
+    message: fullSummary,
+    content_summary: fullSummary,
+    tag: data.tag || data.source || formOption,
+    status: 'new'
   };
 
   const res = await fetch('/api/leads', {
