@@ -8,12 +8,12 @@ services:
     ports:
       - '127.0.0.1:3001:3000'
     environment:
-      - NOCOBASE_BASE_URL=https://lht.gun.hmz.one
-      - NOCOBASE_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGVOYW1lIjoicm9vdCIsImlhdCI6MTc4MjU0NDIyOSwiZXhwIjozMzM0MDE0NDIyOX0.l-Aru4p4MXyS6teBgmJQKeS2SfhMCUPV3IGAf2zeYWE
+      - NOCOBASE_BASE_URL=https://linhhoatam.apps.agentic.io.vn
+      - NOCOBASE_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGVOYW1lIjoicm9vdCIsImlhdCI6MTc4NzgyNzAwNiwiZXhwIjozMzM0NTQyNzAwNn0.2_hY0hPPvPIHgRn_Z8M6pozWZIKnphvnuH1Yx5OgCXU
       - NEXT_PUBLIC_BASE_URL=https://lhtt62026.apps.agentic.io.vn
       - NODE_TLS_REJECT_UNAUTHORIZED=0
     extra_hosts:
-      - "lht.gun.hmz.one:180.93.137.62"
+      - "linhhoatam.apps.agentic.io.vn:host-gateway"
       - "lhtt62026.apps.agentic.io.vn:host-gateway"
     volumes:
       - ./public/uploads:/app/public/uploads
