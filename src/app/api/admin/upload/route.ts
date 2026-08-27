@@ -13,7 +13,7 @@ async function checkAuth(req: NextRequest): Promise<boolean> {
   const token = authHeader.replace(/^Bearer\s+/i, '').trim();
   if (!token) return false;
 
-  const nocobaseUrl = process.env.NOCOBASE_BASE_URL || 'https://lht.gun.hmz.one';
+  const nocobaseUrl = process.env.NOCOBASE_BASE_URL || 'https://linhhoatam.apps.agentic.io.vn';
   try {
     // Use auth:check endpoint (correct NocoBase endpoint)
     const res = await fetch(`${nocobaseUrl}/api/auth:check`, {

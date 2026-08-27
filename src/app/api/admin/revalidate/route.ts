@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { revalidatePath } from 'next/cache';
 
-const NOCOBASE_URL = process.env.NOCOBASE_BASE_URL || 'https://lht.gun.hmz.one';
+const NOCOBASE_URL = process.env.NOCOBASE_BASE_URL || 'https://linhhoatam.apps.agentic.io.vn';
 
 async function checkAuth(req: NextRequest): Promise<boolean> {
   const authHeader = req.headers.get('authorization');
