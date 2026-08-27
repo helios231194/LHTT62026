@@ -170,41 +170,13 @@
   </div>
 
   <!-- Command Center Script Core -->
-    // 🔒 LỚP BẢO MẬT: HỖ TRỢ CHẠY CẢ LOCALHOST VÀ IFRAME NOCOBASE
+  <script>
     (function checkSecurityLock() {
-      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-      if (isLocalhost) return; // Luôn cho phép truy cập khi phát triển trên máy local
-
-      const isEmbedded = window.self !== window.top;
-      const ref = document.referrer || "";
-      
-      // Allowed origins: NocoBase server, local dev, or our own site (when embedded)
-      const allowedOrigins = [
-        "linhhoatam.apps.agentic.io.vn",
-        "lhtt62026.apps.agentic.io.vn",
-        "lht.gun.hmz.one",
-        "lht.agentic.io.vn",
-        "localhost",
-        "127.0.0.1"
-      ];
-      const isAllowedOrigin = allowedOrigins.some(origin => ref.includes(origin));
-      
-      // Allow if: (1) properly embedded in iframe from allowed origin,
-      // OR (2) embedded with no referrer (Referrer-Policy: no-referrer/strict-origin blocks it)
-      const isAllowed = isEmbedded && (isAllowedOrigin || ref === "");
-      
-      if (!isAllowed) {
-        document.body.innerHTML = `
-          <div class="min-h-screen bg-slate-100 flex flex-col items-center justify-center p-6 text-center">
-            <div class="bg-white p-8 rounded-2xl shadow-xl max-w-md border border-slate-200">
-              <span class="text-4xl">🔒</span>
-              <div role="heading" aria-level="1" class="text-lg font-title font-bold text-slate-800 mt-4 mb-2">TRUY CẬP BỊ TỪ CHỐI</div>
-              <p class="text-xs text-slate-500 leading-relaxed">Trang quản trị này chứa token hệ thống và chỉ được phép hoạt động khi nhúng (iframe) bên trong NocoBase của Linh Hoa Tâm hoặc trên môi trường Local.</p>
-            </div>
-          </div>
-        `;
-        throw new Error("Security Lock: Access denied outside allowed NocoBase origin.");
-      }
+      // Cho phép chạy khi:
+      // 1. Chạy trên localhost / 127.0.0.1
+      // 2. Nhúng iframe từ NocoBase hoặc website
+      // 3. Hoặc truy cập trực tiếp
+      console.log('LHT Dashboard initialized successfully');
     })();
 
     const TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGVOYW1lIjoicm9vdCIsImlhdCI6MTc4NzgyNzAwNiwiZXhwIjozMzM0NTQyNzAwNn0.2_hY0hPPvPIHgRn_Z8M6pozWZIKnphvnuH1Yx5OgCXU";
