@@ -99,7 +99,9 @@ export async function GET(req: NextRequest) {
     if (res.ok) {
       const json = await res.json();
       if (isSingular && json.data) {
-        return NextResponse.json({ data: json.data });
+        const local = await readJsonFile(TAB_FILES[tab]).catch(() => ({}));
+        const cleanedNoco = Object.fromEntries(Object.entries(json.data).filter(([_, v]) => v !== null && v !== undefined && v !== ''));
+        return NextResponse.json({ data: { ...local, ...cleanedNoco } });
       }
       if (Array.isArray(json.data) && json.data.length > 0) {
         return NextResponse.json({ data: json.data });
@@ -141,12 +143,12 @@ export async function POST(req: NextRequest) {
     try {
       const isSingular = ['homepage', 'speaker_assets', 'destiny_profile'].includes(tab);
       const endpoint = isSingular
-        ? `${nocobaseUrl}/api/${tab}:create`
+        ? (payload.id ? `${nocobaseUrl}/api/${tab}:update?filterByTk=${payload.id}` : `${nocobaseUrl}/api/${tab}:update?filterByTk=1`)
         : payload.id
         ? `${nocobaseUrl}/api/${tab}:update?filterByTk=${payload.id}`
         : `${nocobaseUrl}/api/${tab}:create`;
 
-      const nocoRes = await fetch(endpoint, {
+      let nocoRes = await fetch(endpoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -154,6 +156,18 @@ export async function POST(req: NextRequest) {
         },
         body: JSON.stringify(payload),
       });
+
+      // If update on singular failed (e.g. record 1 does not exist yet), try create
+      if (!nocoRes.ok && isSingular) {
+        nocoRes = await fetch(`${nocobaseUrl}/api/${tab}:create`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: authHeader,
+          },
+          body: JSON.stringify(payload),
+        });
+      }
 
       if (nocoRes.ok) {
         const nocoJson = await nocoRes.json();

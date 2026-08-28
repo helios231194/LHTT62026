@@ -66,15 +66,22 @@ export default function HoSoVanMenhPage() {
   });
 
   useEffect(() => {
-    fetch('/api/admin/config?tab=destiny_profile')
-      .then(res => res.json())
-      .then(data => {
-        if (data?.data) setDestinyData(data.data);
-      })
-      .catch(err => console.error('Error fetching destiny_profile config:', err));
+    Promise.all([
+      fetch('/api/admin/config?tab=destiny_profile').then(res => res.json()).catch(() => ({})),
+      fetch('/api/admin/config?tab=homepage').then(res => res.json()).catch(() => ({}))
+    ]).then(([destinyRes, homeRes]) => {
+      const dData = destinyRes?.data || {};
+      const hData = homeRes?.data || {};
+      setDestinyData({
+        ...hData,
+        ...dData,
+        cover_image: dData.cover_image || dData.destiny_pdf_cover || hData.destiny_pdf_cover,
+        destiny_pdf_cover: dData.destiny_pdf_cover || dData.cover_image || hData.destiny_pdf_cover,
+      });
+    }).catch(err => console.error('Error fetching destiny_profile config:', err));
   }, []);
 
-  const destinyCoverUrl = resolveAttachmentUrl(destinyData?.cover_image?.[0]?.url) || '/uploads/1784020906703-BanoL.png';
+  const destinyCoverUrl = resolveAttachmentUrl(destinyData?.cover_image || destinyData?.destiny_pdf_cover || destinyData?.image) || '/uploads/1784020906703-BanoL.png';
   const tagline = destinyData?.tagline || 'Bước đầu tiên để hiểu mình trước khi ra quyết định chiến lược.';
   const description = destinyData?.description || 'Hồ Sơ Vận Mệnh là tài liệu phân tích cá nhân hóa được xây dựng riêng theo ngày tháng năm sinh và tên của bạn. Đây là bản đồ đầu tiên để hiểu cấu trúc vận hành nội tại, điểm mạnh bẩm sinh và chu kỳ đang ở hiện tại, trước khi đi sâu vào tham vấn chiến lược.';
   const priceStandard = destinyData?.price_standard || '680.000 VNĐ';

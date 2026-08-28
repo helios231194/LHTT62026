@@ -478,7 +478,7 @@
           destinyProfileData = destinyProfileData[0] || {};
         }
 
-        const coverUrl = resolveUrl(destinyProfileData.cover_image) || '/uploads/1784020906703-BanoL.png';
+        const coverUrl = resolveUrl(destinyProfileData.cover_image || destinyProfileData.destiny_pdf_cover) || '/uploads/1784020906703-BanoL.png';
 
         area.innerHTML = `
           <div class="max-w-3xl">
@@ -579,6 +579,7 @@
         if (fileData && fileData.url) {
           destinyProfileData = destinyProfileData || {};
           destinyProfileData.cover_image = [fileData];
+          destinyProfileData.destiny_pdf_cover = [fileData];
 
           const previewImg = document.getElementById('destiny-cover-preview');
           if (previewImg) previewImg.src = fileData.url;
@@ -605,8 +606,12 @@
 
       const baseData = (destinyProfileData && typeof destinyProfileData === 'object' && !Array.isArray(destinyProfileData)) ? destinyProfileData : {};
 
+      const coverImg = destinyProfileData?.cover_image || destinyProfileData?.destiny_pdf_cover || null;
+
       const payload = {
         ...baseData,
+        cover_image: coverImg,
+        destiny_pdf_cover: coverImg,
         name: document.getElementById('dp-name').value.trim(),
         tagline: document.getElementById('dp-tagline').value.trim(),
         description: document.getElementById('dp-description').value.trim(),
