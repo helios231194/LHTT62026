@@ -441,47 +441,59 @@ const packageDetails: Record<string, PackageDetail> = {
 };
 
 export function LeaderConsulting({ initialProfile, initialBusinessProducts }: LeaderConsultingProps) {
-  const p1 = initialBusinessProducts?.find((p: any) => String(p.id) === '1' || p.sort_order === 1);
-  const p2 = initialBusinessProducts?.find((p: any) => String(p.id) === '2' || p.sort_order === 2);
-  const p3 = initialBusinessProducts?.find((p: any) => String(p.id) === '3' || p.sort_order === 3);
-  const p4 = initialBusinessProducts?.find((p: any) => String(p.id) === '4' || p.sort_order === 4);
+  // Sort products by sort_order or id
+  const sortedProducts = Array.isArray(initialBusinessProducts)
+    ? [...initialBusinessProducts].sort((a: any, b: any) => (a.sort_order || a.id || 0) - (b.sort_order || b.id || 0))
+    : [];
+
+  const p1 = sortedProducts.find((p: any) => String(p.id) === '1' || p.sort_order === 1) || sortedProducts[0];
+  const p2 = sortedProducts.find((p: any) => String(p.id) === '2' || p.sort_order === 2) || sortedProducts[1];
+  const p3 = sortedProducts.find((p: any) => String(p.id) === '3' || p.sort_order === 3) || sortedProducts[2];
+  const p4 = sortedProducts.find((p: any) => String(p.id) === '4' || p.sort_order === 4) || sortedProducts[3];
 
   const tier1ImgUrl = resolveAttachmentUrl(p1?.image) || resolveAttachmentUrl(initialProfile?.consulting_tier1_img) || PLACEHOLDER;
   const tier2ImgUrl = resolveAttachmentUrl(p2?.image) || resolveAttachmentUrl(initialProfile?.consulting_tier2_img) || PLACEHOLDER;
   const tier3ImgUrl = resolveAttachmentUrl(p3?.image) || resolveAttachmentUrl(initialProfile?.consulting_tier3_img) || PLACEHOLDER;
   const tier4ImgUrl = resolveAttachmentUrl(p4?.image) || resolveAttachmentUrl(initialProfile?.consulting_tier4_img) || '/uploads/1784069618158-800x800_3.png';
 
+  const isPopular = (p: any) => Boolean(p?.featured === true || (p?.badge && String(p.badge).trim() !== ''));
+  const getBadge = (p: any) => (p?.badge && String(p.badge).trim() !== '') ? String(p.badge).trim() : 'ĐƯỢC CHỌN NHIỀU NHẤT';
+
   const pricingTiers = [
     {
       id: 'goi-nen-tang',
       name: p1?.name || 'PHIÊN PHỎNG VẤN CHIẾN LƯỢC & GIẢI MÃ ĐIỂM MÙ ĐỘC BẢN',
       image: tier1ImgUrl,
-      popular: false,
-      ctaTextPrimary: 'ĐẶT LỊCH PHỎNG VẤN CHUYÊN SÂU',
+      popular: isPopular(p1),
+      badge: getBadge(p1),
+      ctaTextPrimary: p1?.cta_label || 'ĐẶT LỊCH PHỎNG VẤN CHUYÊN SÂU',
       ctaTextSecondary: 'Xem chi tiết →',
     },
     {
       id: 'goi-co-van',
       name: p2?.name || 'CHƯƠNG TRÌNH COACHING 90 NGÀY',
       image: tier2ImgUrl,
-      popular: true,
-      ctaTextPrimary: 'ĐẶT LỊCH COACHING 90 NGÀY',
+      popular: isPopular(p2),
+      badge: getBadge(p2),
+      ctaTextPrimary: p2?.cta_label || 'ĐẶT LỊCH COACHING 90 NGÀY',
       ctaTextSecondary: 'Xem chi tiết →',
     },
     {
       id: 'goi-doi-ngu',
       name: p3?.name || 'BẢN ĐỒ ĐỘI NGŨ LÃNH ĐẠO & QUẢN LÝ CHỦ CHỐT',
       image: tier3ImgUrl,
-      popular: false,
-      ctaTextPrimary: 'ĐẶT LỊCH WORKSHOP ĐỘI NGŨ',
+      popular: isPopular(p3),
+      badge: getBadge(p3),
+      ctaTextPrimary: p3?.cta_label || 'ĐẶT LỊCH WORKSHOP ĐỘI NGŨ',
       ctaTextSecondary: 'Xem chi tiết →',
     },
     {
       id: 'cai-to-doanh-nghiep',
       name: p4?.name || 'CẢI TỔ DOANH NGHIỆP & TÁI CẤU TRÚC',
       image: tier4ImgUrl,
-      popular: false,
-      ctaTextPrimary: 'YÊU CẦU TƯ VẤN CẢI TỔ',
+      popular: isPopular(p4),
+      badge: getBadge(p4),
+      ctaTextPrimary: p4?.cta_label || 'YÊU CẦU TƯ VẤN CẢI TỔ',
       ctaTextSecondary: 'Xem chi tiết →',
     }
   ];
