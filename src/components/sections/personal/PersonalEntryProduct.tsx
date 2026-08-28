@@ -12,7 +12,11 @@ interface PersonalEntryProductProps {
 }
 
 export function PersonalEntryProduct({ initialProfile, initialDestinyProfile }: PersonalEntryProductProps) {
-  const destinyCoverUrl = resolveAttachmentUrl(initialDestinyProfile?.cover_image || initialProfile?.destiny_pdf_cover) || '/uploads/1784020906703-BanoL.png';
+  const destinyCoverUrl = resolveAttachmentUrl(
+    initialDestinyProfile?.destiny_pdf_cover ||
+    initialDestinyProfile?.cover_image ||
+    initialProfile?.destiny_pdf_cover
+  ) || '/uploads/1784020906703-BanoL.png';
 
   return (
     <section className="py-24 md:py-32 bg-ice-white relative overflow-hidden" id="entry">

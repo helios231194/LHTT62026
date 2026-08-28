@@ -3,6 +3,13 @@
   "hero_title": null,
   "hero_desc": null,
   "avatar": null,
-  "destiny_pdf_cover": null,
+  "destiny_pdf_cover": [
+    {
+      "id": 1787893772067,
+      "filename": "vẽ (2).png",
+      "url": "/uploads/1787893772067-v2.png",
+      "mimetype": "image/png"
+    }
+  ],
   "strategy_pdf_cover": null
 }
