@@ -446,57 +446,39 @@ export function LeaderConsulting({ initialProfile, initialBusinessProducts }: Le
     ? [...initialBusinessProducts].sort((a: any, b: any) => (a.sort_order || a.id || 0) - (b.sort_order || b.id || 0))
     : [];
 
-  const p1 = sortedProducts.find((p: any) => String(p.id) === '1' || p.sort_order === 1) || sortedProducts[0];
-  const p2 = sortedProducts.find((p: any) => String(p.id) === '2' || p.sort_order === 2) || sortedProducts[1];
-  const p3 = sortedProducts.find((p: any) => String(p.id) === '3' || p.sort_order === 3) || sortedProducts[2];
-  const p4 = sortedProducts.find((p: any) => String(p.id) === '4' || p.sort_order === 4) || sortedProducts[3];
-
-  const tier1ImgUrl = resolveAttachmentUrl(p1?.image) || resolveAttachmentUrl(initialProfile?.consulting_tier1_img) || PLACEHOLDER;
-  const tier2ImgUrl = resolveAttachmentUrl(p2?.image) || resolveAttachmentUrl(initialProfile?.consulting_tier2_img) || PLACEHOLDER;
-  const tier3ImgUrl = resolveAttachmentUrl(p3?.image) || resolveAttachmentUrl(initialProfile?.consulting_tier3_img) || PLACEHOLDER;
-  const tier4ImgUrl = resolveAttachmentUrl(p4?.image) || resolveAttachmentUrl(initialProfile?.consulting_tier4_img) || '/uploads/1784069618158-800x800_3.png';
-
   const isPopular = (p: any) => Boolean(p?.featured === true || (p?.badge && String(p.badge).trim() !== ''));
   const getBadge = (p: any) => (p?.badge && String(p.badge).trim() !== '') ? String(p.badge).trim() : 'ĐƯỢC CHỌN NHIỀU NHẤT';
 
-  const pricingTiers = [
-    {
-      id: 'goi-nen-tang',
-      name: p1?.name || 'PHIÊN PHỎNG VẤN CHIẾN LƯỢC & GIẢI MÃ ĐIỂM MÙ ĐỘC BẢN',
-      image: tier1ImgUrl,
-      popular: isPopular(p1),
-      badge: getBadge(p1),
-      ctaTextPrimary: p1?.cta_label || 'ĐẶT LỊCH PHỎNG VẤN CHUYÊN SÂU',
+  // Build pricing tiers dynamically from sortedProducts (matching exact count in NocoBase)
+  const pricingTiers = (sortedProducts.length > 0 ? sortedProducts : [
+    { id: 1, sort_order: 1, name: 'PHIÊN PHỎNG VẤN CHIẾN LƯỢC & GIẢI MÃ ĐIỂM MÙ ĐỘC BẢN', cta_label: 'ĐẶT LỊCH PHỎNG VẤN CHUYÊN SÂU' },
+    { id: 2, sort_order: 2, name: 'CHƯƠNG TRÌNH COACHING 90 NGÀY', cta_label: 'ĐẶT LỊCH COACHING 90 NGÀY' },
+    { id: 3, sort_order: 3, name: 'BẢN ĐỒ ĐỘI NGŨ LÃNH ĐẠO & QUẢN LÝ CHỦ CHỐT', cta_label: 'ĐẶT LỊCH WORKSHOP ĐỘI NGŨ' },
+  ]).map((p: any, idx: number) => {
+    let id = p.slug || `goi-${p.id || idx + 1}`;
+    if (p.sort_order === 1 || p.id === 6 || String(p.id) === '1') id = 'goi-nen-tang';
+    else if (p.sort_order === 2 || p.id === 4 || String(p.id) === '2') id = 'goi-co-van';
+    else if (p.sort_order === 3 || p.id === 3 || String(p.id) === '3') id = 'goi-doi-ngu';
+    else if (p.sort_order === 4 || String(p.id) === '4') id = 'cai-to-doanh-nghiep';
+
+    const fallbackImg = idx === 0 ? (resolveAttachmentUrl(initialProfile?.consulting_tier1_img) || PLACEHOLDER)
+      : idx === 1 ? (resolveAttachmentUrl(initialProfile?.consulting_tier2_img) || PLACEHOLDER)
+      : idx === 2 ? (resolveAttachmentUrl(initialProfile?.consulting_tier3_img) || PLACEHOLDER)
+      : (resolveAttachmentUrl(initialProfile?.consulting_tier4_img) || '/uploads/1784069618158-800x800_3.png');
+
+    const imgUrl = resolveAttachmentUrl(p?.image) || fallbackImg;
+
+    return {
+      id,
+      product: p,
+      name: p?.name || `GÓI THAM VẤN ${idx + 1}`,
+      image: imgUrl,
+      popular: isPopular(p),
+      badge: getBadge(p),
+      ctaTextPrimary: p?.cta_label || (id === 'goi-nen-tang' ? 'ĐẶT LỊCH PHỎNG VẤN CHUYÊN SÂU' : id === 'goi-co-van' ? 'ĐẶT LỊCH COACHING 90 NGÀY' : id === 'goi-doi-ngu' ? 'ĐẶT LỊCH WORKSHOP ĐỘI NGŨ' : 'YÊU CẦU TƯ VẤN CẢI TỔ'),
       ctaTextSecondary: 'Xem chi tiết →',
-    },
-    {
-      id: 'goi-co-van',
-      name: p2?.name || 'CHƯƠNG TRÌNH COACHING 90 NGÀY',
-      image: tier2ImgUrl,
-      popular: isPopular(p2),
-      badge: getBadge(p2),
-      ctaTextPrimary: p2?.cta_label || 'ĐẶT LỊCH COACHING 90 NGÀY',
-      ctaTextSecondary: 'Xem chi tiết →',
-    },
-    {
-      id: 'goi-doi-ngu',
-      name: p3?.name || 'BẢN ĐỒ ĐỘI NGŨ LÃNH ĐẠO & QUẢN LÝ CHỦ CHỐT',
-      image: tier3ImgUrl,
-      popular: isPopular(p3),
-      badge: getBadge(p3),
-      ctaTextPrimary: p3?.cta_label || 'ĐẶT LỊCH WORKSHOP ĐỘI NGŨ',
-      ctaTextSecondary: 'Xem chi tiết →',
-    },
-    {
-      id: 'cai-to-doanh-nghiep',
-      name: p4?.name || 'CẢI TỔ DOANH NGHIỆP & TÁI CẤU TRÚC',
-      image: tier4ImgUrl,
-      popular: isPopular(p4),
-      badge: getBadge(p4),
-      ctaTextPrimary: p4?.cta_label || 'YÊU CẦU TƯ VẤN CẢI TỔ',
-      ctaTextSecondary: 'Xem chi tiết →',
-    }
-  ];
+    };
+  });
 
   const [activePackageId, setActivePackageId] = useState<string | null>(null);
   const [modalView, setModalView] = useState<'details' | 'register'>('details');
@@ -542,11 +524,11 @@ export function LeaderConsulting({ initialProfile, initialBusinessProducts }: Le
   const currentDetail = packageDetails[activeDetailKey];
 
   const matchedProduct = initialBusinessProducts?.find((p: any) => {
-    if (activePackageId === 'goi-nen-tang') return String(p.id) === '1' || p.sort_order === 1;
-    if (activePackageId === 'goi-co-van') return String(p.id) === '2' || p.sort_order === 2;
-    if (activePackageId === 'goi-doi-ngu') return String(p.id) === '3' || p.sort_order === 3;
+    if (activePackageId === 'goi-nen-tang') return String(p.id) === '1' || p.sort_order === 1 || p.id === 6;
+    if (activePackageId === 'goi-co-van') return String(p.id) === '2' || p.sort_order === 2 || p.id === 4;
+    if (activePackageId === 'goi-doi-ngu') return String(p.id) === '3' || p.sort_order === 3 || p.id === 3;
     if (activePackageId === 'cai-to-doanh-nghiep') return String(p.id) === '4' || p.sort_order === 4;
-    return false;
+    return p.slug === activePackageId || String(p.id) === activePackageId;
   });
 
   const benefitsArray = matchedProduct?.benefits
@@ -622,7 +604,7 @@ export function LeaderConsulting({ initialProfile, initialBusinessProducts }: Le
           </div>
         </FadeIn>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 xl:gap-8 max-w-[1480px] mx-auto items-start">
+        <div className={`grid grid-cols-1 md:grid-cols-2 ${pricingTiers.length === 3 ? 'lg:grid-cols-3 max-w-[1240px]' : pricingTiers.length === 2 ? 'lg:grid-cols-2 max-w-[800px]' : pricingTiers.length === 1 ? 'lg:grid-cols-1 max-w-[420px]' : 'lg:grid-cols-4 max-w-[1480px]'} gap-6 xl:gap-8 mx-auto items-start`}>
           {pricingTiers.map((tier, idx) => (
             <FadeIn key={idx} direction="up" delay={idx * 0.15}>
               <div className={`relative flex flex-col h-full bg-white rounded-[2rem] overflow-hidden transition-all duration-300 group hover:shadow-2xl ${
