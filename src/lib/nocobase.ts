@@ -105,27 +105,31 @@ export function resolveAttachmentUrl(
     return encodeURI(decodeURI(url));
   }
 
-  // Full URL from old backend
+  // Full URL from old backend -> Map to MinIO
   if (url.startsWith('https://lht.gun.hmz.one/storage/uploads/')) {
     const filename = url.replace('https://lht.gun.hmz.one/storage/uploads/', '');
     return `${MINIO_BASE_URL}/${encodeURIComponent(decodeURIComponent(filename))}`;
   }
 
+  // Other absolute HTTP/HTTPS URLs
   if (url.startsWith('http://') || url.startsWith('https://')) return url;
 
-  // Extract clean filename from relative upload paths (/storage/uploads/..., /uploads/..., uploads/...)
-  if (url.includes('uploads/')) {
-    const cleanFilename = url
-      .replace(/^\/?(storage\/)?uploads\//, '')
-      .replace(/^\//, '');
-
-    if (cleanFilename) {
-      return `${MINIO_BASE_URL}/${encodeURIComponent(decodeURIComponent(cleanFilename))}`;
-    }
+  // Legacy NocoBase /storage/uploads/ paths -> Map to MinIO
+  if (url.startsWith('/storage/uploads/') || url.startsWith('storage/uploads/')) {
+    const filename = url.replace(/^\/?storage\/uploads\//, '');
+    return `${MINIO_BASE_URL}/${encodeURIComponent(decodeURIComponent(filename))}`;
   }
 
-  // Static local asset in public/ directory (e.g. /LOGO-07.png, /images/..., /herobannerbackground.png)
-  return url;
+  // Local /uploads/ paths (new uploads stored in public/uploads)
+  if (url.startsWith('/uploads/')) {
+    return encodeURI(decodeURI(url));
+  }
+  if (url.startsWith('uploads/')) {
+    return `/${encodeURI(decodeURI(url))}`;
+  }
+
+  // Static local asset in public/ directory (e.g. /LOGO-07.png, /images/..., /herobanner/hero02.png)
+  return url.startsWith('/') ? url : `/${url}`;
 }
 
 // Thời gian revalidate (giây)

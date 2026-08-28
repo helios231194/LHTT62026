@@ -69,7 +69,7 @@ export function BookFeedback({ initialFeedbacks, initialVideos }: BookFeedbackPr
          <div className="animate-marquee gap-6 px-4 cursor-pointer">
           {feedbacksList.length > 0 ? (
             [...feedbacksList, ...feedbacksList].map((item, idx) => {
-              const imageUrl = typeof item.image === 'string' ? item.image : (item.image?.[0] ? resolveAttachmentUrl(item.image[0]) : '');
+              const imageUrl = resolveAttachmentUrl(item.image) || '';
               return (
                 <div 
                   key={idx}
