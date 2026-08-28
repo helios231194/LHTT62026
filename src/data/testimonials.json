@@ -1,7 +1,6 @@
 [
   {
     "id": 7,
-    "updatedAt": "2026-07-02T22:31:54.343Z",
     "name": "Mr. Trần Trung Nhân",
     "position": "Founder",
     "company": "FitStrength / Học viện đào tạo PT",
@@ -13,14 +12,13 @@
       {
         "id": 1784020323788,
         "filename": "Trần Trung Nhân.jpg",
-        "url": "/uploads/1784020323788-TranTrungNhan.jpg",
+        "url": "https://minio.agentic.io.vn/linhoatam/1784020323788-TranTrungNhan.jpg",
         "mimetype": "image/jpeg"
       }
     ]
   },
   {
     "id": 8,
-    "updatedAt": "2026-07-02T22:36:31.857Z",
     "name": "Ms. Hoàng Lê Dung",
     "position": "Founder & CEO",
     "company": "Hệ sinh thái Sức khỏe ProCARE",
@@ -40,7 +38,7 @@
         "mimetype": "image/jpeg",
         "path": "",
         "meta": {},
-        "url": "/uploads/HoàngLêDung-3ts3na.jpg",
+        "url": "https://minio.agentic.io.vn/linhoatam/HoàngLêDung-3ts3na.jpg",
         "createdById": 1,
         "updatedById": 1,
         "storageId": 372110280097792,
@@ -56,7 +54,6 @@
   },
   {
     "id": 9,
-    "updatedAt": "2026-07-02T22:36:34.292Z",
     "name": "Ms. Thảo Nguyễn",
     "position": "Co-founder & Head of Finance",
     "company": "Aura Capital",
@@ -76,7 +73,7 @@
         "mimetype": "image/jpeg",
         "path": "",
         "meta": {},
-        "url": "/uploads/ThảoNguyễn-p1o7hd.jpg",
+        "url": "https://minio.agentic.io.vn/linhoatam/ThảoNguyễn-p1o7hd.jpg",
         "createdById": 1,
         "updatedById": 1,
         "storageId": 372110280097792,
@@ -92,7 +89,6 @@
   },
   {
     "id": 10,
-    "updatedAt": "2026-07-02T22:36:37.924Z",
     "name": "Mr. Nguyễn Thành Huy",
     "position": "Founder",
     "company": "SUA Architecture & UY Diamond Jewelry",
@@ -112,7 +108,7 @@
         "mimetype": "image/jpeg",
         "path": "",
         "meta": {},
-        "url": "/uploads/NguyễnThànhHuy-in246q.jpg",
+        "url": "https://minio.agentic.io.vn/linhoatam/NguyễnThànhHuy-in246q.jpg",
         "createdById": 1,
         "updatedById": 1,
         "storageId": 372110280097792,
@@ -128,7 +124,6 @@
   },
   {
     "id": 11,
-    "updatedAt": "2026-07-02T22:36:43.778Z",
     "name": "Ms. Phạm Huỳnh Thảo Miên",
     "position": "Founder",
     "company": "TNHH Yến Sào SG / Á hậu Đại Dương Doanh Nhân Thế Giới 2026",
@@ -148,7 +143,7 @@
         "mimetype": "image/jpeg",
         "path": "",
         "meta": {},
-        "url": "/uploads/PhạmHuỳnhThảoMiên-wuj9uk.jpg",
+        "url": "https://minio.agentic.io.vn/linhoatam/PhạmHuỳnhThảoMiên-wuj9uk.jpg",
         "createdById": 1,
         "updatedById": 1,
         "storageId": 372110280097792,
@@ -164,7 +159,6 @@
   },
   {
     "id": 12,
-    "updatedAt": "2026-07-02T22:36:47.928Z",
     "name": "Mr. Đỗ Duy Thanh",
     "position": "CEO",
     "company": "Công ty TNHH Adobus / Founder Hệ thống Dụng cụ cắt kim loại Adobus",
@@ -184,7 +178,7 @@
         "mimetype": "image/jpeg",
         "path": "",
         "meta": {},
-        "url": "/uploads/ĐỗDuyThanh-na3146.jpg",
+        "url": "https://minio.agentic.io.vn/linhoatam/ĐỗDuyThanh-na3146.jpg",
         "createdById": 1,
         "updatedById": 1,
         "storageId": 372110280097792,
@@ -200,7 +194,6 @@
   },
   {
     "id": 13,
-    "updatedAt": "2026-07-03T22:04:51.115Z",
     "name": "Ông Nguyễn Văn A",
     "position": "Trưởng ban tổ chức",
     "company": "CEO Forum 2025",
@@ -212,7 +205,6 @@
   },
   {
     "id": 14,
-    "updatedAt": "2026-07-03T22:04:51.169Z",
     "name": "Bà Trần Thị B",
     "position": "Founder & CEO",
     "company": "TechStartup JSC",

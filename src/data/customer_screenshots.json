@@ -8,7 +8,7 @@
       {
         "id": 1,
         "filename": "screenshot1.jpg",
-        "url": "/uploads/screenshot1.jpg"
+        "url": "https://minio.agentic.io.vn/linhoatam/screenshot1.jpg"
       }
     ]
   },
@@ -21,7 +21,7 @@
       {
         "id": 2,
         "filename": "screenshot2.webp",
-        "url": "/uploads/screenshot2.webp"
+        "url": "https://minio.agentic.io.vn/linhoatam/screenshot2.webp"
       }
     ]
   }

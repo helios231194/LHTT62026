@@ -1,143 +1,168 @@
 [
   {
     "id": 1,
-    "name": "File Luận giải Cá nhân",
-    "slug": "file-luan-giai",
-    "badge": "",
-    "tagline": "Dành cho cá nhân phát triển",
-    "description": "Bước đầu vào hành trình hiểu chính mình. Phân tích 7 chỉ số vận mệnh theo ngày sinh.",
-    "long_description": "<p><strong>Bản phân tích cá nhân hóa</strong> giúp bạn nhận diện 7 chỉ số cốt lõi và chu kỳ năng lượng cá nhân.</p><p>Hồ sơ bao gồm hướng dẫn tra cứu chi tiết, giải mã điểm mạnh và cảnh báo điểm mù trong 12 tháng tới.</p>",
-    "price": "450.000 VND",
-    "benefits": "7 chỉ số vận mệnh cá nhân|Điểm mạnh bẩm sinh|Chu kỳ sự nghiệp & sức khỏe|Cách vận hành tự nhiên|Thời điểm thuận lợi 12 tháng",
-    "cta_label": "Nhận file ngay",
-    "href": "/phat-trien-ban-than",
-    "theme": "light",
-    "featured": false,
-    "sort_order": 1,
-    "image": [
-      {
-        "id": 1784020906703,
-        "filename": "/uploads/1784020906703-BanoL.png",
-        "url": "/uploads/1784020906703-BanoL.png",
-        "mimetype": "image/png"
-      }
-    ]
-  },
-  {
-    "id": 2,
-    "name": "Full 19 Chỉ Số Vận Mệnh",
-    "slug": "full-19-chi-so",
-    "badge": "ĐẦY ĐỦ NHẤT",
-    "tagline": "Phân tích toàn diện",
-    "description": "Phân tích chi tiết toàn bộ 19 chỉ số vận mệnh, bao gồm chu kỳ sự nghiệp, tình duyên và sức khỏe và công việc",
-    "long_description": "<p><strong>Phân tích chuyên sâu toàn bộ 19 chỉ số số học</strong> bao gồm chu kỳ cuộc đời 5 năm, tình duyên, hôn nhân, sức khỏe và sự nghiệp dài hạn.</p><p>Giúp bạn định vị bản thân, ra quyết định chính xác và tránh các bẫy tâm lý trong các giai đoạn chuyển giao.</p>",
-    "price": "Liên hệ",
-    "benefits": "19 chỉ số vận mệnh đầy đủ|Chu kỳ 5 năm chi tiết|Phân tích tình duyên & hôn nhân|Sức khỏe & năng lượng|Định hướng sự nghiệp dài hạn|Test thông tin mới",
-    "cta_label": "Đặt lịch tư vấn",
-    "href": "/phat-trien-ban-than",
-    "theme": "dark",
-    "featured": true,
-    "sort_order": 2,
-    "image": [
-      {
-        "id": 1785312314828,
-        "filename": "/uploads/1785312314828-800x800_71.png",
-        "url": "/uploads/1785312314828-800x800_71.png",
-        "mimetype": "image/png"
-      }
-    ]
-  },
-  {
-    "id": 3,
-    "name": "Cố Vấn Sự Nghiệp",
-    "slug": "co-van-su-nghiep",
-    "badge": "",
-    "tagline": "Định hướng nghề nghiệp",
-    "description": "Phân tích phương hướng sự nghiệp phù hợp nhất dựa trên chỉ số số học cá nhân.",
-    "long_description": "<p><strong>Buổi làm việc 1:1 trực tiếp cùng Master Hoàng Mai Linh</strong> giúp bạn giải mã môi trường làm việc lý tưởng và thời điểm thuận lợi để chuyển việc hoặc bứt phá sự nghiệp.</p><p>Đi kèm tài liệu định hướng và biểu mẫu hành động cá nhân.</p>",
-    "price": "Liên hệ",
-    "benefits": "Phân tích nghề nghiệp phù hợp|Thời điểm thuận để chuyển việc|Môi trường làm việc lý tưởng|Đối tác & cộng sự phù hợp",
-    "cta_label": "Đặt lịch",
-    "href": "/phat-trien-ban-than",
-    "theme": "light",
-    "featured": false,
-    "sort_order": 3,
-    "image": [
-      {
-        "id": 1784101941934,
-        "filename": "/uploads/1784101893659-800x800_5.png",
-        "url": "/uploads/1784101941934-800x800_5.png",
-        "mimetype": "image/png"
-      }
-    ]
-  },
-  {
-    "id": 4,
-    "name": "Hóa Giải Mâu Thuẫn",
-    "slug": "hoa-giai-mau-thuan",
+    "name": "HÓA GIẢI MÂU THUẪN",
+    "slug": "",
     "badge": "",
     "tagline": "Cải thiện quan hệ",
     "description": "Hiểu đúng bộ số của người bên cạnh, mâu thuẫn được tháo gỡ từ gốc rễ.",
     "long_description": "<p><strong style=\"background-color: transparent; color: rgb(10, 31, 68);\">Dành cho</strong></p><ol><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"background-color: transparent; color: rgb(85, 85, 85);\">Người đang bế tắc trong mối quan hệ gia đình, bạn bè, đồng nghiệp hoặc vợ chồng</span></li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"background-color: transparent; color: rgb(85, 85, 85);\">Khi mọi cuộc trò chuyện dễ trở thành tranh luận dù đã cố gắng giữ bình tĩnh</span></li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"background-color: transparent; color: rgb(85, 85, 85);\">Người muốn hiểu sâu hơn về người bên cạnh để kết nối bền vững hơn</span></li></ol><p><strong style=\"background-color: transparent; color: rgb(10, 31, 68);\">Nội dung buổi tham vấn</strong></p><ol><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"background-color: transparent; color: rgb(85, 85, 85);\">Tháo gỡ bất ổn tâm lý và tìm ra điểm kết nối thực sự giữa hai người</span></li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"background-color: transparent; color: rgb(85, 85, 85);\">Hiểu rõ bản thân và đối phương có thực sự hợp nhau theo bộ số</span></li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"background-color: transparent; color: rgb(85, 85, 85);\">Hóa giải điểm khuyết và phát huy điểm chung khi cả hai ở gần nhau</span></li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"background-color: transparent; color: rgb(85, 85, 85);\">Cách tăng giá trị và tần số bản thân trong mối quan hệ một cách tinh tế</span></li></ol>",
     "price": "6.500.000 VNĐ",
     "benefits": "File ghi âm buổi tham vấn|File lá số PDF phân tích đầy đủ (50+ trang)|Sổ ghi chú và việc cần làm để chuyển hóa mối quan hệ|Biểu mẫu hành động cụ thể",
-    "cta_label": "Tư vấn ngay",
-    "href": "/phat-trien-ban-than",
+    "cta_label": "",
+    "href": null,
     "theme": "light",
     "featured": false,
-    "sort_order": 4,
+    "sort_order": 1,
     "image": [
       {
-        "id": 1784069571146,
-        "filename": "/uploads/1784069559946-800x800_1.png",
-        "url": "/uploads/1784069571146-800x800_1.png",
+        "id": 1787850179190,
+        "filename": "800x800_1.png",
+        "url": "/uploads/1787850179190-800x800_1.png",
         "mimetype": "image/png"
       }
     ]
   },
   {
-    "id": 5,
-    "name": "Combo Hồ Sơ Vận Mệnh",
-    "slug": "ho-so-van-menh",
-    "badge": "SẢN PHẨM KHỞI ĐẦU",
-    "tagline": "Bước đầu tiên để hiểu mình",
-    "description": "Bản đồ phân tích cá nhân hóa gần 100 trang PDF kết hợp sách in Sức Mạnh Ẩn Sau Con Số ship tận nhà.",
-    "long_description": "<p><strong>Combo sản phẩm phễu chiến lược</strong> kết hợp cuốn sách in <em>Sức Mạnh Ẩn Sau Con Số</em> ship tận nhà và tệp PDF Hồ Sơ Vận Mệnh gần 100 trang.</p><p>Dành riêng cho khách hàng mua Combo Cao Cấp: Tặng kèm quyền truy cập Bộ 4 Video độc quyền hướng dẫn tự luận giải và thực hành.</p>",
-    "price": "Từ 680.000 VND",
-    "benefits": "Combo Tiêu Chuẩn: Sách in + PDF Hồ Sơ Vận Mệnh|Combo Cao Cấp: Sách in + PDF Hồ Sơ + Bộ 4 Video độc quyền|Phân tích 7 chỉ số vận mệnh cốt lõi|Định vị chu kỳ cuộc đời & Năm cá nhân hiện tại|Nhận diện điểm mạnh & điểm mù ra quyết định|Thiết kế làm cẩm nang đồng hành trọn đời",
-    "cta_label": "Tìm hiểu ngay",
-    "href": "/ho-so-van-menh",
+    "id": 3,
+    "name": "CỐ VẤN SỰ NGHIỆP",
+    "slug": "co-van-su-nghiep",
+    "badge": "",
+    "tagline": "Định hướng nghề nghiệp",
+    "description": "Xác định điểm mạnh thực sự và thời điểm hành động đúng chu kỳ vận mệnh.",
+    "long_description": "<p><strong style=\"color: rgb(10, 31, 68); background-color: transparent;\">Dành cho</strong></p><ol><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"color: rgb(85, 85, 85); background-color: transparent;\">Người chưa biết rõ điểm mạnh và hướng phát triển phù hợp với bộ số của mình</span></li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"color: rgb(85, 85, 85); background-color: transparent;\">Người đang cân nhắc chuyển ngành, thay đổi hướng đi hoặc khởi nghiệp</span></li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"color: rgb(85, 85, 85); background-color: transparent;\">Người đi làm nhiều năm nhưng cảm thấy chưa phát huy hết năng lực</span></li></ol><p><strong style=\"color: rgb(10, 31, 68); background-color: transparent;\">Nội dung buổi tham vấn</strong></p><ol><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"color: rgb(85, 85, 85); background-color: transparent;\">Xác định điểm mạnh và điểm cần phát triển theo bộ số vận mệnh cá nhân</span></li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"color: rgb(85, 85, 85); background-color: transparent;\">Tư vấn nghề nghiệp và lĩnh vực phù hợp với cấu trúc hành động tự nhiên</span></li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"color: rgb(85, 85, 85); background-color: transparent;\">Vạch ra lộ trình sự nghiệp theo từng giai đoạn phát triển</span></li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"color: rgb(85, 85, 85); background-color: transparent;\">Cảnh báo các quyết định dễ sai lầm tại các mốc thời gian cụ thể</span></li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"color: rgb(85, 85, 85); background-color: transparent;\">Xác định thời điểm vàng để dốc toàn lực và đạt được thành công lớn nhất</span></li></ol>",
+    "price": "5.400.000 VNĐ",
+    "benefits": "File lá số PDF phân tích sự nghiệp chi tiết (50+ trang)|Lộ trình hành động theo từng giai đoạn sự nghiệp|File ghi âm buổi tham vấn|Biểu mẫu hành động cụ thể",
+    "cta_label": "Đặt lịch",
+    "href": "/phat-trien-ban-than",
     "theme": "light",
-    "featured": true,
-    "sort_order": 0,
+    "featured": false,
+    "sort_order": 5,
     "image": [
       {
-        "id": 1784101927467,
-        "filename": "/uploads/1785312314828-800x800_71.png",
-        "url": "/uploads/1784101927467-800x800_7.png",
+        "id": 1787884837634,
+        "filename": "800x800_5.png",
+        "url": "/uploads/1787884837634-800x800_5.png",
         "mimetype": "image/png"
       }
     ]
   },
   {
     "id": 6,
-    "name": "Cải vận bằng con số",
+    "name": "CẢI VẬN BẰNG CON SỐ",
     "slug": "cai-van-bang-con-so",
-    "badge": "Coaching 1:1",
+    "badge": "",
     "tagline": "Tối ưu số sim, tài khoản",
     "description": "Số sim, tài khoản, số nhà đang định hình năng lực vận hành mỗi ngày.",
-    "long_description": "<p><strong style=\"background-color: transparent; color: rgb(10, 31, 68);\">Dành cho</strong></p><ol><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"background-color: transparent; color: rgb(85, 85, 85);\">Người muốn nâng cao trường năng lượng thông qua các con số đang sử dụng hàng ngày</span></li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"background-color: transparent; color: rgb(85, 85, 85);\">Chủ doanh nghiệp và cá nhân muốn điều chỉnh số sim, tài khoản, số nhà cho phù hợp bộ số vận mệnh</span></li></ol><p><strong style=\"background-color: transparent; color: rgb(10, 31, 68);\">Nội dung buổi tham vấn</strong></p><ol><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"background-color: transparent; color: rgb(85, 85, 85);\">Phân tích các con số hiện hữu và mức độ phù hợp với bộ số vận mệnh cá nhân</span></li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"background-color: transparent; color: rgb(85, 85, 85);\">Tìm ra những con số may mắn, bổ sung năng lượng còn thiếu</span></li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"background-color: transparent; color: rgb(85, 85, 85);\">Đề xuất thay đổi cụ thể để nâng cao trường năng lực</span></li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"background-color: transparent; color: rgb(85, 85, 85);\">Cải vận qua phương pháp khoa học của Thuật Số Học</span></li></ol>",
+    "long_description": "<p><strong style=\"color: rgb(10, 31, 68); background-color: transparent;\">Dành cho</strong></p><ol><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"color: rgb(85, 85, 85); background-color: transparent;\">Người muốn nâng cao trường năng lượng thông qua các con số đang sử dụng hàng ngày</span></li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"color: rgb(85, 85, 85); background-color: transparent;\">Chủ doanh nghiệp và cá nhân muốn điều chỉnh số sim, tài khoản, số nhà cho phù hợp bộ số vận mệnh</span></li></ol><p><strong style=\"color: rgb(10, 31, 68); background-color: transparent;\">Nội dung buổi tham vấn</strong></p><ol><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"color: rgb(85, 85, 85); background-color: transparent;\">Phân tích các con số hiện hữu và mức độ phù hợp với bộ số vận mệnh cá nhân</span></li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"color: rgb(85, 85, 85); background-color: transparent;\">Tìm ra những con số may mắn, bổ sung năng lượng còn thiếu</span></li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"color: rgb(85, 85, 85); background-color: transparent;\">Đề xuất thay đổi cụ thể để nâng cao trường năng lực</span></li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"color: rgb(85, 85, 85); background-color: transparent;\">Cải vận qua phương pháp khoa học của Thuật Số Học</span></li></ol>",
     "price": "2.900.000 VNĐ",
     "benefits": "Báo cáo phân tích bộ số hiện tại|Danh sách con số phù hợp đề xuất thay thế|Hướng dẫn thực hiện thay đổi cụ thể|File ghi âm buổi tham vấn",
     "cta_label": "Tư vấn ngay",
+    "href": null,
     "theme": "light",
-    "sort_order": 5,
     "featured": false,
+    "sort_order": 2,
     "image": [
       {
-        "id": 1784103500170,
-        "filename": "/uploads/1784103500170-800x800_4.png",
-        "url": "/uploads/1784103500170-800x800_4.png",
+        "id": 1787850317196,
+        "filename": "800x800_2.png",
+        "url": "/uploads/1787850317196-800x800_2.png",
+        "mimetype": "image/png"
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "name": "CẢI TỔ DOANH NGHIỆP",
+    "slug": "hoa-giai-mau-thuan",
+    "badge": "SẢN PHẨM KHỞI ĐẦU",
+    "tagline": "Dành cho cá nhân phát triển",
+    "description": "Cấu trúc nhân sự đúng chu kỳ, doanh nghiệp vận hành thuận chiều và tăng trưởng bền hơn",
+    "long_description": "<p><strong style=\"background-color: transparent; color: rgb(10, 31, 68);\">Dành cho</strong></p><ol><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"background-color: transparent; color: rgb(85, 85, 85);\">Chủ doanh nghiệp đang gặp khó khăn trong việc giữ chân và phát huy nhân sự cốt lõi</span></li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"background-color: transparent; color: rgb(85, 85, 85);\">Founder cần xác định đúng vai trò cho từng thành viên trong đội ngũ</span></li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"background-color: transparent; color: rgb(85, 85, 85);\">Doanh nghiệp muốn tìm nguyên nhân gốc rễ khiến vận hành chưa thuận lợi</span></li></ol><p><strong style=\"background-color: transparent; color: rgb(10, 31, 68);\">Nội dung buổi tham vấn</strong></p><ol><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"background-color: transparent; color: rgb(85, 85, 85);\">Phân tích bộ số nhân sự nòng cốt và đề xuất sắp xếp lại vai trò phù hợp</span></li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"background-color: transparent; color: rgb(85, 85, 85);\">Tìm ra nguyên nhân gốc rễ khiến vận hành chưa thuận lợi</span></li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"background-color: transparent; color: rgb(85, 85, 85);\">Định hướng tuyển dụng phù hợp với chu kỳ doanh nghiệp</span></li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"background-color: transparent; color: rgb(85, 85, 85);\">Nắm bắt thời cơ và xác định rủi ro trong từng giai đoạn phát triển</span></li></ol><p><br></p>",
+    "price": "3.800.000 VND",
+    "benefits": "Báo cáo phân tích cấu trúc nhân sự theo bộ số|Sơ đồ phân vai đề xuất cho đội ngũ cốt lõi|File lá số PDF đầy đủ cho từng người được phân tích (50+ trang mỗi người)|File ghi âm buổi tham vấn|Biểu mẫu hành động cụ thể",
+    "cta_label": "",
+    "href": null,
+    "theme": "light",
+    "featured": false,
+    "sort_order": 3,
+    "image": [
+      {
+        "id": 1787884685167,
+        "filename": "800x800_3.png",
+        "url": "/uploads/1787884685167-800x800_3.png",
+        "mimetype": "image/png"
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "name": "XEM ĐỐI TƯỢNG KẾT HÔN",
+    "slug": "",
+    "badge": "",
+    "tagline": "",
+    "description": "Hiểu bộ số của người ấy trước khi đưa ra quyết định quan trọng nhất.",
+    "long_description": "<p><strong style=\"color: rgb(10, 31, 68); background-color: transparent;\">Dành cho</strong></p><ol><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"color: rgb(85, 85, 85); background-color: transparent;\">Người đang cân nhắc về mối quan hệ hôn nhân và muốn có góc nhìn sâu hơn</span></li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"color: rgb(85, 85, 85); background-color: transparent;\">Cặp đôi muốn hiểu rõ sự tương hợp về bộ số vận mệnh trước khi đi đến quyết định lớn</span></li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"color: rgb(85, 85, 85); background-color: transparent;\">Người đang hoài nghi về mối quan hệ hiện tại và cần định hướng rõ ràng</span></li></ol><p><strong style=\"color: rgb(10, 31, 68); background-color: transparent;\">Nội dung buổi tham vấn</strong></p><ol><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"color: rgb(85, 85, 85); background-color: transparent;\">Phân tích tính cách ẩn giấu, mong muốn thầm kín và vận mệnh của cả hai người</span></li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"color: rgb(85, 85, 85); background-color: transparent;\">Hiểu mức độ tương hợp và những điểm dễ gây mâu thuẫn về mặt bộ số</span></li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"color: rgb(85, 85, 85); background-color: transparent;\">Cách để hai người hòa hợp và vững tin đi cùng nhau trên hành trình dài</span></li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"color: rgb(85, 85, 85); background-color: transparent;\">Tư vấn cách giữ lửa và phát triển mối quan hệ bền vững theo bộ số</span></li></ol><p><br></p>",
+    "price": "9.600.000 VNĐ",
+    "benefits": "File lá số PDF phân tích đầy đủ cho cả hai người (50+ trang)|Báo cáo tương hợp bộ số và lộ trình xây dựng mối quan hệ|File ghi âm buổi tham vấn|Biểu mẫu hành động cụ thể",
+    "cta_label": "",
+    "href": null,
+    "theme": "light",
+    "featured": false,
+    "sort_order": 4,
+    "image": [
+      {
+        "id": 1787884754742,
+        "filename": "800x800_4.png",
+        "url": "/uploads/1787884754742-800x800_4.png",
+        "mimetype": "image/png"
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "name": "ĐẶT TÊN THƯƠNG HIỆU & SẢN PHẨM",
+    "slug": "",
+    "badge": "",
+    "tagline": "Phân tích toàn diện",
+    "description": "Tên hợp bộ số vận mệnh thu hút đúng tệp khách hàng và đặt nền móng cho sự nghiệp.",
+    "long_description": "<p><strong style=\"background-color: transparent; color: rgb(10, 31, 68);\">Dành cho</strong></p><ol><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"background-color: transparent; color: rgb(85, 85, 85);\">Chủ doanh nghiệp, founder cần đặt tên công ty, thương hiệu hoặc dòng sản phẩm mới</span></li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"background-color: transparent; color: rgb(85, 85, 85);\">Cá nhân muốn xây dựng nghệ danh hoặc nhân hiệu phù hợp với bộ số</span></li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"background-color: transparent; color: rgb(85, 85, 85);\">Người muốn điều chỉnh tên hiện tại để nâng cao trường năng lượng thu hút</span></li></ol><p><strong style=\"background-color: transparent; color: rgb(10, 31, 68);\">Nội dung buổi tham vấn</strong></p><ol><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"background-color: transparent; color: rgb(85, 85, 85);\">Phân tích bộ số hiện tại và xác định năng lượng cần bổ sung qua tên</span></li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"background-color: transparent; color: rgb(85, 85, 85);\">Kết hợp 3 trường phái Thuật Số cùng Phong Thủy để tìm tên phù hợp nhất</span></li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"background-color: transparent; color: rgb(85, 85, 85);\">Đề xuất danh sách tên phù hợp với lĩnh vực, thị trường và mục tiêu</span></li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"background-color: transparent; color: rgb(85, 85, 85);\">Phân tích chi tiết từng phương án tên theo góc độ bộ số và năng lượng</span></li></ol><p><br></p>",
+    "price": "8.900.000 VNĐ",
+    "benefits": "Danh sách tên đề xuất cùng phân tích bộ số chi tiết|Báo cáo đánh giá tên hiện tại nếu có|File ghi âm buổi tham vấn|Hướng dẫn sử dụng và phát triển thương hiệu theo bộ số",
+    "cta_label": "",
+    "href": null,
+    "theme": "light",
+    "featured": false,
+    "sort_order": 6,
+    "image": [
+      {
+        "id": 1787884903451,
+        "filename": "800x800_6.png",
+        "url": "/uploads/1787884903451-800x800_6.png",
+        "mimetype": "image/png"
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "name": "ĐẶT TÊN BÉ SƠ SINH",
+    "slug": "",
+    "badge": "",
+    "tagline": "",
+    "description": "Tên đúng bộ số là hành trang đầu tiên tặng con trên mọi chặng phía trước.",
+    "long_description": "<p><strong style=\"background-color: transparent; color: rgb(10, 31, 68);\">Dành cho</strong></p><ol><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"background-color: transparent; color: rgb(85, 85, 85);\">Cha mẹ chuẩn bị đón con chào đời và muốn đặt tên đúng bộ số vận mệnh</span></li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"background-color: transparent; color: rgb(85, 85, 85);\">Gia đình muốn bổ sung năng lượng còn thiếu trong ngày sinh của con qua cái tên</span></li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"background-color: transparent; color: rgb(85, 85, 85);\">Cha mẹ muốn hiểu rõ bộ số của con để định hướng nuôi dưỡng phù hợp nhất</span></li></ol><p><strong style=\"background-color: transparent; color: rgb(10, 31, 68);\">Nội dung buổi tham vấn</strong></p><ol><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"background-color: transparent; color: rgb(85, 85, 85);\">Phân tích bộ số từ ngày sinh của con và xác định năng lượng cần bổ sung</span></li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"background-color: transparent; color: rgb(85, 85, 85);\">Đề xuất danh sách tên phù hợp giúp cân bằng và nâng cao trường năng lực của con</span></li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"background-color: transparent; color: rgb(85, 85, 85);\">Phân tích tính cách và xu hướng phát triển của con theo bộ số</span></li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"background-color: transparent; color: rgb(85, 85, 85);\">Hướng dẫn cha mẹ cách đồng hành và hỗ trợ con phát huy điểm mạnh bẩm sinh</span></li></ol>",
+    "price": "10.000.000 VNĐ",
+    "benefits": "Combo: Phân tích Tên và Ngày Sinh|Danh sách tên đề xuất cùng phân tích bộ số chi tiết|Báo cáo bộ số vận mệnh của con theo ngày sinh|File ghi âm buổi tham vấn|Hướng dẫn nuôi dưỡng và phát triển theo bộ số",
+    "cta_label": "",
+    "href": null,
+    "theme": "light",
+    "featured": false,
+    "sort_order": 8,
+    "image": [
+      {
+        "id": 1787884991705,
+        "filename": "800x800_8.png",
+        "url": "/uploads/1787884991705-800x800_8.png",
         "mimetype": "image/png"
       }
     ]

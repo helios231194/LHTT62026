@@ -1,59 +1,14 @@
 [
   {
-    "id": 1,
-    "name": "Bản đồ Chiến lược 2026",
-    "slug": "ban-do-chien-luoc",
-    "badge": "",
-    "tagline": "Dành cho CEO & Founder",
-    "description": "PDF cá nhân hóa hoàn toàn theo tên và ngày sinh. Tài liệu tham chiếu chiến lược trong suốt năm 2026.",
-    "price": "3.800.000 VND",
-    "benefits": "7 chỉ số lãnh đạo cốt lõi|Chu kỳ vận hành toàn năm 2026|Lộ trình 4 trụ cột chiến lược|Phân tích điểm mạnh & rủi ro|Dùng trong họp chiến lược, tuyển dụng, đầu tư",
-    "cta_label": "Nhận bản đồ ngay",
-    "href": "/giai-phap-lanh-dao",
-    "theme": "light",
-    "featured": false,
-    "sort_order": 1,
-    "image": [
-      {
-        "id": 1784069559946,
-        "filename": "/uploads/1784069559946-800x800_1.png",
-        "url": "/uploads/1784069559946-800x800_1.png",
-        "mimetype": "image/png"
-      }
-    ]
-  },
-  {
-    "id": 2,
-    "name": "Tham Vấn Lãnh Đạo 1:1 & Đội Ngũ",
-    "slug": "tu-van-1-1",
-    "badge": "★ ĐƯỢC CHỌN NHIỀU NHẤT",
-    "tagline": "Coaching chiến lược chuyên sâu",
-    "description": "Chương trình tham vấn đồng hành trực tiếp cùng Master Hoàng Mai Linh giúp thiết lập bản đồ ra quyết định và tối ưu năng lực đội ngũ.",
-    "price": "Từ 6.800.000 VND",
-    "benefits": "Phiên Phỏng Vấn Chiến Lược & Giải Mã Điểm Mù Độc Bản (6.8tr)|Chương Trình Coaching 90 Ngày (19.8tr)|Bản Đồ Đội Ngũ Lãnh Đạo & Quản Lý Chủ Chốt (35tr)|Bản Đồ Điểm Mù Quản Trị Theo Thuật Số Học Ứng Dụng (55tr)|Workshop Thấu Hiểu Đội Ngũ & Tối Ưu Phối Hợp (75tr)",
-    "cta_label": "Đặt lịch tham vấn",
-    "href": "/giai-phap-lanh-dao",
-    "theme": "dark",
-    "featured": true,
-    "sort_order": 2,
-    "image": [
-      {
-        "id": 1784101834981,
-        "filename": "/uploads/1784101834981-800x800_10.png",
-        "url": "/uploads/1784101834981-800x800_10.png",
-        "mimetype": "image/png"
-      }
-    ]
-  },
-  {
     "id": 3,
-    "name": "Workshop Chiến lược Nhóm",
+    "name": "BẢN ĐỒ ĐỘI NGŨ LÃNH ĐẠO & QUẢN LÝ CHỦ CHỐT BẢN ĐỒ ĐIỂM MÙ QUẢN TRỊ THEO THUẬT SỐ HỌC ỨNG DỤNG WORKSHOP THẤU HIỂU ĐỘI NGŨ & TỐI ƯU PHỐI HỢP",
     "slug": "workshop-chien-luoc-nhom",
     "badge": "",
     "tagline": "Dành cho đội ngũ lãnh đạo",
-    "description": "Workshop chuyên sâu phân tích toàn bộ đội ngũ C-Suite, xây dựng bản đồ vận hành nhóm.",
-    "price": "Từ 20.000.000 VND",
-    "benefits": "Phân tích 7 chỉ số cho từng thành viên|Bản đồ vận hành nhóm|Phân công vai trò tối ưu|Chu kỳ ra quyết định nhóm|Tài liệu sau workshop",
+    "description": "Phân vai đúng, làm rõ quyền hạn và thiết lập nguyên tắc vận hành chung cho nhóm cốt lõi.",
+    "long_description": "<p><strong style=\"background-color: transparent; color: rgb(10, 31, 68);\">3 cấp độ phù hợp với từng quy mô</strong></p><table><tbody><tr><td data-row=\"1\"><strong style=\"background-color: transparent; color: rgb(10, 31, 68);\">Bản Đồ Đội Ngũ Lãnh Đạo &amp; Quản Lý Chủ Chốt — 3 Người — 35.000.000 VNĐ</strong></td><td data-row=\"1\"><span style=\"background-color: transparent; color: rgb(85, 85, 85);\">Founder cùng 2 quản lý chiến lược, 3 cổ đông điều hành, hoặc Ban điều hành nhỏ đang mở rộng quy mô. Thời lượng: 5 giờ.</span></td></tr><tr><td data-row=\"2\"><strong style=\"background-color: transparent; color: rgb(10, 31, 68);\">Bản Đồ Điểm Mù Quản Trị — 5 Người — 55.000.000 VNĐ</strong></td><td data-row=\"2\"><span style=\"background-color: transparent; color: rgb(85, 85, 85);\">Doanh nghiệp đang mở rộng quy mô, 5 thành viên quản lý cấp cao trực tiếp chịu trách nhiệm tăng trưởng, vận hành, tài chính, nhân sự và chiến lược. Thời lượng: 6 đến 7 giờ.</span></td></tr><tr><td data-row=\"3\"><strong style=\"background-color: transparent; color: rgb(10, 31, 68);\">Workshop Thấu Hiểu Đội Ngũ &amp; Tối Ưu Phối Hợp — 7 Người — 75.000.000 VNĐ</strong></td><td data-row=\"3\"><span style=\"background-color: transparent; color: rgb(85, 85, 85);\">Hội đồng quản trị, Ban điều hành 7 người, nhóm cổ đông doanh nghiệp quy mô lớn. Thời lượng: 8 giờ.</span></td></tr></tbody></table><p><br></p><p><strong style=\"background-color: transparent; color: rgb(10, 31, 68);\">Nội dung workshop</strong></p><ol><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"background-color: transparent; color: rgb(85, 85, 85);\">Giai đoạn chuẩn bị: gửi Questionnaire chiến lược cho từng thành viên 5 đến 7 ngày trước workshop</span></li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"background-color: transparent; color: rgb(85, 85, 85);\">Phân tích cá nhân chuyên sâu: luận giải riêng 30 phút mỗi người gồm cấu trúc ra quyết định, điểm mạnh chiến lược và xu hướng hành vi khi áp lực</span></li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"background-color: transparent; color: rgb(85, 85, 85);\">Vẽ Bản Đồ Năng Lượng Đội Ngũ: phân bổ 5 vai trò cốt lõi và phát hiện xung đột trong vai trò trước khi xảy ra</span></li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"background-color: transparent; color: rgb(85, 85, 85);\">Kiến trúc lại cấu trúc ra quyết định: xác định rõ ai có quyền quyết định cuối cùng trong từng nhóm vấn đề</span></li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"background-color: transparent; color: rgb(85, 85, 85);\">Thiết lập Thỏa Thuận Làm Việc Chung 2026: nguyên tắc họp chiến lược, xử lý bất đồng và cơ chế đánh giá lẫn nhau</span></li></ol><p><br></p>",
+    "price": "Từ 35.000.000 VND",
+    "benefits": "Hồ sơ PDF cá nhân từng thành viên|Báo cáo tổng hợp chiến lược nhóm|Bản Đồ Năng Lượng Đội Ngũ|Sơ đồ trách nhiệm và phân quyền đề xuất 2026|Email định hướng triển khai 90 ngày đầu|Mẫu template rà soát quyết định nhóm",
     "cta_label": "Yêu cầu báo giá",
     "href": "/workshop-chien-luoc",
     "theme": "light",
@@ -61,32 +16,57 @@
     "sort_order": 3,
     "image": [
       {
-        "id": 1784101941934,
-        "filename": "/uploads/1784101893659-800x800_5.png",
-        "url": "/uploads/1784101941934-800x800_5.png",
+        "id": 1787885357084,
+        "filename": "800x800_11.png",
+        "url": "/uploads/1787885357084-800x800_11.png",
         "mimetype": "image/png"
       }
     ]
   },
   {
     "id": 4,
-    "name": "Cải Tổ Doanh Nghiệp",
+    "name": "CHƯƠNG TRÌNH COACHING 90 NGÀY",
     "slug": "cai-to-doanh-nghiep",
     "badge": "",
     "tagline": "Tái cấu trúc chiến lược",
-    "description": "Phân tích tổng thể cấu trúc nhân sự và thời điểm phù hợp để tái cơ cấu tổ chức.",
-    "price": "Liên hệ",
-    "benefits": "Phân tích cấu trúc tổ chức hiện tại|Xác định vị trí then chốt|Lộ trình tái cơ cấu|Thời điểm triển khai tối ưu|Theo dõi sau tái cơ cấu",
+    "description": "Đồng hành tái cấu trúc chiến lược 90 ngày, theo dõi thực thi sau mỗi quyết định lớn",
+    "long_description": "<p><strong style=\"background-color: transparent; color: rgb(10, 31, 68);\">Dành cho</strong></p><ol><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"background-color: transparent; color: rgb(85, 85, 85);\">CEO cần cơ chế theo sát thực thi thực tế trong 30 ngày sau buổi luận giải</span></li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"background-color: transparent; color: rgb(85, 85, 85);\">Lãnh đạo đang trong quá trình tái cấu trúc và cần đồng hành xuyên suốt 90 ngày</span></li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"background-color: transparent; color: rgb(85, 85, 85);\">Founder muốn có người phân tích các quyết định thực tế theo góc độ chu kỳ cá nhân</span></li></ol><p><strong style=\"background-color: transparent; color: rgb(10, 31, 68);\">Cấu trúc chương trình</strong></p><table><tbody><tr><td data-row=\"1\"><strong style=\"background-color: transparent; color: rgb(10, 31, 68);\">Bao gồm</strong></td><td data-row=\"1\"><span style=\"background-color: transparent; color: rgb(85, 85, 85);\">Toàn bộ quyền lợi Phiên Phỏng Vấn Chiến Lược &amp; Giải Mã Điểm Mù Độc Bản</span></td></tr><tr><td data-row=\"2\"><strong style=\"background-color: transparent; color: rgb(10, 31, 68);\">Hệ thống 4 tuần</strong></td><td data-row=\"2\"><span style=\"background-color: transparent; color: rgb(85, 85, 85);\">1 buổi luận giải chính 90 phút + 3 phiên check-in 30 phút trong 3 tuần kế tiếp</span></td></tr><tr><td data-row=\"3\"><strong style=\"background-color: transparent; color: rgb(10, 31, 68);\">Phân tích quyết định</strong></td><td data-row=\"3\"><span style=\"background-color: transparent; color: rgb(85, 85, 85);\">Trong 30 ngày đầu: tham vấn tuyển dụng, mở chi nhánh, đầu tư marketing, ký hợp đồng đối tác</span></td></tr><tr><td data-row=\"4\"><strong style=\"background-color: transparent; color: rgb(10, 31, 68);\">Hỗ trợ trực tiếp</strong></td><td data-row=\"4\"><span style=\"background-color: transparent; color: rgb(85, 85, 85);\">Hỗ trợ qua Zalo trong 30 ngày khi cần xác nhận trước quyết định quan trọng</span></td></tr></tbody></table><p><br></p>",
+    "price": "19.800.000 VNĐ",
+    "benefits": "Hồ sơ PDF cá nhân 100+ trang|Email tóm tắt sau buổi chính và sau mỗi phiên check-in|Mẫu template Bản Đồ Hành Động 90 Ngày chi tiết|Checklist 12 tháng và 5 câu hỏi tự rà soát lãnh đạo mỗi tuần|Email Hướng Dẫn Tự Thực Hiện 6 Tháng Tiếp Theo|Hỗ trợ qua Zalo trong 30 ngày",
     "cta_label": "Yêu cầu tư vấn",
     "href": "/giai-phap-lanh-dao",
     "theme": "light",
     "featured": false,
-    "sort_order": 4,
+    "sort_order": 2,
     "image": [
       {
-        "id": 1784069618158,
-        "filename": "/uploads/1784069618158-800x800_3.png",
-        "url": "/uploads/1784069618158-800x800_3.png",
+        "id": 1787885245371,
+        "filename": "800x800_10.png",
+        "url": "/uploads/1787885245371-800x800_10.png",
+        "mimetype": "image/png"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "name": "PHIÊN PHỎNG VẤN CHIẾN LƯỢC & GIẢI MÃ ĐIỂM MÙ ĐỘC BẢN",
+    "slug": "",
+    "badge": "",
+    "tagline": "",
+    "description": "Luận giải cấu trúc lãnh đạo cá nhân và định vị chu kỳ 9 năm để ra quyết định đúng thời điểm.",
+    "long_description": "<p><strong style=\"background-color: transparent; color: rgb(10, 31, 68);\">Dành cho</strong></p><ol><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"background-color: transparent; color: rgb(85, 85, 85);\">Người đứng đầu cần hiểu rõ mình đang ở pha nào trong chu kỳ phát triển</span></li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"background-color: transparent; color: rgb(85, 85, 85);\">CEO, Founder muốn tránh đầu tư, tuyển dụng hoặc mở rộng sai thời điểm</span></li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><span style=\"background-color: transparent; color: rgb(85, 85, 85);\">Lãnh đạo cần có bản đồ hành động rõ ràng cho 12 tháng tiếp theo</span></li></ol><p><strong style=\"background-color: transparent; color: rgb(10, 31, 68);\">Nội dung buổi tham vấn</strong></p><table><tbody><tr><td data-row=\"1\"><strong style=\"background-color: transparent; color: rgb(10, 31, 68);\">Phân tích 7 chỉ số</strong></td><td data-row=\"1\"><span style=\"background-color: transparent; color: rgb(85, 85, 85);\">Đường Đời, Sứ Mệnh, Động Lực, Nhân Cách, Thái Độ, Trung Niên và Chu Kỳ 9 Năm cá nhân lãnh đạo</span></td></tr><tr><td data-row=\"2\"><strong style=\"background-color: transparent; color: rgb(10, 31, 68);\">Năm Cá Nhân 2026</strong></td><td data-row=\"2\"><span style=\"background-color: transparent; color: rgb(85, 85, 85);\">Xác định pha khởi tạo, tích lũy hay tái cấu trúc; mức độ rủi ro khi mở rộng; phạm vi nên ủy quyền</span></td></tr><tr><td data-row=\"3\"><strong style=\"background-color: transparent; color: rgb(10, 31, 68);\">4 Trụ Cột hành động</strong></td><td data-row=\"3\"><span style=\"background-color: transparent; color: rgb(85, 85, 85);\">Sự nghiệp và đội ngũ / Tài chính và đầu tư / Quan hệ và đối tác / Phát triển bản thân</span></td></tr><tr><td data-row=\"4\"><strong style=\"background-color: transparent; color: rgb(10, 31, 68);\">Kết quả buổi làm việc</strong></td><td data-row=\"4\"><span style=\"background-color: transparent; color: rgb(85, 85, 85);\">3 mục tiêu trọng tâm 2026 / 3 hành động 90 ngày / 1 giới hạn cần thiết lập ngay / Cấu trúc ra quyết định mới</span></td></tr></tbody></table><p><br></p>",
+    "price": "6.800.000 VNĐ",
+    "benefits": "Hồ sơ PDF cá nhân 100+ trang|Email tóm tắt tổng hợp chiến lược|Checklist 12 tháng và bộ câu hỏi tự rà soát hàng tuần|Mẫu template đánh giá quyết định lớn",
+    "cta_label": "",
+    "href": null,
+    "theme": "light",
+    "featured": false,
+    "sort_order": 1,
+    "image": [
+      {
+        "id": 1787885173153,
+        "filename": "800x800_9.png",
+        "url": "/uploads/1787885173153-800x800_9.png",
         "mimetype": "image/png"
       }
     ]
